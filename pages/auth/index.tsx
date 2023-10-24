@@ -6,12 +6,18 @@ import {useState} from 'react'
 
 const Authentication:React.FC = () => {
     const [formState, setFormState] = useState('login')
+    const [formValue, setFormValue] = useState({})
 
-    const checkFormVal = (newFormState:{}) => {
-        console.log(newFormState);
+    const setForm = (newFormState:{}) => {
+        setFormValue(newFormState)
+        console.log(formValue);
         
     }
+
+    // Sending authentication request
+
     
+
     return(
       <div className="container sm:px-10 login">
             <div className="block xl:grid grid-cols-2 gap-4">
@@ -29,7 +35,7 @@ const Authentication:React.FC = () => {
                 <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                 <div className="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                     { formState =='login' ?
-                        <LoginForm onFormChange={checkFormVal}/>    : 
+                        <LoginForm onFormChange={setForm}/>    : 
                     formState == 'school'?
                         <RegisterForm /> :
                     formState == 'professional'?
