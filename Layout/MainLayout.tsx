@@ -5,11 +5,11 @@ import TopBar from "@/Components/TopBar"
 const MainLayout = (props) => {
     return (
         <>
-            <div class="flex mt-[4.7rem] md:mt-0">
+            <div className="flex mt-[4.7rem] md:mt-0">
                 <MobileNav />
-                <div class="flex mt-[4.7rem] md:mt-0">
+                <div className="flex mt-[4.7rem] md:mt-0">
                     <SideNav />
-                    <div class="content">
+                    <div className="content">
                         <TopBar />
                         {props.children}
                     </div>

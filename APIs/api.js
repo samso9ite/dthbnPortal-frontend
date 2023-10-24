@@ -11,16 +11,16 @@ config.headers.Authorization = `Bearer ${token}`
 });
 
 // defining a custom error handler for all APIs
-const errorHandler = (error) => {
-  const statusCode = error.response?.status
+// const errorHandler = (error) => {
+//   const statusCode = error.response?.status
 
-  // logging only errors that are not 401
-  if (statusCode && statusCode !== 401) {
-    console.error(error)
-  }
+//   // logging only errors that are not 401
+//   if (statusCode && statusCode !== 401) {
+//     console.error(error)
+//   }
 
-  return Promise.reject(error)
-}
+//   return Promise.reject(error)
+// }
 
 // registering the custom error handler to the
 // "api" axios instance
@@ -29,7 +29,7 @@ api.interceptors.response.use(undefined, (error) => {
 })
 
 const baseUrl = NEXT_PUBLIC_API_BASE_URL || ''
-axios_instance.baseUrl = baseUrl
+axios_instance.baseUrl = "http://127.0.0.1:8000/api/v2/"
 export default {
   axios_instance,
   baseUrl,
