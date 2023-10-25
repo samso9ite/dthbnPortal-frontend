@@ -1,12 +1,15 @@
 import api from "./api";
+import axios from "axios";
 
-export const AuthenticationAPI = {
-    login:async (params:type) => {
+const AuthenticationAPI = {
+    login:async (formData:{}) => {
         try{
-            const response = api.axios_instance.post(api.baseUrl+'')
+            const response = axios.post('http://127.0.0.1:8000/api/token/', formData)
             return response
         }catch{
             throw new Error("Email or password isn't correct")
         }
     }
 }
+
+export default AuthenticationAPI

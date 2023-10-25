@@ -1,18 +1,18 @@
 import {useState} from 'react'
 
 interface FormData {
-    email:string, 
+    username:string, 
     password:string
 }
 const LoginForm: React.FC<{onFormChange: (formData:FormData) => void}> = ({onFormChange}) => {
     const [formData, setFormData] = useState<FormData>({
-        email:'',
+        username:'',
         password: ''
     })
     
     // Get email value and save
     const emailHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
-        const newFormData = {...formData, email:event.target.value}
+        const newFormData = {...formData, username:event.target.value}
         setFormData(newFormData);
         onFormChange(newFormData)
     }

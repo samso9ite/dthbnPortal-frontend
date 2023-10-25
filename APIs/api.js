@@ -1,36 +1,37 @@
 import axios from 'axios'
-
 const axios_instance = axios.create();
 axios_instance.defaults.timeout = 300000;
 axios_instance.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
 axios_instance.defaults.headers.post['Accept'] = 'application/json;';
 axios_instance.interceptors.request.use(async function (config) {
-let token = await sessionStorage.getItem('token')
-config.headers.Authorization = `Bearer ${token}`
+let access = await sessionStorage.getItem('access') 
+    if(!navigator.onLine){
+        alert("Hello! Seems you're offline");
+        return {
+          headers: {},
+          method: config.method,
+          url: ""
+        };
+      };
+  access ? config.headers.Authorization = `JWT ${access}` : null;
   return config;
 });
 
-// defining a custom error handler for all APIs
-// const errorHandler = (error) => {
-//   const statusCode = error.response?.status
-
-//   // logging only errors that are not 401
-//   if (statusCode && statusCode !== 401) {
-//     console.error(error)
+// Route user to login when token expires
+// axios_instance.interceptors.response.use(undefined, function (error) {
+//   if (error) {
+//     const originalRequest = error.config;
+//     if (error.response.status === 401 && !originalRequest._retry) {
+//         localStorage.clear();
+//         sessionStorage.clear();
+//         return window.location.href="http://127.0.0.1:8000/api/";
+//     }
 //   }
+// })
 
-//   return Promise.reject(error)
-// }
-
-// registering the custom error handler to the
-// "api" axios instance
-api.interceptors.response.use(undefined, (error) => {
-  return errorHandler(error)
-})
-
-const baseUrl = NEXT_PUBLIC_API_BASE_URL || ''
-axios_instance.baseUrl = "http://127.0.0.1:8000/api/v2/"
-export default {
+const baseUrl = 'http://127.0.0.1:8000/api/token/'
+// const baseUrl = 'http://127.0.0.1:8000/'
+export default { 
   axios_instance,
   baseUrl,
-}           
+}

@@ -1,23 +1,36 @@
+import  AuthenticationAPI  from "@/APIs/authenticationApi's"
 import ForgotPasswordForm from "@/Components/auth/FogotPwdForm"
 import LoginForm from "@/Components/auth/LoginForm"
 import ProfRegisterForm from "@/Components/auth/ProfRegisterationForm"
 import RegisterForm from "@/Components/auth/RegisterationForm"
+import  {useCustomMutation} from "@/Hooks/apiCall"
 import {useState} from 'react'
+import { useRouter } from "next/router"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ApiStateHandler from "@/util/ApiStateHandler"
 
-const Authentication:React.FC = () => {
+const Authentication: React.FC = () => {
     const [formState, setFormState] = useState('login')
-    const [formValue, setFormValue] = useState({})
+    const [formData, setformData] = useState<any>({})
 
     const setForm = (newFormState:{}) => {
-        setFormValue(newFormState)
-        console.log(formValue);
-        
+        setformData(newFormState)
     }
+    const router = useRouter()
 
+    const onSuccess = () => {   
+        console.log("Successful");
+        
+        // router.push('/dashboard')
+    }
+    const {handleSubmit, isError, isPending, error} = useCustomMutation(() => {AuthenticationAPI.login(formData)}, onSuccess)
     // Sending authentication request
-
-    
-
+    const submitHandler = () => {
+        console.log(formData);
+        
+       handleSubmit(formData)
+    }
     return(
       <div className="container sm:px-10 login">
             <div className="block xl:grid grid-cols-2 gap-4">
@@ -46,14 +59,15 @@ const Authentication:React.FC = () => {
                         <a  onClick={() => {setFormState('forgotPassword')}}>Forgot Password?</a> 
                     </div>
                     <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                        <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onClick={() => {setFormState('login')}}>Login</button>
+                        <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onClick={submitHandler}>Login</button>
                         <button className="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top" onClick={() => {setFormState('school')}}>School Signup</button>
                         <button className="btn btn-outline-secondary py-3  w-fullxl:w-32 ml-3 align-top" onClick={() => {setFormState('professional')}}>Professional Signup</button>
                     </div>
                     <div className="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> By signin up, you agree to our <a className="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & <a className="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div>
-            
                 </div>
                 </div>
+                {ApiStateHandler (isError, error, isPending) }
+                    
             </div>
         </div>
     )
