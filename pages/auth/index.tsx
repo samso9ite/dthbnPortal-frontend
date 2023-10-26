@@ -13,6 +13,7 @@ import ApiStateHandler from "@/util/ApiStateHandler"
 const Authentication: React.FC = () => {
     const [formState, setFormState] = useState('login')
     const [formData, setformData] = useState<any>({})
+    const [showStatus, setShowStatus] = useState<boolean>(false)
 
     const setForm = (newFormState:{}) => {
         setformData(newFormState)
@@ -20,16 +21,21 @@ const Authentication: React.FC = () => {
     const router = useRouter()
 
     const onSuccess = () => {   
-        console.log("Successful");
-        
         // router.push('/dashboard')
     }
-    const {handleSubmit, isError, isPending, error} = useCustomMutation(() => {AuthenticationAPI.login(formData)}, onSuccess)
+
+    const apiStatusHandler = (statusData:boolean) => {
+        setShowStatus(statusData)
+        console.log(statusData);    
+        console.log("This triggers");
+          
+    }
+   
+    const {handleSubmit, isError, isPending, error, isSuccess} = useCustomMutation(AuthenticationAPI.login, onSuccess)
     // Sending authentication request
     const submitHandler = () => {
-        console.log(formData);
-        
        handleSubmit(formData)
+       apiStatusHandler(true)
     }
     return(
       <div className="container sm:px-10 login">
@@ -47,29 +53,33 @@ const Authentication: React.FC = () => {
                 </div>
                 <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                 <div className="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
-                    { formState =='login' ?
-                        <LoginForm onFormChange={setForm}/>    : 
-                    formState == 'school'?
+                
+                    {   formState =='login' ?
+                        <LoginForm onFormChange={setForm}/> : 
+                        formState == 'school' ?
                         <RegisterForm /> :
-                    formState == 'professional'?
+                        formState == 'professional' ?
                         <ProfRegisterForm /> :
                         <ForgotPasswordForm />
                     }
                     <div className="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
-                        <a  onClick={() => {setFormState('forgotPassword')}}>Forgot Password?</a> 
+                        <a onClick={() => {setFormState('forgotPassword')}}>Forgot Password?</a> 
                     </div>
                     <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                        <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onClick={submitHandler}>Login</button>
+                    <p>{showStatus}</p>
+                        <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" onClick={submitHandler} disabled={isPending}>{isPending ? 'Authenticating' : 'Login'} {isPending}</button>
                         <button className="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top" onClick={() => {setFormState('school')}}>School Signup</button>
                         <button className="btn btn-outline-secondary py-3  w-fullxl:w-32 ml-3 align-top" onClick={() => {setFormState('professional')}}>Professional Signup</button>
                     </div>
-                    <div className="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> By signin up, you agree to our <a className="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & <a className="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div>
+                    <div className="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> By signing up, you agree to our <a className="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & <a className="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div>
                 </div>
+                
+                {showStatus && ApiStateHandler (isPending, isError, error, apiStatusHandler) } 
                 </div>
-                {ApiStateHandler (isError, error, isPending) }
-                    
             </div>
+            <ToastContainer /> 
         </div>
+       
     )
 }
 export default Authentication

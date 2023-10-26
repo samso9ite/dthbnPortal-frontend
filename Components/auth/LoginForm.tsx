@@ -22,6 +22,7 @@ const LoginForm: React.FC<{onFormChange: (formData:FormData) => void}> = ({onFor
        setFormData(newFormData)
        onFormChange(newFormData)
     }
+    
 
     return(
         <>
@@ -30,8 +31,10 @@ const LoginForm: React.FC<{onFormChange: (formData:FormData) => void}> = ({onFor
             </h2>
             <div className="intro-x mt-2 text-slate-400 xl:hidden text-center">A few more clicks to sign in to your account. Manage all your e-commerce accounts in one place</div>
             <div className="intro-x mt-8">
-                <input type="text" className="intro-x login__input form-control py-3 px-4 block" placeholder="Email" onChange={emailHandler}/>
-                <input type="password" className="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password" onChange={passwordHandler} />
+                <form>
+                    <input type="text" className="intro-x login__input form-control py-3 px-4 block" placeholder="Email" onChange={emailHandler}/>
+                    <input type="password" className="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password" onChange={passwordHandler} />
+                </form>
             </div>
         </>
     )
