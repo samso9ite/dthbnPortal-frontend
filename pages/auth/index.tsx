@@ -9,6 +9,8 @@ import { useRouter } from "next/router"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ApiStateHandler from "@/util/ApiStateHandler"
+import GenericForm, {Field, FormValues} from "@/UI/genericForm"
+import { Fields } from "@/Components/Forms/Forms"
 
 const Authentication: React.FC = () => {
     const [formState, setFormState] = useState('login')
@@ -35,6 +37,10 @@ const Authentication: React.FC = () => {
        handleSubmit(formData)
        apiStatusHandler(true)
     }
+    const handleFormSubmit = (values:FormValues) => {
+        console.log('Form data:', values);
+    };
+    
     return(
       <div className="container sm:px-10 login">
             <div className="block xl:grid grid-cols-2 gap-4">
@@ -51,13 +57,27 @@ const Authentication: React.FC = () => {
                 </div>
                 <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                 <div className="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
+                   {formState == 'login' ? 'Sign in' : formState == 'school' ? 'School Sign up' : 'Professional Sign Up'}
+                </h2>
                    {   
                         formState =='login' ?
-                        <LoginForm onFormChange={setForm}/> : 
+                        <GenericForm fields={Fields.loginFormFields}
+                            initialValues={{email:'', password: ''}}
+                            onSubmit={handleFormSubmit}
+                        />
+                       : 
                         formState == 'school' ?
-                        <RegisterForm /> :
+                        <GenericForm fields={Fields.schoolFormFields}
+                            initialValues={{schCode:'', schName:'', password:'', confirmPwd:'', email:'', phone:''}}
+                            onSubmit={handleFormSubmit}
+                        />
+                        :
                         formState == 'professional' ?
-                        <ProfRegisterForm /> :
+                        <GenericForm fields={Fields.professionalFormFields} 
+                            initialValues={{regCode:'', email:'', programme:'Dental Therapist', password:'', confirmPwd:'',}} 
+                            onSubmit={handleFormSubmit}
+                        /> :
                         <ForgotPasswordForm />
                     }
                     <div className="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
@@ -70,11 +90,11 @@ const Authentication: React.FC = () => {
                         <button className="btn btn-outline-secondary py-3  w-fullxl:w-32 ml-3 align-top" onClick={() => {setFormState('professional')}}>Professional Signup</button>
                     </div>
                     <div className="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> 
-                    By signing up, you agree to our <a className="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & 
+                        By signing up, you agree to our <a className="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & 
                     <a className="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div>
                 </div>
                 
-                {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, apiStatusHandler)}
+                    {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, apiStatusHandler)}
                 
                 </div>
             </div>

@@ -1,3 +1,4 @@
+import Multiselect from 'multiselect-react-dropdown';
 const CustomSelect = (name:string, value:any, options:[], onChange:() => void) => {
     return(
         <select name={name} value={value} onChange={onChange}>  
@@ -11,3 +12,14 @@ const CustomSelect = (name:string, value:any, options:[], onChange:() => void) =
 }
 
 export default CustomSelect
+
+export const customMultipleSelect = (name:string, value:any, options:[], onChange:() => void) => {
+    return(
+        <Multiselect className='mt-4'
+        options={options} 
+        selectedValues={value} 
+        displayValue="name" 
+        />
+    )
+}
+
