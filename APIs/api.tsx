@@ -1,4 +1,9 @@
-import axios from 'axios'
+import axios, {AxiosInstance, AxiosResponse }  from 'axios'
+
+interface Api {
+  axios_instance: AxiosInstance;
+} 
+
 const axios_instance = axios.create();
 axios_instance.defaults.timeout = 300000;
 axios_instance.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
@@ -29,7 +34,7 @@ let access = await sessionStorage.getItem('access')
 //   }
 // })
 
-const baseUrl = 'http://127.0.0.1:8000/api/token/'
+const baseUrl = 'http://127.0.0.1:8000/api/'
 // const baseUrl = 'http://127.0.0.1:8000/'
 export default { 
   axios_instance,

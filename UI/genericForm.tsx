@@ -1,16 +1,17 @@
 import CustomSelect, { customMultipleSelect } from "./customSelect";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Multiselect from 'multiselect-react-dropdown';
 
 type Field = {
     name:string;
     type:string;
-    options?: {label:string, value:string}[];
+    options?: {label:string, value:string, }[];
     label: string;
+    isHidden?:boolean
 }
 
 type FormValues = {
-    [key: string]: string | undefined   
+    [key: string]: string | undefined    
 }
 
 type Props = {
@@ -20,9 +21,13 @@ type Props = {
 }
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues})  => {
-    let programmes = [{name:'Dental Therapist', value:'DTH'}, {name:'Dental Surgery Technician', value:'DST'}, {name:'Dental Surgeon', value:'DS'}, {name:'Dental Nurses', value:"DN"}]
     const [values, setValues] = useState<FormValues>(initialValues || {});
-
+    
+    // This updates the initial values on form change
+    useEffect(() => {
+        setValues(initialValues || {})
+    }, [initialValues])
+    
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setValues((prevValues) => ({
@@ -37,7 +42,18 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues})  => {
     return(
         <form onSubmit={handleSubmit}>
             {fields.map((field) => {
-                const { name, type, options, label } = field;
+                const { name, type, options, label , isHidden } = field;
+                if(isHidden){
+                    return (
+                        <input
+                        key={name}
+                        type="hidden"
+                        name={name}
+                        value={values[name] || ''}
+                      />
+                    )
+                }
+
                 return(
                     <div key={name}>
                         {type === 'text' ? (
@@ -52,22 +68,26 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues})  => {
                         ) : type === 'select' && options ? (
                             <select name={name} value={values[name] || ''} className="form-select form-select-lg  sm:mr-2 mt-4" 
                                 onChange={handleChange}>
-                                {options.map((option) => (
+                                {options.map((option) => (  
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
                             </select>
-                        ):  <Multiselect className='mt-4'
-                                options={options} 
-                                // selectedValues={values[name] || ''} 
-                                displayValue={name}
-                            />
+                        ): type === 'radio' ? (
+                            <input type="radio" name={name} value={values[name] || ''} onChange={handleChange} />
+                        ):
+                    
+                        <Multiselect className='mt-4'
+                            options={options} 
+                            selectedValues={values[name] || ''} 
+                            displayValue={name}
+                        />
                     }
                     </div>
                 )
             })}
-            <button type="submit">Submit</button>
+            <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top mt-4" type="submit">Submit</button>
             </form>   
         )
 
