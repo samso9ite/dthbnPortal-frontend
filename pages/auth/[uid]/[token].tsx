@@ -5,22 +5,30 @@ import GenericForm, {FormValues} from "@/UI/genericForm";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
+import ApiStateHandler from "@/util/ApiStateHandler";
+import { useState } from "react";
 
 const ResetPassword:React.FC = () => {
+    const [showStatus, setShowStatus] = useState<boolean>(false)
     const onSuccess = () => {
 
     }
+    const apiStatusHandler = (statusData:boolean) => {
+        setShowStatus(statusData)
+    }
     const router = useRouter()
     const {uid, token} = router.query 
-    console.log(uid, token);
     
-    const {handleSubmit, isSuccess, isError, isPending, error} = useCustomMutation(AuthenticationAPI.resetPwd, onSuccess)
+    const resetPwdWithTokenAndUid = (formData: FormValues) => {
+        return AuthenticationAPI.resetPwd(formData, uid, token);
+    };
+    const {handleSubmit, isSuccess, isError, isPending, error} = useCustomMutation(resetPwdWithTokenAndUid, onSuccess)
 
-    const submitHandler = (formData:FormValues, uid:string, token:string) => {
-        if (!!formData.confirmPwd && !!formData.password ){
-            if(formData.confirmPwd === formData.password){
-                // @ts-ignore
-                handleSubmit(formData, uid, token)
+    const submitHandler = (formData:FormValues) => {
+        if (!!formData.confirm_password && !!formData.new_password ){
+            if(formData.confirm_password === formData.new_password){
+                handleSubmit(formData)
+                apiStatusHandler(true)
             }else(
                  toast.error('Password Mismatch', {
                      position: "top-right",
@@ -58,6 +66,8 @@ const ResetPassword:React.FC = () => {
                         </div>
                     </div>
                 </div>
+                {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, apiStatusHandler)}
+                <ToastContainer />
             </div>
     )
 }

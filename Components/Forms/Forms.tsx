@@ -42,7 +42,7 @@ export const Fields:Field = {
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true}, 
     ],
     resetPwdFields: [
-        {name:'password', type:'password', label:'New Password', required:true},
-        {name:'confirmPwd', type:'password', label:'Confirm Password', required:true}
+        {name:'new_password', type:'password', label:'New Password', required:true},
+        {name:'confirm_password', type:'password', label:'Confirm Password', required:true}
     ]
 }
