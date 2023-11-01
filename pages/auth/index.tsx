@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ApiStateHandler from "@/util/ApiStateHandler"
-import GenericForm, {Field, FormValues} from "@/UI/genericForm"
+import GenericForm, {FormValues} from "@/UI/genericForm"
 import { Fields } from "@/Components/Forms/Forms"
 
 type ServiceType = 'login' | 'signUp' | 'forgotPwd';
