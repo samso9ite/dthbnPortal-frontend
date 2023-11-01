@@ -1017,10 +1017,10 @@ select{
 /* Button Colors */
 .btn-primary{
     --tw-border-opacity: 1;
-    border-color: rgb(var(--color-primary) / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(var(--color-primary) / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
+    border-color: #3e1b59;
+    /* --tw-bg-opacity: 1; */
+    background-color: #3e1b59;
+    /* --tw-text-opacity: 1; */
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .dark .btn-primary{

@@ -8,21 +8,25 @@ import ApiStateHandler from "@/util/ApiStateHandler"
 import GenericForm, {Field, FormValues} from "@/UI/genericForm"
 import { Fields } from "@/Components/Forms/Forms"
 
-type ServiceType = 'login' | 'signUp';
+type ServiceType = 'login' | 'signUp' | 'forgotPwd';
 
 const Authentication: React.FC = () => {
     const [formState, setFormState] = useState('login')
-    const [formData, setformData] = useState<any>({})
     const [showStatus, setShowStatus] = useState<boolean>(false)
     const [service, setService] = useState<ServiceType>('login');
 
-    const setForm = (newFormState:{}) => {
-        setformData(newFormState)
-    }
     const router = useRouter()
 
-    const onSuccess = () => {   
-        router.push('/school')
+    const onSuccess = () => { 
+        if(formState == 'school'){ 
+            router.push('/school')
+        }else if(formState == 'professional'){
+            router.push('/professional')
+        }else if(formState == 'forgotPassword'){
+            router.push('')
+        }else if(formState == 'login'){
+            router.push('/school')
+        }
     }
 
     const apiStatusHandler = (statusData:boolean) => {
@@ -36,6 +40,8 @@ const Authentication: React.FC = () => {
             setFormState('login')
         }else if (formState == 'login') {
             setFormState('school');
+        }else if (formState == 'forgotPassword'){
+            setFormState('login')
         }
     }
 
@@ -46,6 +52,8 @@ const Authentication: React.FC = () => {
             setService('signUp')
         }else if (formState == 'login') {
             setService('login');
+        }else{
+            setService('forgotPwd')
         }
     }
 
@@ -53,9 +61,26 @@ const Authentication: React.FC = () => {
 
     // Sending authentication request
     const submitHandler = (formData:FormValues) => {
-        serviceHandler()
-        handleSubmit(formData)
-        apiStatusHandler(true)   
+        if (!!formData.confirmPwd && !!formData.password ){
+           if(formData.confirmPwd === formData.password){
+                serviceHandler()
+                handleSubmit(formData)
+                apiStatusHandler(true)
+           }else(
+                toast.error('Password Mismatch', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    theme: "light",
+                }
+                )
+            )
+        } else {
+            serviceHandler()
+            handleSubmit(formData)
+            apiStatusHandler(true)
+        }  
     }
     
     return(
@@ -79,7 +104,6 @@ const Authentication: React.FC = () => {
                    formState == 'professional' ? 'Professional Sign Up': 'Forgot Password'}
                 </h2>
                    {   
-                   
                         formState =='login' ?
                         <GenericForm fields={Fields.loginFormFields}
                             onSubmit={submitHandler}
@@ -103,7 +127,7 @@ const Authentication: React.FC = () => {
                     <div className="intro-x  text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                         <a onClick={() => {setFormState('forgotPassword')}}>Forgot Password?</a>    
                         <span className="float-right" style={{cursor:'pointer', color:'#280742', fontWeight:'600'}} 
-                        onClick={stateHandler}> { formState == 'school' ? 'Professional Sign Up' : formState == 'professional' ? 'Login' : 'Signup' }</span>
+                        onClick={stateHandler}> { formState == 'school' ? 'Professional Sign Up' : formState == 'professional' ? 'Login' : formState == 'login' ? 'Signup' : 'Login' }</span>
                     </div>
                     <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                     <p>{showStatus}</p>
@@ -114,7 +138,6 @@ const Authentication: React.FC = () => {
                 </div>
                 
                 {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, apiStatusHandler)}
-                
                 </div>
             </div>
             <ToastContainer 

@@ -1,7 +1,5 @@
 import api from "./api";
-import axios from "axios";
 import { FormValues } from "@/UI/genericForm"
-
 
 const generalRequest = async (url:string, formData:FormValues, method: 'post' | 'get' | 'put' | 'delete') => {
     try{
@@ -13,7 +11,8 @@ const generalRequest = async (url:string, formData:FormValues, method: 'post' | 
 }
 const AuthenticationAPI = {
     login: (formData:FormValues) => generalRequest('token/', formData, 'post'),
-    signUp: (formData:FormValues) => generalRequest('auth/sign_up', formData, 'post')
+    signUp: (formData:FormValues) => generalRequest('auth/sign_up', formData, 'post'),
+    forgotPwd:(formData:FormValues) => generalRequest('auth/forgot-password', formData, 'post')
 }
 
 
