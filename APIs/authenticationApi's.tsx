@@ -6,8 +6,14 @@ const generalRequest = async (url:string, formData:FormValues, method: 'post' | 
         const response = await api.axios_instance[method](api.baseUrl+url, formData)
         return response
     }catch(error:any){
-        if(error.response & error.response.data){
-            throw new Error(error.response.data.error)
+        if(error.response && error.response.data){
+            let data = error.response.data
+            for (const key in data) {
+                if (Object.prototype.hasOwnProperty.call(data, key)) {
+                    const value = data[key];
+                    throw new Error(` ${key} : ${value}`)
+                }
+            } 
         }else{
             throw new Error("An error occured while making the request")
         }
@@ -18,8 +24,8 @@ const AuthenticationAPI = {
     login: (formData:FormValues) => generalRequest('token/', formData, 'post'),
     signUp: (formData:FormValues) => generalRequest('auth/sign_up', formData, 'post'),
     forgotPwd: (formData:FormValues) => generalRequest('auth/forgot-password', formData, 'post'),
-    resetPwd: (formData:FormValues, uid:string, token:string) => generalRequest(`auth/reset-password/${uid}/${token}`, formData, 'post')
+    resetPwd: (formData:FormValues, uid:string, token:string) => generalRequest(`auth/reset-password/${uid}/${token}`, formData, 'post'),
+    accountActivation: (formData:FormValues) => generalRequest('auth/activate', formData, 'post')
 }
-
 
 export default AuthenticationAPI

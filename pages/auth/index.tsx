@@ -14,18 +14,17 @@ const Authentication: React.FC = () => {
     const [formState, setFormState] = useState('login')
     const [showStatus, setShowStatus] = useState<boolean>(false)
     const [service, setService] = useState<ServiceType>('login');
+    const [message, setMessage] = useState<string>()
 
     const router = useRouter()
 
     const onSuccess = () => { 
-        if(formState == 'school'){ 
+        if(formState == 'login'){
             router.push('/school')
-        }else if(formState == 'professional'){
-            router.push('/professional')
-        }else if(formState == 'forgotPassword'){
-            router.push('')
-        }else if(formState == 'login'){
-            router.push('/school')
+        }else if(formState == 'professional' || formState == 'school'){
+            setMessage('An activation link has been sent to your email, please check.')
+        } else if(formState == 'forgotPassword'){
+            setMessage("A password reset link has been sent to the email provided, please check")
         }
     }
 
@@ -57,7 +56,7 @@ const Authentication: React.FC = () => {
         }
     }
 
-    const {handleSubmit, isError, isPending, error, isSuccess} = useCustomMutation(AuthenticationAPI[service], onSuccess)
+    const {handleSubmit, isError, isPending, error, isSuccess, data} = useCustomMutation(AuthenticationAPI[service], onSuccess)
 
     // Sending authentication request
     const submitHandler = (formData:FormValues) => {
@@ -103,6 +102,9 @@ const Authentication: React.FC = () => {
                    {formState == 'login' ? 'Sign in' : formState == 'school' ? 'School Sign up' :
                    formState == 'professional' ? 'Professional Sign Up': 'Forgot Password'}
                 </h2>
+                    {message &&
+                        <div className="alert alert-success show mb-2 mt-4" role="alert">{message}</div>
+                    }
                    {   
                         formState =='login' ?
                         <GenericForm fields={Fields.loginFormFields}
@@ -137,7 +139,7 @@ const Authentication: React.FC = () => {
                     <a className="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div>
                 </div>
                 
-                {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, apiStatusHandler)}
+                {showStatus && ApiStateHandler(isPending, isError, error, apiStatusHandler)}
                 </div>
             </div>
             <ToastContainer 

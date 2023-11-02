@@ -2,7 +2,7 @@ import GenericForm, {Field, FormValues} from "@/UI/genericForm"
 
 export const Fields:Field = {
     loginFormFields: [
-        {name:'email', type:'text', label:'Email', required:true},
+        {name:'username', type:'text', label:'Username', required:true},
         {name:'password', type:'password', label:'Password', required:true}
     ],
     forgetPwdFormFields: [
