@@ -1,4 +1,4 @@
-import  AuthenticationAPI  from "@/APIs/authenticationApi's"
+import  apiRequest  from "@/APIs/apiRequests"
 import  {useCustomMutation} from "@/Hooks/apiCall"
 import {useEffect, useState} from 'react'
 import { useRouter } from "next/router"
@@ -18,8 +18,10 @@ const Authentication: React.FC = () => {
 
     const router = useRouter()
 
-    const onSuccess = () => { 
+    const onSuccess = (data:any) => { 
         if(formState == 'login'){
+            sessionStorage.setItem('token', data.data.access),
+            sessionStorage.setItem('refresh', data.data.refresh)
             router.push('/school')
         }else if(formState == 'professional' || formState == 'school'){
             setMessage('An activation link has been sent to your email, please check.')
@@ -56,7 +58,7 @@ const Authentication: React.FC = () => {
         }
     }
 
-    const {handleSubmit, isError, isPending, error, isSuccess, data} = useCustomMutation(AuthenticationAPI[service], onSuccess)
+    const {handleSubmit, isError, isPending, error, isSuccess, data} = useCustomMutation(apiRequest[service], onSuccess)
 
     // Sending authentication request
     const submitHandler = (formData:FormValues) => {
@@ -105,10 +107,10 @@ const Authentication: React.FC = () => {
                     {message &&
                         <div className="alert alert-success show mb-2 mt-4" role="alert">{message}</div>
                     }
-                   {   
+                    {   
                         formState =='login' ?
                         <GenericForm fields={Fields.loginFormFields}
-                            onSubmit={submitHandler}
+                            onSubmit={submitHandler} isPending={isPending}
                         />
                        : 
                         formState == 'school' ?
@@ -123,7 +125,7 @@ const Authentication: React.FC = () => {
                             onSubmit={submitHandler}
                         /> :
                         <GenericForm fields={Fields.forgetPwdFormFields} 
-                            onSubmit={submitHandler}
+                            onSubmit={submitHandler} 
                         />
                     }
                     <div className="intro-x  text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">

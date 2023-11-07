@@ -17,10 +17,11 @@ type FormValues = {
 type Props = {
     fields: Field[];
     onSubmit: (values: FormValues) => void;
-    initialValues?: FormValues
+    initialValues?: FormValues;
+    isPending?: boolean
 }
 
-const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues})  => {
+const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending})  => {
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
     
@@ -108,13 +109,13 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues})  => {
                              )}
                              </div>
                         )
-                        
                     }
                     </div>
                 )
             })}
 
-            <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top mt-4" type="submit">Submit</button>
+            <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top mt-4" type="submit" 
+            disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}</button>
             </form>   
         )
 

@@ -14,7 +14,7 @@ export const useCustomMutation = (service:any, onSuccess: () => void): {
     const { mutate, isPending, isError, error, isSuccess, data } = useMutation({
         mutationFn: service,
         onSuccess: onSuccess
-    });
+    }); 
     const handleSubmit = (formData:any) =>{
         mutate(formData)
     }
@@ -28,6 +28,24 @@ export const useCustomMutation = (service:any, onSuccess: () => void): {
     };
 }
 
-export const useCustomQuery = () => {
-
+export const useCustomQuery = (service: any, key:any):{  
+    isPending:boolean;
+    isSuccess:boolean;
+    isError:boolean;
+    error:any;
+    data:any
+} => {
+    const {isPending, isSuccess, isError, error, data} = useQuery({
+        
+        queryKey: [key],
+        queryFn: service,
+        staleTime: 5000,
+    })
+    return{
+        isPending,
+        isSuccess,
+        isError,
+        error,
+        data
+    };
 }

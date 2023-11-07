@@ -1,4 +1,4 @@
-import AuthenticationAPI from "@/APIs/authenticationApi's";
+import apiRequest from "@/APIs/ApiRequests";
 import { Fields } from "@/Components/Forms/Forms";
 import { useCustomMutation } from "@/Hooks/apiCall";
 import GenericForm, {FormValues} from "@/UI/genericForm";
@@ -23,7 +23,7 @@ const ResetPassword:React.FC = () => {
     }
 
     const {handleSubmit, isSuccess, isError, isPending, error, data} = 
-    useCustomMutation(AuthenticationAPI.accountActivation, onSuccess)
+    useCustomMutation(apiRequest.accountActivation, onSuccess)
     useEffect(() => {
         let formData = {
             uidb:uid,

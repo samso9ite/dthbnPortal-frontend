@@ -1,4 +1,4 @@
-import AuthenticationAPI from "@/APIs/authenticationApi's";
+import apiRequest from "@/APIs/ApiRequests";
 import { Fields } from "@/Components/Forms/Forms";
 import { useCustomMutation } from "@/Hooks/apiCall";
 import GenericForm, {FormValues} from "@/UI/genericForm";
@@ -25,7 +25,7 @@ const ResetPassword:React.FC = () => {
     const {uid, token} = router.query 
     
     const resetPwdWithTokenAndUid = (formData: FormValues) => {
-        return AuthenticationAPI.resetPwd(formData, uid, token);
+        return apiRequest.resetPwd(formData, uid, token);
     };
 
     const {handleSubmit, isSuccess, isError, isPending, error, data} = useCustomMutation(resetPwdWithTokenAndUid, onSuccess)
