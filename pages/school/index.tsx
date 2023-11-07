@@ -29,9 +29,6 @@ const Dashboard = () => {
                                         <div className="box p-5">
                                             <div className="flex">
                                                 <i data-lucide="file-text" className="report-box__icon text-primary" />
-                                                <div className="ml-auto">
-                                                    <div className="report-box__indicator bg-success tooltip cursor-pointer" title="33% Higher than last month"> 33% <i data-lucide="chevron-up" className="w-4 h-4 ml-0.5" /> </div>
-                                                </div>
                                             </div>
                                             <div className="text-3xl font-medium leading-8 mt-6">{response?.total_indexed}</div>
                                             <div className="text-base text-slate-500 mt-1">Total Indexed</div>
@@ -43,9 +40,7 @@ const Dashboard = () => {
                                         <div className="box p-5">
                                             <div className="flex">
                                                 <i data-lucide="edit" className="report-box__icon text-pending"/> 
-                                                <div className="ml-auto">
-                                                    <div className="report-box__indicator bg-danger tooltip cursor-pointer" title="2% Lower than last month"> 2% <i data-lucide="chevron-down" className="w-4 h-4 ml-0.5"/> </div>
-                                                </div>
+                                              
                                             </div>
                                             <div className="text-3xl font-medium leading-8 mt-6">{response?.exam_reg_stud}</div>
                                             <div className="text-base text-slate-500 mt-1"> Registered Exam Student</div>
@@ -57,9 +52,7 @@ const Dashboard = () => {
                                         <div className="box p-5">
                                             <div className="flex">
                                                 <i data-lucide="users" className="report-box__icon text-warning"/> 
-                                                <div className="ml-auto">
-                                                    <div className="report-box__indicator bg-success tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-lucide="chevron-up" className="w-4 h-4 ml-0.5"/> </div>
-                                                </div>
+                                               
                                             </div>
                                             <div className="text-3xl font-medium leading-8 mt-6">{response?.notification}</div>
                                             <div className="text-base text-slate-500 mt-1">Message</div>
@@ -76,7 +69,6 @@ const Dashboard = () => {
                                     <div className="flex items-center">
                                         <div className="w-2/4 flex-none">
                                             <div className="text-lg font-medium truncate">Current Indexing</div>
-                                            {/* <div className="text-slate-500 mt-1">{response?.current_indexing}</div> */}
                                         </div>
                                         <div className="flex-none ml-auto relative">
                                         
@@ -90,7 +82,6 @@ const Dashboard = () => {
                                     <div className="flex items-center">
                                         <div className="w-2/4 flex-none">
                                             <div className="text-lg font-medium truncate">Current Exam Registeration</div>
-                                            {/* <div className="text-slate-500 mt-1">1450 </div> */}
                                         </div>
                                         <div className="flex-none ml-auto relative">
                                         

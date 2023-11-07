@@ -13,15 +13,36 @@ const IndexingList = () => {
     return(
         <>
         <div className="col-span-12 mt-6">
-             <div className="intro-y block sm:flex items-center h-10">
-                    <h2 className="text-lg font-medium truncate mr-5">
-                        Current Indexing Record
-                    </h2>
-                    <div className="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                        <button className="btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" className="hidden sm:block w-4 h-4 mr-2"/> Export to Excel </button>
-                        <button className="ml-3 btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" className="hidden sm:block w-4 h-4 mr-2"/> Export to PDF </button>
+            <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <h2 className="text-lg font-medium truncate mr-5">
+                                Current Indexing Record
+                            </h2>
+                        <div className="dropdown">
+                            <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
+                            <div className="dropdown-menu w-40">
+                                <ul className="dropdown-content">
+                                    <li>
+                                        <a href="" className="dropdown-item"> <i data-lucide="printer" className="w-4 h-4 mr-2"></i> Print </a>
+                                    </li>
+                                    <li>
+                                        <a href="" className="dropdown-item"> <i data-lucide="file-text" className="w-4 h-4 mr-2"></i> Export to Excel </a>
+                                    </li>
+                                    <li>
+                                        <a href="" className="dropdown-item"> <i data-lucide="file-text" className="w-4 h-4 mr-2"></i> Export to PDF </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="hidden md:block mx-auto ">
+                        </div>
+                        <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                            <div className="w-56 relative text-slate-500">
+                                <input type="text" className="form-control w-56 box pr-10" placeholder="Search..." />
+                                <i className="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i> 
+                            </div>
+                        </div>
                     </div>
-                </div>
+             
                 <div className="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
                     <table className="table table-report sm:mt-2">
                         <thead>

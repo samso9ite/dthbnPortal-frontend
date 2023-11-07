@@ -1,26 +1,16 @@
 import MainLayout from "@/Layout/MainLayout"
-import { useEffect } from "react"
-import Api from "../../../Api"
 
-const Indexing = () => {
-    useEffect(() => {
-    Api.axios_instance.get(Api.baseUrl+'/dashboard')
-    .then(res => {
-        console.log(res);
-    }).catch(error => {
-        console.log(error);
-    })
-    }, [])
+const Examination = () => {
     return(
-            <MainLayout>
-                 <h2 className="intro-y text-lg font-medium mt-10">
-                    Current Indexing
+       <MainLayout>
+              <h2 className="intro-y text-lg font-medium mt-10">
+                    Current Examination
                 </h2>
                 <div className="grid grid-cols-12 gap-6 mt-5">
                     <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                         <div className="dropdown">
-                            <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
-                            <div className="dropdown-menu w-40">
+                            <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor:'#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
+                          <div className="dropdown-menu w-40">
                                 <ul className="dropdown-content">
                                     <li>
                                         <a href="" className="dropdown-item"> <i data-lucide="printer" className="w-4 h-4 mr-2"></i> Print </a>
@@ -82,6 +72,7 @@ const Indexing = () => {
                                         </div>
                                     </td>
                                 </tr>
+                           
                             </tbody>
                                 <div id="superlarge-modal-size-preview" className="modal" tabindex="-1" aria-hidden="true">
                                     <div className="modal-dialog modal-xl">
@@ -205,7 +196,7 @@ const Indexing = () => {
                                 </div>
                         </table>
                     </div>
-                    <div className="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+                  <div className="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
                         <nav className="w-full sm:w-auto sm:mr-auto">
                             <ul className="pagination">
                                 <li className="page-item">
@@ -235,29 +226,8 @@ const Indexing = () => {
                         </select>
                     </div>
                 </div>
-                <div id="delete-confirmation-modal" className="modal" tabindex="-1" aria-hidden="true">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-body p-0">
-                                <div className="p-5 text-center">
-                                    <i data-lucide="x-circle" className="w-16 h-16 text-danger mx-auto mt-3"></i> 
-                                    <div className="text-3xl mt-5">Are you sure?</div>
-                                    <div className="text-slate-500 mt-2">
-                                        Do you really want to delete these records? 
-                                        <br />
-                                        This process cannot be undone.
-                                    </div>
-                                </div>
-                                <div className="px-5 pb-8 text-center">
-                                    <button type="button" data-tw-dismiss="modal" className="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                                    <button type="button" className="btn btn-danger w-24">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </MainLayout>
+       </MainLayout>
     )
 }
 
-export default Indexing
+export default Examination

@@ -7,6 +7,7 @@ export default function Document() {
         <link rel="stylesheet" href={process.env.NEXT_PUBLIC_URL+'./dist/css/app.css'} />
         <link href={process.env.PUBLIC_URL+'./dist/images/logo.svg'} rel="shortcut icon" />
         <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       </Head>
       <body  className="py-5" style={{backgroundColor: '#280742'}}>
         <Main />

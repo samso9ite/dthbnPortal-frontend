@@ -1,4 +1,18 @@
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+
 const SideNav = () => {
+    const router = useRouter()
+    const exactPath = router.asPath
+    const [isSubMenuActive , setIsSubMenuActive] = useState<string>()
+
+    const activateSubmenuHandler = (menu:string) => {
+        setIsSubMenuActive(menu)
+    }
+    console.log(router.pathname);
+    
+
     return ( 
         <>
              <nav className="side-nav">
@@ -9,104 +23,94 @@ const SideNav = () => {
                 <div className="side-nav__devider my-6"></div>
                 <ul>
                     <li>
-                        <a href="index.html" className="side-menu side-menu--active">
+                        <Link href='/school' className={router.pathname == '/school' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
                                 Dashboard 
                             </div>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="javascript:;" className="side-menu">
+                        <Link href="javascript:;" className={exactPath.includes('/school/indexing')  ? "side-menu side-menu--active" : 'side-menu'} onClick={() => activateSubmenuHandler('indexing')}>
                             <div className="side-menu__icon"> <i data-lucide="file-text"></i> </div>
                             <div className="side-menu__title">
                                 Indexing 
-                                <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                <div className="side-menu__sub-icon "> <i className="fa fa-chevron-circle-down" aria-hidden="true"></i> </div>
                             </div>
-                        </a>
-                        <ul className="">
+                        </Link>
+                        <ul className={isSubMenuActive == 'indexing' ? 'side-menu__sub-open' : ''}>
                             <li>
-                                <a href="current_indexing.html" className="side-menu">
+                                <Link href="/school/indexing/current" className={exactPath == '/school/indexing/current' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Current Index Record </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="index.html" className="side-menu">
+                                <Link href="/school/indexing/submitted" className={exactPath == '/school/indexing/submitted' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Submitted Index Record </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="simple-menu-light-dashboard-overview-1.html" className="side-menu">
+                                <Link href="/school/indexing/approved" className={exactPath == '/school/indexing/approved' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Approved Index Record </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="top-menu-light-dashboard-overview-1.html" className="side-menu">
+                                <Link href="/school/indexing/declined" className={exactPath == '/school/indexing/declined' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Declined Index Record </div>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" className="side-menu">
+                        <Link href="javascript:;" className={exactPath.includes('/school/exam')  ? "side-menu side-menu--active" : 'side-menu'} onClick={() => activateSubmenuHandler('exam')}>
                             <div className="menu__icon"> <i data-lucide="edit"></i> </div>
                             <div className="side-menu__title">
                                 Examination 
-                                <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                <div className="side-menu__sub-icon "> <i className="fa fa-chevron-circle-down" aria-hidden="true"></i> </div>
                             </div>
-                        </a>
-                        <ul className="">
+                        </Link>
+                        <ul className={isSubMenuActive == 'exam' ? 'side-menu__sub-open' : ''}>
                             <li>
-                                <a href="side-menu-light-categories.html" className="side-menu">
+                                <Link href="/school/exam/curren" className={exactPath == '/school/exam/current' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Current Exam Record </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="side-menu-light-add-product.html" className="side-menu">
+                                <Link href="/school/exam/submitted" className={exactPath == '/school/exam/submitted' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Submitted Exam Record </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="javascript:;" className="side-menu">
+                                <Link href="/school/exam/approved" className={exactPath == '/school/approved/approved' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title">
-                                        Approved Inndex Record 
+                                        Approved Exam Record 
                                         <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                                     </div>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="javascript:;" className="side-menu">
+                                <Link href="/school/exam/declined" className={exactPath == '/school/exam/approved' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title">
-                                        Delined Index Record
+                                        Delined Exam Record
                                         <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                                     </div>
-                                </a>
+                                </Link>
                             </li>
                            
                         </ul>
                     </li>
 
                     <li className="side-nav__devider my-6"></li>
-                    <li>
-                        <a href="side-menu-light-inbox.html" className="side-menu">
-                            <div className="side-menu__icon"> <i data-lucide="user-plus"></i> </div>
-                            <div className="side-menu__title"> Pre-register Student </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="code_generation.html" className="side-menu">
-                            <div className="side-menu__icon"> <i data-lucide="plus-square"></i> </div>
-                            <div className="side-menu__title"> Generate Code     </div>
-                        </a>
-                    </li>
+                   
+                   
                    
                     <li>
                         <a href="side-menu-light-chat.html" className="side-menu">
@@ -122,12 +126,7 @@ const SideNav = () => {
                         </a>
                     </li>
 
-                    <li>
-                        <a href="menu-light-chat.html" className="menu">
-                            <div className="menu__icon"> <i data-lucide="message-square"></i> </div>
-                            <div className="menu__title"> Whatsapp Support 2 </div>
-                        </a>
-                    </li>
+                   
                    
                     <li className="side-nav__devider my-6"></li>
                 
