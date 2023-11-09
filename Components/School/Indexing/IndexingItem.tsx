@@ -1,7 +1,9 @@
 
+import { useState } from "react"
+import IndexingDetails from "./details"
 
 const IndexingItem:React.FC<{data: Indexing}> = (props) => {
-    console.log(props.data);
+    const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     
     return(
         <>
@@ -9,7 +11,7 @@ const IndexingItem:React.FC<{data: Indexing}> = (props) => {
                 <td className="w-56">
                     <div className="flex">
                         <div className="w-10 h-10 image-fit zoom-in">
-                            <img alt="Student Image" className="tooltip rounded-full" src={props.data.profile_image !== null ? props.data.profile_image : "dist/images/preview-12.jpg"} title="Uploaded at 3 June 2020" />
+                            <img alt="Student Image" className="tooltip rounded-full" src={props.data.profile_image !== null ? props.data.profile_image : "dist/images/preview-12.jpg"} />
                         </div>
                     </div>
                 </td>
@@ -42,14 +44,13 @@ const IndexingItem:React.FC<{data: Indexing}> = (props) => {
                 </td>
                 <td className="table-report__action ">
                     <div className="flex justify-center items-center">
-                        <button className="btn btn-primary mr-1 mb-2" data-tw-toggle="modal" 
-                            data-tw-target="#superlarge-modal-size-preview" style={{backgroundColor: '#280742'}}>
-                            <i data-lucide="eye" className="w-5 h-5"></i> 
+                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => {setIsModalOpen(true)}}>
+                            <i className="fa fa-eye" aria-hidden="true"></i> 
                         </button>
                     </div>
-                  </td>
+                </td>
             </tr>
-              
+            <IndexingDetails data={props.data} modalIsOpen={modalIsOpen}/>
         </>
     )
 }

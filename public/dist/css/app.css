@@ -173,6 +173,13 @@ button,
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
 }
+.Modal{
+  z-index: 1000 !important;
+}
+.Overlay{
+  z-index: 1000 !important;
+}
+
 /*
 Use the modern Firefox focus style for all focusable elements.
 */
@@ -2319,6 +2326,7 @@ select{
     height: 100vh;
     width: 100vw;
     opacity: 0;
+    z-index: 1000;
   }
 .modal.modal-overlap {
       background: #000000a6;
@@ -18810,3 +18818,4 @@ html body{
         color: rgb(var(--color-success) / var(--tw-text-opacity));
     }
 }
+
