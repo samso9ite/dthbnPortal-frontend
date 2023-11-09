@@ -1,14 +1,11 @@
-import { useCustomQuery } from "@/Hooks/apiCall"
-import apiRequest from "@/APIs/ApiRequests"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchData, selectIndexedData } from "@/store/indexing-slice"
 import IndexingItem from "./IndexingItem"
 
 const IndexingList = () => {
-    
-    const  fetchData = () => {
-        const {isPending, isError, error, data } = useCustomQuery(apiRequest.indexingList, 'indexing')
-        return data?.data
-    } 
-    const response = fetchData()
+    const dispatch = useDispatch<any>()
+    dispatch(fetchData())
+    const response =  useSelector(selectIndexedData)
    
     return(
         <>
@@ -21,9 +18,6 @@ const IndexingList = () => {
                             <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
                             <div className="dropdown-menu w-40">
                                 <ul className="dropdown-content">
-                                    <li>
-                                        <a href="" className="dropdown-item"> <i data-lucide="printer" className="w-4 h-4 mr-2"></i> Print </a>
-                                    </li>
                                     <li>
                                         <a href="" className="dropdown-item"> <i data-lucide="file-text" className="w-4 h-4 mr-2"></i> Export to Excel </a>
                                     </li>
@@ -43,7 +37,7 @@ const IndexingList = () => {
                         </div>
                     </div>
              
-                <div className="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+                <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
                     <table className="table table-report sm:mt-2">
                         <thead>
                             <tr>
@@ -55,6 +49,7 @@ const IndexingList = () => {
                                 <th className="text-center whitespace-nowrap">SEX</th>
                                 <th className="text-center whitespace-nowrap">AGE</th>
                                 <th className="text-center whitespace-nowrap">RELIGION</th>
+                                <th className="text-center whitespace-nowrap">VIEW</th>
                             </tr>
                         </thead>
                         <tbody>

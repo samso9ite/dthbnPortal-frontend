@@ -10,7 +10,12 @@ const SideNav = () => {
     const activateSubmenuHandler = (menu:string) => {
         setIsSubMenuActive(menu)
     }
-    console.log(router.pathname);
+  
+    const logOut = () => {
+        sessionStorage.clear()
+        localStorage.clear()
+        router.push('/auth')
+    }
     
 
     return ( 
@@ -75,7 +80,7 @@ const SideNav = () => {
                         </Link>
                         <ul className={isSubMenuActive == 'exam' ? 'side-menu__sub-open' : ''}>
                             <li>
-                                <Link href="/school/exam/curren" className={exactPath == '/school/exam/current' ? "side-menu side-menu--active" : 'side-menu'}>
+                                <Link href="/school/exam/current" className={exactPath == '/school/exam/current' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Current Exam Record </div>
                                 </Link>
@@ -126,28 +131,25 @@ const SideNav = () => {
                         </a>
                     </li>
 
-                   
-                   
                     <li className="side-nav__devider my-6"></li>
                 
                     <li>
-                        <a href="javascript:;" className="side-menu">
+                        <Link href='/school/profile' className={router.pathname == '/school/profile' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="trello"></i> </div>
                             <div className="side-menu__title">
                                 Profile 
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="javascript:;" className="side-menu">
+                        <a href="javascript:;" className="side-menu" onClick={logOut}>
                             <div className="side-menu__icon"> <i data-lucide="power"></i> </div>
                             <div className="side-menu__title">
                                 Logout 
                             </div>
                         </a>
                     </li>
-              
                 </ul>
             </nav>
         </>

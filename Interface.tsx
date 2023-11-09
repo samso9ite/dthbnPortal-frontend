@@ -31,3 +31,7 @@ interface Indexing {
     verified: boolean;
     year: string
 }
+
+interface IndexingState {
+    indexed: []; 
+}

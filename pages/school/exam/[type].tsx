@@ -1,6 +1,10 @@
 import MainLayout from "@/Layout/MainLayout"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchData, selectIndexedData } from "@/store/indexing-slice"
 
 const Examination = () => {
+    const indexingData =  useSelector(selectIndexedData)
+    
     return(
        <MainLayout>
               <h2 className="intro-y text-lg font-medium mt-10">
@@ -221,8 +225,6 @@ const Examination = () => {
                         <select className="w-20 form-select box mt-3 sm:mt-0">
                             <option>10</option>
                             <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
                         </select>
                     </div>
                 </div>
