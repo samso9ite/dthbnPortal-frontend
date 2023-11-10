@@ -50,7 +50,7 @@ const IndexingItem:React.FC<{data: Indexing}> = (props) => {
                     </div>
                 </td>
             </tr>
-            <IndexingDetails data={props.data} modalIsOpen={modalIsOpen}/>
+            <IndexingDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
         </>
     )
 }

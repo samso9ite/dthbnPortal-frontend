@@ -45,6 +45,12 @@ const SideNav = () => {
                         </Link>
                         <ul className={isSubMenuActive == 'indexing' ? 'side-menu__sub-open' : ''}>
                             <li>
+                                <Link href="/school/indexing/new" className={exactPath == '/school/indexing/new' ? "side-menu side-menu--active" : 'side-menu'}>
+                                    <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                    <div className="side-menu__title"> Create New Index </div>
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/school/indexing/current" className={exactPath == '/school/indexing/current' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Current Index Record </div>

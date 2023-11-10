@@ -2,16 +2,13 @@ import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean}> = (props) => {
-    const onCloseModal = () => {
-
-    }
-
+const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
+   
     return (
         <>
             <Modal
                 open={props.modalIsOpen}
-                onClose={onCloseModal}
+                onClose={props.onCloseModal}
                >
                 <div className="intro-y box px-5 pt-5 mt-5" >
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
