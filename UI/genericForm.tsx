@@ -18,10 +18,11 @@ type Props = {
     fields: Field[];
     onSubmit: (values: FormValues) => void;
     initialValues?: FormValues;
-    isPending?: boolean
+    isPending?: boolean,
+    span6?:boolean
 }
 
-const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending})  => {
+const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6 })  => {
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
     
@@ -62,12 +63,14 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }
     return(
         <form onSubmit={handleSubmit}>
+            <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
             {fields.map((field) => {
-                const { name, type, options, label  } = field;
+                const { name, type, options, label } = field;
                 return(
-                    <div key={name}>
+                   
+                    <div key={name} className={span6 == true ? 'intro-y col-span-12 sm:col-span-6' : ''}>
                         {type === 'select' && options ? (
-                            <div>
+                            <>
                                 <select name={name} value={values[name] || ''} className="form-select form-select-lg  sm:mr-2 mt-4" 
                                     onChange={handleChange}>
                                     {options.map((option) => (  
@@ -81,7 +84,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                 {field.required && errors[name] && (
                                         <p className="text-red-500">{errors[name]}</p>
                                     )}
-                            </div>
+                            </>
                         ): type === 'multiselect' ? (
                             <div>
                                 <Multiselect className='mt-4'
@@ -95,7 +98,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                             </div>
                         ):
                         (
-                            <div>
+                            <>
                             <input
                                 className="intro-x login__input form-control py-3 px-4 block mt-4"
                                 type={type}
@@ -107,15 +110,16 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                             {field.required && errors[name] && (
                                  <p className="text-red-500">{errors[name]}</p>
                              )}
-                             </div>
+                             </>
                         )
                     }
                     </div>
                 )
             })}
-
+</div>
             <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top mt-4" type="submit" 
-            disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}</button>
+                disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}
+            </button>
             </form>   
         )
 

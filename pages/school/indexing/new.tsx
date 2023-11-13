@@ -1,3 +1,5 @@
+import ProfileForm from "@/Components/School/Indexing/profileForm"
+
 const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewIndexing = () => {
@@ -28,41 +30,12 @@ const NewIndexing = () => {
                 </div>
                 <div className="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <div className="font-medium text-base">Profile Settings</div>
-                    <div className="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label className="form-label">Name</label>
-                            <input id="input-wizard-1" type="text" className="form-control" placeholder="example@gmail.com" />
-                        </div>
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label  className="form-label">Phone Number</label>
-                            <input id="input-wizard-2" type="text" className="form-control" placeholder="example@gmail.com" />
-                        </div>
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label  className="form-label">Email</label>
-                            <input id="input-wizard-3" type="text" className="form-control" placeholder="Important Meeting" />
-                        </div>
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label  className="form-label">HMatric / Reg No</label>
-                            <input id="input-wizard-4" type="text" className="form-control" placeholder="Job, Work, Documentation" />
-                        </div>
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label className="form-label">Programme</label>
-                            <select id="input-wizard-6" className="form-select">
-                                <option>Dental Therapist</option>
-                                <option>Dental Surgery Technician</option>
-                                <option>Dental Surgery</option>
-                            </select>
-                        </div>
-                        <div className="intro-y col-span-12 sm:col-span-6">
-                            <label  className="form-label">Address</label>
-                            <input id="input-wizard-5" type="text" className="form-control" placeholder="Job, Work, Documentation" />
-                        </div>
+                       <ProfileForm />
                         
                         <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                             <button className="btn btn-secondary w-24">Previous</button>
                             <button className="btn btn-primary w-24 ml-2">Next</button>
                         </div>
-                    </div>
                 </div>
             </div>
         </MainLayout>

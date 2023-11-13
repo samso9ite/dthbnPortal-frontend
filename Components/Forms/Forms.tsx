@@ -46,7 +46,7 @@ export const Fields:Field = {
         {name:'confirm_password', type:'password', label:'Confirm Password', required:true}
     ],
     // New Indexng Form
-    indexingProfile: [
+    indexingProfileFields: [
         {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
