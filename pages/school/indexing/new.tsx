@@ -6,11 +6,8 @@ import IndexingForm from "@/Components/School/Indexing/IndexingForm"
 const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewIndexing = () => {
-    const [formState, setFormState] = useState('profile')
     const dispatch = useDispatch()
     let stepper = useSelector(stepperState)
-    dispatch(indexingActions.switchState('result'))
-    // console.log(stepper);
     
     return (
         <MainLayout>

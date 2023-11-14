@@ -23,6 +23,7 @@ const indexingSlice = createSlice({
     reducers: {
         storeIndexingData(state, action:PayloadAction<Indexing>){
             const formData = action.payload
+             
             if(state.stepperState == 'profile'){
                 state.profileData = formData
                 state.stepperState = 'work'

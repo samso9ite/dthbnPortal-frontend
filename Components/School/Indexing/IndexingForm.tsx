@@ -8,6 +8,8 @@ const IndexingForm = () => {
     let formState = useSelector(stepperState) 
     
     const submitHandler = (formData:any) => {
+        console.log(formData);
+        
         dispatch(indexingActions.storeIndexingData(formData))
     }
 
