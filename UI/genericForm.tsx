@@ -1,16 +1,18 @@
 import CustomSelect, { customMultipleSelect } from "./customSelect";
 import {useEffect, useState} from 'react'
 import Multiselect from 'multiselect-react-dropdown';
+import Button from "./stepperButton";
 
 type Field = {
     name:string;
     type:string;
     options?: {label:string, value:string, }[];
     label: string;
-    required?:boolean
+    required?:boolean;
+    stepperForm?:true
 }
 
-type FormValues = {
+export type FormValues = {
     [key: string]: string | undefined    
 }
 
@@ -18,11 +20,12 @@ type Props = {
     fields: Field[];
     onSubmit: (values: FormValues) => void;
     initialValues?: FormValues;
-    isPending?: boolean,
-    span6?:boolean
+    isPending?: boolean, 
+    span6?:boolean, 
+    stepperForm?:boolean
 }
 
-const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6 })  => {
+const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm })  => {
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
     
@@ -116,11 +119,13 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                     </div>
                 )
             })}
-</div>
-            <button className="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top mt-4" type="submit" 
-                disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}
-            </button>
-            </form>   
+            </div>
+            {stepperForm ? <Button /> : 
+                <button className="btn btn-primary py-3 px-4 xl:w-32 xl:mr-3 align-top mt-4" type="submit" 
+                    disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}
+                </button>
+            }
+        </form>   
         )
 
     }

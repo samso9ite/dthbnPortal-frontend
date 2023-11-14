@@ -34,5 +34,9 @@ interface Indexing {
 }
 
 interface IndexingState {
-    indexed: []; 
+    indexed: Indexing[]; 
+    profileData: {};
+    workData: {},
+    RefereeData: {},
+    stepperState: string   
 }

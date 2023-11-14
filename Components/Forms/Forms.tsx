@@ -82,23 +82,23 @@ export const Fields:Field = {
         {name: 'permanent_address', type:'text', label:'Permanent Address', required:false}
     ],
 
-    indexingWorkDetails: [
+    indexingWorkFields: [
         {name: 'place_of_work', type:'text', label:'Place of Work', required:true},
-        {name: 'address', type:'text', label:'Address'},
-        {name: 'position', type:'text', label:'Position'},
+        {name: 'address', type:'text', label:'Address', required:true},
+        {name: 'position', type:'text', label:'Position', required:true},
     ],
-    indexingRefereeDetails: [
+    indexingRefereeFields: [
         {name: 'referee_name', type:'text', label:'Referee Name', required:true},
         {name: 'referee_number', type:'number', label:'Referee Number', required:true},
         {name: 'referee_address', type:'text', label:'Referee Address', required:true},
     ],
-    indexingSchDetails:[
+    indexingSchFields:[
         {name: 'sch_attended', type:'text', label:'School Attended'},
         {name: 'entry-graduation_date', type:'date', label:'Entry & Graduation Date', required:true},
         {name: 'qualification', type:'text', label:'Qualification', required:true},
         {name: 'upload_certificaate', type:'file', label:'Upload Certificate'}
     ],
-    indexingOLevel: [
+    indexingResultFields: [
         {name: 'exam_number', type:'text', label:'Exaination Number', required:true},
         {name: 'exam_type', type:'select', label:'Examination Type', required:true,
             options: [
