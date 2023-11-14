@@ -1,4 +1,6 @@
+import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
+import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues} from "@/UI/genericForm"
 import { indexingActions, stepperState } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
@@ -6,11 +8,20 @@ import { useDispatch, useSelector } from "react-redux"
 const IndexingForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState) 
-    
+
+    const onSuccess = () => {
+         
+    }
+
+    const {handleSubmit, isSuccess, isError, error, isPending, data} =
+     useCustomMutation(apiRequest.createIndexing, onSuccess)
+
     const submitHandler = (formData:any) => {
-        console.log(formData);
-        
-        dispatch(indexingActions.storeIndexingData(formData))
+        if(formState == 'result'){
+           handleSubmit(formData)
+        }else{
+            dispatch(indexingActions.storeIndexingData(formData))
+        }
     }
 
     return(

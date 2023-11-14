@@ -37,7 +37,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
 
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
-    indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get')
+    indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get'),
+    createIndexing: (formData:FormValues) => generalRequest('school/new_indexing/', 'post', formData)
 }
 
 
