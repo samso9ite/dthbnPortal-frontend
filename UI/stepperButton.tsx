@@ -12,6 +12,8 @@ const Button:React.FC = () =>{
             dispatch(indexingActions.switchState('work'))
         }else if(stepper == 'result'){
             dispatch(indexingActions.switchState('referee'))
+        }else if(stepper == 'secondResult'){
+            dispatch(indexingActions.switchState('result'))
         } else(
             dispatch(indexingActions.switchState('profile'))
         )

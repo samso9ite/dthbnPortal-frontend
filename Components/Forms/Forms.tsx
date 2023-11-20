@@ -1,5 +1,54 @@
 import GenericForm, {Field, FormValues} from "@/UI/genericForm"
 
+
+const subjectOptions =   [
+    {value:'', label:'Select Subject'},
+    {value:'Mathematics', label:'Mathematics'},
+    {value:'English', label:'English'},
+    {value:'Physics', label:'Physics'},
+    {value:'Chemistry', label:'Chemistry'},
+    {value:'Biology', label:'Biology'},
+    {value:'Further Mathematics', label:'Further Mathematics'},
+    {value:'C.R.K', label:'C.R.K'},
+    {value:'Civic Education', label:'Civic Education'},
+    {value:'Agricultural Science', label:'Agircultural Science'},
+    {value:'Economics', label:'Economics'},
+    {value:'Islamic Studies', label:'Islamic Studies'},
+]
+
+const gradeOptions = [
+    {value:'', label:'Select Grade'},
+    {value:'A1', label:'A1'},
+    {value:'B2', label:'B2'},
+    {value:'B3', label:'B3'},
+    {value:'C4', label:'C4'},
+    {value:'C5', label:'C5'},
+    {value:'C6', label:'C6'},
+    {value:'D7', label:'D7'},
+    {value:'E8', label:'E8'},
+    {value:'F9', label:'F9'},
+]
+
+const generateFields = (count:number, options:any, field:string) => {
+    
+    
+    const generatedFields = Array.from({length:count}, (_, index) => ({
+        name: `${field}_${index + 1}`,
+        type: 'select',
+        label: `${field} ${index + 1}`, 
+        required: false,
+        options: options
+        
+    }))
+    console.log(generatedFields);
+    return generatedFields;
+    
+}
+
+const generatedSubjectFields = generateFields(8, subjectOptions, 'Subject');
+const generatedGradeFields = generateFields(8, gradeOptions, 'Grade');
+
+
 export const Fields:Field = {
     loginFormFields: [
         {name:'username', type:'text', label:'Username', required:true},
@@ -109,19 +158,7 @@ export const Fields:Field = {
             ]
         },
         {name: 'exam_year', type:'text', label:'Examination Year', required:true},
-        {name: 'subject', type:'text', label:'Subject', required:true},
-        {name: 'grade', type:'select', label:'grade', required:true,
-            options: [
-                {value:'A1', label:'A1'},
-                {value:'B2', label:'B2'},
-                {value:'B3', label:'B3'},
-                {value:'C4', label:'C4'},
-                {value:'C5', label:'C5'},
-                {value:'C6', label:'C6'},
-                {value:'D7', label:'D7'},
-                {value:'E8', label:'E8'},
-                {value:'F9', label:'F9'},
-            ]
-        },
+        generatedSubjectFields,
+        generatedGradeFields
     ]
 }

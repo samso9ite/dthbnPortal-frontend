@@ -12,8 +12,10 @@ type Field = {
     stepperForm?:true
 }
 
+type arrayField = string
+
 export type FormValues = {
-    [key: string]: string | undefined    
+    [key: string]: string | undefined | arrayField[]   
 }
 
 type Props = {
@@ -34,12 +36,25 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         setValues(initialValues || {})
     }, [initialValues])
     
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e:React.ChangeEvent<any>) => {
         const {name, value} = e.target;
-        setValues((prevValues) => ({
-            ...prevValues, [name]:value,
-        }));
 
+        // Handle stepper form fields
+        if(fields.find(field => field.name === name && field.stepperForm)){
+            setValues((prevValues) => ({
+                ...prevValues,
+                [name]: [
+                    ...(prevValues[name] || []), // Ensure it's an array or use an empty array
+                    {
+                      [name]: value,
+                    },
+                  ],
+            }))
+        }else{
+            setValues((prevValues) => ({
+                ...prevValues, [name]:value,
+            }));
+        }
         if(fields.find((field) =>  field.name === name && field.required)){
             setErrors((prevErrors) => ({
                 ...prevErrors, [name]:''

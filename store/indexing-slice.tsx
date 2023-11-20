@@ -13,7 +13,9 @@ const initialState:IndexingState = {
     indexed:[],
     profileData: {},
     workData: {},
-    RefereeData: {},
+    refereeData: {},
+    firstResultData: {},
+    secondResultData: {},
     stepperState: 'profile'
 }
 
@@ -31,8 +33,10 @@ const indexingSlice = createSlice({
                 state.workData = formData;
                 state.stepperState = 'referee'
             }else if(state.stepperState == 'referee'){
-                state.RefereeData = formData;
+                state.refereeData = formData;
                 state.stepperState = 'result'
+            }else{
+                state.stepperState = 'secondResult'
             }
         },
         switchState(state, action:PayloadAction<string>){
@@ -48,6 +52,10 @@ const indexingSlice = createSlice({
 
 export const selectIndexedData = (state: RootState) => state.index.indexed;
 export const indexProfileDetails = (state:RootState) => state.index.profileData;
+export const indexWorkDetails = (state:RootState) => state.index.workData;
+export const indexRefereeDetails = (state:RootState) => state.index.refereeData;
+export const indexFirstResultDetails = (state:RootState) => state.index.firstResultData;
+export const indexSecondResultDetails = (state:RootState) => state.index.secondResultData;
 export const stepperState = (state:RootState) => state.index.stepperState
 
 export const indexingActions = indexingSlice.actions
