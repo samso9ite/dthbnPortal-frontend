@@ -10,6 +10,8 @@ import {useState} from 'react'
 type ModifiedRefereeField = Field & { name: string };
 
 const IndexingForm = () => {
+    console.log(Fields.indexingResultFields);
+    
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
     const[numOfSitting, setNumOfSitting] = useState('1')
