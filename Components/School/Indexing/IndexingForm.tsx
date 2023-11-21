@@ -40,31 +40,35 @@ const IndexingForm = () => {
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             let data:any = '';
-            let grade: { key: string; value: string }[][] = []
-            const array = Object.keys(formData)
-            console.log(array);
-            
+            // let grade: { key: string; value: string }[][] = []
+        
             const valuesArray: any  = Object.entries(formData).reduce(
                 (result:any, [key, value]) => {
                   if (gradeKeysToRemove.includes(key)) {
+                    
                     result[key] = value;
-                  }
+                    result.grade = result.grade || [];
+                    result.grade.push({ key, value });
+                }
                   return result;
                 },
                 {}
               );
              
-
             // Push the removedKeyValueArray into the grades array
-            grade.push(valuesArray);
+            // grade.grade.push(valuesArray);
+            const resultArray = [{ grade: valuesArray }];
+            console.log(resultArray);
+            
 
-            console.log(grade);
             
             gradeKeysToRemove.forEach(key => delete formData[key])
-            console.log(valuesArray);
+            console.log(formData);
+            formData = {...formData, ...resultArray[0]}
             console.log(formData);
             
-
+            
+          
             handleSubmit(formData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
