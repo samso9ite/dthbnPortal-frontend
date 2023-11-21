@@ -2,8 +2,7 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
-import { indexingActions, stepperState, indexProfileDetails, indexRefereeDetails,
-    indexWorkDetails, indexFirstResultDetails, indexSecondResultDetails } from "@/store/indexing-slice"
+import { indexingActions, stepperState, indexingData } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
 
@@ -13,12 +12,13 @@ type ModifiedRefereeField = Field & { name: string };
 const IndexingForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
-    const profileDetails = useSelector(indexProfileDetails)
-    const workDetails = useSelector(indexWorkDetails)
-    const refereeDetails = useSelector(indexRefereeDetails)
-    const firstResult = useSelector(indexFirstResultDetails)
-    const secondResult = useSelector(indexSecondResultDetails)
+    const indexingFormData = useSelector(indexingData)
     const[numOfSitting, setNumOfSitting] = useState('')
+
+    let gradeKeysToRemove = [
+        'Subject_1', 'Subject_2', 'Subject_3', 'Subject_4', 'Subject_5', 'Subject_6', 'Subject_7', 'Subject_8',
+        'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
+    ]
 
     const onSuccess = () => {
          
@@ -30,37 +30,41 @@ const IndexingForm = () => {
         ...Fields.indexingRefereeFields.map((field:Field, index:number) => ({...field, name: `${field.name}_${index}` }))
     ]
 
-   
     const onChangeSitting = (e:React.ChangeEvent<HTMLSelectElement>) => {
         setNumOfSitting(e.target.value)
     }
 
-    // const getFormData = () => {
-        
-
-    //    
-    //     console.log(data);
-    //     return data
-    // }
-   
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
      useCustomMutation(apiRequest.createIndexing, onSuccess)
      const submitHandler = (formData:any) => {
-        console.log(numOfSitting);
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             let data:any = '';
+            let grade: { key: string; value: string }[][] = []
+            const array = Object.keys(formData)
+            console.log(array);
             
-            if(numOfSitting ==  '1'){
-                console.log(formData);
-                data = {...profileDetails, ...workDetails, ...refereeDetails, ...formData}
-            } else if(numOfSitting == '2'){
-                data = {...profileDetails, ...workDetails, ...refereeDetails, ...firstResult, ...formData}
-            }
+            const valuesArray: any  = Object.entries(formData).reduce(
+                (result:any, [key, value]) => {
+                  if (gradeKeysToRemove.includes(key)) {
+                    result[key] = value;
+                  }
+                  return result;
+                },
+                {}
+              );
+             
+
+            // Push the removedKeyValueArray into the grades array
+            grade.push(valuesArray);
+
+            console.log(grade);
             
-            console.log(data);
+            gradeKeysToRemove.forEach(key => delete formData[key])
+            console.log(valuesArray);
+            console.log(formData);
             
-            
+
             handleSubmit(formData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
@@ -76,12 +80,10 @@ const IndexingForm = () => {
                 name: `${fieldItem.name}_${index}`,
             }));
         });
-    
-        console.log(duplicatedFields);
+
         return duplicatedFields;
     };
     
-
     return( 
         <>
             {formState == 'result' &&

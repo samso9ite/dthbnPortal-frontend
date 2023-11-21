@@ -35,10 +35,10 @@ interface Indexing {
 
 interface IndexingState {
     indexed: Indexing[]; 
-    profileData: {};
-    workData: {},
-    refereeData: {},
-    firstResultData:{},
-    secondResultData:{},
+    indexingData: {};
+    // workData: {},
+    // refereeData: {},
+    // firstResultData:{},
+    // secondResultData:{},
     stepperState: string   
 }

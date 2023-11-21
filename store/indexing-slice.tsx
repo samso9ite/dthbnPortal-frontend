@@ -11,11 +11,11 @@ export const fetchData = createAsyncThunk('indexing/fetchIndexData', async () =>
 
 const initialState:IndexingState = {
     indexed:[],
-    profileData: {},
-    workData: {},
-    refereeData: {},
-    firstResultData: {},
-    secondResultData: {},
+    indexingData: {},
+    // workData: {},
+    // refereeData: {},
+    // firstResultData: {},
+    // secondResultData: {},
     stepperState: 'profile'
 }
 
@@ -27,13 +27,13 @@ const indexingSlice = createSlice({
             const formData = action.payload
              
             if(state.stepperState == 'profile'){
-                state.profileData = formData
+                state.indexingData = formData
                 state.stepperState = 'work'
             }else if(state.stepperState == 'work'){
-                state.workData = formData;
+                state.indexingData = formData;
                 state.stepperState = 'referee'
             }else if(state.stepperState == 'referee'){
-                state.refereeData = formData;
+                state.indexingData = formData;
                 state.stepperState = 'result'
             }else{
                 state.stepperState = 'secondResult'
@@ -51,11 +51,11 @@ const indexingSlice = createSlice({
 })
 
 export const selectIndexedData = (state: RootState) => state.index.indexed;
-export const indexProfileDetails = (state:RootState) => state.index.profileData;
-export const indexWorkDetails = (state:RootState) => state.index.workData;
-export const indexRefereeDetails = (state:RootState) => state.index.refereeData;
-export const indexFirstResultDetails = (state:RootState) => state.index.firstResultData;
-export const indexSecondResultDetails = (state:RootState) => state.index.secondResultData;
+export const indexingData = (state:RootState) => state.index.indexingData;
+// export const indexWorkDetails = (state:RootState) => state.index.workData;
+// export const indexRefereeDetails = (state:RootState) => state.index.refereeData;
+// export const indexFirstResultDetails = (state:RootState) => state.index.firstResultData;
+// export const indexSecondResultDetails = (state:RootState) => state.index.secondResultData;
 export const stepperState = (state:RootState) => state.index.stepperState
 
 export const indexingActions = indexingSlice.actions
