@@ -13,7 +13,12 @@ type ModifiedRefereeField = Field & { name: string };
 const IndexingForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
-    const[numOfSitting, setNumOfSitting] = useState('1')
+    const profileDetails = useSelector(indexProfileDetails)
+    const workDetails = useSelector(indexWorkDetails)
+    const refereeDetails = useSelector(indexRefereeDetails)
+    const firstResult = useSelector(indexFirstResultDetails)
+    const secondResult = useSelector(indexSecondResultDetails)
+    const[numOfSitting, setNumOfSitting] = useState('')
 
     const onSuccess = () => {
          
@@ -29,19 +34,32 @@ const IndexingForm = () => {
     const onChangeSitting = (e:React.ChangeEvent<HTMLSelectElement>) => {
         setNumOfSitting(e.target.value)
     }
+
+    // const getFormData = () => {
+        
+
+    //    
+    //     console.log(data);
+    //     return data
+    // }
    
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
      useCustomMutation(apiRequest.createIndexing, onSuccess)
      const submitHandler = (formData:any) => {
-        if(formState == 'result' && numOfSitting == '1'){
-            const profileDetails = useSelector(indexProfileDetails)
-            const workDetails = useSelector(indexWorkDetails)
-            const refereeDetails = useSelector(indexRefereeDetails)
-            const firstResult = useSelector(indexFirstResultDetails)
-            const secondResult = useSelector(indexSecondResultDetails)
-
-            const data = {...profileDetails, ...workDetails, ...refereeDetails, ...firstResult, ...secondResult}
+        console.log(numOfSitting);
+        
+        if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
+            let data:any = '';
+            
+            if(numOfSitting ==  '1'){
+                console.log(formData);
+                data = {...profileDetails, ...workDetails, ...refereeDetails, ...formData}
+            } else if(numOfSitting == '2'){
+                data = {...profileDetails, ...workDetails, ...refereeDetails, ...firstResult, ...formData}
+            }
+            
             console.log(data);
+            
             
             handleSubmit(formData)
         }else{
@@ -49,20 +67,8 @@ const IndexingForm = () => {
         }
 
     }
-    //  const duplicateGrades = (fields:any) => {
-    //     console.log(fields);
-    //     fields.map((field:any) => {
-    //     const fieldArray = Array.isArray(field) ? field : [field];
-    //     let result =  fieldArray.map((fieldItem, index) => ({
-            
-    //         ...fieldItem, name: `${fieldItem.name}_${index}` }))
-    //         console.log(result);
-            
-    //     return result
-    // })}
 
     const duplicateGrades = (fields:any) => {
-        console.log(fields);
         const duplicatedFields = fields.flatMap((field:any) => {
             const fieldArray = Array.isArray(field) ? field : [field];
             return fieldArray.map((fieldItem, index) => ({
@@ -80,9 +86,9 @@ const IndexingForm = () => {
         <>
             {formState == 'result' &&
                 <select className="form-control" onChange={onChangeSitting}>
-                    <option>Select number of sitting</option>
-                    <option>One Sitting</option>
-                    <option>Two Sitting</option>
+                    <option value=''>Select number of sitting</option>
+                    <option value='1'>One Sitting</option>
+                    <option value='2'>Two Sitting</option>
                 </select>
             }
           
