@@ -28,8 +28,7 @@ type Props = {
 }
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm })  => {
-    // console.log(fields);
-    
+  
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
     
@@ -85,8 +84,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         <form onSubmit={handleSubmit}>
             <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
             {fields.map((field) => {
-                console.log(field);
-                const fieldArray = Array.isArray(field) ? field : [];
+                const fieldArray = Array.isArray(field) ? field : [field];
                 return fieldArray.map((field, index) => {
                 const { name, type, options, label } = field;
                 return(
@@ -96,7 +94,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                             <>
                                 <select name={name} value={values[name] || ''} className="form-select form-select-lg  sm:mr-2 mt-4" 
                                     onChange={handleChange}>
-                                    {options.map((option) => (  
+                                    {options.map((option:{value:string, label:string}) => (  
                                         <option key={option.value} value={option.value}>
                                             {option.label}
                                         </option>

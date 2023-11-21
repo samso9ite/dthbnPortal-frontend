@@ -40,7 +40,6 @@ const generateFields = (count:number, options:any, field:string) => {
         options: options
         
     }))
-    console.log(generatedFields);
     return generatedFields;
     
 }
@@ -62,6 +61,7 @@ export const Fields:Field = {
         {name:'email', type:'email', label:'Email', required:true},
         {name:'programme', type:'select', label:'Programme', 
             options: [
+                {value:'', label:'Select Cadre'},
                 {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
                 {values:'Dental Therapist', label:'Dental Therapist'},
                 {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
@@ -102,14 +102,16 @@ export const Fields:Field = {
         {name: 'last_name', type:'text', label:'Last Name', required:true},
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician', name:'Dental Surgery Technician'},
-                {values:'Dental Therapist', label:'Dental Therapist', name:'Dental Therapist'},
-                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant', name:'Dental Surgery Assistant'},
-                {values:'Dental Nurse', label:'Dental Nurse', name:'Dental Nurse'}
+                {value:'', label:'Select Cadre'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
+                {values:'Dental Therapist', label:'Dental Therapist'},
+                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
+                {values:'Dental Nurse', label:'Dental Nurse'}
             ],
         },
         {name: 'gender', type:'select', label:'Gender', required:true,
             options: [
+                {value:'', label:'Select Gender'},
                 {values:'Male', label:'Male'},
                 {values:'Female', label:'Female'}
             ]
@@ -122,6 +124,7 @@ export const Fields:Field = {
         {name: 'lga', type:'text', label:'Local Government Area', required:true},
         {name: 'marital_status', type:'select', label:'Marital Status', required:true,
             options: [
+                {values:'', label:'Select Marital Status'},
                 {values:'Single', label:'Single'},
                 {values:'Married', label:'Married'},
                 {values:'Divorced', label:'Divorced'}
@@ -151,6 +154,7 @@ export const Fields:Field = {
         {name: 'exam_number', type:'text', label:'Exaination Number', required:true},
         {name: 'exam_type', type:'select', label:'Examination Type', required:true,
             options: [
+                {value:'', label:'Select Exam Type'},
                 {value:'WASSCE', label:'WAEC'},
                 {value:'GCE', label:'GCE'},
                 {value:'NECO', label:'NECO'},
@@ -159,6 +163,7 @@ export const Fields:Field = {
         },
         {name: 'exam_year', type:'text', label:'Examination Year', required:true},
         generatedSubjectFields,
-        generatedGradeFields
+        generatedGradeFields,
+        {name:'o_level_cert_1', type:'file', label:'O Level Certificate', required:true}
     ]
 }
