@@ -38,24 +38,29 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }, [initialValues])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
-        const {name, value} = e.target;
-
+        let {name, value, files} = e.target;
+        let file = files && e.target.files[0]
+        console.log(value);
+        
+        
         // Handle stepper form fields
-        if(fields.find(field => field.name === name && field.stepperForm)){
-            setValues((prevValues) => ({
-                ...prevValues,
-                [name]: [
-                    ...(prevValues[name] || []), // Ensure it's an array or use an empty array
-                    {
-                      [name]: value,
-                    },
-                  ],
-            }))
-        }else{
-            setValues((prevValues) => ({
-                ...prevValues, [name]:value,
-            }));
-        }
+       if (fields.find(field => field.name === name && field.stepperForm)) {
+        setValues((prevValues) => ({
+            ...prevValues,
+            [name]: [
+                ...(prevValues[name] || []), // Ensure it's an array or use an empty array
+                {
+                    [name]: files ? file : value,
+                },
+            ],
+        }))
+        console.log(values);
+    } else {
+        setValues((prevValues) => ({
+            ...prevValues,
+            [name]: files ? file : prevValues[name] || '',
+        }));
+    }
         if(fields.find((field) =>  field.name === name && field.required)){
             setErrors((prevErrors) => ({
                 ...prevErrors, [name]:''
@@ -99,12 +104,11 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                             {option.label}
                                         </option>
                                     ))
-                                
                                     }
                                 </select>
                                 {field.required && errors[name] && (
-                                        <p className="text-red-500">{errors[name]}</p>
-                                    )}
+                                    <p className="text-red-500">{errors[name]}</p>
+                                )}
                             </>
                         ): type === 'multiselect' ? (
                             <div>
@@ -120,17 +124,17 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                         ):
                         (
                             <>
-                            <input
-                                className="intro-x login__input form-control py-3 px-4 block mt-4"
-                                type={type}
-                                name={name}
-                                placeholder={label}
-                                value={values[name] || ''}
-                                onChange={handleChange}
-                            />
-                            {field.required && errors[name] && (
-                                 <p className="text-red-500">{errors[name]}</p>
-                             )}
+                                <input
+                                    className="intro-x login__input form-control py-3 px-4 block mt-4"
+                                    type={type}
+                                    name={name}
+                                    placeholder={label}
+                                    value={type == 'file' ? undefined : values[name] || ''}
+                                    onChange={handleChange}
+                                />
+                                {field.required && errors[name] && (
+                                    <p className="text-red-500">{errors[name]}</p>
+                                )}
                              </>
                         )
                     }

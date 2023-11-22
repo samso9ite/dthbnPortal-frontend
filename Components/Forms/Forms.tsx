@@ -97,10 +97,11 @@ export const Fields:Field = {
     ],
     // New Indexng Form
     indexingProfileFields: [
+        {name:'profile_image', type:'file', label:'Profile Image', required:true},
         {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
-        {name: 'last_name', type:'text', label:'Last Name', required:true},
+        {name: 'surname', type:'text', label:'Last Name', required:true},
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
@@ -110,7 +111,7 @@ export const Fields:Field = {
                 {values:'Dental Nurse', label:'Dental Nurse'}
             ],
         },
-        {name: 'gender', type:'select', label:'Gender', required:true,
+        {name: 'sex', type:'select', label:'Gender', required:true,
             options: [
                 {value:'', label:'Select Gender'},
                 {values:'Male', label:'Male'},
@@ -132,7 +133,8 @@ export const Fields:Field = {
             ]
         },
         {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
-        {name: 'permanent_address', type:'text', label:'Permanent Address', required:false}
+        {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
+        {name: 'contact_address', type:'text', label:'Contact Address', required:false}
     ],
 
     indexingWorkFields: [
