@@ -20,6 +20,10 @@ const IndexingForm = () => {
         'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
     ]
 
+    let schKeysToRemove = ['School with date_1', 'School with date_2', 'School with date_3']
+    let qualificationKeysToRemove = ['Qualification with date_1', 'Qualification with date_2', 'Qualification with date_3']
+    let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number', 'referee_number_1']
+
     const onSuccess = () => {
          
     }
@@ -40,15 +44,21 @@ const IndexingForm = () => {
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             let data:any = '';
-            // let grade: { key: string; value: string }[][] = []
-        
             const valuesArray: any  = Object.entries(formData).reduce(
                 (result:any, [key, value]) => {
-                  if (gradeKeysToRemove.includes(key)) {
+                if (gradeKeysToRemove.includes(key)) {
+                    result.grade = result.grade || {};
+                    result.grade[key] = value;
                     
-                    result[key] = value;
-                    result.grade = result.grade || [];
-                    result.grade.push({ key, value });
+                } if(refereeKeysToRemove.includes(key)){
+                    result.referee = result.referee || {};
+                    result.referee[key] = value;
+                } if(qualificationKeysToRemove.includes(key)){
+                    result.qualifications = result.qualification || {};
+                    result.qualifications[key] = value;
+                }if(schKeysToRemove.includes(key)){
+                    result.schools = result.schools || {};
+                    result.schools[key] = value;
                 }
                   return result;
                 },
@@ -56,15 +66,17 @@ const IndexingForm = () => {
               );
              
             // Push the removedKeyValueArray into the grades array
-            // grade.grade.push(valuesArray);
             const resultArray = [{ grade: valuesArray }];
             console.log(resultArray);
             
-
-            
             gradeKeysToRemove.forEach(key => delete formData[key])
+            refereeKeysToRemove.forEach(key => delete formData[key])
+            qualificationKeysToRemove.forEach(key => delete formData[key])
+            schKeysToRemove.forEach(key => delete formData[key])
+            
             console.log(formData);
-            formData = {...formData, ...resultArray[0]}
+            formData = {...formData, ...resultArray[0].grade, ...resultArray[0].grade.referee,
+                ...resultArray[0].grade.qualifications, ...resultArray[0].grade.schools}
             console.log(formData);
             
             
@@ -100,7 +112,8 @@ const IndexingForm = () => {
           
             
             <GenericForm fields= { formState == 'profile' ? Fields.indexingProfileFields : 
-                    formState == 'work' ? Fields.indexingWorkFields :
+                    formState == 'work' ? Fields.indexingWorkFields : 
+                    formState == 'sch/cert' ? Fields.indexingSchCertDetails :
                     formState == 'referee' ? modifiedRefereeFields : formState == 'result' ?
                     Fields.indexingResultFields : duplicateGrades(Fields.indexingResultFields)
                 } 

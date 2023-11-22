@@ -31,14 +31,20 @@ const NewIndexing = () => {
                         "lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-slate-600 dark:text-slate-400"}>Work Details</div>
                     </div>
                     <div className="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button className={stepper == 'referee'  ? "w-10 h-10 rounded-full btn btn-primary" :
+                        <button className={stepper == 'sch/cert' ? "w-10 h-10 rounded-full btn btn-primary" :
                          "w-10 h-10 rounded-full btn text-slate-500 bg-slate-100 dark:bg-darkmode-400 dark:border-darkmode-400"}>3</button>
+                        <div className={stepper == 'sch/cert' ? "lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto" : 
+                        "lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-slate-600 dark:text-slate-400"}>Schools / Qualification Details</div>
+                    </div>
+                    <div className="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
+                        <button className={stepper == 'referee'  ? "w-10 h-10 rounded-full btn btn-primary" :
+                         "w-10 h-10 rounded-full btn text-slate-500 bg-slate-100 dark:bg-darkmode-400 dark:border-darkmode-400"}>4</button>
                         <div className={stepper == 'referee' ? "lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto" : 
                         "lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-slate-600 dark:text-slate-400"}>Referee Details</div>
                     </div>
                     <div className="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
                         <button className={stepper == 'result' || stepper == 'secondResult' ? "w-10 h-10 rounded-full btn btn-primary" :
-                         "w-10 h-10 rounded-full btn text-slate-500 bg-slate-100 dark:bg-darkmode-400 dark:border-darkmode-400"}>3</button>
+                         "w-10 h-10 rounded-full btn text-slate-500 bg-slate-100 dark:bg-darkmode-400 dark:border-darkmode-400"}>5</button>
                         <div className={stepper == 'result' || stepper == 'secondResult' ? "lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto" : 
                         "lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-slate-600 dark:text-slate-400"}>Result Details</div>
                     </div>

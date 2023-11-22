@@ -29,12 +29,11 @@ const gradeOptions = [
     {value:'F9', label:'F9'},
 ]
 
-const generateFields = (count:number, options:any, field:string) => {
-    
+const generateFields = (count:number,  field:string, options?:any,) => {
     
     const generatedFields = Array.from({length:count}, (_, index) => ({
         name: `${field}_${index + 1}`,
-        type: 'select',
+        type: options ? 'select' : 'text',
         label: `${field} ${index + 1}`, 
         required: false,
         options: options
@@ -44,8 +43,10 @@ const generateFields = (count:number, options:any, field:string) => {
     
 }
 
-const generatedSubjectFields = generateFields(8, subjectOptions, 'Subject');
-const generatedGradeFields = generateFields(8, gradeOptions, 'Grade');
+const generatedSubjectFields = generateFields(8, 'Subject', subjectOptions);
+const generatedGradeFields = generateFields(8, 'Grade' , gradeOptions);
+const generatedSchField = generateFields(3, 'School with date');
+const generatedCertField = generateFields(3, 'Qualification with date')
 
 
 export const Fields:Field = {
@@ -165,5 +166,9 @@ export const Fields:Field = {
         generatedSubjectFields,
         generatedGradeFields,
         {name:'o_level_cert_1', type:'file', label:'O Level Certificate', required:true}
+    ],
+    indexingSchCertDetails: [
+        generatedSchField,
+        generatedCertField
     ]
 }

@@ -31,11 +31,14 @@ const indexingSlice = createSlice({
                 state.stepperState = 'work'
             }else if(state.stepperState == 'work'){
                 state.indexingData = formData;
+                state.stepperState = 'sch/cert'
+            }else if(state.stepperState == 'sch/cert'){
+                state.indexingData = formData;
                 state.stepperState = 'referee'
             }else if(state.stepperState == 'referee'){
                 state.indexingData = formData;
                 state.stepperState = 'result'
-            }else{
+            }else {
                 state.stepperState = 'secondResult'
             }
         },
@@ -52,10 +55,6 @@ const indexingSlice = createSlice({
 
 export const selectIndexedData = (state: RootState) => state.index.indexed;
 export const indexingData = (state:RootState) => state.index.indexingData;
-// export const indexWorkDetails = (state:RootState) => state.index.workData;
-// export const indexRefereeDetails = (state:RootState) => state.index.refereeData;
-// export const indexFirstResultDetails = (state:RootState) => state.index.firstResultData;
-// export const indexSecondResultDetails = (state:RootState) => state.index.secondResultData;
 export const stepperState = (state:RootState) => state.index.stepperState
 
 export const indexingActions = indexingSlice.actions
