@@ -167,7 +167,7 @@ export const Fields:Field = {
         {name: 'exam_year', type:'text', label:'Examination Year', required:true},
         generatedSubjectFields,
         generatedGradeFields,
-        {name:'o_level_cert_1', type:'file', label:'O Level Certificate', required:true}
+        {name:'o_level_cert', type:'file', label:'O Level Certificate', required:true}
     ],
     indexingSchCertDetails: [
         generatedSchField,

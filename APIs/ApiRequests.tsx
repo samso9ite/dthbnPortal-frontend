@@ -1,7 +1,7 @@
 import api from "./api";
 import { FormValues } from "@/UI/genericForm"
 
-const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get', formData?:FormValues) => {
+const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get', formData?:FormValues, fileUpload?:boolean) => {
     
     try{
         if(method == 'get'){
@@ -38,9 +38,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
     indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get'),
-    createIndexing: (formData:FormValues) => generalRequest('school/new_indexing/', 'post', formData)
+    createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData)
 }
-
-
 
 export default apiRequest

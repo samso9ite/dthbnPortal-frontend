@@ -40,8 +40,6 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
         let file = files && e.target.files[0]
-        console.log(value);
-        
         
         // Handle stepper form fields
        if (fields.find(field => field.name === name && field.stepperForm)) {
@@ -54,7 +52,6 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 },
             ],
         }))
-        console.log(values);
     } else {
         setValues((prevValues) => ({
             ...prevValues,

@@ -50,25 +50,23 @@ const IndexingForm = () => {
 
             // Append each key-value pair to the FormData
             for (const [key, value] of Object.entries(formData)) {
-            if (gradeKeysToRemove.includes(key)) {
-                resultFormData.append(`grades.${key}`, value as string);
-                delete formData[key]
-            } else if (refereeKeysToRemove.includes(key)) {
-                resultFormData.append(`referees.${key}`, value as string);
-                delete formData[key]
-            } else if (qualificationKeysToRemove.includes(key)) {
-                resultFormData.append(`examinations.${key}`, value as string);
-                delete formData[key]
-            } else if (schKeysToRemove.includes(key)) {
-                resultFormData.append(`school_attended.${key}`, value as string);
-                delete formData[key]
-            } else {
-                resultFormData.append(key, value as string | Blob);
-            }
-          
-        }      
-            
-        console.log(resultFormData);
+                if (gradeKeysToRemove.includes(key)) {
+                    resultFormData.append(`grades.${key}`, value as string);
+                    delete formData[key]
+                } else if (refereeKeysToRemove.includes(key)) {
+                    resultFormData.append(`referees.${key}`, value as string);
+                    delete formData[key]
+                } else if (qualificationKeysToRemove.includes(key)) {
+                    resultFormData.append(`examinations.${key}`, value as string);
+                    delete formData[key]
+                } else if (schKeysToRemove.includes(key)) {
+                    resultFormData.append(`school_attended.${key}`, value as string);
+                    delete formData[key]
+                } else {
+                    resultFormData.append(key, value as string | Blob);
+                }
+            }      
+            console.log(resultFormData);
         
             handleSubmit(resultFormData)
         }else{
