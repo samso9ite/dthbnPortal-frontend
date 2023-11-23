@@ -58,7 +58,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     } else {
         setValues((prevValues) => ({
             ...prevValues,
-            [name]: files ? file : prevValues[name] || '',
+            [name]: files ? file : value || '',
         }));
     }
         if(fields.find((field) =>  field.name === name && field.required)){
@@ -86,7 +86,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         
     }
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
             {fields.map((field) => {
                 const fieldArray = Array.isArray(field) ? field : [field];

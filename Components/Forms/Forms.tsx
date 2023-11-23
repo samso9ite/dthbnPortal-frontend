@@ -45,8 +45,8 @@ const generateFields = (count:number,  field:string, options?:any,) => {
 
 const generatedSubjectFields = generateFields(8, 'Subject', subjectOptions);
 const generatedGradeFields = generateFields(8, 'Grade' , gradeOptions);
-const generatedSchField = generateFields(3, 'School with date');
-const generatedCertField = generateFields(3, 'Qualification with date')
+const generatedSchField = generateFields(3, 'School');
+const generatedCertField = generateFields(3, 'Qualifications')
 
 
 export const Fields:Field = {

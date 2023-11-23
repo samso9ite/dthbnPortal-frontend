@@ -20,9 +20,10 @@ const IndexingForm = () => {
         'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
     ]
 
-    let schKeysToRemove = ['School with date_1', 'School with date_2', 'School with date_3']
-    let qualificationKeysToRemove = ['Qualification with date_1', 'Qualification with date_2', 'Qualification with date_3']
-    let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number', 'referee_number_1']
+    let schKeysToRemove = ['School_1', 'School_2', 'School_3']
+    let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
+    let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
+     'referee_number_1']
 
     const onSuccess = () => {
          
@@ -41,47 +42,35 @@ const IndexingForm = () => {
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
      useCustomMutation(apiRequest.createIndexing, onSuccess)
      const submitHandler = (formData:any) => {
+        console.log(formData);
+        
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
-            let data:any = '';
-            const valuesArray: any  = Object.entries(formData).reduce(
-                (result:any, [key, value]) => {
-                if (gradeKeysToRemove.includes(key)) {
-                    result.grade = result.grade || {};
-                    result.grade[key] = value;
-                    
-                } if(refereeKeysToRemove.includes(key)){
-                    result.referee = result.referee || {};
-                    result.referee[key] = value;
-                } if(qualificationKeysToRemove.includes(key)){
-                    result.qualifications = result.qualification || {};
-                    result.qualifications[key] = value;
-                }if(schKeysToRemove.includes(key)){
-                    result.schools = result.schools || {};
-                    result.schools[key] = value;
-                }
-                  return result;
-                },
-                {}
-              );
-             
-            // Push the removedKeyValueArray into the grades array
-            const resultArray = [{ grade: valuesArray }];
-            console.log(resultArray);
-            
-            gradeKeysToRemove.forEach(key => delete formData[key])
-            refereeKeysToRemove.forEach(key => delete formData[key])
-            qualificationKeysToRemove.forEach(key => delete formData[key])
-            schKeysToRemove.forEach(key => delete formData[key])
-            
-            console.log(formData);
-            formData = {...formData, ...resultArray[0].grade, ...resultArray[0].grade.referee,
-                ...resultArray[0].grade.qualifications, ...resultArray[0].grade.schools}
-            console.log(formData);
-            
-            
+            const resultFormData = new FormData();
+
+            // Append each key-value pair to the FormData
+            for (const [key, value] of Object.entries(formData)) {
+            if (gradeKeysToRemove.includes(key)) {
+                resultFormData.append(`grades.${key}`, value as string);
+                delete formData[key]
+            } else if (refereeKeysToRemove.includes(key)) {
+                resultFormData.append(`referees.${key}`, value as string);
+                delete formData[key]
+            } else if (qualificationKeysToRemove.includes(key)) {
+                resultFormData.append(`examinations.${key}`, value as string);
+                delete formData[key]
+            } else if (schKeysToRemove.includes(key)) {
+                resultFormData.append(`school_attended.${key}`, value as string);
+                delete formData[key]
+            } else {
+                resultFormData.append(key, value as string | Blob);
+            }
           
-            handleSubmit(formData)
+        }      
+            
+        console.log(resultFormData);
+        
+            handleSubmit(resultFormData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
         }
