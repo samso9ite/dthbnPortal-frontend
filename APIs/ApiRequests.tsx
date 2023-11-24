@@ -2,13 +2,23 @@ import api from "./api";
 import { FormValues } from "@/UI/genericForm"
 
 const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get', formData?:FormValues, fileUpload?:boolean) => {
+    console.log(fileUpload);
     
     try{
+        let config
         if(method == 'get'){
             const response = await api.axios_instance[method](api.baseUrl+url)
             return response
         }else{
-            const response = await api.axios_instance[method](api.baseUrl+url, formData)
+            if (fileUpload) {
+                // If there are files, set the Content-Type to multipart/form-data
+                config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                };
+            }
+            const response = await api.axios_instance[method](api.baseUrl+url, formData, config)
             return response
         }
           
@@ -38,7 +48,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
     indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get'),
-    createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData)
+    createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData, fileUpload=true)
 }
 
 export default apiRequest

@@ -44,7 +44,6 @@ const IndexingForm = () => {
      const submitHandler = (formData:any) => {
         console.log(formData);
         
-        
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             const resultFormData = new FormData();
 
@@ -66,8 +65,6 @@ const IndexingForm = () => {
                     resultFormData.append(key, value as string | Blob);
                 }
             }      
-            console.log(resultFormData);
-        
             handleSubmit(resultFormData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
