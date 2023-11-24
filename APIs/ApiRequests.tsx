@@ -2,7 +2,6 @@ import api from "./api";
 import { FormValues } from "@/UI/genericForm"
 
 const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get', formData?:FormValues, fileUpload?:boolean) => {
-    console.log(fileUpload);
     
     try{
         let config

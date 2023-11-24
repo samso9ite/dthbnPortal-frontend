@@ -64,12 +64,40 @@ const IndexingForm = () => {
                 } else {
                     resultFormData.append(key, value as string | Blob);
                 }
-            }      
+            }   
+            // console.log(resultFormData);
+            for (const key of resultFormData.keys()) {
+                console.log(key);
+                if(key == 'referees'){
+                    console.log("Referee is present");
+                    
+                }
+              }
+            
+            // if (resultFormData.has("grades")) {
+            //     console.log("There's grade here");
+                
+            //     resultFormData.set('grades', JSON.stringify(resultFormData.getAll('grades')));
+            // }
+    
+            // if (resultFormData.has("referees")) {
+            //     console.log("It has referees");
+                
+            //     resultFormData.set('referees', JSON.stringify(resultFormData.getAll('referees')));
+            // }
+    
+            // if ('examinations' in resultFormData) {
+            //     resultFormData.set('examinations', JSON.stringify(resultFormData.getAll('examinations')));
+            // }
+    
+            // if ('school_attended' in resultFormData) {
+            //     resultFormData.set('school_attended', JSON.stringify(resultFormData.getAll('school_attended')));
+            // }
+               
             handleSubmit(resultFormData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
         }
-
     }
 
     const duplicateGrades = (fields:any) => {
