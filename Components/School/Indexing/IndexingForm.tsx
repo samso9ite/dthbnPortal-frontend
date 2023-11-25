@@ -46,53 +46,49 @@ const IndexingForm = () => {
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             const resultFormData = new FormData();
+            let referees:any = {};
+            let school_data:any = {};
+            let grades:any = {};
+            let examinations:any = {}
+            const formDataCopy = { ...formData };
 
             // Append each key-value pair to the FormData
             for (const [key, value] of Object.entries(formData)) {
                 if (gradeKeysToRemove.includes(key)) {
-                    resultFormData.append(`grades.${key}`, value as string);
-                    delete formData[key]
-                } else if (refereeKeysToRemove.includes(key)) {
-                    resultFormData.append(`referees.${key}`, value as string);
-                    delete formData[key]
+                    grades[key] = value
+                 } else if (refereeKeysToRemove.includes(key)) {
+                    referees[key] = value
                 } else if (qualificationKeysToRemove.includes(key)) {
-                    resultFormData.append(`examinations.${key}`, value as string);
-                    delete formData[key]
+
+                    examinations[key] = value
                 } else if (schKeysToRemove.includes(key)) {
-                    resultFormData.append(`school_attended.${key}`, value as string);
-                    delete formData[key]
-                } else {
+                    school_data[key] = value
+                } 
+            }   
+
+            gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            schKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            
+            formDataCopy.examinations = JSON.stringify(examinations)
+            formDataCopy.grades = JSON.stringify(grades)
+            formDataCopy.referees = JSON.stringify(referees)
+            formDataCopy.school_data = JSON.stringify(school_data)
+            
+            console.log(formDataCopy);
+            
+            for (const [key, value] of Object.entries(formDataCopy)) {
                     resultFormData.append(key, value as string | Blob);
                 }
-            }   
+               
             // console.log(resultFormData);
             for (const key of resultFormData.keys()) {
                 console.log(key);
                 if(key == 'referees'){
                     console.log("Referee is present");
-                    
                 }
-              }
-            
-            // if (resultFormData.has("grades")) {
-            //     console.log("There's grade here");
-                
-            //     resultFormData.set('grades', JSON.stringify(resultFormData.getAll('grades')));
-            // }
-    
-            // if (resultFormData.has("referees")) {
-            //     console.log("It has referees");
-                
-            //     resultFormData.set('referees', JSON.stringify(resultFormData.getAll('referees')));
-            // }
-    
-            // if ('examinations' in resultFormData) {
-            //     resultFormData.set('examinations', JSON.stringify(resultFormData.getAll('examinations')));
-            // }
-    
-            // if ('school_attended' in resultFormData) {
-            //     resultFormData.set('school_attended', JSON.stringify(resultFormData.getAll('school_attended')));
-            // }
+            }
                
             handleSubmit(resultFormData)
         }else{
