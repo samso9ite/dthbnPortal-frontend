@@ -98,7 +98,7 @@ export const Fields:Field = {
     // New Indexng Form
     indexingProfileFields: [
         {name:'profile_image', type:'file', label:'Profile Image', required:true},
-        {name: 'institution_name', type:'text', label:'Institution', required:true},
+        // {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
         {name: 'surname', type:'text', label:'Last Name', required:true},
@@ -124,6 +124,7 @@ export const Fields:Field = {
         {name: 'nationality', type:'text', label:'Nationality', required:true},
         {name: 'state', type:'text', label:'State of Origin', required:true},
         {name: 'lga', type:'text', label:'Local Government Area', required:true},
+        {name: 'religion', type:'text', label:'Religion', required:true},
         {name: 'marital_status', type:'select', label:'Marital Status', required:true,
             options: [
                 {values:'', label:'Select Marital Status'},

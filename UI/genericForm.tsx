@@ -121,6 +121,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                         ):
                         (
                             <>
+                           {type == "file" && <label className="form-control"><b>{label}</b></label>}
                                 <input
                                     className="intro-x login__input form-control py-3 px-4 block mt-4"
                                     type={type}

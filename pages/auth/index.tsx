@@ -18,7 +18,7 @@ const Authentication: React.FC = () => {
 
     const router = useRouter()
 
-    const onSuccess = (data:any) => { 
+    const onSuccess:any = (data:any) => { 
         if(formState == 'login'){
             sessionStorage.setItem('token', data.data.access),
             sessionStorage.setItem('refresh', data.data.refresh)

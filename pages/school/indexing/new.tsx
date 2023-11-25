@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux"
 import {useState, useCallback, useEffect} from 'react'
-import { indexingActions, stepperState } from "@/store/indexing-slice"
+import {stepperState } from "@/store/indexing-slice"
 import IndexingForm from "@/Components/School/Indexing/IndexingForm"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewIndexing = () => {
-    const dispatch = useDispatch()
     let stepper = useSelector(stepperState)
     
     return (
@@ -52,6 +53,7 @@ const NewIndexing = () => {
                     <IndexingForm />
                 </div>
             </div>
+            <ToastContainer />
         </MainLayout>
     )
 }

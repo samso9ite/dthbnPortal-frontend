@@ -3,7 +3,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const ApiStateHandler = (isPending:boolean, isError:boolean, error:any,
-    apiStatusHandler: (statusData:boolean) => void) =>{
+    apiStatusHandler?: any, showSuccessMsg?:boolean, isSuccess?:boolean, successMsg?:any ) => {
+        console.log(successMsg);
+        console.log(showSuccessMsg);
+        console.log(isSuccess);
+        
+        
         if(isError){
             return(
                 toast.error(error.message, {
@@ -18,20 +23,20 @@ const ApiStateHandler = (isPending:boolean, isError:boolean, error:any,
                 )
             )     
         }
-        // if(isSuccess){
-        //     return(
-        //         toast.success("Request Sent", {
-        //             position: "top-right",
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             theme: "light",
-        //             onOpen: () =>apiStatusHandler(false)
-        //         }
+        if(isSuccess && showSuccessMsg){
+            return(
+                toast.success(successMsg, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    theme: "light",
+                    onOpen: () =>apiStatusHandler(false)
+                }
                 
-        //         )
-        //     )     
-        // }
+                )
+            )     
+        }
         
     }
 
