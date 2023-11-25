@@ -42,7 +42,6 @@ const IndexingForm = () => {
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
      useCustomMutation(apiRequest.createIndexing, onSuccess)
      const submitHandler = (formData:any) => {
-        console.log(formData);
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             const resultFormData = new FormData();
@@ -51,6 +50,15 @@ const IndexingForm = () => {
             let grades:any = {};
             let examinations:any = {}
             const formDataCopy = { ...formData };
+            let currentYear = new Date().getFullYear()
+            console.log(currentYear);
+            
+            let nextYear = currentYear + 1
+            console.log(nextYear);
+            
+            let year = currentYear+'-'+nextYear
+            console.log(year);
+            
 
             // Append each key-value pair to the FormData
             for (const [key, value] of Object.entries(formData)) {
@@ -75,20 +83,12 @@ const IndexingForm = () => {
             formDataCopy.grades = JSON.stringify(grades)
             formDataCopy.referees = JSON.stringify(referees)
             formDataCopy.school_data = JSON.stringify(school_data)
-            
-            console.log(formDataCopy);
+           
+            formDataCopy.year = year
             
             for (const [key, value] of Object.entries(formDataCopy)) {
                     resultFormData.append(key, value as string | Blob);
                 }
-               
-            // console.log(resultFormData);
-            for (const key of resultFormData.keys()) {
-                console.log(key);
-                if(key == 'referees'){
-                    console.log("Referee is present");
-                }
-            }
                
             handleSubmit(resultFormData)
         }else{
