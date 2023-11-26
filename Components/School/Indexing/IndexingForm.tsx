@@ -30,14 +30,22 @@ const IndexingForm = () => {
     let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
     let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
      'referee_number_1']
+     
+     const clearForm = () => {
+        setNumOfSitting('');
+    };
 
     const onSuccess:any = (data:any) => {
         console.log(data);
         dispatch(indexingActions.switchState('profile'))
+        clearForm()
     }
     const apiStatusHandler = () => {
+        
     }
-
+    // const clearForm = () => {
+    //     setNumOfSitting('');
+    // }
     // Duplicate form fields
     const modifiedRefereeFields:ModifiedRefereeField[] = [
         ...Fields.indexingRefereeFields,
@@ -137,7 +145,7 @@ const IndexingForm = () => {
                     formState == 'referee' ? modifiedRefereeFields : formState == 'result' ?
                     Fields.indexingResultFields : duplicateGrades(Fields.indexingResultFields)
                 } 
-                onSubmit={submitHandler} span6={true} stepperForm={true} 
+                onSubmit={submitHandler} span6={true} stepperForm={true} clearForm={clearForm}
             />
            {ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
         </>

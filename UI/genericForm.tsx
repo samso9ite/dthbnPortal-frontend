@@ -24,10 +24,11 @@ type Props = {
     initialValues?: FormValues;
     isPending?: boolean, 
     span6?:boolean, 
-    stepperForm?:boolean
+    stepperForm?:boolean,
+    clearForm?: () => void
 }
 
-const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm })  => {
+const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, clearForm })  => {
   
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
@@ -36,6 +37,20 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     useEffect(() => {
         setValues(initialValues || {})
     }, [initialValues])
+    
+    useEffect(() => {
+        // Check if clearForm prop changes and call it
+        if (clearForm) {
+            setValues(initialValues || {})
+            console.log("This triggered in child"); 
+        }
+    }, [clearForm]);
+
+    
+    clearForm = () => {
+        setValues(initialValues || {})
+        console.log("This triggered in child"); 
+    }
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
