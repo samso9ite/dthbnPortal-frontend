@@ -42,15 +42,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         // Check if clearForm prop changes and call it
         if (clearForm) {
             setValues(initialValues || {})
-            console.log("This triggered in child"); 
         }
     }, [clearForm]);
 
-    
-    clearForm = () => {
-        setValues(initialValues || {})
-        console.log("This triggered in child"); 
-    }
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
