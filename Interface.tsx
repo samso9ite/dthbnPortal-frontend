@@ -24,7 +24,7 @@ interface Indexing {
     profile_image: string;
     referees: string[];
     religion: string;
-    school_attended: string[];
+    school_attended: any;
     sex: string;
     state: string;
     submitted: boolean;
