@@ -13,7 +13,9 @@ type ModifiedRefereeField = Field & { name: string };
 const IndexingForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
+    
     const[numOfSitting, setNumOfSitting] = useState('')
+    const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
     let showSuccessMsg = true
 
     let gradeKeysToRemove = [
@@ -30,22 +32,18 @@ const IndexingForm = () => {
     let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
     let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
      'referee_number_1']
-     
-     const clearForm = () => {
-        setNumOfSitting('');
-    };
 
     const onSuccess:any = (data:any) => {
-        console.log(data);
+        setNotifIsActive(true)
         dispatch(indexingActions.switchState('profile'))
-        clearForm()
+        dispatch(indexingActions.setIndexingStatus(false))
+        setNumOfSitting('');
     }
-    const apiStatusHandler = () => {
-        
+   
+    const apiStatusHandler = (statusData:boolean) => {
+        setNotifIsActive(statusData)
     }
-    // const clearForm = () => {
-    //     setNumOfSitting('');
-    // }
+
     // Duplicate form fields
     const modifiedRefereeFields:ModifiedRefereeField[] = [
         ...Fields.indexingRefereeFields,
@@ -60,6 +58,8 @@ const IndexingForm = () => {
         useCustomMutation(apiRequest.createIndexing, onSuccess)
 
      const submitHandler = (formData:any) => {
+        console.log(formData);
+        
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             
@@ -113,6 +113,9 @@ const IndexingForm = () => {
             handleSubmit(resultFormData)
         }else{
             dispatch(indexingActions.storeIndexingData(formData))
+            if(formState == 'profile'){
+                dispatch(indexingActions.setIndexingStatus(true))
+            }
         }
     }
 
@@ -145,9 +148,9 @@ const IndexingForm = () => {
                     formState == 'referee' ? modifiedRefereeFields : formState == 'result' ?
                     Fields.indexingResultFields : duplicateGrades(Fields.indexingResultFields)
                 } 
-                onSubmit={submitHandler} span6={true} stepperForm={true} clearForm={clearForm}
+                onSubmit={submitHandler} span6={true} stepperForm={true} 
             />
-           {ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
+           {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
         </>
     )
 }

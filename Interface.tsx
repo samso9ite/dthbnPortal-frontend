@@ -36,9 +36,6 @@ interface Indexing {
 interface IndexingState {
     indexed: Indexing[]; 
     indexingData: {};
-    // workData: {},
-    // refereeData: {},
-    // firstResultData:{},
-    // secondResultData:{},
+    isActive:boolean
     stepperState: string   
 }

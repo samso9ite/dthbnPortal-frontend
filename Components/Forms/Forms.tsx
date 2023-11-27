@@ -97,7 +97,6 @@ export const Fields:Field = {
     ],
     // New Indexng Form
     indexingProfileFields: [
-        {name:'profile_image', type:'file', label:'Profile Image', required:true},
         // {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
@@ -133,9 +132,11 @@ export const Fields:Field = {
                 {values:'Divorced', label:'Divorced'}
             ]
         },
-        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
         {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
-        {name: 'contact_address', type:'text', label:'Contact Address', required:false}
+        {name: 'contact_address', type:'text', label:'Contact Address', required:false},
+        {name:'profile_image', type:'file', label:'Profile Image', required:true},
+        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
+       
     ],
 
     indexingWorkFields: [

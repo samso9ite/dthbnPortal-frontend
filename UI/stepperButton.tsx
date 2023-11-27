@@ -8,10 +8,14 @@ const Button:React.FC = () =>{
     const onPrevious = () => {
         if(stepper == 'work') {
             dispatch(indexingActions.switchState('profile'))
-        }else if(stepper == 'referee'){
+        }else if(stepper == 'sch/cert'){
             dispatch(indexingActions.switchState('work'))
-        }else if(stepper == 'result'){
+        }else if(stepper == 'referee'){
+            dispatch(indexingActions.switchState('sch/cert'))
+        }else if(stepper == 'sch/cert'){
             dispatch(indexingActions.switchState('referee'))
+        }else if(stepper == 'result'){
+                dispatch(indexingActions.switchState('referee'))
         }else if(stepper == 'secondResult'){
             dispatch(indexingActions.switchState('result'))
         } else(

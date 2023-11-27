@@ -12,11 +12,8 @@ export const fetchData = createAsyncThunk('indexing/fetchIndexData', async () =>
 const initialState:IndexingState = {
     indexed:[],
     indexingData: {},
-    // workData: {},
-    // refereeData: {},
-    // firstResultData: {},
-    // secondResultData: {},
-    stepperState: 'profile'
+    stepperState: 'profile',
+    isActive: false
 }
 
 const indexingSlice = createSlice({
@@ -44,6 +41,9 @@ const indexingSlice = createSlice({
         },
         switchState(state, action:PayloadAction<string>){
             state.stepperState = action.payload
+        },
+        setIndexingStatus(state, action:PayloadAction<boolean>){
+            state.isActive = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -55,7 +55,8 @@ const indexingSlice = createSlice({
 
 export const selectIndexedData = (state: RootState) => state.index.indexed;
 export const indexingData = (state:RootState) => state.index.indexingData;
-export const stepperState = (state:RootState) => state.index.stepperState
+export const stepperState = (state:RootState) => state.index.stepperState;
+export const indexingState = (state:RootState) => state.index.isActive
 
 export const indexingActions = indexingSlice.actions
 

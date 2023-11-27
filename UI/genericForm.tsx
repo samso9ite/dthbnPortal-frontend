@@ -2,6 +2,11 @@ import CustomSelect, { customMultipleSelect } from "./customSelect";
 import {useEffect, useState} from 'react'
 import Multiselect from 'multiselect-react-dropdown';
 import Button from "./stepperButton";
+import { useSelector } from "react-redux";
+import { indexingData, indexingState, stepperState } from "@/store/indexing-slice";
+import { useRouter } from "next/router";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Field = {
     name:string;
@@ -29,22 +34,46 @@ type Props = {
 }
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, clearForm })  => {
+    const router = useRouter()
   
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({})
+    let storeFormData = useSelector(indexingData)
+    let indexingStatus = useSelector(indexingState)
+    let stepper = useSelector(stepperState)
     
     // This updates the initial values on form change
-    useEffect(() => {
+    useEffect(() => { 
         setValues(initialValues || {})
     }, [initialValues])
     
     useEffect(() => {
         // Check if clearForm prop changes and call it
-        if (clearForm) {
-            setValues(initialValues || {})
-        }
+       
     }, [clearForm]);
 
+    useEffect(() => {
+        if(indexingStatus == true && router.pathname=='/school/indexing/new' && stepper !== 'profile'){
+            console.log(indexingStatus);
+            console.log("this triggerednow");
+            
+            setValues(storeFormData)
+            console.log("This triggered");
+            
+            toast.success("Please Reset all Images", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+              })
+        }
+        if (!indexingStatus) {
+            console.log("This triggered");
+            
+            setValues(initialValues || {})
+        }
+       }, [indexingStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
