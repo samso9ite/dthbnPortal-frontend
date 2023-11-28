@@ -95,6 +95,8 @@ export const Fields:Field = {
         {name:'new_password', type:'password', label:'New Password', required:true},
         {name:'confirm_password', type:'password', label:'Confirm Password', required:true}
     ],
+
+
     // New Indexng Form
     indexingProfileFields: [
         // {name: 'institution_name', type:'text', label:'Institution', required:true},
@@ -174,5 +176,63 @@ export const Fields:Field = {
     indexingSchCertDetails: [
         generatedSchField,
         generatedCertField
+    ],
+
+    // New Examination Form
+    examinationProfileFields: [
+        // {name: 'institution_name', type:'text', label:'Institution', required:true},
+        {name: 'first_name', type:'text', label:'First Name', required:true}, 
+        {name: 'middle_name', type:'text', label:'Middle Name', required:true},
+        {name: 'surname', type:'text', label:'Last Name', required:true},
+        {name: 'cadre', type:'select', label:'Cadre', required:true,
+            options: [
+                {value:'', label:'Select Cadre'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
+                {values:'Dental Therapist', label:'Dental Therapist'},
+                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
+                {values:'Dental Nurse', label:'Dental Nurse'}
+            ],
+        },
+        {name: 'sex', type:'select', label:'Gender', required:true,
+            options: [
+                {value:'', label:'Select Gender'},
+                {values:'Male', label:'Male'},
+                {values:'Female', label:'Female'}
+            ]
+        },
+        {name: 'age', type:'number', label:'Age', required:true},
+        {name: 'telephone', type:'text', label:'Telephone', required:true},
+        {name: 'email', type:'email', label:'Email', required:true},
+        {name: 'nationality', type:'text', label:'Nationality', required:true},
+        {name: 'state', type:'text', label:'State of Origin', required:true},
+        {name: 'lga', type:'text', label:'Local Government Area', required:true},
+        {name: 'religion', type:'text', label:'Religion', required:true},
+        {name: 'marital_status', type:'select', label:'Marital Status', required:true,
+            options: [
+                {values:'', label:'Select Marital Status'},
+                {values:'Single', label:'Single'},
+                {values:'Married', label:'Married'},
+                {values:'Divorced', label:'Divorced'}
+            ]
+        },
+        {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
+        {name: 'contact_address', type:'text', label:'Contact Address', required:false},
+        {name:'profile_image', type:'file', label:'Profile Image', required:true},
+        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
+    ],
+    examinationWorkFields: [
+        {name: 'place_of_work', type:'text', label:'Place of Work', required:true},
+        {name: 'address', type:'text', label:'Address', required:true},
+        {name: 'position', type:'text', label:'Position', required:true},
+    ],
+    examinationRefereeFields: [
+        {name: 'referee_name', type:'text', label:'Referee Name', required:true},
+        {name: 'referee_number', type:'number', label:'Referee Number', required:true},
+        {name: 'referee_address', type:'text', label:'Referee Address', required:true},
+    ],
+    examinationCertificateFields: [
+        {name:'dental_school_result', type:'field', label:'Dental School Certificate', required:false}, 
+        {name:'dental_school_testimonial', type:'field', label:'Dental School Testimonial', required:false},
+        {name:'waec_result', type:'field', label:'Waec Result', required:false}  
     ]
 }

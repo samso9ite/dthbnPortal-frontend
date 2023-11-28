@@ -49,6 +49,10 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get'),
     createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData, fileUpload=true),
     submitIndexingForApproval: () => generalRequest('school/submit_all_index/', 'patch'),
+
+    // Examination API's
+    examinationRecord: () => generalRequest('school/examination_record/2023-2024', 'get'),
+    
 }
 
 export default apiRequest

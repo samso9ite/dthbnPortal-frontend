@@ -39,3 +39,10 @@ interface IndexingState {
     isActive:boolean
     stepperState: string   
 }
+
+interface ExaminationState {
+    indexed: Indexing[]; 
+    indexingData: {};
+    isActive:boolean
+    stepperState: string   
+}
