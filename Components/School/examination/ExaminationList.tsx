@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { fetchData, selectIndexedData } from "@/store/indexing-slice"
-import IndexingItem from "./IndexingItem"
+import ExaminationItem from "./ExaminationItem";
 import { useRouter } from "next/router"
 import ReactSearchBox from "react-search-box";
 import { useCustomMutation } from "@/Hooks/apiCall";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import apiRequest from "@/APIs/ApiRequests";
 import PaginatedItems from "@/UI/paginated";
 
-const IndexingList:React.FC = () => {
+const ExaminationList:React.FC = () => {
     const router = useRouter()
     const exactPath = router.asPath
     const [notifIsActive, setNotifIsActive] = useState(false)
@@ -23,25 +23,25 @@ const IndexingList:React.FC = () => {
     dispatch(fetchData())
     let response =  useSelector(selectIndexedData)
     let heading; 
-    let indexingState = ''
+    let examinationState = ''
     if(exactPath.includes('/current')){
        response = response?.filter((data:Indexing) => data.submitted == false)
-       heading = "Current Indexing Record"
-       indexingState = 'current'
+       heading = "Current Examination Record"
+       examinationState = 'current'
     }else if(exactPath.includes('/submitted')){
         response = response?.filter((data:Indexing) => data.submitted == true)
-        heading = "Submitted Indexing Record"
-        indexingState = "submitted"
+        heading = "Submitted Examination Record"
+        examinationState = "submitted"
     } else if(exactPath.includes('/approved')){
 
         response = response?.filter((data:Indexing) => {data.approved == true})
         
-        heading = "Approved Indexing Record"
-        indexingState="approved"
+        heading = "Approved Examination Record"
+        examinationState="approved"
     }else if(exactPath.includes('/declined')){
        response = response?.filter((data:Indexing) => {data.declined == true})
-       heading = "Declined Indexing Record"
-       indexingState="declined"
+       heading = "Declined Examination Record"
+       examinationState="declined"
     }
    
     const onSuccess = () => {
@@ -49,7 +49,7 @@ const IndexingList:React.FC = () => {
     }
     const {handleSubmit, isSuccess, isError, isPending, error, data} = useCustomMutation(apiRequest.submitIndexingForApproval, onSuccess)
 
-    const onSubmitCurrentIndexing = () => {
+    const onSubmitCurrentExamination = () => {
         handleSubmit('')
     }
 
@@ -66,7 +66,7 @@ const IndexingList:React.FC = () => {
                     </h2>
                 <div className="dropdown">
                     {/* <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button> */}
-                    {indexingState == 'current' && <button  onClick={onSubmitCurrentIndexing} className="btn  btn-primary shadow-md" 
+                    {examinationState == 'current' && <button  onClick={onSubmitCurrentExamination} className="btn  btn-primary shadow-md" 
                     style={{backgroundColor: '#280742'}} >Submit Current Indexing<i className="w-4 h-4"></i> </button>}
                     {/* <div className="dropdown-menu w-40">
                         <ul className="dropdown-content">
@@ -113,7 +113,7 @@ const IndexingList:React.FC = () => {
                                 response?.length !== 0 &&
                                     <PaginatedItems items={response}>
                                         {(item:any) => (
-                                            <IndexingItem data={item} />
+                                            <ExaminationItem data={item} />
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
@@ -132,4 +132,4 @@ const IndexingList:React.FC = () => {
     )
 }
 
-export default IndexingList
+export default ExaminationList
