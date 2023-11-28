@@ -3,11 +3,11 @@ import { fetchData, selectIndexedData } from "@/store/indexing-slice"
 import IndexingItem from "./IndexingItem"
 import { useRouter } from "next/router"
 import ReactSearchBox from "react-search-box";
-import ScrollableComponent from "@/UI/scrollableComponent";
 import { useCustomMutation } from "@/Hooks/apiCall";
 import ApiStateHandler from "@/util/ApiStateHandler";
 import { useState } from "react";
 import apiRequest from "@/APIs/ApiRequests";
+import PaginatedItems from "@/UI/paginated";
 
 const IndexingList:React.FC = () => {
     const router = useRouter()
@@ -51,7 +51,7 @@ const IndexingList:React.FC = () => {
     const onSubmitCurrentIndexing = () => {
         console.log("This Clicked");
         
-        handleSubmit
+        handleSubmit('')
     }
     return(
         <>
@@ -92,7 +92,7 @@ const IndexingList:React.FC = () => {
             </div>
              
                 <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                <ScrollableComponent>
+                {/* <ScrollableComponent> */}
                     <table className="table table-report sm:mt-2">
                         <thead>
                             <tr>
@@ -108,16 +108,14 @@ const IndexingList:React.FC = () => {
                             </tr>
                         </thead>
                         <tbody>
-                          
-                                {
-                                    response?.map((data:Indexing) => (
-                                        <IndexingItem data={data} />
-                                    ))
-                                }
-                            
+                            <PaginatedItems items={response}>
+                                {(item:any) => (
+                                    <IndexingItem data={item} />
+                                )}
+                            </PaginatedItems>
                         </tbody>
                     </table>
-                    </ScrollableComponent>
+                    {/* </ScrollableComponent> */}
                 </div>
             
         </div>  
