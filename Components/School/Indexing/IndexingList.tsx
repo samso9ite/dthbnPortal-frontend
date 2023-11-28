@@ -22,6 +22,8 @@ const IndexingList:React.FC = () => {
     const dispatch = useDispatch<any>()
     dispatch(fetchData())
     let response =  useSelector(selectIndexedData)
+    console.log(response);
+    
     let heading; 
     let indexingState = ''
     if(exactPath.includes('/current')){

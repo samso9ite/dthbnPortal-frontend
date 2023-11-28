@@ -51,8 +51,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     submitIndexingForApproval: () => generalRequest('school/submit_all_index/', 'patch'),
 
     // Examination API's
-    examinationRecord: () => generalRequest('school/examination_record/2023-2024', 'get'),
-    
+    examinationRecord: () => generalRequest('school/exam_record/2023-2024', 'get'),
+
 }
 
 export default apiRequest

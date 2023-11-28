@@ -193,7 +193,7 @@ export const Fields:Field = {
                 {values:'Dental Nurse', label:'Dental Nurse'}
             ],
         },
-        {name: 'sex', type:'select', label:'Gender', required:true,
+        {name: 'gender', type:'select', label:'Gender', required:true,
             options: [
                 {value:'', label:'Select Gender'},
                 {values:'Male', label:'Male'},
@@ -203,10 +203,12 @@ export const Fields:Field = {
         {name: 'age', type:'number', label:'Age', required:true},
         {name: 'telephone', type:'text', label:'Telephone', required:true},
         {name: 'email', type:'email', label:'Email', required:true},
-        {name: 'nationality', type:'text', label:'Nationality', required:true},
-        {name: 'state', type:'text', label:'State of Origin', required:true},
-        {name: 'lga', type:'text', label:'Local Government Area', required:true},
+        {name: 'postal_address', type:'text', label:'Postal Address', required:false},
         {name: 'religion', type:'text', label:'Religion', required:true},
+        {name: 'residential_country', type:'text', label:'Residential Country', required:true},
+        {name: 'residential_state', type:'text', label:'Residential State', required:true},
+        {name: 'residential_lga', type:'text', label:'Local Government Area', required:true},
+        {name: 'residential_address', type:'text', label:'Residential Address', required:false},
         {name: 'marital_status', type:'select', label:'Marital Status', required:true,
             options: [
                 {values:'', label:'Select Marital Status'},
@@ -215,15 +217,26 @@ export const Fields:Field = {
                 {values:'Divorced', label:'Divorced'}
             ]
         },
-        {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
-        {name: 'contact_address', type:'text', label:'Contact Address', required:false},
+        {name: 'maiden_name', type:'text', label:'Maiden Name', required:false},
+        {name: 'state_of_origin', type:'text', label:'State of Origin', required:true},
+        {name: 'lga_state', type:'text', label:'Local Government Area', required:true},
+        {name: 'senatorial_district', type:'text', label:'Senatorial District', required:true},
+        {name: 'date_of_birth', type:'date', label:'Date of Birth', required:true},
+        {name: 'state_of_birth', type:'text', label:'State of Birth', required:true},
+        {name: 'lga_of_birth', type:'text', label:'Local Government Area', required:true},
         {name:'profile_image', type:'file', label:'Profile Image', required:true},
         {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
     ],
     examinationWorkFields: [
-        {name: 'place_of_work', type:'text', label:'Place of Work', required:true},
-        {name: 'address', type:'text', label:'Address', required:true},
-        {name: 'position', type:'text', label:'Position', required:true},
+        {name: 'office_name', type:'text', label:'Place of Work', required:true},
+        {name: 'office_address', type:'text', label:'Address', required:true},
+        {name: 'present_position', type:'text', label:'Position', required:true},
+        {name: 'sector', type:'text', label:'Sector', required:true},
+        {name: 'office_country', type:'text', label:'Office Country', required:true},
+        {name: 'office_state', type:'text', label:'Office State', required:true},
+        {name: 'office_lga', type:'text', label:'Office LGA', required:true},
+        {name: 'office_phone', type:'text', label:'Office Phone', required:true},
+        {name: 'office_email', type:'text', label:'Office Email', required:true},
     ],
     examinationRefereeFields: [
         {name: 'referee_name', type:'text', label:'Referee Name', required:true},
@@ -234,5 +247,13 @@ export const Fields:Field = {
         {name:'dental_school_result', type:'field', label:'Dental School Certificate', required:false}, 
         {name:'dental_school_testimonial', type:'field', label:'Dental School Testimonial', required:false},
         {name:'waec_result', type:'field', label:'Waec Result', required:false}  
-    ]
+    ],
+    examinationSchFields:[
+        {name: 'institutions_attended', type:'text', label:'Institution Attended', required:true},
+        {name: 'hod_name', type:'text', label:'HOD Name', required:false},
+        {name: 'hod_phone', type:'text', label:'HOD Phone', required:false},
+        {name: 'hod_email', type:'email', label:'HOD Email'},
+        {name: 'qualifications', type:'text', label:'Qualifications', required:false},
+        {name: 'professional_qualifications', type:'text', label:'Professional Qualifications', required:false},
+    ],
 }

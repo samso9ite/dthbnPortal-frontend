@@ -4,9 +4,11 @@ import { persistReducer } from "redux-persist";
 import thunk from 'redux-thunk';
 import {combineReducers} from 'redux';
 import indexingSlice from "./indexing-slice";
+import examinationSlice from "./examination-slice";
 
 const reducers = combineReducers({
-    index: indexingSlice.reducer
+    index: indexingSlice.reducer,
+    examination: examinationSlice.reducer
 })
 
 export type RootState = ReturnType<typeof reducers>;

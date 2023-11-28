@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { fetchData, selectIndexedData } from "@/store/indexing-slice"
+import { fetchData, examinationRecord } from "@/store/examination-slice"
 import ExaminationItem from "./ExaminationItem";
 import { useRouter } from "next/router"
 import ReactSearchBox from "react-search-box";
@@ -21,7 +21,7 @@ const ExaminationList:React.FC = () => {
 
     const dispatch = useDispatch<any>()
     dispatch(fetchData())
-    let response =  useSelector(selectIndexedData)
+    let response =  useSelector(examinationRecord)
     let heading; 
     let examinationState = ''
     if(exactPath.includes('/current')){
@@ -67,7 +67,7 @@ const ExaminationList:React.FC = () => {
                 <div className="dropdown">
                     {/* <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button> */}
                     {examinationState == 'current' && <button  onClick={onSubmitCurrentExamination} className="btn  btn-primary shadow-md" 
-                    style={{backgroundColor: '#280742'}} >Submit Current Indexing<i className="w-4 h-4"></i> </button>}
+                    style={{backgroundColor: '#280742'}} >Submit Current Examination<i className="w-4 h-4"></i> </button>}
                     {/* <div className="dropdown-menu w-40">
                         <ul className="dropdown-content">
                             <li>

@@ -36,9 +36,9 @@ const ExaminationForm = () => {
             <GenericForm fields= { 
                     formState == 'profile' ? Fields.examinationProfileFields : 
                     formState == 'work' ? Fields.examinationWorkFields : 
-                    formState == 'sch/cert' ? Fields.examinationCertificateFields :
+                    formState == 'sch/cert' ? Fields.examinationSchFields :
                     formState == 'referee' ? Fields.examinationRefereeFields :
-                    formState == 'result'
+                    Fields.examinationCertificateFields
                 } 
                 onSubmit={submitHandler} span6={true} stepperForm={true} 
             />

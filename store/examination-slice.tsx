@@ -36,8 +36,6 @@ const examinationSlice = createSlice({
             }else if(state.stepperState == 'referee'){
                 state.formData = formData;
                 state.stepperState = 'result'
-            }else {
-                state.stepperState = 'secondResult'
             }
         },
         switchState(state, action:PayloadAction<string>){
@@ -53,3 +51,12 @@ const examinationSlice = createSlice({
         })
     }
 })
+
+export const examinationRecord = (state: RootState) => state.examination.examinationRecord
+export const formData = (state:RootState) => state.examination.formData;
+export const stepperState = (state:RootState) => state.examination.stepperState;
+export const examinationState = (state:RootState) => state.examination.isActive
+
+export const examinationActions = examinationSlice.actions
+
+export default examinationSlice
