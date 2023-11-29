@@ -94,6 +94,7 @@ interface Examination {
     waec_result:string;
     dental_school_result:string;
     dental_school_testimonial:string;
+    title:string
 }
 
 interface IndexingState {

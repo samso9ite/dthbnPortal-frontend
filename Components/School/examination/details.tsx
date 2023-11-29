@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import Link from 'next/link';
 
-const ExaminationDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
+const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
     // console.log(JSON.parse(props.data.school_attended));
     
    
@@ -25,11 +26,15 @@ const ExaminationDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseMo
                             </div>
                         </div>
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Contact Details</b></div>
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>CONTACT DETAILS</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
                                 <div className="truncate sm:whitespace-normal flex items-center"> <b>Email: </b> {props.data.email}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Permanent Address: </b> {props.data.permanent_address} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Contact Address: </b> {props.data.contact_address}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Residential Country: </b> {props.data.residential_country} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Residential State : </b> {props.data.residential_state}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Residential LGA: </b> {props.data.residential_lga} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Residential Address: </b> {props.data.residential_address}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Senatorial District: </b> {props.data.senatorial_district}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Postal Address: </b> {props.data.postal_address}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> {props.data.telephone} </div>
                             </div>
                         </div>
@@ -39,34 +44,62 @@ const ExaminationDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseMo
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                     
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Personal Details</b></div>
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>PERSONAL DETAILS</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
+                            <div className="truncate sm:whitespace-normal flex items-center"> <b>Title: </b> {props.data.title}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center"> <b>First Name: </b> {props.data.first_name}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Middle Name: </b> { props.data.middlename} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Surname: </b> {props.data.surname}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Cadre: </b> {props.data.cadre} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Sex: </b> {props.data.sex} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Age: </b> {props.data.age} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> {props.data.religion}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Nationality: </b> {props.data.nationality} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Marital Status: </b> {props.data.marital_status}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Place of Work: </b> {props.data.place_of_work} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Sex: </b> {props.data.gender} </div>
                             </div>
                         </div>
 
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Schools Attended</b></div>
+                            {/* <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Schools Attended</b></div> */}
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
                                
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Address: </b> </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> +234 811 2417 083</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> Christian</div>
+                            <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> {props.data.religion}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>State of Birth: </b> {props.data.state_of_birth} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>State of Origin: </b> {props.data.state_of_origin}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>LGA of Birth: </b> {props.data.lga_of_birth} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Marital Status: </b> {props.data.marital_status} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>D.O.B: </b> {props.data.date_of_birth} </div>
                             </div>
                         </div>
                 
                     </div>
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
+                    
+                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>WORK DETAILS</b></div>
+                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Place of Work: </b>{props.data.office_name}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Present Position: </b>{props.data.present_position}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Country: </b> {props.data.office_country} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Address: </b> {props.data.office_address} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office State: </b> {props.data.office_state}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Address: </b> {props.data.office_lga} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Phone: </b> {props.data.office_phone} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Email: </b> {props.data.office_email}</div>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>SCHOOLS / QUALIFICATIONS</b></div>
+                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
+                            <div className="truncate sm:whitespace-normal flex items-center"> <b>Institutions Attended: </b>{props.data.institutions_attended}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualifications: </b>{props.data.qualifications}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Professional Qualifications: </b> {props.data.professional_qualifications} </div>
+                                <Link href={props.data.waec_result} target='_blank'><button className="btn  mr-1 mb-2 mt-3" style={{width:'100%'}}>O-Level Result</button></Link>
+                                <Link href={props.data.dental_school_result} target='_blank'><button className="btn  mr-1 mb-2 mt-3" style={{width:'100%'}}>Dental School Result</button></Link>
+                                <Link href={props.data.dental_school_testimonial} target='_blank'><button className="btn  mr-1 mb-2 mt-3" style={{width:'100%'}}>Dental School Testimonial</button></Link>
+                            </div>
+                        </div>
+                
+                    </div>
+                    {/* <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                     
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
@@ -88,34 +121,11 @@ const ExaminationDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseMo
                             </div>
                         </div>
                 
-                    </div>
-                    <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
-                    
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
-                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Junior Leaving Certificate: </b> Herbert Macaulay Junior School</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Seecondary Leaving Certificate: </b> Aiyetoro Senior High School </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
-                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Email: </b> arnoldschwarzenegger@left4code.com </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Address: </b> 20, Ojuelegba Street Yaba Lagos. </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> +234 811 2417 083</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> Christian</div>
-                            </div>
-                        </div>
-                
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
                     
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                        {/* <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <div id="faq-accordion-2" className="accordion accordion-boxed">
                                 <div className="accordion-item">
                                     <div id="faq-accordion-content-5" className="accordion-header"> <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-5" aria-expanded="true" aria-controls="faq-accordion-collapse-5" style={{color:'red'}}> Dissapprove Submission</button> </div>
@@ -125,9 +135,9 @@ const ExaminationDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseMo
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}}>Approve Submission</button>
+                            <button className="btn  mr-1 mb-2" style={{width:'100%'}}>Edit Exam Record</button>
                         </div>
                 </div>
         

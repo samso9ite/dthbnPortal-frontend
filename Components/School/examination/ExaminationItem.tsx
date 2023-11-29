@@ -2,7 +2,7 @@
 import { useState } from "react"
 import ExaminationDetails from "./details"
 
-const ExaminationItem:React.FC<{data: Indexing}> = (props) => {
+const ExaminationItem:React.FC<{data: Examination}> = (props) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     
     return(
@@ -24,17 +24,17 @@ const ExaminationItem:React.FC<{data: Indexing}> = (props) => {
                 </td>
                 <td className="text-center">
                     <div className="flex justify-center items-center">
-                    {props.data.contact_address}
+                    {props.data.residential_address}
                     </div>
                 </td>
                 <td className="text-center">
                     <div className="flex justify-center items-center">
-                    {props.data.sex}
+                    {props.data.gender}
                     </div>
                 </td>
                 <td className="text-center">
                     <div className="flex justify-center items-center">
-                        {props.data.age}
+                        {props.data.date_of_birth}
                     </div>
                 </td>
                 <td className="text-center">

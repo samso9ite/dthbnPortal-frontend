@@ -52,7 +52,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
 
     // Examination API's
     examinationRecord: () => generalRequest('school/exam_record/2023-2024', 'get'), 
-    createExamRecord: (formData:FormValues, fileUpload:boolean) => generalRequest('school/exam_reg/', 'post', formData, fileUpload=true)
+    createExamRecord: (formData:FormValues, fileUpload:boolean) => generalRequest('school/exam_reg/', 'post', formData, fileUpload=true),
+    submitExamForApproval: () => generalRequest('school/submit_all_exam_record/', 'patch'),
 }
 
 export default apiRequest

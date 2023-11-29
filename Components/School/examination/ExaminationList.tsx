@@ -47,7 +47,7 @@ const ExaminationList:React.FC = () => {
     const onSuccess = () => {
         dispatch(fetchData())
     }
-    const {handleSubmit, isSuccess, isError, isPending, error, data} = useCustomMutation(apiRequest.submitIndexingForApproval, onSuccess)
+    const {handleSubmit, isSuccess, isError, isPending, error, data} = useCustomMutation(apiRequest.submitExamForApproval, onSuccess)
 
     const onSubmitCurrentExamination = () => {
         handleSubmit('')
@@ -103,7 +103,7 @@ const ExaminationList:React.FC = () => {
                                 <th className="text-center whitespace-nowrap"> PHONE</th>
                                 <th className="text-center whitespace-nowrap">ADDRESS</th>
                                 <th className="text-center whitespace-nowrap">SEX</th>
-                                <th className="text-center whitespace-nowrap">AGE</th>
+                                <th className="text-center whitespace-nowrap">DOB</th>
                                 <th className="text-center whitespace-nowrap">RELIGION</th>
                                 <th className="text-center whitespace-nowrap">VIEW</th>
                             </tr>

@@ -181,6 +181,15 @@ export const Fields:Field = {
     // New Examination Form
     examinationProfileFields: [
         // {name: 'institution_name', type:'text', label:'Institution', required:true},
+        {name: 'title', type:'select', label:'Title', required:true,
+        options: [
+            {value:'', label:'Select Title'},
+            {values:'Mr.', label:'Mr.'},
+            {values:'Mrs.', label:'Mrs.'},
+            {values:'Miss', label:'Miss'},
+            {values:'Messrs', label: 'Messrs'}
+        ],
+    },
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
         {name: 'surname', type:'text', label:'Last Name', required:true},
