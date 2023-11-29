@@ -1,5 +1,5 @@
-import { examinationActions } from "@/store/examination-slice"
-import { indexingActions, stepperState } from "@/store/indexing-slice"
+import { examinationActions,stepperState as examStepperState } from "@/store/examination-slice"
+import { indexingActions, stepperState as indexingStepperState } from "@/store/indexing-slice"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -7,10 +7,15 @@ import { useDispatch, useSelector } from "react-redux"
 
 const Button:React.FC = () =>{
     const router = useRouter()
-    let stepper = useSelector(stepperState)
+    // const[stepper, setStepper] = useState<string>('')
+    let indexingStepper = useSelector(indexingStepperState)
+    let examStepper = useSelector(examStepperState)
     const dispatch = useDispatch()
+    let stepper:string = ''
     const onPrevious = () => {
         if (router.pathname.includes('/indexing')){
+            stepper = indexingStepper
+            // setStepper(indexingStepper)
             if(stepper == 'work') {
                 dispatch(indexingActions.switchState('profile'))
             }else if(stepper == 'sch/cert'){
@@ -26,7 +31,10 @@ const Button:React.FC = () =>{
             } else(
                 dispatch(indexingActions.switchState('profile'))
             )
-        }else{
+        }else  if (router.pathname.includes('/exam')){
+            // console.log(stepper);
+            // setStepper(examStepper)
+            stepper = examStepper
             if(stepper == 'work') {
                 dispatch(examinationActions.switchState('profile'))
             }else if(stepper == 'sch/cert'){

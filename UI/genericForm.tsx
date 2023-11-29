@@ -4,7 +4,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import Button from "./stepperButton";
 import { useSelector } from "react-redux";
 import { indexingData, indexingState, stepperState as indexStepperState} from "@/store/indexing-slice";
-import { stepperState as examStepperState} from "@/store/examination-slice";
+import { stepperState as examStepperState, formData} from "@/store/examination-slice";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,8 +41,11 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formStatus, setFormStatus] = useState<boolean>(false)
+    const [storeFormData, setStoreFormData] = useState<any>({});
+    const [stepper, setStepper] = useState<string>('')
 
-    let storeFormData = useSelector(indexingData)
+    let indexingFormData = useSelector(indexingData)
+    let examFormData = useSelector(formData) 
     let indexingStatus = useSelector(indexingState)
     let examinationStatus = useSelector(examinationState)
     let indexingRoute = router.pathname=='/school/indexing/new'
@@ -50,26 +53,23 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const indexStepper = useSelector(indexStepperState)
     const examStepper = useSelector(examStepperState)
     
-    let stepper:string = ''
-
     useEffect(() => {
-        if(indexingStatus == true || examinationStatus == true && indexingRoute == true || examRoute == true){
+        if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
-            stepper = indexStepper
-        }
-        // else if( && examRoute == true){
-        //     setFormStatus('examination')
-        //     stepper = examStepper
-        // }
+            setStepper(indexStepper)
+            setStoreFormData(indexingFormData)
+        }else if(examinationStatus == true && examRoute == true){
+            setFormStatus(true)
+            setStepper(examStepper)
+            setStoreFormData(examFormData)
+        } 
     }, [])
     
-
     // This updates the initial values on form change
-    useEffect(() => { 
-        setValues(initialValues || {})
-    }, [initialValues])
+    // useEffect(() => { 
+    //     setValues(initialValues || {})
+    // }, [initialValues])
     
-
     useEffect(() => {
         if(formStatus == true  && stepper !== 'profile'){
             setValues(storeFormData)
