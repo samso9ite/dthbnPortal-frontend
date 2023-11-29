@@ -224,8 +224,8 @@ export const Fields:Field = {
         {name: 'date_of_birth', type:'date', label:'Date of Birth', required:true},
         {name: 'state_of_birth', type:'text', label:'State of Birth', required:true},
         {name: 'lga_of_birth', type:'text', label:'Local Government Area', required:true},
+        {name: 'mode_of_payment', type:'text', label:'Mode of Payment', required:true},
         {name:'profile_image', type:'file', label:'Profile Image', required:true},
-        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
     ],
     examinationWorkFields: [
         {name: 'office_name', type:'text', label:'Place of Work', required:true},

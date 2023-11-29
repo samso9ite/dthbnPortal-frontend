@@ -86,7 +86,7 @@ const SideNav = () => {
                         </Link>
                         <ul className={isSubMenuActive == 'exam' ? 'side-menu__sub-open' : ''}>
                             <li>
-                                <Link href="/school/examination/new" className={exactPath == '/school/exam/new' ? "side-menu side-menu--active" : 'side-menu'}>
+                                <Link href="/school/exam/new" className={exactPath == '/school/exam/new' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Create New Exam Record </div>
                                 </Link>

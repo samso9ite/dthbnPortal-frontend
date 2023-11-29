@@ -2,21 +2,26 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
-import { indexingActions, stepperState, indexingData } from "@/store/indexing-slice"
+import { examinationActions, stepperState, examinationRecord } from "@/store/examination-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
 import ApiStateHandler from "@/util/ApiStateHandler"
+import {  } from "@/store/examination-slice"
 
 
 const ExaminationForm = () => {
     const dispatch = useDispatch()
+    // dispatch(examinationActions.switchState('profile'))
     let formState = useSelector(stepperState)
+    console.log(formState);
+    
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
+    console.log(useSelector(stepperState));
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
-        dispatch(indexingActions.switchState('profile'))
-        dispatch(indexingActions.setIndexingStatus(false))
+        dispatch(examinationActions.switchState('profile'))
+        // dispatch(examinationActions.se(false))
     }
 
     const apiStatusHandler = (statusData:boolean) => {
@@ -28,6 +33,12 @@ const ExaminationForm = () => {
 
     const submitHandler = (formData:any) => {
         console.log(formData);
+        
+        
+        dispatch(examinationActions.storeExaminationData(formData))
+        // if(formState == 'profile'){
+        //     dispatch(indexingActions.setIndexingStatus(true))
+        // }
     
     }
 

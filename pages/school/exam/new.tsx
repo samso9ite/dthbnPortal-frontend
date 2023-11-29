@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import {useState, useCallback, useEffect} from 'react'
-import {stepperState } from "@/store/indexing-slice"
-import IndexingForm from "@/Components/School/Indexing/IndexingForm"
+import {stepperState } from "@/store/examination-slice"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ExaminationForm from "@/Components/School/examination/ExaminationForm";

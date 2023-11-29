@@ -21,18 +21,26 @@ const examinationSlice = createSlice({
     name: 'Examination',
     initialState,
     reducers: {
-        storeExaminationData(state, action:PayloadAction<Indexing>){
+        storeExaminationData(state, action:PayloadAction<Examination>){
+            console.log(action.payload);
+            console.log(state.stepperState);
+            
             const formData = action.payload
              
             if(state.stepperState == 'profile'){
+                console.log(formData);
+                
                 state.formData = formData
                 state.stepperState = 'work'
+                
             }else if(state.stepperState == 'work'){
                 state.formData = formData;
                 state.stepperState = 'sch/cert'
+
             }else if(state.stepperState == 'sch/cert'){
                 state.formData = formData;
                 state.stepperState = 'referee'
+
             }else if(state.stepperState == 'referee'){
                 state.formData = formData;
                 state.stepperState = 'result'
