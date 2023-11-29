@@ -58,8 +58,6 @@ const IndexingForm = () => {
         useCustomMutation(apiRequest.createIndexing, onSuccess)
 
      const submitHandler = (formData:any) => {
-        console.log(formData);
-        
         
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             

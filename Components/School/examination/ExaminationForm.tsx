@@ -11,15 +11,15 @@ import {  } from "@/store/examination-slice"
 
 const ExaminationForm = () => {
     const dispatch = useDispatch()
-    // dispatch(examinationActions.switchState('profile'))
     let formState = useSelector(stepperState)
+    let showSuccessMsg = true
     
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
         dispatch(examinationActions.switchState('profile'))
-        // dispatch(examinationActions.se(false))
+        dispatch(examinationActions.setExaminationStatus(false))
     }
 
     const apiStatusHandler = (statusData:boolean) => {
@@ -40,9 +40,11 @@ const ExaminationForm = () => {
             let year = currentYear+'-'+nextYear
             examFormData.append("year", year)
             handleSubmit(examFormData)
-
         }else{
             dispatch(examinationActions.storeExaminationData(formData))
+            if(formState == 'profile'){
+                dispatch(examinationActions.setExaminationStatus(true))
+            }
         }
       
     }
@@ -58,7 +60,7 @@ const ExaminationForm = () => {
                 } 
                 onSubmit={submitHandler} span6={true} stepperForm={true} 
             />
-           {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler, isSuccess, data?.data.message)}
+           {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler,showSuccessMsg, isSuccess, data?.data.message)}
         </>
     )
 }

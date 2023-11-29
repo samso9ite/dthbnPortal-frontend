@@ -4,7 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ApiStateHandler = (isPending:boolean, isError:boolean, error:any,
     apiStatusHandler?: any, showSuccessMsg?:boolean, isSuccess?:boolean, successMsg?:any ) => {
+         console.log(isSuccess);
          
+        console.log(successMsg);
+        
         if(isError){
             return(
                 toast.error(error.message, {

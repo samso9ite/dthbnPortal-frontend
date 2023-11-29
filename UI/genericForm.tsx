@@ -3,10 +3,12 @@ import {useEffect, useState} from 'react'
 import Multiselect from 'multiselect-react-dropdown';
 import Button from "./stepperButton";
 import { useSelector } from "react-redux";
-import { indexingData, indexingState, stepperState } from "@/store/indexing-slice";
+import { indexingData, indexingState, stepperState as indexStepperState} from "@/store/indexing-slice";
+import { stepperState as examStepperState} from "@/store/examination-slice";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { examinationState } from "@/store/examination-slice";
 
 type Field = {
     name:string;
@@ -33,32 +35,44 @@ type Props = {
     clearForm?: () => void
 }
 
-const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, clearForm })  => {
+const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm })  => {
     const router = useRouter()
   
     const [values, setValues] = useState<FormValues>(initialValues || {});
-    const [errors, setErrors] = useState<Record<string, string>>({})
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [formStatus, setFormStatus] = useState<boolean>(false)
+
     let storeFormData = useSelector(indexingData)
     let indexingStatus = useSelector(indexingState)
-    let stepper = useSelector(stepperState)
+    let examinationStatus = useSelector(examinationState)
+    let indexingRoute = router.pathname=='/school/indexing/new'
+    let examRoute = router.pathname=='/school/exam/new'
+    const indexStepper = useSelector(indexStepperState)
+    const examStepper = useSelector(examStepperState)
     
+    let stepper:string = ''
+
+    useEffect(() => {
+        if(indexingStatus == true || examinationStatus == true && indexingRoute == true || examRoute == true){
+            setFormStatus(true)
+            stepper = indexStepper
+        }
+        // else if( && examRoute == true){
+        //     setFormStatus('examination')
+        //     stepper = examStepper
+        // }
+    }, [])
+    
+
     // This updates the initial values on form change
     useEffect(() => { 
         setValues(initialValues || {})
     }, [initialValues])
     
-    useEffect(() => {
-        // Check if clearForm prop changes and call it
-       
-    }, [clearForm]);
 
     useEffect(() => {
-        if(indexingStatus == true && router.pathname=='/school/indexing/new' && stepper !== 'profile'){
-            console.log(indexingStatus);
-            console.log("this triggerednow");
-            
+        if(formStatus == true  && stepper !== 'profile'){
             setValues(storeFormData)
-            console.log("This triggered");
             
             toast.success("Please Reset all Images", {
                 position: "bottom-right",
@@ -67,13 +81,11 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 closeOnClick: true,
                 theme: "light",
               })
-        }
-        if (!indexingStatus) {
-            console.log("This triggered");
-            
+        } 
+        if (!formStatus) {
             setValues(initialValues || {})
         }
-       }, [indexingStatus])
+       }, [formStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
