@@ -1,28 +1,47 @@
+import { examinationActions } from "@/store/examination-slice"
 import { indexingActions, stepperState } from "@/store/indexing-slice"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
+
 const Button:React.FC = () =>{
+    const router = useRouter()
     let stepper = useSelector(stepperState)
     const dispatch = useDispatch()
     const onPrevious = () => {
-        if(stepper == 'work') {
-            dispatch(indexingActions.switchState('profile'))
-        }else if(stepper == 'sch/cert'){
-            dispatch(indexingActions.switchState('work'))
-        }else if(stepper == 'referee'){
-            dispatch(indexingActions.switchState('sch/cert'))
-        }else if(stepper == 'sch/cert'){
-            dispatch(indexingActions.switchState('referee'))
-        }else if(stepper == 'result'){
+        if (router.pathname.includes('/indexing')){
+            if(stepper == 'work') {
+                dispatch(indexingActions.switchState('profile'))
+            }else if(stepper == 'sch/cert'){
+                dispatch(indexingActions.switchState('work'))
+            }else if(stepper == 'referee'){
+                dispatch(indexingActions.switchState('sch/cert'))
+            }else if(stepper == 'sch/cert'){
                 dispatch(indexingActions.switchState('referee'))
-        }else if(stepper == 'secondResult'){
-            dispatch(indexingActions.switchState('result'))
-        } else(
-            dispatch(indexingActions.switchState('profile'))
-        )
+            }else if(stepper == 'result'){
+                    dispatch(indexingActions.switchState('referee'))
+            }else if(stepper == 'secondResult'){
+                dispatch(indexingActions.switchState('result'))
+            } else(
+                dispatch(indexingActions.switchState('profile'))
+            )
+        }else{
+            if(stepper == 'work') {
+                dispatch(examinationActions.switchState('profile'))
+            }else if(stepper == 'sch/cert'){
+                dispatch(examinationActions.switchState('work'))
+            }else if(stepper == 'referee'){
+                dispatch(examinationActions.switchState('sch/cert'))
+            }else if(stepper == 'sch/cert'){
+                dispatch(examinationActions.switchState('referee'))
+            }else if(stepper == 'result'){
+                    dispatch(examinationActions.switchState('referee'))
+            }else(
+                dispatch(examinationActions.switchState('profile'))
+            )
+        }
     }
-
     return(
         <>
             <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">

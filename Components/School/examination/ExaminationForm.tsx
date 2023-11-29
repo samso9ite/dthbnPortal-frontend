@@ -13,10 +13,8 @@ const ExaminationForm = () => {
     const dispatch = useDispatch()
     // dispatch(examinationActions.switchState('profile'))
     let formState = useSelector(stepperState)
-    console.log(formState);
     
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
-    console.log(useSelector(stepperState));
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
@@ -29,17 +27,24 @@ const ExaminationForm = () => {
     }
 
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
-        useCustomMutation(apiRequest.createIndexing, onSuccess)
+        useCustomMutation(apiRequest.createExamRecord, onSuccess)
 
     const submitHandler = (formData:any) => {
-        console.log(formData);
-        
-        
-        dispatch(examinationActions.storeExaminationData(formData))
-        // if(formState == 'profile'){
-        //     dispatch(indexingActions.setIndexingStatus(true))
-        // }
-    
+        if (formState == 'result') {
+            const examFormData = new FormData();
+            for(const [key, value] of Object.entries(formData)){
+                examFormData.append(key, value as string | Blob)
+            }
+            let currentYear = new Date().getFullYear()
+            let nextYear = currentYear + 1
+            let year = currentYear+'-'+nextYear
+            examFormData.append("year", year)
+            handleSubmit(examFormData)
+
+        }else{
+            dispatch(examinationActions.storeExaminationData(formData))
+        }
+      
     }
 
     return(

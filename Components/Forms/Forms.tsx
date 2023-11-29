@@ -244,9 +244,9 @@ export const Fields:Field = {
         {name: 'referee_address', type:'text', label:'Referee Address', required:true},
     ],
     examinationCertificateFields: [
-        {name:'dental_school_result', type:'field', label:'Dental School Certificate', required:false}, 
-        {name:'dental_school_testimonial', type:'field', label:'Dental School Testimonial', required:false},
-        {name:'waec_result', type:'field', label:'Waec Result', required:false}  
+        {name:'dental_school_result', type:'file', label:'Dental School Certificate', required:false}, 
+        {name:'dental_school_testimonial', type:'file', label:'Dental School Testimonial', required:false},
+        {name:'waec_result', type:'file', label:'Waec Result', required:false}  
     ],
     examinationSchFields:[
         {name: 'institutions_attended', type:'text', label:'Institution Attended', required:true},
