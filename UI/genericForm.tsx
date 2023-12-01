@@ -55,17 +55,12 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
 
-    console.log(examinationStatus);
-    
-
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
             setStepper(indexStepper)
             setStoreFormData(indexingFormData)
         }else if(examinationStatus == true && examRoute == true){
-            console.log(examStepper);
-            
             setFormStatus(true)
             setStepper(examStepper)
             setStoreFormData(examFormData)
@@ -76,10 +71,20 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     // useEffect(() => { 
     //     setValues(initialValues || {})
     // }, [initialValues])
+    console.log(stepper);
+    console.log(isExamUpdate);
+    
+    
     
     useEffect(() => {
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
+        console.log(formStatus);
+        
+        console.log(uncompletedForm);
+        
         let updatingForm = formStatus == true  && stepper == 'profile' && isExamUpdate == true
+        console.log(updatingForm);
+        
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
             

@@ -18,20 +18,20 @@ const IndexingForm = () => {
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
     let showSuccessMsg = true
 
-    let gradeKeysToRemove = [
-        'exam_number', 'exam_type', 'exam_year', 'Subject_1', 'Subject_2', 'Subject_3', 'Subject_4', 'Subject_5', 'Subject_6', 'Subject_7', 'Subject_8',
-        'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
-    ]
-    let secondGradeKeysToRemove = [
-        'exam_number_0', 'exam_type_0', 'exam_year_0', 'Subject_1_0', 'Subject_2_1', 'Subject_3_2', 'Subject_4_3', 'Subject_5_4', 'Subject_6_5', 'Subject_7_6', 'Subject_8_7',
-        'Grade_1_0', 'Grade_2_1', 'Grade_3_2', 'Grade_4_3', 'Grade_5_4', 'Grade_6_5', 'Grade_7_6', 'Grade_8_7'
-    ]
+    // let gradeKeysToRemove = [
+    //     'exam_number', 'exam_type', 'exam_year', 'Subject_1', 'Subject_2', 'Subject_3', 'Subject_4', 'Subject_5', 'Subject_6', 'Subject_7', 'Subject_8',
+    //     'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
+    // ]
+    // let secondGradeKeysToRemove = [
+    //     'exam_number_0', 'exam_type_0', 'exam_year_0', 'Subject_1_0', 'Subject_2_1', 'Subject_3_2', 'Subject_4_3', 'Subject_5_4', 'Subject_6_5', 'Subject_7_6', 'Subject_8_7',
+    //     'Grade_1_0', 'Grade_2_1', 'Grade_3_2', 'Grade_4_3', 'Grade_5_4', 'Grade_6_5', 'Grade_7_6', 'Grade_8_7'
+    // ]
     
 
-    let schKeysToRemove = ['School_1', 'School_2', 'School_3']
-    let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
-    let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
-     'referee_number_1']
+    // let schKeysToRemove = ['School_1', 'School_2', 'School_3']
+    // let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
+    // let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
+    //  'referee_number_1']
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
@@ -62,45 +62,45 @@ const IndexingForm = () => {
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
             
             const resultFormData = new FormData();
-            let referees:any = {};
-            let school_data:any = {};
-            let grades:any = {};
-            let examinations:any = {}
+            // let referees:any = {};
+            // let school_data:any = {};
+            // let grades:any = {};
+            // let examinations:any = {}
             let currentYear = new Date().getFullYear()
-            let secondGrades:any = {} 
+            // let secondGrades:any = {} 
             let nextYear = currentYear + 1
             let year = currentYear+'-'+nextYear
             const formDataCopy = { ...formData };
             
             // Append each key-value pair to the FormData
-            for (const [key, value] of Object.entries(formData)) {
-                if (gradeKeysToRemove.includes(key)) {
-                    grades[key] = value
-                 } else if (refereeKeysToRemove.includes(key)) {
-                    referees[key] = value
-                } else if (qualificationKeysToRemove.includes(key)) {
-                    examinations[key] = value
-                } else if (schKeysToRemove.includes(key)) {
-                    school_data[key] = value
-                } else if(secondGradeKeysToRemove.includes(key)){
-                    secondGrades[key] = value
-                }
-            }   
+            // for (const [key, value] of Object.entries(formData)) {
+            //     if (gradeKeysToRemove.includes(key)) {
+            //         grades[key] = value
+            //      } else if (refereeKeysToRemove.includes(key)) {
+            //         referees[key] = value
+            //     } else if (qualificationKeysToRemove.includes(key)) {
+            //         examinations[key] = value
+            //     } else if (schKeysToRemove.includes(key)) {
+            //         school_data[key] = value
+            //     } else if(secondGradeKeysToRemove.includes(key)){
+            //         secondGrades[key] = value
+            //     }
+            // }   
 
-            gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            schKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            secondGradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            // gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            // refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            // qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            // schKeysToRemove.forEach((key) => delete formDataCopy[key]);
+            // secondGradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
             
-            formDataCopy.examinations = JSON.stringify(examinations)
-            formDataCopy.grades = JSON.stringify(grades)
-            if(numOfSitting == '2') {
-                formDataCopy.secondGrades = JSON.stringify(secondGrades)
-            }
-            formDataCopy.referees = JSON.stringify(referees)
-            formDataCopy.school_attended = JSON.stringify(school_data)
-            formDataCopy.exam_sitting = numOfSitting
+            // formDataCopy.examinations = JSON.stringify(examinations)
+            // formDataCopy.grades = JSON.stringify(grades)
+            // if(numOfSitting == '2') {
+            //     formDataCopy.secondGrades = JSON.stringify(secondGrades)
+            // }
+            // formDataCopy.referees = JSON.stringify(referees)
+            // formDataCopy.school_attended = JSON.stringify(school_data)
+            // formDataCopy.exam_sitting = numOfSitting
            
             formDataCopy.year = year
             

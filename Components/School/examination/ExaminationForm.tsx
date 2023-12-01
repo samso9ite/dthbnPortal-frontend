@@ -14,8 +14,6 @@ const ExaminationForm = () => {
     let formState = useSelector(stepperState)
     const isUpdate = useSelector(examUpdate)
     const updateKey = useSelector(updateRecordKey)
-    console.log(updateKey);
-    
     
     let showSuccessMsg = true
     
@@ -25,6 +23,9 @@ const ExaminationForm = () => {
         setNotifIsActive(true)
         dispatch(examinationActions.switchState('profile'))
         dispatch(examinationActions.setExaminationStatus(false))
+        if(isUpdate == true){
+            dispatch(examinationActions.setExamUpdate({isUpdate:false, updateRecordKey:0}))
+        }
     }
 
     const apiStatusHandler = (statusData:boolean) => {

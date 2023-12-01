@@ -29,10 +29,10 @@ const gradeOptions = [
     {value:'F9', label:'F9'},
 ]
 
-const generateFields = (count:number,  field:string, options?:any,) => {
+const generateFields = (count:number, name:string, field:string, options?:any,) => {
     
     const generatedFields = Array.from({length:count}, (_, index) => ({
-        name: `${field}_${index + 1}`,
+        name: `${name}_${index + 1}`,
         type: options ? 'select' : 'text',
         label: `${field} ${index + 1}`, 
         required: false,
@@ -43,11 +43,11 @@ const generateFields = (count:number,  field:string, options?:any,) => {
     
 }
 
-const generatedSubjectFields = generateFields(8, 'Subject', subjectOptions);
-const generatedGradeFields = generateFields(8, 'Grade' , gradeOptions);
-const generatedSchField = generateFields(3, 'School');
-const generatedCertField = generateFields(3, 'Qualifications')
-
+const generatedSubjectFields = generateFields(8, 'subject',  'Subject', subjectOptions);
+const generatedGradeFields = generateFields(8, 'grade', 'Grade' , gradeOptions);
+const generatedSchField = generateFields(3, 'school_attended', 'School Attended');
+const generatedCertField = generateFields(3,'qualification', 'Qualification');
+const generatedEntry_GradYear = generateFields(3,'admission_grad_year', 'Admission & Graduation Year (2000 -2003)')
 
 export const Fields:Field = {
     loginFormFields: [
@@ -151,12 +151,6 @@ export const Fields:Field = {
         {name: 'referee_number', type:'number', label:'Referee Number', required:true},
         {name: 'referee_address', type:'text', label:'Referee Address', required:true},
     ],
-    indexingSchFields:[
-        {name: 'sch_attended', type:'text', label:'School Attended'},
-        {name: 'entry-graduation_date', type:'date', label:'Entry & Graduation Date', required:true},
-        {name: 'qualification', type:'text', label:'Qualification', required:true},
-        {name: 'upload_certificaate', type:'file', label:'Upload Certificate'}
-    ],
     indexingResultFields: [
         {name: 'exam_number', type:'text', label:'Exaination Number', required:true},
         {name: 'exam_type', type:'select', label:'Examination Type', required:true,
@@ -175,7 +169,8 @@ export const Fields:Field = {
     ],
     indexingSchCertDetails: [
         generatedSchField,
-        generatedCertField
+        generatedCertField,
+        generatedEntry_GradYear
     ],
 
     // New Examination Form
