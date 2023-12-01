@@ -2,7 +2,7 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
-import { examinationActions, stepperState, examinationRecord } from "@/store/examination-slice"
+import { examinationActions, stepperState, examinationRecord, examUpdate, formData, updateRecordKey } from "@/store/examination-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
 import ApiStateHandler from "@/util/ApiStateHandler"
@@ -12,6 +12,11 @@ import {  } from "@/store/examination-slice"
 const ExaminationForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
+    const isUpdate = useSelector(examUpdate)
+    const updateKey = useSelector(updateRecordKey)
+    console.log(updateKey);
+    
+    
     let showSuccessMsg = true
     
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
@@ -25,9 +30,11 @@ const ExaminationForm = () => {
     const apiStatusHandler = (statusData:boolean) => {
         setNotifIsActive(statusData)
     }
+    let fileUpload = true
 
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
-        useCustomMutation(apiRequest.createExamRecord, onSuccess)
+        useCustomMutation(isUpdate ?(formData:FormValues) => apiRequest.updateExamRecord(formData,fileUpload,updateKey) : 
+        apiRequest.createExamRecord, onSuccess)
 
     const submitHandler = (formData:any) => {
         if (formState == 'result') {
@@ -45,8 +52,7 @@ const ExaminationForm = () => {
             if(formState == 'profile'){
                 dispatch(examinationActions.setExaminationStatus(true))
             }
-        }
-      
+        }   
     }
 
     return(

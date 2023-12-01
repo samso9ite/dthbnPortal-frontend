@@ -2,11 +2,23 @@ import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { examinationActions } from '@/store/examination-slice';
+import { useRouter } from 'next/router';
 
 const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
-    // console.log(JSON.parse(props.data.school_attended));
+    const dispatch = useDispatch()
+    const router = useRouter()
+
+    const onEditRecord = () => {
+        const pk = props.data.id
+        dispatch(examinationActions.setExaminationStatus(true))
+        dispatch(examinationActions.switchState(''))
+        dispatch(examinationActions.storeExaminationData(props.data))
+        dispatch(examinationActions.setExamUpdate({isUpdate:true, updateRecordKey:props.data.id}))
+        router.push('/school/exam/new')
+    }
     
-   
     return (
         <>
             <Modal
@@ -56,7 +68,6 @@ const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onClos
                         </div>
 
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            {/* <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Schools Attended</b></div> */}
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
                                
                             <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> {props.data.religion}</div>
@@ -137,7 +148,7 @@ const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onClos
                             </div>
                         </div> */}
                         <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn  mr-1 mb-2" style={{width:'100%'}}>Edit Exam Record</button>
+                            <button className="btn  mr-1 mb-2" style={{width:'100%'}} onClick={onEditRecord}>Edit Exam Record</button>
                         </div>
                 </div>
         

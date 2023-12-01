@@ -108,5 +108,7 @@ interface ExaminationState {
     examinationRecord: Indexing[]; 
     formData: {};
     isActive:boolean
-    stepperState: string   
+    stepperState: string,
+    isUpdate:boolean,
+    updateRecordKey: number
 }

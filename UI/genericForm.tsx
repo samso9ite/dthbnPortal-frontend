@@ -4,7 +4,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import Button from "./stepperButton";
 import { useSelector } from "react-redux";
 import { indexingData, indexingState, stepperState as indexStepperState} from "@/store/indexing-slice";
-import { stepperState as examStepperState, formData} from "@/store/examination-slice";
+import { stepperState as examStepperState, formData, examUpdate} from "@/store/examination-slice";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -42,7 +42,8 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formStatus, setFormStatus] = useState<boolean>(false)
     const [storeFormData, setStoreFormData] = useState<any>({});
-    const [stepper, setStepper] = useState<string>('')
+    const [stepper, setStepper] = useState<string>('');
+    const [isUpdate, setIsUpdate] = useState<boolean>(false)
 
     let indexingFormData = useSelector(indexingData)
     let examFormData = useSelector(formData) 
@@ -52,13 +53,19 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     let examRoute = router.pathname=='/school/exam/new'
     const indexStepper = useSelector(indexStepperState)
     const examStepper = useSelector(examStepperState)
+    const isExamUpdate = useSelector(examUpdate)
+
+    console.log(examinationStatus);
     
+
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
             setStepper(indexStepper)
             setStoreFormData(indexingFormData)
         }else if(examinationStatus == true && examRoute == true){
+            console.log(examStepper);
+            
             setFormStatus(true)
             setStepper(examStepper)
             setStoreFormData(examFormData)
@@ -71,7 +78,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     // }, [initialValues])
     
     useEffect(() => {
-        if(formStatus == true  && stepper !== 'profile'){
+        let uncompletedForm = formStatus == true  && stepper !== 'profile'
+        let updatingForm = formStatus == true  && stepper == 'profile' && isExamUpdate == true
+        if(uncompletedForm || updatingForm){
             setValues(storeFormData)
             
             toast.success("Please Reset all Images", {
@@ -81,7 +90,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 closeOnClick: true,
                 theme: "light",
               })
-        } 
+        }
         if (!formStatus) {
             setValues(initialValues || {})
         }

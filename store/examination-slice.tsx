@@ -14,7 +14,9 @@ const initialState:ExaminationState = {
     examinationRecord:[],
     formData: {},
     stepperState: 'profile',
-    isActive: false
+    isActive: false,
+    isUpdate: false,
+    updateRecordKey: ''
 }
 
 const examinationSlice = createSlice({
@@ -22,14 +24,9 @@ const examinationSlice = createSlice({
     initialState,
     reducers: {
         storeExaminationData(state, action:PayloadAction<Examination>){
-            console.log(action.payload);
-            console.log(state.stepperState);
-            
             const formData = action.payload
              
             if(state.stepperState == 'profile'){
-                console.log(formData);
-                
                 state.formData = formData
                 state.stepperState = 'work'
                 
@@ -45,12 +42,20 @@ const examinationSlice = createSlice({
                 state.formData = formData;
                 state.stepperState = 'result'
             }
+            else{
+                state.formData = formData;
+                state.stepperState = 'profile'
+            }
         },
         switchState(state, action:PayloadAction<string>){
             state.stepperState = action.payload
         },
         setExaminationStatus(state, action:PayloadAction<boolean>){
             state.isActive = action.payload
+        },
+        setExamUpdate(state, action:PayloadAction<{isUpdate:boolean, updateRecordKey:number}>){
+            state.isUpdate = action.payload.isUpdate,
+            state.updateRecordKey = action.payload.updateRecordKey
         }
     },
     extraReducers: (builder) => {
@@ -64,6 +69,8 @@ export const examinationRecord = (state: RootState) => state.examination.examina
 export const formData = (state:RootState) => state.examination.formData;
 export const stepperState = (state:RootState) => state.examination.stepperState;
 export const examinationState = (state:RootState) => state.examination.isActive
+export const examUpdate = (state:RootState) => state.examination.isUpdate
+export const updateRecordKey = (state:RootState) => state.examination.updateRecordKey
 
 export const examinationActions = examinationSlice.actions
 
