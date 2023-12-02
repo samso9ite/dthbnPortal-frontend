@@ -43,8 +43,8 @@ const generateFields = (count:number, name:string, field:string, options?:any,) 
     
 }
 
-const generatedSubjectFields = generateFields(8, 'subject',  'Subject', subjectOptions);
-const generatedGradeFields = generateFields(8, 'grade', 'Grade' , gradeOptions);
+const generatedSubjectFields = generateFields(7, 'sub',  'Subject', subjectOptions);
+const generatedGradeFields = generateFields(7, 'grade', 'Grade' , gradeOptions);
 const generatedSchField = generateFields(3, 'school_attended', 'School Attended');
 const generatedCertField = generateFields(3,'qualification', 'Qualification');
 const generatedEntry_GradYear = generateFields(3,'admission_grad_year', 'Admission & Graduation Year (2000 -2003)')

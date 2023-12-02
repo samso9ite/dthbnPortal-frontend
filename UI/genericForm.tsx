@@ -54,7 +54,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const indexStepper = useSelector(indexStepperState)
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
-
+   
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
@@ -67,23 +67,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         } 
     }, [])
     
-    // This updates the initial values on form change
-    // useEffect(() => { 
-    //     setValues(initialValues || {})
-    // }, [initialValues])
-    console.log(stepper);
-    console.log(isExamUpdate);
-    
-    
-    
     useEffect(() => {
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
-        console.log(formStatus);
-        
-        console.log(uncompletedForm);
-        
         let updatingForm = formStatus == true  && stepper == 'profile' && isExamUpdate == true
-        console.log(updatingForm);
         
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
@@ -96,10 +82,10 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 theme: "light",
               })
         }
-        if (!formStatus) {
+        if (!formStatus || indexingStatus == false) {
             setValues(initialValues || {})
         }
-       }, [formStatus])
+       }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;

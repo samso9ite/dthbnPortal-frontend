@@ -39,8 +39,18 @@ const indexingSlice = createSlice({
                 state.stepperState = 'secondResult'
             }
         },
+        resetIndexingData(state, action:PayloadAction<any>){
+            console.log("Entered");
+            state.indexingData = {}
+            console.log(state.indexingData);
+            
+        },
         switchState(state, action:PayloadAction<string>){
+            console.log(action.payload);
+            
             state.stepperState = action.payload
+            console.log(state.stepperState);
+            
         },
         setIndexingStatus(state, action:PayloadAction<boolean>){
             state.isActive = action.payload
@@ -56,7 +66,8 @@ const indexingSlice = createSlice({
 export const selectIndexedData = (state: RootState) => state.index.indexed;
 export const indexingData = (state:RootState) => state.index.indexingData;
 export const stepperState = (state:RootState) => state.index.stepperState;
-export const indexingState = (state:RootState) => state.index.isActive
+export const indexingState = (state:RootState) => state.index.isActive;
+export const resetIndexingData = (state:RootState) => state.index.indexingData
 
 export const indexingActions = indexingSlice.actions
 

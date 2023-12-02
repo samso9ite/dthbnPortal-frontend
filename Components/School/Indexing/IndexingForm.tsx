@@ -2,7 +2,7 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
-import { indexingActions, stepperState, indexingData } from "@/store/indexing-slice"
+import { indexingActions, stepperState, indexingData, indexingState } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
 import ApiStateHandler from "@/util/ApiStateHandler"
@@ -17,6 +17,7 @@ const IndexingForm = () => {
     const[numOfSitting, setNumOfSitting] = useState('')
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
     let showSuccessMsg = true
+    
 
     // let gradeKeysToRemove = [
     //     'exam_number', 'exam_type', 'exam_year', 'Subject_1', 'Subject_2', 'Subject_3', 'Subject_4', 'Subject_5', 'Subject_6', 'Subject_7', 'Subject_8',
@@ -32,12 +33,16 @@ const IndexingForm = () => {
     // let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
     // let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
     //  'referee_number_1']
+    
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
-        dispatch(indexingActions.switchState('profile'))
+       
         dispatch(indexingActions.setIndexingStatus(false))
+        dispatch(indexingActions.resetIndexingData({}))
+        dispatch(indexingActions.switchState('profile'))
         setNumOfSitting('');
+        
     }
    
     const apiStatusHandler = (statusData:boolean) => {
@@ -70,7 +75,7 @@ const IndexingForm = () => {
             // let secondGrades:any = {} 
             let nextYear = currentYear + 1
             let year = currentYear+'-'+nextYear
-            const formDataCopy = { ...formData };
+            // const formDataCopy = { ...formData };
             
             // Append each key-value pair to the FormData
             // for (const [key, value] of Object.entries(formData)) {
@@ -102,14 +107,15 @@ const IndexingForm = () => {
             // formDataCopy.school_attended = JSON.stringify(school_data)
             // formDataCopy.exam_sitting = numOfSitting
            
-            formDataCopy.year = year
+            formData.year = year
             
-            for (const [key, value] of Object.entries(formDataCopy)) {
+            for (const [key, value] of Object.entries(formData)) {
                     resultFormData.append(key, value as string | Blob);
                 }
-               
             handleSubmit(resultFormData)
         }else{
+            console.log("Dipatching");
+            
             dispatch(indexingActions.storeIndexingData(formData))
             if(formState == 'profile'){
                 dispatch(indexingActions.setIndexingStatus(true))
