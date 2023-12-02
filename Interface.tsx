@@ -10,9 +10,7 @@ interface Indexing {
     comment: string;
     contact_address: string;
     email: string;
-    exam_sitting:string[];
     examinations: string[];
-    grades: string[];
     id: number;
     institution: number;
     marital_status: string;
@@ -22,15 +20,63 @@ interface Indexing {
     permanent_address: string;
     place_of_work: string;
     profile_image: string;
-    referees: string[];
+    referee_name:string;
+    referee_name_0:string;
+    referee_phone:number;
+    referee_phone_2:number;
+    referee_address:string;
+    referee_address_1:string;
     religion: string;
-    school_attended: any;
+    school_attended_1: any;
+    school_attended_2: any;
+    school_attended_3: any;
+    admission_grad_year_1: string;
+    admission_grad_year_2: string;
+    admission_grad_year_3: string;
+    qualification_1: string;
+    qualification_2: string;
+    qualification_3: string;
     sex: string;
     state: string;
     submitted: boolean;
     telephone: string;
     verified: boolean;
-    year: string
+    year: string;
+    exam_number: string;
+    exam_type: string;
+    exam_year: string;
+    exam_number_0: string;
+    exam_type_0: string;
+    exam_year_0: string;
+    sub_1: string;
+    sub_2: string;
+    sub_3: string;
+    sub_4: string;
+    sub_5: string;
+    sub_6: string;
+    sub_7: string;
+    sub_1_0:string;
+    sub_2_1: string;
+    sub_3_2: string;
+    sub_4_3: string;
+    sub_5_4: string;
+    sub_6_5: string;
+    sub_7_6: string;
+    grade_1: string;
+    grade_2: string;
+    grade_3: string;
+    grade_4: string;
+    grade_5: string;
+    grade_6: string;
+    grade_7: string;
+    grade_1_0: string;
+    grade_2_1: string;
+    grade_3_2: string;
+    grade_4_3: string;
+    grade_5_4: string;
+    grade_6_5: string;
+    grade_7_6: string;
+    exam_sitting: string
 }
 
 interface Examination {
@@ -47,7 +93,6 @@ interface Examination {
     email: string;
     exam_sitting:string[];
     examinations: string[];
-    grades: string[];
     id: number;
     institution: number;
     marital_status: string;

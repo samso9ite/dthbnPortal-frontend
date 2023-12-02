@@ -49,6 +49,7 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Age: </b> {props.data.age} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> {props.data.religion}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Nationality: </b> {props.data.nationality} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>State: </b> {props.data.state} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Marital Status: </b> {props.data.marital_status}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Place of Work: </b> {props.data.place_of_work} </div>
                             </div>
@@ -56,11 +57,16 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
 
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Schools Attended</b></div>
-                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                               
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Address: </b> </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> +234 811 2417 083</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> Christian</div>
+                            <div className="flex flex-col justify-center items-center lg:items-start">
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>School:</b> {props.data.school_attended_1} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Admission/Graduation Year:</b> {props.data.school_attended_1} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualification:</b> {props.data.qualification_1} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>School: </b>{props.data.school_attended_2} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Admission/Graduation Year:</b> {props.data.school_attended_2} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualification:</b> {props.data.qualification_2} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>School: </b>{props.data.school_attended_3} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Admission/Graduation Year:</b> {props.data.school_attended_3} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualification:</b> {props.data.qualification_3} </div>
                             </div>
                         </div>
                 
@@ -69,49 +75,40 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                     
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>OLevel Result</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Junior Leaving Certificate: </b> Herbert Macaulay Junior School</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Seecondary Leaving Certificate: </b> Aiyetoro Senior High School </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number: </b> {props.data.exam_number}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type: </b> {props.data.exam_type}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year: </b> {props.data.exam_year}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_1}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_2} {props.data.grade_2}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_3} {props.data.grade_3}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_4} {props.data.grade_4}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_5} {props.data.grade_5}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_6}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_7}</div>
                             </div>
                         </div>
 
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
+                       {props.data.exam_sitting && <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>OLevel Result</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Email: </b> arnoldschwarzenegger@left4code.com </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Address: </b> 20, Ojuelegba Street Yaba Lagos. </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> +234 811 2417 083</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> Christian</div>
+                            <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number: </b> {props.data.exam_number}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type: </b> {props.data.exam_type}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year: </b> {props.data.exam_year}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1_0} {props.data.grade_1_0}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_2_1} {props.data.grade_2_1}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_3_2} {props.data.grade_3_2}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_4_3} {props.data.grade_4_3}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_5_4} {props.data.grade_5_4}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_6_5} {props.data.grade_6_5}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_7_6} {props.data.grade_7_6}</div>
                             </div>
                         </div>
+                        }
                 
                     </div>
-                    <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
-                    
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
-                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Junior Leaving Certificate: </b> Herbert Macaulay Junior School</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Seecondary Leaving Certificate: </b> Aiyetoro Senior High School </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Tertiary Institution: </b> Yaba College of Technology</div>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Academic Details</b></div>
-                            <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Email: </b> arnoldschwarzenegger@left4code.com </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Address: </b> 20, Ojuelegba Street Yaba Lagos. </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Phone: </b> +234 811 2417 083</div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> Christian</div>
-                            </div>
-                        </div>
-                
-                    </div>
+                   
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
                     
