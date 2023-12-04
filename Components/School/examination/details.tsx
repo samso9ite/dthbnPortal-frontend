@@ -12,7 +12,6 @@ const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onClos
     const examUpdateStatus = useSelector(examUpdate) 
     
     const onEditRecord = () => {
-        const pk = props.data.id
         dispatch(examinationActions.setExaminationStatus(true))
         dispatch(examinationActions.switchState(''))
         dispatch(examinationActions.storeExaminationData(props.data))

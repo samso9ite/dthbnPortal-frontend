@@ -1,20 +1,35 @@
 import { useSelector, useDispatch } from "react-redux"
 import {useState, useCallback, useEffect} from 'react'
-import {stepperState } from "@/store/indexing-slice"
+import {indexingActions, indexingUpdate, stepperState } from "@/store/indexing-slice"
 import IndexingForm from "@/Components/School/Indexing/IndexingForm"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/router";
 
 const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewIndexing = () => {
     let stepper = useSelector(stepperState)
+    const indexingUpdateStatus = useSelector(indexingUpdate) 
+    const dispatch = useDispatch()
+    const router = useRouter()
+ 
+    const exitUpdate = () => {
+        dispatch(indexingActions.setIndexingUpdate({isUpdate:false, updateRecordKey:0}))
+        dispatch(indexingActions.setIndexingStatus(false))
+        router.push('/school/indexing/current')
+    }
     
     return (
         <MainLayout>
-            <h2 className="intro-y text-lg font-medium mt-10">
-               Create New Indexing 
-            </h2>
+          <div className="mt-10">
+                <span className="intro-y text-lg font-medium mt-10">
+                   {indexingUpdateStatus == true ? 'Update Exam Record' : 'Create New Exam Record' }
+                </span>
+                {indexingUpdateStatus == true &&
+                    <button className="btn btn-primary" style={{float:"right"}} onClick={exitUpdate}>Exit Update</button>
+                }
+            </div>
             <div className="intro-y box py-10 sm:py-20 mt-5">
                 <div className="relative before:hidden before:lg:block before:absolute before:w-[69%] before:h-[3px] before:top-0 before:bottom-0 before:mt-4 before:bg-slate-100 before:dark:bg-darkmode-400 flex flex-col lg:flex-row justify-center px-5 sm:px-20">
                     <div className="intro-x lg:text-center flex items-center lg:block flex-1 z-10">

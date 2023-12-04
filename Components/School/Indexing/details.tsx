@@ -2,13 +2,19 @@ import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { indexingActions } from '@/store/indexing-slice';
 
 const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
-    // console.log(JSON.parse(props.data.school_attended));
-
-    const router = useRouter()
+  
+    const router = useRouter();
+    const dispatch = useDispatch()
     const onEditRecord = () => {
-        
+        dispatch(indexingActions.setIndexingStatus(true))
+        dispatch(indexingActions.switchState(''))
+        dispatch(indexingActions.storeIndexingData(props.data))
+        dispatch(indexingActions.setIndexingUpdate({isUpdate:true, updateRecordKey:props.data.id}))
+        router.push('/school/indexing/new')
     }
     return (
         <>
@@ -130,8 +136,8 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                         <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}}>Approve Submission</button>
                         </div> */}
-                         {router.pathname == '/school/index/current' && <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn  mr-1 mb-2" style={{width:'100%'}} onClick={onEditRecord}>Edit Index Record</button>
+                          {router.asPath.includes('/school/indexing/current') && <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                            <button className="btn  mr-1 mb-2" style={{width:'100%'}} onClick={onEditRecord}>Edit Indexing Record</button>
                             </div>
                         }
                 </div>

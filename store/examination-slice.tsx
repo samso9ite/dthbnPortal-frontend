@@ -3,8 +3,6 @@ import { useCustomQuery } from "@/Hooks/apiCall"
 import apiRequest from "@/APIs/ApiRequests";
 import { RootState } from ".";
 
-
-
 export const fetchData = createAsyncThunk('examination/fetchExaminationRecord', async () => {
     const {isPending, isError, error, data } = useCustomQuery(apiRequest.examinationRecord, 'examination')
     return data?.data
@@ -16,7 +14,7 @@ const initialState:ExaminationState = {
     stepperState: 'profile',
     isActive: false,
     isUpdate: false,
-    updateRecordKey: ''
+    updateRecordKey: 0
 }
 
 const examinationSlice = createSlice({

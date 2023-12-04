@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import Multiselect from 'multiselect-react-dropdown';
 import Button from "./stepperButton";
 import { useSelector } from "react-redux";
-import { indexingData, indexingState, stepperState as indexStepperState} from "@/store/indexing-slice";
+import { indexingData, indexingState, indexingUpdate, stepperState as indexStepperState} from "@/store/indexing-slice";
 import { stepperState as examStepperState, formData, examUpdate} from "@/store/examination-slice";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
@@ -54,6 +54,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const indexStepper = useSelector(indexStepperState)
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
+    const indexingUpdateStatus = useSelector(indexingUpdate)
    
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
@@ -69,28 +70,24 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     
     useEffect(() => {
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
-        let updatingForm = formStatus == true  && stepper == 'profile' && isExamUpdate == true
-        console.log(uncompletedForm);
-        console.log(updatingForm);
-        console.log(formStatus);
-        
+        let updatingForm = formStatus == true  && stepper == 'profile' && 
+        (isExamUpdate == true || indexingUpdateStatus == true)
         
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
-            
             toast.success("Please Reset all Images", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 theme: "light",
-              })
+            })
         }
 
-        // if (formStatus == false || indexingStatus == false) {
-        //     setValues(initialValues || {})
-        // }
-       }, [formStatus, indexingStatus, examinationStatus])
+        if (formStatus == false || indexingStatus == false) {
+            setValues(initialValues || {})
+        }
+    }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;

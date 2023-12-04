@@ -13,7 +13,9 @@ const initialState:IndexingState = {
     indexed:[],
     indexingData: {},
     stepperState: 'profile',
-    isActive: false
+    isActive: false,
+    isUpdate: false,
+    updateRecordKey: 0
 }
 
 const indexingSlice = createSlice({
@@ -35,25 +37,27 @@ const indexingSlice = createSlice({
             }else if(state.stepperState == 'referee'){
                 state.indexingData = formData;
                 state.stepperState = 'result'
-            }else {
+            }else if(state.stepperState == 'result'){
+                state.indexingData = formData;
                 state.stepperState = 'secondResult'
+            }else{
+                state.indexingData = formData;
+                state.stepperState = 'profile'
             }
         },
         resetIndexingData(state, action:PayloadAction<any>){
-            console.log("Entered");
-            state.indexingData = {}
-            console.log(state.indexingData);
-            
+            state.indexingData = {}  
         },
         switchState(state, action:PayloadAction<string>){
-            console.log(action.payload);
-            
             state.stepperState = action.payload
-            console.log(state.stepperState);
             
         },
         setIndexingStatus(state, action:PayloadAction<boolean>){
             state.isActive = action.payload
+        },
+        setIndexingUpdate(state, action:PayloadAction<{isUpdate:boolean, updateRecordKey:number}>){
+            state.isUpdate = action.payload.isUpdate,
+            state.updateRecordKey = action.payload.updateRecordKey
         }
     },
     extraReducers: (builder) => {
@@ -68,6 +72,8 @@ export const indexingData = (state:RootState) => state.index.indexingData;
 export const stepperState = (state:RootState) => state.index.stepperState;
 export const indexingState = (state:RootState) => state.index.isActive;
 export const resetIndexingData = (state:RootState) => state.index.indexingData
+export const indexingUpdate = (state:RootState) => state.index.isUpdate
+export const updateRecordKey = (state:RootState) => state.index.updateRecordKey
 
 export const indexingActions = indexingSlice.actions
 

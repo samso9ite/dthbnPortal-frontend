@@ -145,8 +145,10 @@ interface Examination {
 interface IndexingState {
     indexed: Indexing[]; 
     indexingData: {};
-    isActive:boolean
-    stepperState: string   
+    isActive:boolean;
+    stepperState: string;
+    isUpdate:boolean,
+    updateRecordKey: number
 }
 
 interface ExaminationState {

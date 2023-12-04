@@ -2,7 +2,7 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
-import { indexingActions, stepperState, indexingData, indexingState } from "@/store/indexing-slice"
+import { indexingActions, stepperState, indexingData, indexingState, indexingUpdate, updateRecordKey } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
 import ApiStateHandler from "@/util/ApiStateHandler"
@@ -13,9 +13,11 @@ type ModifiedRefereeField = Field & { name: string };
 const IndexingForm = () => {
     const dispatch = useDispatch()
     let formState = useSelector(stepperState)
+    const isUpdate = useSelector(indexingUpdate)
     
     const[numOfSitting, setNumOfSitting] = useState('')
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
+    const updateKey = useSelector(updateRecordKey)
     let showSuccessMsg = true
     
 
@@ -42,7 +44,9 @@ const IndexingForm = () => {
         dispatch(indexingActions.resetIndexingData({}))
         dispatch(indexingActions.switchState('profile'))
         setNumOfSitting('');
-        
+        if(isUpdate == true){
+            dispatch(indexingActions.setIndexingUpdate({isUpdate:false, updateRecordKey:0}))
+        }
     }
    
     const apiStatusHandler = (statusData:boolean) => {
@@ -58,14 +62,14 @@ const IndexingForm = () => {
     const onChangeSitting = (e:React.ChangeEvent<HTMLSelectElement>) => {
         setNumOfSitting(e.target.value)
     }
+    let fileUpload = true
 
     const {handleSubmit, isSuccess, isError, error, isPending, data} =
-        useCustomMutation(apiRequest.createIndexing, onSuccess)
+        useCustomMutation(isUpdate ?(formData:FormValues) => apiRequest.updateIndexRecord(formData,fileUpload,updateKey) : 
+        apiRequest.createIndexing, onSuccess)
 
      const submitHandler = (formData:any) => {
-        
         if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
-            
             const resultFormData = new FormData();
             // let referees:any = {};
             // let school_data:any = {};
@@ -112,10 +116,10 @@ const IndexingForm = () => {
             for (const [key, value] of Object.entries(formData)) {
                     resultFormData.append(key, value as string | Blob);
                 }
+                console.log("This ran");
+                
             handleSubmit(resultFormData)
         }else{
-            console.log("Dipatching");
-            
             dispatch(indexingActions.storeIndexingData(formData))
             if(formState == 'profile'){
                 dispatch(indexingActions.setIndexingStatus(true))
