@@ -70,6 +70,10 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     useEffect(() => {
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
         let updatingForm = formStatus == true  && stepper == 'profile' && isExamUpdate == true
+        console.log(uncompletedForm);
+        console.log(updatingForm);
+        console.log(formStatus);
+        
         
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
@@ -82,9 +86,10 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 theme: "light",
               })
         }
-        if (!formStatus || indexingStatus == false) {
-            setValues(initialValues || {})
-        }
+
+        // if (formStatus == false || indexingStatus == false) {
+        //     setValues(initialValues || {})
+        // }
        }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {

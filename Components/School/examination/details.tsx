@@ -2,14 +2,15 @@ import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { examinationActions } from '@/store/examination-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { examUpdate, examinationActions } from '@/store/examination-slice';
 import { useRouter } from 'next/router';
 
 const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
     const dispatch = useDispatch()
     const router = useRouter()
-
+    const examUpdateStatus = useSelector(examUpdate) 
+    
     const onEditRecord = () => {
         const pk = props.data.id
         dispatch(examinationActions.setExaminationStatus(true))
@@ -147,9 +148,10 @@ const ExaminationDetails:React.FC<{data:Examination, modalIsOpen:boolean, onClos
                                 </div>
                             </div>
                         </div> */}
-                        <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                        {router.pathname == '/school/exam/current' && <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <button className="btn  mr-1 mb-2" style={{width:'100%'}} onClick={onEditRecord}>Edit Exam Record</button>
-                        </div>
+                            </div>
+                        }
                 </div>
         
                 </div>

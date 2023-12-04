@@ -1,20 +1,35 @@
 import { useSelector, useDispatch } from "react-redux"
 import {useState, useCallback, useEffect} from 'react'
-import {stepperState } from "@/store/examination-slice"
+import {examUpdate, examinationActions, stepperState } from "@/store/examination-slice"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ExaminationForm from "@/Components/School/examination/ExaminationForm";
+import { useRouter } from "next/router";
 
 const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewExamination = () => {
     let stepper = useSelector(stepperState)
+    const examUpdateStatus = useSelector(examUpdate) 
+    const dispatch = useDispatch()
+    const router = useRouter()
+ 
+    const exitUpdate = () => {
+        dispatch(examinationActions.setExamUpdate({isUpdate:false, updateRecordKey:0}))
+        dispatch(examinationActions.setExaminationStatus(false))
+        router.push('/school/exam/current')
+    }
     
     return (
         <MainLayout>
-            <h2 className="intro-y text-lg font-medium mt-10">
-               Create New Exam Record 
-            </h2>
+            <div className="mt-10">
+                <span className="intro-y text-lg font-medium mt-10">
+                   {examUpdateStatus == true ? 'Update Exam Record' : 'Create New Exam Record' }
+                </span>
+                {examUpdateStatus == true &&
+                    <button className="btn btn-primary" style={{float:"right"}} onClick={exitUpdate}>Exit Update</button>
+                }
+            </div>
             <div className="intro-y box py-10 sm:py-20 mt-5">
                 <div className="relative before:hidden before:lg:block before:absolute before:w-[69%] before:h-[3px] before:top-0 before:bottom-0 before:mt-4 before:bg-slate-100 before:dark:bg-darkmode-400 flex flex-col lg:flex-row justify-center px-5 sm:px-20">
                     <div className="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
