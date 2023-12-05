@@ -260,4 +260,21 @@ export const Fields:Field = {
         {name: 'qualifications', type:'text', label:'Qualifications', required:false},
         {name: 'professional_qualifications', type:'text', label:'Professional Qualifications', required:false},
     ],
+
+    // Profile Update Form
+    schProfileUpdateFields: [
+        {name: 'sch_address', type:'text', label:'School Address', required:false},
+        {name: 'hod_phone', type:'text', label:'School Phone Number', required:false},
+        {name: 'sch_logo', type:'file', label:'Logo', required: false},
+        {name: 'hod_name', type:'text', label:'HOD Name', required:false},
+        {name: 'hod_phone', type:'text', label:'HOD Phone', required:false},
+        {name: 'hod_email', type:'email', label:'HOD Email'},
+    ],
+
+    schChangePassword: [
+        {name: 'old_password', type:'password', label:'Old Password', required:true},
+        {name: 'new_password', type:'password', label:'New Password', required:true},
+        {name: 'confirm_password', type:'password', label:'Confirm Password', required:true},
+       
+    ]
 }

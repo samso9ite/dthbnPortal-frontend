@@ -24,7 +24,7 @@ const NewIndexing = () => {
         <MainLayout>
           <div className="mt-10">
                 <span className="intro-y text-lg font-medium mt-10">
-                   {indexingUpdateStatus == true ? 'Update Exam Record' : 'Create New Exam Record' }
+                   {indexingUpdateStatus == true ? 'Update Indexing Record' : 'Create New indexing Record' }
                 </span>
                 {indexingUpdateStatus == true &&
                     <button className="btn btn-primary" style={{float:"right"}} onClick={exitUpdate}>Exit Update</button>
