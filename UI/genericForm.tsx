@@ -37,6 +37,9 @@ type Props = {
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm })  => {
     const router = useRouter()
+
+    console.log(initialValues);
+    
   
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -84,9 +87,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
             })
         }
 
-        if (formStatus == false || indexingStatus == false) {
-            setValues(initialValues || {})
-        }
+        // if (formStatus == false || indexingStatus == false) {
+        //     setValues(initialValues || {})
+        // }
     }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {

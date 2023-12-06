@@ -1,3 +1,4 @@
+import { formData } from "@/store/examination-slice";
 import api from "./api";
 import { FormValues } from "@/UI/genericForm"
 
@@ -43,6 +44,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     forgotPwd: (formData:FormValues) => generalRequest('auth/forgot-password', 'post', formData),
     resetPwd: (formData:FormValues, uid:string, token:string) => generalRequest(`auth/reset-password/${uid}/${token}`, 'post', formData),
     accountActivation: (formData:FormValues) => generalRequest('auth/activate', 'post', formData),
+    changePassword: (formData:FormValues) => generalRequest('auth/change_pwd/', 'post'),
 
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
@@ -57,7 +59,12 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     createExamRecord: (formData:FormValues, fileUpload:boolean) => generalRequest('school/exam_reg/', 'post', formData, fileUpload=true),
     submitExamForApproval: () => generalRequest('school/submit_all_exam_record/', 'patch'),
     updateExamRecord: (formData:FormValues, fileUpload:boolean,pk:number) => 
-    generalRequest(`school/update_exam_record/${pk}/`, 'patch', formData, fileUpload=true)
+    generalRequest(`school/update_exam_record/${pk}/`, 'patch', formData, fileUpload=true),
+
+    // School Profile
+    updateProfile: (formData:FormValues, fileUpload:boolean,  pk:number) => 
+        generalRequest(`school/profile_update/${pk}/`, 'patch', formData, fileUpload=true)
+   
 }
 
 export default apiRequest

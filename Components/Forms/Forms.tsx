@@ -263,18 +263,16 @@ export const Fields:Field = {
 
     // Profile Update Form
     schProfileUpdateFields: [
-        {name: 'sch_address', type:'text', label:'School Address', required:false},
-        {name: 'hod_phone', type:'text', label:'School Phone Number', required:false},
-        {name: 'sch_logo', type:'file', label:'Logo', required: false},
+        {name: 'address', type:'text', label:'School Address', required:false},
+        {name: 'sch_phone', type:'text', label:'School Phone Number', required:false},
         {name: 'hod_name', type:'text', label:'HOD Name', required:false},
         {name: 'hod_phone', type:'text', label:'HOD Phone', required:false},
         {name: 'hod_email', type:'email', label:'HOD Email'},
+        {name: 'sch_logo', type:'file', label:'School Logo', required: false},
     ],
 
     schChangePassword: [
-        {name: 'old_password', type:'password', label:'Old Password', required:true},
         {name: 'new_password', type:'password', label:'New Password', required:true},
-        {name: 'confirm_password', type:'password', label:'Confirm Password', required:true},
-       
+        {name: 'confirm_password', type:'password', label:'Confirm Password', required:true},  
     ]
 }
