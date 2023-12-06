@@ -11,7 +11,7 @@ const subjectOptions =   [
     {value:'Further Mathematics', label:'Further Mathematics'},
     {value:'C.R.K', label:'C.R.K'},
     {value:'Civic Education', label:'Civic Education'},
-    {value:'Agricultural Science', label:'Agircultural Science'},
+    {value:'Agricultural Science', label:'Agricultural Science'},
     {value:'Economics', label:'Economics'},
     {value:'Islamic Studies', label:'Islamic Studies'},
 ]

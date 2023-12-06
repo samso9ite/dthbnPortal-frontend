@@ -1,6 +1,7 @@
 import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
+import { ToastContainer, toast } from 'react-toastify';
 import GenericForm, {FormValues, Field} from "@/UI/genericForm"
 import { indexingActions, stepperState, indexingData, indexingState, indexingUpdate, updateRecordKey } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
@@ -69,61 +70,72 @@ const IndexingForm = () => {
         apiRequest.createIndexing, onSuccess)
 
      const submitHandler = (formData:any) => {
-        if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
-            const resultFormData = new FormData();
-            // let referees:any = {};
-            // let school_data:any = {};
-            // let grades:any = {};
-            // let examinations:any = {}
-            let currentYear = new Date().getFullYear()
-            // let secondGrades:any = {} 
-            let nextYear = currentYear + 1
-            let year = currentYear+'-'+nextYear
-            // const formDataCopy = { ...formData };
-            
-            // Append each key-value pair to the FormData
-            // for (const [key, value] of Object.entries(formData)) {
-            //     if (gradeKeysToRemove.includes(key)) {
-            //         grades[key] = value
-            //      } else if (refereeKeysToRemove.includes(key)) {
-            //         referees[key] = value
-            //     } else if (qualificationKeysToRemove.includes(key)) {
-            //         examinations[key] = value
-            //     } else if (schKeysToRemove.includes(key)) {
-            //         school_data[key] = value
-            //     } else if(secondGradeKeysToRemove.includes(key)){
-            //         secondGrades[key] = value
-            //     }
-            // }   
-
-            // gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            // refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            // qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            // schKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            // secondGradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-            
-            // formDataCopy.examinations = JSON.stringify(examinations)
-            // formDataCopy.grades = JSON.stringify(grades)
-            // if(numOfSitting == '2') {
-            //     formDataCopy.secondGrades = JSON.stringify(secondGrades)
-            // }
-            // formDataCopy.referees = JSON.stringify(referees)
-            // formDataCopy.school_attended = JSON.stringify(school_data)
-            // formDataCopy.exam_sitting = numOfSitting
-           
-            formData.year = year
-            
-            for (const [key, value] of Object.entries(formData)) {
-                    resultFormData.append(key, value as string | Blob);
-                }
-                console.log("This ran");
+        if (numOfSitting == '1' || numOfSitting == '2'){
+            if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
+                const resultFormData = new FormData();
+                // let referees:any = {};
+                // let school_data:any = {};
+                // let grades:any = {};
+                // let examinations:any = {}
+                let currentYear = new Date().getFullYear()
+                // let secondGrades:any = {} 
+                let nextYear = currentYear + 1
+                let year = currentYear+'-'+nextYear
+                // const formDataCopy = { ...formData };
                 
-            handleSubmit(resultFormData)
-        }else{
-            dispatch(indexingActions.storeIndexingData(formData))
-            if(formState == 'profile'){
-                dispatch(indexingActions.setIndexingStatus(true))
+                // Append each key-value pair to the FormData
+                // for (const [key, value] of Object.entries(formData)) {
+                //     if (gradeKeysToRemove.includes(key)) {
+                //         grades[key] = value
+                //      } else if (refereeKeysToRemove.includes(key)) {
+                //         referees[key] = value
+                //     } else if (qualificationKeysToRemove.includes(key)) {
+                //         examinations[key] = value
+                //     } else if (schKeysToRemove.includes(key)) {
+                //         school_data[key] = value
+                //     } else if(secondGradeKeysToRemove.includes(key)){
+                //         secondGrades[key] = value
+                //     }
+                // }   
+
+                // gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+                // refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+                // qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
+                // schKeysToRemove.forEach((key) => delete formDataCopy[key]);
+                // secondGradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
+                
+                // formDataCopy.examinations = JSON.stringify(examinations)
+                // formDataCopy.grades = JSON.stringify(grades)
+                // if(numOfSitting == '2') {
+                //     formDataCopy.secondGrades = JSON.stringify(secondGrades)
+                // }
+                // formDataCopy.referees = JSON.stringify(referees)
+                // formDataCopy.school_attended = JSON.stringify(school_data)
+                // formDataCopy.exam_sitting = numOfSitting
+            
+                formData.year = year
+                
+                for (const [key, value] of Object.entries(formData)) {
+                        resultFormData.append(key, value as string | Blob);
+                    }
+                    console.log("This ran");
+                    
+                handleSubmit(resultFormData)
+            }else{
+                dispatch(indexingActions.storeIndexingData(formData))
+                if(formState == 'profile'){
+                    dispatch(indexingActions.setIndexingStatus(true))
+                }
             }
+        }else{
+            toast.error("Please select number of sitting", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+            }
+            )
         }
     }
 

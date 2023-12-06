@@ -55,7 +55,7 @@ const Profile = () => {
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="Midone - HTML Admin Template" className="rounded-full" src={response?.school_data.profile_img ? response?.school_data.profile_img : "dist/images/profile-9.jpg"} />
+                                <img alt="School Logo" className="rounded-full" src={response?.school_data.profile_img ? response?.school_data.profile_img : "dist/images/profile-9.jpg"} />
                             </div>
                             <div className="ml-5">
                                 <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.school_data.sch_name}</div>
@@ -95,9 +95,9 @@ const Profile = () => {
                             ></i>Update Profile </a>
                         </li>
 
-                        <li id="change-password-tab" className="nav-item" role="presentation" onClick={() => { setFormState('password') }}>
+                        {/* <li id="change-password-tab" className="nav-item" role="presentation" onClick={() => { setFormState('password') }}>
                             <a href="javascript:;" className="nav-link py-4 flex items-center" data-tw-target="#change-password" aria-selected="false" role="tab" > <i className="w-4 h-4 mr-2" data-lucide="lock"></i> Change Password </a>
-                        </li>
+                        </li> */}
 
                     </ul>
                 </div>

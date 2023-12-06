@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const SideNav = () => {
     const router = useRouter()
     const exactPath = router.asPath
     const [isSubMenuActive , setIsSubMenuActive] = useState<string>()
+    const [sch_name, setSchName] = useState<any>()
 
     const activateSubmenuHandler = (menu:string) => {
         setIsSubMenuActive(menu)
@@ -16,14 +17,20 @@ const SideNav = () => {
         localStorage.clear()
         router.push('/auth')
     }
+
+    useEffect(() => {
+      setSchName(localStorage.getItem('sch_name'))
+      console.log(localStorage.getItem('sch_name'));
+      
+    }, [])
     
 
     return ( 
         <>
-             <nav className="side-nav">
+            <nav className="side-nav">
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
                     <img alt="Dental Board of Nigeria" className="w-6" src="src/images/logo_dental.png" />
-                    <span className="hidden xl:block text-white text-lg ml-3"> Dental Board Sch </span> 
+                    <span className="hidden xl:block text-white text-lg ml-3"> {sch_name} </span> 
                 </a>
                 <div className="side-nav__devider my-6"></div>
                 <ul>
@@ -126,8 +133,6 @@ const SideNav = () => {
                     </li>
 
                     <li className="side-nav__devider my-6"></li>
-                   
-                   
                    
                     <li>
                         <a href="side-menu-light-chat.html" className="side-menu">

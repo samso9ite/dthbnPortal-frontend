@@ -65,6 +65,7 @@ const NewIndexing = () => {
                   
                 </div>
                 <div className="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
+                    {stepper == 'result' && <h1 className="text-center mb-3"> Please insert the grades according to how your subject was selected</h1>}
                     <IndexingForm />
                 </div>
             </div>
