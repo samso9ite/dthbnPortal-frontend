@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from 'react-paginate';
+import styles from './paginated.module.css'
+import styled from "styled-components";
 
-const PaginatedItems:React.FC<{items:any, children:any}> = (props) => {
+
+const PaginatedItems:React.FC<{items:any, children:any, headerChildren:any}> = (props) => {
     const [itemOffset, setItemOffset] = useState(0);
     let itemsPerPage = 10
   
@@ -18,20 +21,31 @@ const PaginatedItems:React.FC<{items:any, children:any}> = (props) => {
 
 return(
     <>
+        <table className="table table-report sm:mt-2">
+            {props.headerChildren}
             {currentItems &&
-                currentItems?.map((item:any) => (
+                currentItems?.map((item:any, index:number) => (
                     props.children(item)
-            ))
+                ))
             }
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-            />
+        </table>
+        <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="< Previous"
+            renderOnZeroPageCount={null}
+            containerClassName="pagination justify-content-center"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+        />
     </>
 )
 }

@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchData, examinationRecord } from "@/store/examination-slice"
 import ExaminationItem from "./ExaminationItem";
 import { useRouter } from "next/router"
-import ReactSearchBox from "react-search-box";
 import { useCustomMutation } from "@/Hooks/apiCall";
 import ApiStateHandler from "@/util/ApiStateHandler";
 import { useState } from "react";
 import apiRequest from "@/APIs/ApiRequests";
 import PaginatedItems from "@/UI/paginated";
+import SearchFilter from "@/Hooks/searchFilter";
 
 const ExaminationList:React.FC = () => {
     const router = useRouter()
@@ -82,14 +82,7 @@ const ExaminationList:React.FC = () => {
                 <div className="hidden md:block mx-auto ">
                 </div>
                 <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                   
-                     <ReactSearchBox
-                        placeholder="Search by name, cadre, phone, sex"
-                        value="Doe"
-                        data={response}
-                        // onChange={(value) => console.log(value)}
-                        // callback={(record) => console.log(record)}
-                    />
+                    <SearchFilter records={response} getfilteredData={updateFilter} />
                 </div>
             </div>  
              

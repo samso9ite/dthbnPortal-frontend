@@ -20,11 +20,8 @@ const SideNav = () => {
 
     useEffect(() => {
       setSchName(localStorage.getItem('sch_name'))
-      console.log(localStorage.getItem('sch_name'));
-      
     }, [])
     
-
     return ( 
         <>
             <nav className="side-nav">
