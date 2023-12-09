@@ -1,8 +1,7 @@
-import MobileNav from "@/Components/MobileNav"
-import SideNav from "@/Components/SideNav"
-import TopBar from "@/Components/TopBar"
+import SideNav from "@/Components/Admin/SideNav";
+import MobileNav from "@/Components/Admin/MobileNav";
 
-const MainLayout = (props:any) => {
+const AdminLayout = (props:any) => {
     return (
         <>
             <div className="flex mt-[4.7rem] md:mt-0">
@@ -10,7 +9,6 @@ const MainLayout = (props:any) => {
                 <div className="flex mt-[4.7rem] md:mt-0">
                     <SideNav />
                     <div className="content">
-                        <TopBar />
                         {props.children}
                     </div>
                 </div>
@@ -19,4 +17,4 @@ const MainLayout = (props:any) => {
     )
 }
 
-export default MainLayout
+export default AdminLayout

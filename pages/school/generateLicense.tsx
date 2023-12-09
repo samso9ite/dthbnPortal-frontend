@@ -9,7 +9,7 @@ const GenerateLicense = () => {
                 <div className="grid grid-cols-12 gap-6 mt-5">
                     <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                         <div className="dropdown">
-                            <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style="background-color:#280742">Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
+                            <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{"backgroundColor":"#280742"}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button>
                         
                             <div className="dropdown-menu w-40">
                                 <ul className="dropdown-content">
