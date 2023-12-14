@@ -4,7 +4,7 @@ import AdminLayout from "@/Layout/AdminLayout"
 
 const AdminDashboard = () => {
     const  fetchData = () => {
-        const {isPending, isError, error, data } = useCustomQuery(apiRequest.dashboard, 'dashboard')
+        const {isPending, isError, error, data } = useCustomQuery(apiRequest.adminDashboard, 'dashboard')
         return data?.data.data
     } 
     const response:any = fetchData()
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
                                                 <div className="flex">
                                                     <i data-lucide="file-text" className="report-box__icon text-primary" />
                                                 </div>
-                                                {/* <div className="text-3xl font-medium leading-8 mt-6">{response?.total_indexed}</div> */}
+                                                <div className="text-3xl font-medium leading-8 mt-6">{response?.total_sch_num}</div>
                                                 <div className="text-base text-slate-500 mt-1">Schools</div>
                                             </div>
                                         </div>
@@ -40,7 +40,7 @@ const AdminDashboard = () => {
                                                     <i data-lucide="edit" className="report-box__icon text-pending"/> 
                                                 
                                                 </div>
-                                                {/* <div className="text-3xl font-medium leading-8 mt-6">{response?.exam_reg_stud}</div> */}
+                                                <div className="text-3xl font-medium leading-8 mt-6">{response?.total_prof_num}</div>
                                                 <div className="text-base text-slate-500 mt-1"> Professionals</div>
                                             </div>
                                         </div>
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
                                                     <i data-lucide="users" className="report-box__icon text-warning"/> 
                                                 
                                                 </div>
-                                                {/* <div className="text-3xl font-medium leading-8 mt-6">{response?.notification}</div> */}
+                                                <div className="text-3xl font-medium leading-8 mt-6">{response?.total_submited_index}</div>
                                                 <div className="text-base text-slate-500 mt-1">Student Indexed</div>
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
                                                     <i data-lucide="users" className="report-box__icon text-warning"/> 
                                                 
                                                 </div>
-                                                {/* <div className="text-3xl font-medium leading-8 mt-6">{response?.notification}</div> */}
+                                                <div className="text-3xl font-medium leading-8 mt-6">{response?.total_exam_reg}</div>
                                                 <div className="text-base text-slate-500 mt-1">Exam Registeration</div>
                                             </div>
                                         </div>

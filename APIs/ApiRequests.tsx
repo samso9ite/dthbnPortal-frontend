@@ -63,7 +63,10 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
 
     // School Profile
     updateProfile: (formData:FormValues, fileUpload:boolean,  pk:number) => 
-        generalRequest(`school/profile_update/${pk}/`, 'patch', formData, fileUpload=true)
+        generalRequest(`school/profile_update/${pk}/`, 'patch', formData, fileUpload=true),
+
+    // Admin Endpoints
+    adminDashboard: () =>generalRequest('admin/dashboard', 'get')
    
 }
 
