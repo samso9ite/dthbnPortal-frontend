@@ -2,7 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ApiStateHandler = (isPending:boolean, isError:boolean, error:any,
+const ApiStateHandler = (isPending?:boolean, isError?:boolean, error?:any,
     apiStatusHandler?: any, showSuccessMsg?:boolean, isSuccess?:boolean, successMsg?:any ) => {
         if(isError){
             return(

@@ -2,7 +2,7 @@ import { formData } from "@/store/examination-slice";
 import api from "./api";
 import { FormValues } from "@/UI/genericForm"
 
-const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get', formData?:FormValues, fileUpload?:boolean) => {
+const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get' | 'delete', formData?:FormValues, fileUpload?:boolean) => {
     
     try{
         let config
@@ -19,8 +19,6 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
                 };
             }
             const response = await api.axios_instance[method](api.baseUrl+url, formData, config)
-            console.log(response, "This triggered");
-            
             return response
         }
           
@@ -71,7 +69,9 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     // Admin Endpoints
     adminDashboard: () =>generalRequest('admin/dashboard', 'get'),
     accreditedSchools: () =>generalRequest('admin/accredited_schools', 'get'),
-    allSchools: () => generalRequest('admin/all_schools', 'get')
+    allSchools: () => generalRequest('admin/all_schools', 'get'),
+    userRestriction: (id:number, type:string) => generalRequest(`admin/restriction/${id}/${type}`, 'post'),
+    deleteAccount: (id:number) => generalRequest(`admin/delete_user/${id}`, 'delete')
 }
 
 export default apiRequest
