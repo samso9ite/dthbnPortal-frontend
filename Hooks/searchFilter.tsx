@@ -17,19 +17,12 @@ const SearchFilter = (props:any) => {
 
     // This function performs the filtering of the record based on the user query and then replacing the store data
     const filterData = (query:string) => {
-        console.log(query);
-        
-        console.log(filterData);
-        console.log(records);
-        
-        
         const filteredData = responseData?.filter((item:any) => 
             Object.values(item).some(value => 
                 typeof value === 'string' && value.toLowerCase().includes(query.toLowerCase()) // This gets an array of values for each
                 // object and then checking if the values contain the search query
             )
         )
-        console.log(filteredData);
         
         props.getfilteredData(filteredData)
         // This calls the updateRecord reducer to replace the record with the filtered data.

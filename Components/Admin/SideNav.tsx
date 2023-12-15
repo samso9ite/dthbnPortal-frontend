@@ -31,10 +31,10 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="javascript:;" className={exactPath.includes('/admin/accredited')  ? "side-menu side-menu--active" : 'side-menu'} >
+                        <Link href="/admin/schools" className={exactPath.includes('/admin/schools')  ? "side-menu side-menu--active" : 'side-menu'} >
                             <div className="side-menu__icon"> <i data-lucide="file-text"></i> </div>
                             <div className="side-menu__title">
-                                Accredited Schools 
+                                All Schools 
                             </div>
                         </Link>
                     </li>

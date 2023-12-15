@@ -1,7 +1,10 @@
 import TitleCase from "@/util/TitleCase"
+import { useState } from "react"
+import SchoolDetails from "./SchoolDetails"
 
 
 const SchoolItem = (props:any) => {
+    const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     
     return (
         <>
@@ -10,7 +13,7 @@ const SchoolItem = (props:any) => {
                     <div className="flex">
                         <div className="w-10 h-10 image-fit zoom-in">
                             <img alt="Student Image" className="tooltip rounded-full" 
-                            src={props.data.User?.school_logo !== null ? props.data.User?.school_logo : 
+                            src={props.data.User?.school_logo !== null ? props.data?.school_logo : 
                             "dist/images/preview-12.jpg"} />
                         </div>
                     </div>
@@ -39,12 +42,13 @@ const SchoolItem = (props:any) => {
                
                 <td className="table-report__action ">
                     <div className="flex justify-center items-center">
-                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} >
+                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => {setIsModalOpen(true)}}>
                             <i className="fa fa-eye" aria-hidden="true"></i> 
                         </button>
                     </div>
                 </td>
             </tr>
+            <SchoolDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
         </>
     )
 }

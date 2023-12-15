@@ -71,6 +71,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     // Admin Endpoints
     adminDashboard: () =>generalRequest('admin/dashboard', 'get'),
     accreditedSchools: () =>generalRequest('admin/accredited_schools', 'get'),
+    allSchools: () => generalRequest('admin/all_schools', 'get')
 }
 
 export default apiRequest
