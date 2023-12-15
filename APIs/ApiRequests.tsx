@@ -19,6 +19,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
                 };
             }
             const response = await api.axios_instance[method](api.baseUrl+url, formData, config)
+            console.log(response);
+            
             return response
         }
           
@@ -70,6 +72,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     adminDashboard: () =>generalRequest('admin/dashboard', 'get'),
     accreditedSchools: () =>generalRequest('admin/accredited_schools', 'get'),
     allSchools: () => generalRequest('admin/all_schools', 'get'),
+    allProfessionals: () => generalRequest('admin/all_professionals', 'get'),
     userRestriction: (id:number, type:string) => generalRequest(`admin/restriction/${id}/${type}`, 'post'),
     deleteAccount: (id:number) => generalRequest(`admin/delete_user/${id}`, 'delete')
 }
