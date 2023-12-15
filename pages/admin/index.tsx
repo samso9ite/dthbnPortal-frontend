@@ -1,4 +1,5 @@
 import apiRequest from "@/APIs/ApiRequests"
+import SchoolList from "@/Components/Admin/Schools/SchoolList"
 import { useCustomQuery } from "@/Hooks/apiCall"
 import AdminLayout from "@/Layout/AdminLayout"
 
@@ -68,7 +69,9 @@ const AdminDashboard = () => {
                                                 <div className="text-base text-slate-500 mt-1">Exam Registeration</div>
                                             </div>
                                         </div>
-                                    </div>                            
+                                    </div>   
+
+                                    <SchoolList />                         
                                 </div>
                             </div>
                         

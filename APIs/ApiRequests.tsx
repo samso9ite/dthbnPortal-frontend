@@ -19,6 +19,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
                 };
             }
             const response = await api.axios_instance[method](api.baseUrl+url, formData, config)
+            console.log(response, "This triggered");
+            
             return response
         }
           
@@ -45,6 +47,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     resetPwd: (formData:FormValues, uid:string, token:string) => generalRequest(`auth/reset-password/${uid}/${token}`, 'post', formData),
     accountActivation: (formData:FormValues) => generalRequest('auth/activate', 'post', formData),
     changePassword: (formData:FormValues) => generalRequest('auth/change_pwd/', 'post'),
+    getUserAccount: (param:string) => generalRequest(`auth/get_account/${param}`, 'get'),
 
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
@@ -66,8 +69,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
         generalRequest(`school/profile_update/${pk}/`, 'patch', formData, fileUpload=true),
 
     // Admin Endpoints
-    adminDashboard: () =>generalRequest('admin/dashboard', 'get')
-   
+    adminDashboard: () =>generalRequest('admin/dashboard', 'get'),
+    accreditedSchools: () =>generalRequest('admin/accredited_schools', 'get'),
 }
 
 export default apiRequest
