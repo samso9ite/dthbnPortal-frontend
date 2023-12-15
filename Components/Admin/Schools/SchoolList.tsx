@@ -3,19 +3,23 @@ import SchoolItem from "./SchoolItem"
 import apiRequest from "@/APIs/ApiRequests"
 import PaginatedItems from "@/UI/paginated"
 import SearchFilter from "@/Hooks/searchFilter"
+import { useEffect, useState } from "react"
 
 const SchoolList = () => {
-    
+    const [filteredData, setfilteredData] = useState([])
+    const [updatedResponse, setUpdatedResponse] = useState<any>()
     const fetchData = () => {
         const {isPending, isError, error, data } = useCustomQuery(apiRequest.accreditedSchools, 'accreditedSchools')
-        console.log(data);
-        
         return data
     }
-   const response:any = fetchData()
-   console.log(response);
-   
+    const response:any = fetchData()
+    useEffect(() => {
+        setUpdatedResponse(response);
+    }, [response]);
 
+    const updateFilter = (filteredData:any) => {
+        setfilteredData(filteredData)
+    }
     return (
         <>
          <div className="col-span-12 mt-6">
@@ -38,15 +42,15 @@ const SchoolList = () => {
                 </div>
                 <div className="hidden md:block mx-auto ">
                 </div>
-                {/* <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                    <SearchFilter records={response} getfilteredData={updateFilter} />
-                </div> */}
+                <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                    <SearchFilter records={updatedResponse?.data} getfilteredData={updateFilter} />
+                </div>
             </div>  
              
                 <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                        {response?.data ?  (
-                                response?.data.length !== 0 &&
-                                    <PaginatedItems items={response.data} headerChildren={
+                        {filteredData ?  (
+                                filteredData?.length !== 0 &&
+                                    <PaginatedItems items={filteredData} headerChildren={
                                         <thead>
                                             <tr>
                                                 <th className="whitespace-nowrap">Logo</th>
