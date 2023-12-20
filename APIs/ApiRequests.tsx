@@ -74,7 +74,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     allSchools: () => generalRequest('admin/all_schools', 'get'),
     allProfessionals: () => generalRequest('admin/all_professionals', 'get'),
     userRestriction: (id:number, type:string) => generalRequest(`admin/restriction/${id}/${type}`, 'post'),
-    deleteAccount: (id:number) => generalRequest(`admin/delete_user/${id}`, 'delete')
+    deleteAccount: (id:number) => generalRequest(`admin/delete_user/${id}`, 'delete'),
+    indexedList: (year:string) => generalRequest(`admin/indexed_list/${year}`, 'get'),
 }
 
 export default apiRequest

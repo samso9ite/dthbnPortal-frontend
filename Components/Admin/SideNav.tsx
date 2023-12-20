@@ -50,14 +50,14 @@ const SideNav = () => {
                     <li className="side-nav__devider my-6"></li>
                    
                     <li>
-                         <Link href="javascript:;" className={exactPath.includes('/admin/indexing')  ? "side-menu side-menu--active" : 'side-menu'} >
+                         <Link href="/admin/schools/indexing" className={exactPath.includes('/admin/indexing')  ? "side-menu side-menu--active" : 'side-menu'} >
                             <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
                             <div className="side-menu__title"> Indexing Department</div>
                         </Link>
                     </li>
                    
                     <li>
-                         <Link href="javascript:;" className={exactPath.includes('/admin/examination')  ? "side-menu side-menu--active" : 'side-menu'} >
+                         <Link href="/admin/schools/examination" className={exactPath.includes('/admin/examination')  ? "side-menu side-menu--active" : 'side-menu'} >
                             <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
                             <div className="side-menu__title"> Examination Department </div>
                         </Link>
