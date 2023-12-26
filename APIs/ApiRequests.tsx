@@ -78,6 +78,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     indexedList: (year:string) => generalRequest(`admin/indexed_list/${year}`, 'get'),
     schIndexedRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_indexed_rec/${id}/${year}/${type}`, 'get'),
     examList: (year:string) => generalRequest(`admin/exam_record/${year}`, 'get'),
+    schExamRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_exam_rec/${id}/${year}/${type}`, 'get'),
 }
 
 export default apiRequest

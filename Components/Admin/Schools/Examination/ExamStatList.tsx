@@ -8,11 +8,11 @@ import ExamStatItem from "./ExamStatItem"
 const ExamStatList = () => {
     const [filteredData, setfilteredData] = useState([])
     const [updatedResponse, setUpdatedResponse] = useState<any>()
-    const [indexYear, setIndexYear] = useState<string>('2022-2023')
+    const [examYear, setExamYear] = useState<string>('2021-2022')
 
     const fetchData = () => {
         const {isPending, isError, error, data } = useCustomQuery(
-           () =>  apiRequest.examList(indexYear), 'examinations'
+           () =>  apiRequest.examList(examYear), 'examinations'
         )
         return data?.data.data
     }
@@ -43,7 +43,7 @@ const ExamStatList = () => {
                                             <tr>
                                                 <th className="whitespace-nowrap">SCHOOL NAME</th>
                                                 <th className="text-center whitespace-nowrap">LIMIT</th>
-                                                <th className="text-center whitespace-nowrap"> INDEXED</th>
+                                                <th className="text-center whitespace-nowrap"> SUBMITTED</th>
                                                 <th className="text-center whitespace-nowrap">APPROVED</th>
                                                 <th className="text-center whitespace-nowrap">DECLINED</th>
                                                 <th className="text-center whitespace-nowrap">RESET LIMIT</th>
