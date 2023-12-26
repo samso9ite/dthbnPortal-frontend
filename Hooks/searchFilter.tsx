@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 const SearchFilter = (props:any) => {
     // console.log(props.records);
     let responseData = props.records
+    console.log(responseData);
+    
     
     const [records, setRecords] = useState<any>(props.records)
     useEffect(() => {

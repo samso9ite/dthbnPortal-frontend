@@ -17,7 +17,6 @@ const IndexingStatList = () => {
         return data?.data.data
     }
     const response:any = fetchData()
-    console.log(response);
     
 
     const updateFilter = (filteredData:any) => {
@@ -28,13 +27,13 @@ const IndexingStatList = () => {
             <div className="col-span-12 mt-6">
                 <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                     <h2 className="text-lg font-medium truncate mr-5">  INDEXING RECORD</h2>
+                    <div className="hidden md:block mx-auto ">
+                    </div>
+                    <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                        <SearchFilter records={response?.all_schools}  getfilteredData={updateFilter} />
+                    </div>
                 </div>
-                <div className="hidden md:block mx-auto ">
-                </div>
-                <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                    <SearchFilter records={response?.data}  getfilteredData={updateFilter} />
-                </div>
-
+               
                 <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
                         {filteredData ?  (
                                 filteredData?.length !== 0 &&
@@ -52,7 +51,7 @@ const IndexingStatList = () => {
                                         </thead>
                                     }>
                                         {(item:any) => (
-                                            <IndexingStatItem data={item}/>
+                                            <IndexingStatItem data={item} year={response?.year}/>
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
