@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import IndexedItem from "./IndexedItem"
 import { useRouter } from "next/router"
 import { useParams } from "next/navigation"
+import IndexingStatItem from "./IndexingStatItem"
+import TitleCase from "@/util/TitleCase"
 
 const IndexedList = (props:any) => {
     const [filteredData, setfilteredData] = useState([])
@@ -16,7 +18,9 @@ const IndexedList = (props:any) => {
     const {id, year, type} = router.query
     const fetchData = () => {
         apiRequest.schIndexedRec(id, year, type).then((res) => {
-            setResponse(res)
+            setResponse(res?.data.data)
+            console.log();
+            
             
         }).catch(err => {
             console.log(err);
@@ -38,11 +42,11 @@ const IndexedList = (props:any) => {
         <>
         <div className="col-span-12 mt-6">
             <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                <h2 className="text-lg font-medium truncate mr-5">  INDEXED RECORD</h2>
+                <h2 className="text-lg font-medium truncate mr-5"> <TitleCase  text= {type} /> Indexed Record </h2>
                 <div className="hidden md:block mx-auto ">
                 </div>
                 <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                    <SearchFilter records={response?.all_schools}  getfilteredData={updateFilter} />
+                    <SearchFilter records={response?.all_sch_records}  getfilteredData={updateFilter} />
                 </div>
             </div>
            
@@ -53,11 +57,11 @@ const IndexedList = (props:any) => {
                                 <thead>
                                     <tr>
                                         <th className="whitespace-nowrap">NAME</th>
-                                        <th className="text-center whitespace-nowrap">CATEGORIES</th>
+                                        <th className="text-center whitespace-nowrap">CADRE</th>
                                         <th className="text-center whitespace-nowrap"> ADDRESS</th>
-                                        <th className="text-center whitespace-nowrap">CONTACT</th>
+                                        <th className="text-center whitespace-nowrap">PHONE</th>
                                         <th className="text-center whitespace-nowrap">EMAIL</th>
-                                        <th className="text-center whitespace-nowrap"> STATUS</th>
+                                        <th className="text-center whitespace-nowrap"> SEX</th>
                                         <th className="text-center whitespace-nowrap">VIEW</th>
                                     </tr>
                                 </thead>

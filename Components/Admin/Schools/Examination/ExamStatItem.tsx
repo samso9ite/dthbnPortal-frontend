@@ -1,8 +1,8 @@
 import TitleCase from "@/util/TitleCase";
-import IndexedDetails from "./IndexedDetails";
 import { useState } from "react";
+import ExamDetails from "./ExamDetails";
 
-const IndexedItem = (props:any) => {
+const ExamStatItem = (props:any) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     
     return(
@@ -48,9 +48,9 @@ const IndexedItem = (props:any) => {
                     </div>
                 </td>
             </tr>
-            <IndexedDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
+            <ExamDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
         </>
     )
 }
 
-export default IndexedItem
+export default ExamStatItem

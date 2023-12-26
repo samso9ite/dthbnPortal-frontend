@@ -18,20 +18,25 @@ const IndexingStatItem = (props:any) => {
                     </div>
                 </td>
                 <td className="text-center">
-                <Link href="indexed/[id]/[year]/[type]" as={`indexed/${props.data.id}/${props.year}/submitted`}> <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} >
-                    {props.data?.index}
-                </button> 
-                </Link>
+                    <Link href="indexed/[id]/[year]/[type]" as={`indexed/${props.data.school_id}/${props.year}/submitted`}> 
+                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} >
+                            {props.data?.index}
+                        </button> 
+                    </Link>
                 </td>
                 <td className="text-center">
-                <button className="btn btn-rounded btn-success mr-1 mb-2" >
-                    {props.data?.approved}
-                </button>
+                    <Link href="indexed/[id]/[year]/[type]" as={`indexed/${props.data.school_id}/${props.year}/approved`}> 
+                        <button className="btn btn-rounded btn-success mr-1 mb-2" >
+                            {props.data?.approved}
+                        </button>
+                    </Link>
                 </td>
                 <td className="text-center">
-                <button className="btn btn-danger mr-1 mb-2" >
-                    {props.data?.declined}
-                </button>
+                    <Link href="indexed/[id]/[year]/[type]" as={`indexed/${props.data.school_id}/${props.year}/declined`}> 
+                        <button className="btn btn-danger mr-1 mb-2" >
+                            {props.data?.declined}
+                        </button>
+                    </Link>
                 </td>
                 <td className="text-center">
                     <i className="fa fa-refresh" aria-hidden="true" style={{color: '#280742', fontSize:'large'}}></i> 

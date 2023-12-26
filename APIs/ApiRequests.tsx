@@ -76,7 +76,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     userRestriction: (id:number, type:string) => generalRequest(`admin/restriction/${id}/${type}`, 'post'),
     deleteAccount: (id:number) => generalRequest(`admin/delete_user/${id}`, 'delete'),
     indexedList: (year:string) => generalRequest(`admin/indexed_list/${year}`, 'get'),
-    schIndexedRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_indexed_rec/${id}/${year}/${type}`, 'get')
+    schIndexedRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_indexed_rec/${id}/${year}/${type}`, 'get'),
+    examList: (year:string) => generalRequest(`admin/exam_record/${year}`, 'get'),
 }
 
 export default apiRequest
