@@ -4,7 +4,9 @@ import { useState } from "react";
 
 const IndexedItem = (props:any) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
-    
+    const refetchData = () => {
+        props.triggerRefetchData()
+    }
     return(
         <>
               <tr className="intro-x">
@@ -48,7 +50,7 @@ const IndexedItem = (props:any) => {
                     </div>
                 </td>
             </tr>
-            <IndexedDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
+            <IndexedDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}} refetchData={refetchData}/>
         </>
     )
 }

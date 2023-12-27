@@ -4,7 +4,7 @@ interface Indexing {
     middlename: string;
     age:number;
     approved: boolean;
-    declined: boolean;
+    unapproved: boolean;
     cadre: string;
     closed: boolean;
     comment: string;

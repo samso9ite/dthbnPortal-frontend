@@ -5,7 +5,9 @@ import PaginatedItems from "@/UI/paginated"
 import { useEffect, useState } from "react"
 import IndexedItem from "./IndexedItem"
 import { useRouter } from "next/router"
+
 import TitleCase from "@/util/TitleCase"
+import { ToastContainer } from "react-toastify"
 
 const IndexedList = (props:any) => {
     const [filteredData, setfilteredData] = useState([])
@@ -32,6 +34,11 @@ const IndexedList = (props:any) => {
     const updateFilter = (filteredData:any) => {
         setfilteredData(filteredData)
     }
+
+    const refetchData = () => {
+        fetchData()
+    }
+
     return (
         <>
         <div className="col-span-12 mt-6">
@@ -62,7 +69,7 @@ const IndexedList = (props:any) => {
                                 </thead>
                                 }>
                                 {(item:any) => (
-                                    <IndexedItem data={item}/>
+                                    <IndexedItem data={item} triggerRefetchData={refetchData}/>
                                 )}
                             </PaginatedItems>
                             ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
@@ -71,6 +78,7 @@ const IndexedList = (props:any) => {
                 }
             </div>
         </div>
+        <ToastContainer />
     </>
     )
 }

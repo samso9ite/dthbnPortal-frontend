@@ -274,5 +274,5 @@ export const Fields:Field = {
     schChangePassword: [
         {name: 'new_password', type:'password', label:'New Password', required:true},
         {name: 'confirm_password', type:'password', label:'Confirm Password', required:true},  
-    ]
+    ],
 }
