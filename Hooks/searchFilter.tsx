@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react"
 
 const SearchFilter = (props:any) => {
-    // console.log(props.records);
     let responseData = props.records
-    console.log(responseData);
-    
-    
     const [records, setRecords] = useState<any>(props.records)
     useEffect(() => {
         setRecords(props.records)
         filterData('')
-    }, [])
+    }, [responseData])
     // This function triggers on every query input by the user, capturing the query parameter in a variable
     const queryChangeHandler = (event:any) => {
         let searchQuery = event.target.value
@@ -25,10 +21,8 @@ const SearchFilter = (props:any) => {
                 // object and then checking if the values contain the search query
             )
         )
-        
         props.getfilteredData(filteredData)
         // This calls the updateRecord reducer to replace the record with the filtered data.
-        // dispatch(searchActions.updateRecord(filteredData))
     }
 
     return(

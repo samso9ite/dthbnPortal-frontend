@@ -5,7 +5,9 @@ import SchoolDetails from "./SchoolDetails"
 
 const SchoolItem = (props:any) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
-    
+    const refetchData = () => {
+        props.triggerDataRefetch()
+    }
     return (
         <>
              <tr className="intro-x">
@@ -48,7 +50,7 @@ const SchoolItem = (props:any) => {
                     </div>
                 </td>
             </tr>
-            <SchoolDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/>
+            <SchoolDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}} refetchData={refetchData}/>
         </>
     )
 }

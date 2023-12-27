@@ -5,8 +5,6 @@ import PaginatedItems from "@/UI/paginated"
 import { useEffect, useState } from "react"
 import IndexedItem from "./IndexedItem"
 import { useRouter } from "next/router"
-import { useParams } from "next/navigation"
-import IndexingStatItem from "./IndexingStatItem"
 import TitleCase from "@/util/TitleCase"
 
 const IndexedList = (props:any) => {
@@ -19,12 +17,8 @@ const IndexedList = (props:any) => {
     const fetchData = () => {
         apiRequest.schIndexedRec(id, year, type).then((res) => {
             setResponse(res?.data.data)
-            console.log();
-            
-            
         }).catch(err => {
             console.log(err);
-            
         })
     }
 
@@ -43,6 +37,7 @@ const IndexedList = (props:any) => {
         <div className="col-span-12 mt-6">
             <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                 <h2 className="text-lg font-medium truncate mr-5"> <TitleCase  text= {type} /> Indexed Record </h2>
+              
                 <div className="hidden md:block mx-auto ">
                 </div>
                 <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">

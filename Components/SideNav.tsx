@@ -26,7 +26,7 @@ const SideNav = () => {
         <>
             <nav className="side-nav">
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
-                    <img alt="Dental Board of Nigeria" className="w-6" src="src/images/logo_dental.png" />
+                    <img alt="Dental Board of Nigeria" className="w-6" src={process.env.NEXT_PUBLIC_URL+"src/images/logo_dental.png"} />
                     <span className="hidden xl:block text-white text-lg ml-3"> {sch_name} </span> 
                 </a>
                 <div className="side-nav__devider my-6"></div>

@@ -20,23 +20,6 @@ const IndexingForm = () => {
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
     const updateKey = useSelector(updateRecordKey)
     let showSuccessMsg = true
-    
-
-    // let gradeKeysToRemove = [
-    //     'exam_number', 'exam_type', 'exam_year', 'Subject_1', 'Subject_2', 'Subject_3', 'Subject_4', 'Subject_5', 'Subject_6', 'Subject_7', 'Subject_8',
-    //     'Grade_1', 'Grade_2', 'Grade_3', 'Grade_4', 'Grade_5', 'Grade_6', 'Grade_7', 'Grade_8'
-    // ]
-    // let secondGradeKeysToRemove = [
-    //     'exam_number_0', 'exam_type_0', 'exam_year_0', 'Subject_1_0', 'Subject_2_1', 'Subject_3_2', 'Subject_4_3', 'Subject_5_4', 'Subject_6_5', 'Subject_7_6', 'Subject_8_7',
-    //     'Grade_1_0', 'Grade_2_1', 'Grade_3_2', 'Grade_4_3', 'Grade_5_4', 'Grade_6_5', 'Grade_7_6', 'Grade_8_7'
-    // ]
-    
-
-    // let schKeysToRemove = ['School_1', 'School_2', 'School_3']
-    // let qualificationKeysToRemove = ['Qualifications_1', 'Qualifications_2', 'Qualifications_3']
-    // let refereeKeysToRemove = ['referee_address', 'referee_address_2', 'referee_name', 'referee_name_0', 'referee_number',
-    //  'referee_number_1']
-    
 
     const onSuccess:any = (data:any) => {
         setNotifIsActive(true)
@@ -73,12 +56,7 @@ const IndexingForm = () => {
         if (numOfSitting == '1' || numOfSitting == '2'){
             if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
                 const resultFormData = new FormData();
-                // let referees:any = {};
-                // let school_data:any = {};
-                // let grades:any = {};
-                // let examinations:any = {}
                 let currentYear = new Date().getFullYear()
-                // let secondGrades:any = {} 
                 let nextYear = currentYear + 1
                 let year = currentYear+'-'+nextYear
                 // const formDataCopy = { ...formData };
@@ -118,8 +96,6 @@ const IndexingForm = () => {
                 for (const [key, value] of Object.entries(formData)) {
                         resultFormData.append(key, value as string | Blob);
                     }
-                    console.log("This ran");
-                    
                 handleSubmit(resultFormData)
             }else{
                 dispatch(indexingActions.storeIndexingData(formData))

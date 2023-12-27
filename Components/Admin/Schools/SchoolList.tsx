@@ -18,7 +18,7 @@ const SchoolList = () => {
         )
         return data
     }
-    const response:any = fetchData()
+    let response:any = fetchData()
     useEffect(() => {
         setUpdatedResponse(response);
         if(path == '/admin'){
@@ -31,25 +31,22 @@ const SchoolList = () => {
     const updateFilter = (filteredData:any) => {
         setfilteredData(filteredData)
     }
+    const refetchData = () => {
+        apiRequest.accreditedSchools().then((res) => {
+            setUpdatedResponse(res)
+        }).catch(err => {
+            console.log(err); 
+        })
+    }
     return (
         <>
          <div className="col-span-12 mt-6">
             <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
             <h2 className="text-lg font-medium truncate mr-5"> {header} </h2>
                 <div className="dropdown">
-                    {/* <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button> */}
-                    {/* {examinationState == 'current' && <button  onClick={onSubmitCurrentExamination} className="btn  btn-primary shadow-md" 
-                    style={{backgroundColor: '#280742'}} >Submit Current Examination<i className="w-4 h-4"></i> </button>} */}
-                    {/* <div className="dropdown-menu w-40">
-                        <ul className="dropdown-content">
-                            <li>
-                                <a href="" className="dropdown-item"> <i data-lucide="file-text" className="w-4 h-4 mr-2"></i> Export to Excel </a>
-                            </li>
-                            <li>
-                                <a href="" className="dropdown-item"> <i data-lucide="file-text" className="w-4 h-4 mr-2"></i> Export to PDF </a>
-                            </li>
-                        </ul>
-                    </div> */}
+                    <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" 
+                        data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export
+                    <i className="fa fa-paper-plane-o w-4 h-4" style={{paddingLeft:'5px'}}></i> </button>
                 </div>
                 <div className="hidden md:block mx-auto ">
                 </div>
@@ -75,18 +72,15 @@ const SchoolList = () => {
                                         </thead>
                                     }>
                                         {(item:any) => (
-                                            <SchoolItem data={item} />
+                                            <SchoolItem data={item} triggerDataRefetch={refetchData}/>
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
                                 ) :
                             ''
-                            }
-                        {/* </tbody>
-                    </table> */}
+                        }
                 </div>
-            
-        </div>  
+            </div>  
         </>
     )
 }

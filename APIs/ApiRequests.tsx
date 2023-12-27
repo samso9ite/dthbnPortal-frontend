@@ -79,6 +79,9 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     schIndexedRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_indexed_rec/${id}/${year}/${type}`, 'get'),
     examList: (year:string) => generalRequest(`admin/exam_record/${year}`, 'get'),
     schExamRec: (id:any, year:any, type:any) => generalRequest(`admin/sch_exam_rec/${id}/${year}/${type}`, 'get'),
+    indexRegSwitch: (type:string) => generalRequest(`admin/index_reg_switch/${type}`, 'post'),
+    indexStatus: () => generalRequest('admin/indexing_status/1', 'get'),
+    approveIndex: (id:number) => generalRequest(`admin/approve_index/${id}`, 'patch'),
 }
 
-export default apiRequest
+export default apiRequest 

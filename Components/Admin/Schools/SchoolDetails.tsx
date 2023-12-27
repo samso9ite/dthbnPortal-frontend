@@ -1,20 +1,17 @@
 import apiRequest from "@/APIs/ApiRequests";
-import { useCustomMutation } from "@/Hooks/apiCall";
-import { FormValues } from "@/UI/genericForm";
-import ApiStateHandler from "@/util/ApiStateHandler";
 import TitleCase from "@/util/TitleCase";
 import Modal from "react-responsive-modal"
 import 'react-responsive-modal/styles.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const SchoolDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
+const SchoolDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:() => void, refetchData:any}> = (props) => {
 
     const restrictionHandler = (type:string) => {
         apiRequest.userRestriction(props.data.User.id, type)
         .then(res => {
-            props.onCloseModal
-
+            props.onCloseModal()
+            props.refetchData()
             toast(res?.data.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -24,27 +21,9 @@ const SchoolDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:() => 
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                });
+            });
         })       
     }
-
-    // const deleteUserHandler= () => {
-    //     apiRequest.deleteAccount(props.data.User.id)
-    //     .then(res => {
-    //         props.onCloseModal
-
-    //         toast(res?.data.message, {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //             });
-    //     })       
-    // }
 
     return(
         <>
@@ -56,7 +35,7 @@ const SchoolDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:() => 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                         <div className="flex  px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="Midone - HTML Admin Template" className="rounded-full" src={props.data.User.school_logo !== null ? props.data.User.school_logo : "dist/images/preview-12.jpg"} />
+                                <img alt="Dental Board Of Nigeria" className="rounded-full" src={props.data.User.school_logo !== null ? props.data.User.school_logo : "dist/images/preview-12.jpg"} />
                                 <div className="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2"> <i className="w-4 h-4 text-white" data-lucide="camera"></i> </div>
                             </div>
                             <div className="ml-5">

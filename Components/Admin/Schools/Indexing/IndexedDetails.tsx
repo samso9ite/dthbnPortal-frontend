@@ -4,18 +4,28 @@ import { Modal } from 'react-responsive-modal';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { indexingActions } from '@/store/indexing-slice';
+import apiRequest from '@/APIs/ApiRequests';
+import { ToastContainer, toast } from 'react-toastify';
 
 const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
   
     const router = useRouter();
     const dispatch = useDispatch()
-    // const onEditRecord = () => {
-    //     dispatch(indexingActions.setIndexingStatus(true))
-    //     dispatch(indexingActions.switchState(''))
-    //     dispatch(indexingActions.storeIndexingData(props.data))
-    //     dispatch(indexingActions.setIndexingUpdate({isUpdate:true, updateRecordKey:props.data.id}))
-    //     router.push('/school/indexing/new')
-    // }
+    const approveIndex = (id:number) => {
+        console.log("Approved Index");
+        apiRequest.approveIndex(id).then((res) => {
+            toast.success(res?.data.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+            })      
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+ 
     return (
         <>
             <Modal
@@ -122,7 +132,7 @@ const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
                     
-                        {/* <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                        <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
                             <div id="faq-accordion-2" className="accordion accordion-boxed">
                                 <div className="accordion-item">
                                     <div id="faq-accordion-content-5" className="accordion-header"> <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-5" aria-expanded="true" aria-controls="faq-accordion-collapse-5" style={{color:'red'}}> Dissapprove Submission</button> </div>
@@ -133,13 +143,15 @@ const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}}>Approve Submission</button>
-                        </div> */}
+                        <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 
+                            dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                            <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}} onClick={() => {approveIndex(props.data.id)}}>Approve Submission</button>
+                        </div>
                       
                 </div>
         
                 </div>
+                <ToastContainer />
             </Modal>
         </>
     )
