@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 import apiRequest from '@/APIs/ApiRequests';
 import { ToastContainer, toast } from 'react-toastify';
-import { useCustomMutation } from '@/Hooks/apiCall';
 
 const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void, refetchData:() => void}> = (props) => {
     const [comment, setComment] = useState<string>('')
@@ -16,7 +13,7 @@ const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:
             toast.success(res?.data.message, {
                 position: "bottom-right",
                 autoClose: 5000,
-                hideProgressBar: false,
+                hideProgressBar: false, 
                 closeOnClick: true,
                 theme: "light",
             })      
