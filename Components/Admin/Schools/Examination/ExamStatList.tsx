@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import apiRequest from "@/APIs/ApiRequests"
 import ExamStatItem from "./ExamStatItem"
 import { toast } from "react-toastify"
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 const ExamStatList = () => {
     const [filteredData, setfilteredData] = useState([])
@@ -60,6 +62,21 @@ const ExamStatList = () => {
         })
     }
 
+    const yearRange = () => {
+        let currentYear:any = new Date().getFullYear()
+        let previousYear:any = currentYear - 1
+        let newYear:[string] = ['']
+        while(previousYear >= 2019 ){
+            previousYear = previousYear.toString()
+            const yearRange = `${previousYear}-${currentYear}`;
+            newYear.push(yearRange)
+            currentYear --
+            previousYear --
+        }
+        return newYear
+    }  
+    let yearArr = yearRange()
+
     const onCloseModal = () => {
         setIsModalOpen(false)
     }
@@ -68,7 +85,7 @@ const ExamStatList = () => {
         <>
             <div className="col-span-12 mt-6">
                 <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                    <h2 className="text-lg font-medium truncate mr-5">  EXAMINATION RECORD</h2>
+                    <h2 className="text-lg font-medium truncate mr-5">  EXAMINATION RECORD {yearDisplay}</h2>
                     <div>
                         <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" 
                         style={{backgroundColor: '#280742'}} onClick={() => 
@@ -76,7 +93,9 @@ const ExamStatList = () => {
                             {examStatus == true ?  'Close Exam Registeration' : 'Open Exam Registeration'}
                             <i className="fa fa-power-off w-4 h-4" style={{paddingLeft:'5px'}}></i> 
                         </button>
-                      
+                    </div>
+                    <div className="dropdown"> <button className="dropdown-toggle btn btn-primary" aria-expanded="false" 
+                        style={{marginLeft:'10px'}} onClick={() => {setIsModalOpen(true)}}>Display Record By Year</button>
                     </div>
                     <div className="hidden md:block mx-auto ">
                     </div>
@@ -102,17 +121,29 @@ const ExamStatList = () => {
                                         </thead>
                                     }>
                                         {(item:any) => (
-                                            <ExamStatItem data={item} year={response?.year}/>
+                                            <ExamStatItem data={item} year={response?.year} refetchData={fetchData}/>
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
                                 ) :
                             ''
                             }
-                        {/* </tbody>
-                    </table> */}
+                    </div>
                 </div>
-            </div>
+                <Modal
+                open={modalIsOpen}
+                onClose={onCloseModal}
+               >
+                    <ul className="dropdown-content">
+                        {yearArr.map((year, index) => (
+                        <li key={index} style={{padding: '10px'}}><a className="dropdown-item"  href="#!" onClick={(e) => {
+                            e.preventDefault();
+                            fetchData(year);
+                            }}> {year} </a>
+                        </li>
+                        ))}
+                    </ul>
+            </Modal>
         </>
     )
 }

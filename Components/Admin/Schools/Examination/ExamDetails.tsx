@@ -4,11 +4,51 @@ import { Modal } from 'react-responsive-modal';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { indexingActions } from '@/store/indexing-slice';
+import apiRequest from '@/APIs/ApiRequests';
+import { ToastContainer, toast } from "react-toastify"
 
-const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
+const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void, refetchData:() => void}> = (props) => {
+    const [comment, setComment] = useState<string>('')
+    const approveExam = (id:number) => {
+        apiRequest.approveIndex(id).then((res) => {
+            props.onCloseModal()
+            props.refetchData()
+            toast.success(res?.data.message, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false, 
+                closeOnClick: true,
+                theme: "light",
+            })      
+        }).catch(err => {
+            console.log(err);
+        })
+    }
   
-    const router = useRouter();
-    const dispatch = useDispatch()
+    const declineExam = (id:number) => {
+        let formData = {
+            'comment': comment,
+            'unapproved': true,
+            'approved': false
+        }
+        apiRequest.declineExam(id, formData).then(res => {
+            props.onCloseModal()
+            props.refetchData()
+            toast.success('Student Declined', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+            })        
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    const onCommentChange = (event:any) => {
+        setComment(event.target.value)
+    }
  
     return (
         <>
@@ -116,24 +156,28 @@ const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() 
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
                     
-                        {/* <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div id="faq-accordion-2" className="accordion accordion-boxed">
-                                <div className="accordion-item">
-                                    <div id="faq-accordion-content-5" className="accordion-header"> <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-5" aria-expanded="true" aria-controls="faq-accordion-collapse-5" style={{color:'red'}}> Dissapprove Submission</button> </div>
-                                    <div id="faq-accordion-collapse-5" className="accordion-collapse collapse " aria-labelledby="faq-accordion-content-5" data-tw-parent="#faq-accordion-2">
-                                        <div className="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </div>
-                                        <button className="btn btn-danger  mr-1 mb-2" > Submit </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}}>Approve Submission</button>
-                        </div> */}
-                      
-                </div>
-        
-                </div>
+                    {props.data.unapproved == false ? <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                         <div id="faq-accordion-2" className="accordion accordion-boxed">
+                             <div className="accordion-item">
+                                 <div id="faq-accordion-content-5" className="accordion-header"> <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-5" aria-expanded="true" aria-controls="faq-accordion-collapse-5" style={{color:'red'}}> Dissapprove Submission</button> </div>
+                                 <div id="faq-accordion-collapse-5" className="accordion-collapse collapse " aria-labelledby="faq-accordion-content-5" data-tw-parent="#faq-accordion-2">
+                                     <textarea  value={comment} onChange={onCommentChange} placeholder='Please insert your comment here' style={{width:'100%'}}/>
+                                     <button className="btn btn-danger  mr-1 mb-2" onClick={() => {declineExam(props.data.id)}}> Submit </button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div> : '' 
+                     }
+                     <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 
+                         dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                         {props.data.approved == false ? <button className="btn btn-success  mr-1 mb-2" 
+                             style={{width:'100%'}} onClick={() => {approveExam(props.data.id)}}>Approve Submission 
+                             </button> : ''
+                         }
+                     </div>   
+                 </div>
+             </div>
+                    
             </Modal>
         </>
     )

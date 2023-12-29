@@ -84,9 +84,13 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     indexStatus: () => generalRequest('admin/indexing_status/1', 'get'),
     examStatus: () => generalRequest('admin/exam_status/1', 'get'),
     approveIndex: (id:number) => generalRequest(`admin/approve_index/${id}`, 'patch'),
+    approveExam: (id:number) => generalRequest(`admin/approve_exam/${id}`, 'patch'),
     declineIndex: (id:number, formData:{}) => generalRequest(`admin/decline_indexing/${id}`, 'patch', formData),
+    declineExam: (id:number, formData:{}) => generalRequest(`admin/decline_exam/${id}`, 'patch', formData),
     reverseIndex: (id:number) => generalRequest(`admin/reverse_index_submission/${id}`, 'patch'),
+    reverseExamSubmission: (id:number) => generalRequest(`admin/reverse_exam_submission/${id}`, 'patch'),
     resetIndexLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_index_limit/${id}/${year}/${limit}`, 'patch'),
+    resetExamLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_exam_limit/${id}/${year}/${limit}`, 'patch'),
 }
 
 export default apiRequest 
