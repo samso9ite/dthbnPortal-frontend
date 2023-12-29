@@ -5,22 +5,25 @@ import { useEffect, useState } from "react"
 import IndexingStatItem from "./IndexingStatItem"
 import apiRequest from "@/APIs/ApiRequests"
 import { ToastContainer, toast } from "react-toastify"
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 const IndexingStatList = () => {
     const [filteredData, setfilteredData] = useState([])
     const [indexYear, setIndexYear] = useState<string>('')
     const [indexingStatus, setIndexingStatus] = useState<boolean>(false)
     const [response, setResponse] = useState<any>({})
+    const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
+    const [yearDisplay, setYearDisplay] = useState<string> ('')
 
     const fetchData = (year:string) => {
-        console.log(year);
-        console.log("ERunning");
-        
+        setYearDisplay(year)
         apiRequest.indexedList(year).then((res) => {
             setResponse(res?.data.data)
         }).catch(err => {
             console.log(err);
         })
+        onCloseModal()
     }
 
     const fetchIndexingStatus = () => {
@@ -37,7 +40,7 @@ const IndexingStatList = () => {
         let newYear:[string] = ['']
         while(previousYear >= 2019 ){
             previousYear = previousYear.toString()
-            const yearRange = `${previousYear} - ${currentYear}`;
+            const yearRange = `${previousYear}-${currentYear}`;
             newYear.push(yearRange)
             currentYear --
             previousYear --
@@ -73,11 +76,15 @@ const IndexingStatList = () => {
         })
     }
 
+    const onCloseModal = () => {
+        setIsModalOpen(false)
+    }
+
     return(
         <>
             <div className="col-span-12 mt-6">
                 <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                    <h2 className="text-lg font-medium truncate mr-5">  INDEXING RECORD</h2>{indexingStatus}
+                    <h2 className="text-lg font-medium truncate mr-5">  INDEXING RECORD {yearDisplay    }</h2>{indexingStatus}
                     <div>
                         <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" 
                         style={{backgroundColor: '#280742'}} onClick={() => 
@@ -85,20 +92,11 @@ const IndexingStatList = () => {
                             {indexingStatus == true ?  'Close Indexing' : 'Open Indexing'}
                             <i className="fa fa-power-off w-4 h-4" style={{paddingLeft:'5px'}}></i> 
                         </button>
+                      
                     </div>
                      
                     <div className="dropdown"> <button className="dropdown-toggle btn btn-primary" aria-expanded="false" 
-                    data-tw-toggle="dropdown" style={{marginLeft:'10px'}}>Display Record By Year</button>
-                        <div className="dropdown-menu w-40">
-                            <ul className="dropdown-content">
-                            {yearArr.map((year, index) => (
-                                <li key={index}><a className="dropdown-item" href="#!" onClick={(e) => {
-                                    e.preventDefault();
-                                    fetchData(year);
-                                  }}> {year} </a></li>
-                                ))}
-                            </ul>
-                        </div>
+                        style={{marginLeft:'10px'}} onClick={() => {setIsModalOpen(true)}}>Display Record By Year</button>
                     </div>
                     <div className="hidden md:block mx-auto ">
                     </div>
@@ -133,6 +131,21 @@ const IndexingStatList = () => {
                         }
                 </div>
             </div>
+
+            <Modal
+                open={modalIsOpen}
+                onClose={onCloseModal}
+               >
+                    <ul className="dropdown-content">
+                        {yearArr.map((year, index) => (
+                        <li key={index} style={{padding: '20px'}}><a className="dropdown-item"  href="#!" onClick={(e) => {
+                            e.preventDefault();
+                            fetchData(year);
+                            }}> {year} </a>
+                        </li>
+                        ))}
+                    </ul>
+            </Modal>
             <ToastContainer />
         </>
     )

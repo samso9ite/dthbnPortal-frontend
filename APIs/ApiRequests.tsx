@@ -82,7 +82,9 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     indexRegSwitch: (type:string) => generalRequest(`admin/index_reg_switch/${type}`, 'post'),
     indexStatus: () => generalRequest('admin/indexing_status/1', 'get'),
     approveIndex: (id:number) => generalRequest(`admin/approve_index/${id}`, 'patch'),
-    declineIndex: (id:number, formData:{}) => generalRequest(`admin/decline_indexing/${id}`, 'patch', formData)
+    declineIndex: (id:number, formData:{}) => generalRequest(`admin/decline_indexing/${id}`, 'patch', formData),
+    reverseIndex: (id:number) => generalRequest(`admin/reverse_index_submission/${id}`, 'patch'),
+    resetIndexLimit: (id:number, year:string, formData:{}) => generalRequest(`admin/set_index_limit/${id}/${year}`, 'patch', formData),
 }
 
 export default apiRequest 
