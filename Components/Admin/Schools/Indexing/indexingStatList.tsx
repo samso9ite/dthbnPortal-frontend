@@ -122,7 +122,7 @@ const IndexingStatList = () => {
                                         </thead>
                                     }>
                                         {(item:any) => (
-                                            <IndexingStatItem data={item} year={response?.year}/>
+                                            <IndexingStatItem data={item} year={response?.year} refetchData={fetchData}/>
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
@@ -138,7 +138,7 @@ const IndexingStatList = () => {
                >
                     <ul className="dropdown-content">
                         {yearArr.map((year, index) => (
-                        <li key={index} style={{padding: '20px'}}><a className="dropdown-item"  href="#!" onClick={(e) => {
+                        <li key={index} style={{padding: '10px'}}><a className="dropdown-item"  href="#!" onClick={(e) => {
                             e.preventDefault();
                             fetchData(year);
                             }}> {year} </a>

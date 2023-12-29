@@ -35,9 +35,10 @@ const IndexingStatItem = (props:any) => {
     }
 
     const resetLimit = () => {
-        
-        apiRequest.resetIndexLimit(props.data?.school_id, props.year, {assigned_limit:limit}).then((res) => {
-            toast.success(res?.data.message, {
+        apiRequest.resetIndexLimit(props.data?.school_id, props.year, limit).then((res) => {
+            onClose()
+            props.refetchData(props.year)
+            toast.success("Index Limit Updated", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false, 
@@ -112,9 +113,9 @@ const IndexingStatItem = (props:any) => {
                 onClose={onClose}
                >
                 <div style={{padding:'20px'}}>
-                    <h1 style={{fontSize:'15px', fontWeight:'500'}}>Reset Indexing Limit for {props.data?.school}</h1><br/>
+                    <h1 style={{fontSize:'15px', fontWeight:'500'}}>Reset Indexing Limit for <TitleCase text={props.data?.school} /></h1><br/>
                    
-                    <center style={{marginTop:'20px'}}>  
+                    <center >  
                         <input type="text" placeholder="Please Insert Limit"  onChange={onSetLimit}/> 
                         <button className="dropdown-toggle btn btn-primary" aria-expanded="false" 
                             style={{marginLeft:'10px'}} onClick={resetLimit}>Reset Limit
