@@ -3,8 +3,10 @@ import { useCustomQuery } from "@/Hooks/apiCall"
 import apiRequest from "@/APIs/ApiRequests";
 import { RootState } from ".";
 
-export const fetchData = createAsyncThunk('examination/fetchExaminationRecord', async () => {
-    const {isPending, isError, error, data } = useCustomQuery(apiRequest.examinationRecord, 'examination')
+export const fetchData = createAsyncThunk('examination/fetchExaminationRecord', async (year:string) => {
+    // const {isPending, isError, error, data } = useCustomQuery(apiRequest.examinationRecord, 'examination')
+    // return data?.data
+    const data:any = await apiRequest.examinationRecord(year)
     return data?.data
 })
 

@@ -51,14 +51,14 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
 
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard', 'get'),
-    indexingList: () => generalRequest('school/indexed_record/2023-2024', 'get'),
+    indexingList: (year:string) => generalRequest(`school/indexed_record/${year}`, 'get'),
     createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData, fileUpload=true),
     submitIndexingForApproval: () => generalRequest('school/submit_all_index/', 'patch'),
     updateIndexRecord: (formData:FormValues, fileUpload:boolean,pk:number) => 
     generalRequest(`school/update_indexing/${pk}`, 'patch', formData, fileUpload=true),
 
     // Examination API's
-    examinationRecord: () => generalRequest('school/exam_record/2023-2024', 'get'), 
+    examinationRecord: (year:string) => generalRequest(`school/exam_record/${year}`, 'get'), 
     createExamRecord: (formData:FormValues, fileUpload:boolean) => generalRequest('school/exam_reg/', 'post', formData, fileUpload=true),
     submitExamForApproval: () => generalRequest('school/submit_all_exam_record/', 'patch'),
     updateExamRecord: (formData:FormValues, fileUpload:boolean,pk:number) => 

@@ -1,6 +1,7 @@
 
 import { useState } from "react"
 import IndexingDetails from "./details"
+import TitleCase from "@/util/TitleCase"
 
 const IndexingItem:React.FC<{data: Indexing}> = (props) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
@@ -24,7 +25,7 @@ const IndexingItem:React.FC<{data: Indexing}> = (props) => {
                 </td>
                 <td className="text-center">
                     <div className="flex justify-center items-center">
-                    {props.data.contact_address}
+                    <TitleCase text= {props.data.contact_address} />
                     </div>
                 </td>
                 <td className="text-center">

@@ -1,3 +1,4 @@
+import TitleCase from "@/util/TitleCase"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
@@ -7,6 +8,7 @@ const SideNav = () => {
     const exactPath = router.asPath
     const [isSubMenuActive , setIsSubMenuActive] = useState<string>()
     const [sch_name, setSchName] = useState<any>()
+    const [sch_logo, setSchLogo] = useState<any>()
 
     const activateSubmenuHandler = (menu:string) => {
         setIsSubMenuActive(menu)
@@ -20,14 +22,19 @@ const SideNav = () => {
 
     useEffect(() => {
       setSchName(localStorage.getItem('sch_name'))
+      setSchLogo(localStorage.getItem('sch_logo'))
     }, [])
     
     return ( 
         <>
             <nav className="side-nav">
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
-                    <img alt="Dental Board of Nigeria" className="w-6" src={process.env.NEXT_PUBLIC_URL+"src/images/logo_dental.png"} />
-                    <span className="hidden xl:block text-white text-lg ml-3"> {sch_name} </span> 
+                   
+                    <img alt="Dental Board of Nigeria" className="w-6" src={ sch_logo == 'undefined' ? 
+                        process.env.NEXT_PUBLIC_URL+"src/images/logo_dental.png" : sch_logo} />
+                   
+    
+                    <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {sch_name} /> </span> 
                 </a>
                 <div className="side-nav__devider my-6"></div>
                 <ul>
@@ -40,8 +47,9 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="javascript:;" className={exactPath.includes('/school/indexing')  ? "side-menu side-menu--active" : 'side-menu'} onClick={() => activateSubmenuHandler('indexing')}>
-                            <div className="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                        <Link href="javascript:;" className={exactPath.includes('/school/indexing')  ? "side-menu side-menu--active" : 'side-menu'} 
+                            onClick={() => activateSubmenuHandler('indexing')}>
+                            <div className="side-menu__icon"> </div>
                             <div className="side-menu__title">
                                 Indexing 
                                 <div className="side-menu__sub-icon "> <i className="fa fa-chevron-circle-down" aria-hidden="true"></i> </div>
@@ -91,25 +99,21 @@ const SideNav = () => {
                         <ul className={isSubMenuActive == 'exam' ? 'side-menu__sub-open' : ''}>
                             <li>
                                 <Link href="/school/exam/new" className={exactPath == '/school/exam/new' ? "side-menu side-menu--active" : 'side-menu'}>
-                                    <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Create New Exam Record </div>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/school/exam/current" className={exactPath == '/school/exam/current' ? "side-menu side-menu--active" : 'side-menu'}>
-                                    <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Current Exam Record </div>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/school/exam/submitted" className={exactPath == '/school/exam/submitted' ? "side-menu side-menu--active" : 'side-menu'}>
-                                    <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title"> Submitted Exam Record </div>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/school/exam/approved" className={exactPath == '/school/approved/approved' ? "side-menu side-menu--active" : 'side-menu'}>
-                                    <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title">
                                         Approved Exam Record 
                                         <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
@@ -120,7 +124,7 @@ const SideNav = () => {
                                 <Link href="/school/exam/declined" className={exactPath == '/school/exam/approved' ? "side-menu side-menu--active" : 'side-menu'}>
                                     <div className="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                     <div className="side-menu__title">
-                                        Delined Exam Record
+                                        Declined Exam Record
                                         <div className="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                                     </div>
                                 </Link>

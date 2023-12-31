@@ -3,9 +3,11 @@ import { useCustomQuery } from "@/Hooks/apiCall";
 import apiRequest from "@/APIs/ApiRequests";
 import { RootState } from ".";
 
- 
-export const fetchData = createAsyncThunk('indexing/fetchIndexData', async () => {
-    const {isPending, isError, error, data } = useCustomQuery(apiRequest.indexingList, 'indexing')
+export const fetchData = createAsyncThunk('indexing/fetchIndexData', async (year:string) => {
+    // const {isPending, isError, error, data } = useCustomQuery(apiRequest.indexingList(year), 'indexing')
+    const data:any = await apiRequest.indexingList(year)
+    console.log(data);
+    
     return data?.data
 })
 

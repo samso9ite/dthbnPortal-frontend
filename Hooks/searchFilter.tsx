@@ -1,12 +1,24 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 const SearchFilter = (props:any) => {
+    console.log(props.records);
     let responseData = props.records
     const [records, setRecords] = useState<any>(props.records)
+    const [fetched, setFetched] = useState<boolean>(false)
+    
     useEffect(() => {
-        setRecords(props.records)
-        filterData('')
-    }, [responseData])
+       
+        const intervalFunction = () => {
+            // Check the condition
+              setRecords(props.records)
+              filterData('')
+              clearInterval(intervalId);
+           };
+
+          const intervalId = setTimeout(intervalFunction, 1000);
+        
+    }, [props.records])
+    
     // This function triggers on every query input by the user, capturing the query parameter in a variable
     const queryChangeHandler = (event:any) => {
         let searchQuery = event.target.value
@@ -24,7 +36,7 @@ const SearchFilter = (props:any) => {
         props.getfilteredData(filteredData)
         // This calls the updateRecord reducer to replace the record with the filtered data.
     }
-
+    // filterData('')
     return(
         <>
             <input type="text" className="form-control" placeholder="Search..." onChange={queryChangeHandler} />
