@@ -1,6 +1,14 @@
-import GenericForm, {Field, FormValues} from "@/UI/genericForm"
+import GenericForm, { FormValues} from "@/UI/genericForm"
 
 
+type Field = {
+    name:string;
+    type:string;
+    options?: {label:string, value:string, }[];
+    label: string;
+    required?:boolean;
+    stepperForm?:true
+}
 const subjectOptions =   [
     {value:'', label:'Select Subject'},
     {value:'Mathematics', label:'Mathematics'},
@@ -49,7 +57,7 @@ const generatedSchField = generateFields(3, 'school_attended', 'School Attended'
 const generatedCertField = generateFields(3,'qualification', 'Qualification');
 const generatedEntry_GradYear = generateFields(3,'admission_grad_year', 'Admission & Graduation Year (2000 -2003)')
 
-export const Fields:Field = {
+export const Fields:any = {
     loginFormFields: [
         {name:'username', type:'text', label:'Username', required:true},
         {name:'password', type:'password', label:'Password', required:true}

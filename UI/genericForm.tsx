@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { examinationState } from "@/store/examination-slice";
 
-type Field = {
+ type Field = {
     name:string;
     type:string;
     options?: {label:string, value:string, }[];

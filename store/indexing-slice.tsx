@@ -6,8 +6,6 @@ import { RootState } from ".";
 export const fetchData = createAsyncThunk('indexing/fetchIndexData', async (year:string) => {
     // const {isPending, isError, error, data } = useCustomQuery(apiRequest.indexingList(year), 'indexing')
     const data:any = await apiRequest.indexingList(year)
-    console.log(data);
-    
     return data?.data
 })
 

@@ -7,12 +7,12 @@ import { indexingActions } from '@/store/indexing-slice';
 import apiRequest from '@/APIs/ApiRequests';
 import { ToastContainer, toast } from "react-toastify"
 
-const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void, refetchData:() => void}> = (props) => {
+const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void, refetchData?:() => void}> = (props) => {
     const [comment, setComment] = useState<string>('')
     const approveExam = (id:number) => {
-        apiRequest.approveIndex(id).then((res) => {
+        apiRequest.approveExam(id).then((res) => {
             props.onCloseModal()
-            props.refetchData()
+            props.refetchData?.()
             toast.success(res?.data.message, {
                 position: "bottom-right",
                 autoClose: 5000,
@@ -33,7 +33,7 @@ const ExamDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() 
         }
         apiRequest.declineExam(id, formData).then(res => {
             props.onCloseModal()
-            props.refetchData()
+            props.refetchData?.()
             toast.success('Student Declined', {
                 position: "bottom-right",
                 autoClose: 5000,

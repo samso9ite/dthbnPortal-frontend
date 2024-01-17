@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse }  from 'axios'
+import axios, {AxiosInstance, AxiosRequestHeaders, AxiosResponse }  from 'axios'
 
 interface Api {
   axios_instance: AxiosInstance;
@@ -14,7 +14,7 @@ let access = await sessionStorage.getItem('token')
     if(!navigator.onLine){
         alert("Hello! Seems you're offline");
         return {
-          headers: {},
+          headers: {} as AxiosRequestHeaders,
           method: config.method,
           url: ""
         };
@@ -35,7 +35,7 @@ let access = await sessionStorage.getItem('token')
 //   }
 // })
 
-const baseUrl = 'http://127.0.0.1:8000/api/'
+const baseUrl = 'http://api.dthbn.gov.ng/api/'
 // const baseUrl = 'http://127.0.0.1:8000/'
 export default { 
   axios_instance,

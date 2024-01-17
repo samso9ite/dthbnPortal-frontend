@@ -72,7 +72,7 @@ const ResetPassword:React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, data, apiStatusHandler)}
+                {/* {showStatus && ApiStateHandler(isPending, isError, error, isSuccess, data, apiStatusHandler)} */}
                 <ToastContainer />
             </div>
     )

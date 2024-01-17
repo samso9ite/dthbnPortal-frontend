@@ -74,7 +74,7 @@ const Examination = () => {
                                 </tr>
                            
                             </tbody>
-                                <div id="superlarge-modal-size-preview" className="modal" tabindex="-1" aria-hidden="true">
+                                <div id="superlarge-modal-size-preview" className="modal"  aria-hidden="true">
                                     <div className="modal-dialog modal-xl">
                                         <div className="modal-content">
                                             <div className="intro-y box px-5 pt-5 mt-5">

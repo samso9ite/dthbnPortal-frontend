@@ -2,7 +2,7 @@ import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
 import { ToastContainer, toast } from 'react-toastify';
-import GenericForm, {FormValues, Field} from "@/UI/genericForm"
+import GenericForm, {FormValues} from "@/UI/genericForm"
 import { indexingActions, stepperState, indexingData, indexingState, indexingUpdate, updateRecordKey } from "@/store/indexing-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
@@ -10,6 +10,15 @@ import ApiStateHandler from "@/util/ApiStateHandler"
 
 
 type ModifiedRefereeField = Field & { name: string };
+
+type Field = {
+    name:string;
+    type:string;
+    options?: {label:string, value:string, }[];
+    label: string;
+    required?:boolean;
+    stepperForm?:true
+}
 
 const IndexingForm = () => {
     const dispatch = useDispatch()

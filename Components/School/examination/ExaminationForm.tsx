@@ -1,7 +1,7 @@
 import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
 import { useCustomMutation } from "@/Hooks/apiCall"
-import GenericForm, {FormValues, Field} from "@/UI/genericForm"
+import GenericForm, {FormValues} from "@/UI/genericForm"
 import { examinationActions, stepperState, examinationRecord, examUpdate, formData, updateRecordKey } from "@/store/examination-slice"
 import { useDispatch, useSelector } from "react-redux"
 import {useState} from 'react'
