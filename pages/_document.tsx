@@ -4,8 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="stylesheet" href={process.env.NEXT_PUBLIC_URL+'./dist/css/app.css'} />
-        <link href={process.env.PUBLIC_URL+'./dist/images/logo.svg'} rel="shortcut icon" />
+        <link rel="stylesheet" href={'http://portal.dthbn.gov.ng/dist/css/app.css'} />
+        <link href={'http://portal.dthbn.gov.ng/dist/images/logo.svg'} rel="shortcut icon" />
         <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       </Head>
