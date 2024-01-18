@@ -109,7 +109,7 @@ const Authentication: React.FC = () => {
             <div className="block xl:grid grid-cols-2 gap-4">
                 <div className="hidden xl:flex flex-col min-h-screen">
                     <div className="my-auto">
-                        <img alt="Dental Board of Nigeria" className="-intro-x w-2/2 -mt-16" src={process.env.NEXT_PUBLIC_URL + 'dist/images/dental_logo.png'} />
+                        <img alt="Dental Board of Nigeria" className="-intro-x w-2/2 -mt-16" src={process.env.NEXT_PUBLIC_URL + '/dist/images/dental_logo.png'} />
                         <div className="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             Dental Therapist
                             <br />

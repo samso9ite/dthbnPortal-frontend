@@ -31,7 +31,7 @@ const SideNav = () => {
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
                    
                     <img alt="Dental Board of Nigeria" className="w-6" src={ sch_logo == 'undefined' ? 
-                        process.env.NEXT_PUBLIC_URL+"src/images/logo_dental.png" : sch_logo} />
+                        process.env.NEXT_PUBLIC_URL+"/src/images/logo_dental.png" : sch_logo} />
                    
     
                     <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {sch_name} /> </span> 
