@@ -35,7 +35,7 @@ let access = await sessionStorage.getItem('token')
 //   }
 // })
 
-const baseUrl = 'http://api.dthbn.gov.ng/api/'
+const baseUrl = 'https://api.dthbn.gov.ng/api/'
 // const baseUrl = 'http://127.0.0.1:8000/'
 export default { 
   axios_instance,
