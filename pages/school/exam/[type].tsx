@@ -14,7 +14,7 @@ const Indexing = () => {
                             <div className="modal-body p-0">
                                 <div className="p-5 text-center">
                                     <i data-lucide="x-circle" className="w-16 h-16 text-danger mx-auto mt-3"></i> 
-                                    <div className="text-3xl mt-5">Are you sure?</div>
+                                    <div className="text-3xl mt-5">Are you sure this record should be deleted?</div>
                                     <div className="text-slate-500 mt-2">
                                         Do you really want to delete these records? 
                                         <br />
