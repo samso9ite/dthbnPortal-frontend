@@ -50,7 +50,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     getUserAccount: (param:string) => generalRequest(`auth/get_account/${param}`, 'get'),
 
     // School Portal API's 
-    dashboard:() => generalRequest('school/dashboard', 'get'),
+    dashboard:() => generalRequest('school/dashboard/', 'get'),
     indexingList: (year:string) => generalRequest(`school/indexed_record/${year}`, 'get'),
     createIndexing: (formData:FormValues, fileUpload:boolean) => generalRequest('school/new_indexing/', 'post', formData, fileUpload=true),
     submitIndexingForApproval: () => generalRequest('school/submit_all_index/', 'patch'),

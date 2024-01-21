@@ -62,7 +62,7 @@ const IndexingForm = () => {
         apiRequest.createIndexing, onSuccess)
 
      const submitHandler = (formData:any) => {
-        if (numOfSitting == '1' || numOfSitting == '2'){
+        // if (numOfSitting == '1' || numOfSitting == '2'){
             if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
                 const resultFormData = new FormData();
                 let currentYear = new Date().getFullYear()
@@ -112,16 +112,16 @@ const IndexingForm = () => {
                     dispatch(indexingActions.setIndexingStatus(true))
                 }
             }
-        }else{
-            toast.error("Please select number of sitting", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                theme: "light",
-            }
-            )
-        }
+        // }else{
+        //     toast.error("Please select number of sitting", {
+        //         position: "top-right",
+        //         autoClose: 5000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         theme: "light",
+        //     }
+        //     )
+        // }
     }
 
     const duplicateGrades = (fields:any) => {
