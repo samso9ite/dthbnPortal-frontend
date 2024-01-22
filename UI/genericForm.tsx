@@ -38,10 +38,6 @@ type Props = {
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, employmentStatus })  => {
     const router = useRouter()
-    console.log(employmentStatus);
-    
-    console.log(initialValues);
-    
   
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -74,6 +70,8 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }, [])
     
     useEffect(() => {
+        console.log(stepper);
+        
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
         let updatingForm = formStatus == true  && stepper == 'profile' && 
         (isExamUpdate == true || indexingUpdateStatus == true)
@@ -141,66 +139,66 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }
     return(
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-             {employmentStatus == 'false' &&
-            <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
-             
-                {fields.map((field) => {
-                    const fieldArray = Array.isArray(field) ? field : [field];
-                    return fieldArray.map((field, index) => {
-                    const { name, type, options, label } = field;
-                    return(
-                    
-                        <div key={name} className={span6 == true ? 'intro-y col-span-12 sm:col-span-6' : ''}>
-                            {type === 'select' && options ? (
-                                <>
-                                    <select name={name} value={values[name] || ''} className="form-select form-select-lg  sm:mr-2 mt-4" 
-                                        onChange={handleChange}>
-                                        {options.map((option:{value:string, label:string}) => (  
-                                            <option key={option.value} value={option.value}>
-                                                {option.label}
-                                            </option>
-                                        ))
-                                        }
-                                    </select>
-                                    {field.required && errors[name] && (
+             {(employmentStatus == 'true' && stepper == 'work') ? '' :
+                <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
+                
+                    {fields.map((field) => {
+                        const fieldArray = Array.isArray(field) ? field : [field];
+                        return fieldArray.map((field, index) => {
+                        const { name, type, options, label } = field;
+                        return(
+                        
+                            <div key={name} className={span6 == true ? 'intro-y col-span-12 sm:col-span-6' : ''}>
+                                {type === 'select' && options ? (
+                                    <>
+                                        <select name={name} value={values[name] || ''} className="form-select form-select-lg  sm:mr-2 mt-4" 
+                                            onChange={handleChange}>
+                                            {options.map((option:{value:string, label:string}) => (  
+                                                <option key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </option>
+                                            ))
+                                            }
+                                        </select>
+                                        {field.required && errors[name] && (
+                                            <p className="text-red-500">{errors[name]}</p>
+                                        )}
+                                    </>
+                                ): type === 'multiselect' ? (
+                                    <div>
+                                        <Multiselect className='mt-4'
+                                            options={options} 
+                                            selectedValues={values[name] || ''} 
+                                            displayValue={name}
+                                        />
+                                        {field.required && errors[name] && (
                                         <p className="text-red-500">{errors[name]}</p>
-                                    )}
-                                </>
-                            ): type === 'multiselect' ? (
-                                <div>
-                                    <Multiselect className='mt-4'
-                                        options={options} 
-                                        selectedValues={values[name] || ''} 
-                                        displayValue={name}
-                                    />
-                                    {field.required && errors[name] && (
-                                    <p className="text-red-500">{errors[name]}</p>
-                                    )}
-                                </div>
-                            ):
-                            (
-                                <>
-                            {type == "file" && <label className="form-control"><b>{label}</b></label>}
-                                    <input
-                                        className="intro-x login__input form-control py-3 px-4 block mt-4"
-                                        type={type}
-                                        name={name}
-                                        placeholder={label}
-                                        value={type == 'file' ? undefined : values[name] || ''}
-                                        onChange={handleChange}
-                                    />
-                                    {field.required && errors[name] && (
-                                        <p className="text-red-500">{errors[name]}</p>
-                                    )}
-                                </>
-                            )
-                        }
-                        </div>
-                    );
-                    });
-                })}
-            
-            </div>
+                                        )}
+                                    </div>
+                                ):
+                                (
+                                    <>
+                                {type == "file" && <label className="form-control"><b>{label}</b></label>}
+                                        <input
+                                            className="intro-x login__input form-control py-3 px-4 block mt-4"
+                                            type={type}
+                                            name={name}
+                                            placeholder={label}
+                                            value={type == 'file' ? undefined : values[name] || ''}
+                                            onChange={handleChange}
+                                        />
+                                        {field.required && errors[name] && (
+                                            <p className="text-red-500">{errors[name]}</p>
+                                        )}
+                                    </>
+                                )
+                            }
+                            </div>
+                        );
+                        });
+                    })}
+                
+                </div>
             }
             {stepperForm ? <Button /> : 
                 <button className="btn btn-primary py-3 px-4 xl:w-32 xl:mr-3 align-top mt-4" type="submit" 
