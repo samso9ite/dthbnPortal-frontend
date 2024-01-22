@@ -71,8 +71,8 @@ export const Fields:any = {
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
-                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
+                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
+                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
                 {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
                 {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ], required:true
@@ -91,10 +91,11 @@ export const Fields:any = {
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         {name:'programme', type:'multiselect', label:'Programme', 
             options: [
-                {values:'B. Dental Therapy', label:'B. Dental Therapy', name:'B. Dental Therapy'},
-                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting ', name:'HND Dental Surgery Assisting '},
-                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting', name:'HND Dental Surgery Assisting'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician', name:'Dental Surgery Technician'}
+                {value:'', label:'Select Cadre'},
+                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
+                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
+                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ], required:true
         },
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true}, 
@@ -114,8 +115,8 @@ export const Fields:any = {
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
-                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
+                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
+                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
                 {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
                 {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ],
@@ -199,8 +200,8 @@ export const Fields:any = {
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
-                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
+                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
+                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
                 {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
                 {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ],
