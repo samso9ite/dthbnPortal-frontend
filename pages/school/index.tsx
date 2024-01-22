@@ -12,8 +12,8 @@ const Dashboard = () => {
     } 
     const response:any = fetchData()
     
-    localStorage.setItem('sch_name',response?.school_data.sch_name)
-    localStorage.setItem('sch_logo', response?.school_data.sch_logo)
+    localStorage.setItem('sch_name',response?.school_data?.sch_name)
+    localStorage.setItem('sch_logo', response?.school_data?.sch_logo)
 
     return(
         <MainLayout>
