@@ -22,6 +22,8 @@ const SideNav = () => {
 
     useEffect(() => {
       setSchName(localStorage.getItem('sch_name'))
+      console.log(sch_name);
+      
       setSchLogo(localStorage.getItem('sch_logo'))
     }, [])
     

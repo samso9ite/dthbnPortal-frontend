@@ -27,6 +27,7 @@ const IndexingForm = () => {
     
     const[numOfSitting, setNumOfSitting] = useState('')
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
+    const[employmentStatus, setEmploymentStatus] = useState<string>('true')
     const updateKey = useSelector(updateRecordKey)
     let showSuccessMsg = true
 
@@ -66,8 +67,8 @@ const IndexingForm = () => {
             if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
                 const resultFormData = new FormData();
                 let currentYear = new Date().getFullYear()
-                let nextYear = currentYear + 1
-                let year = currentYear+'-'+nextYear
+                let prevYear = currentYear - 1
+                let year = prevYear+'-'+currentYear
                 // const formDataCopy = { ...formData };
                 
                 // Append each key-value pair to the FormData
@@ -145,7 +146,17 @@ const IndexingForm = () => {
                     <option value='2'>Two Sitting</option>
                 </select>
             }
-          
+            {
+                formState == 'work' && <>
+                    <select className="form-control" onChange={(e) => {
+                        setEmploymentStatus(e.target.value)
+                    }}>
+                        <option value=''>Select Employment Status</option>
+                        <option value='false'>Employed</option>
+                        <option value='true'>Unemployed</option>
+                    </select>
+                </>
+            }
             
             <GenericForm fields= { formState == 'profile' ? Fields.indexingProfileFields : 
                     formState == 'work' ? Fields.indexingWorkFields : 
@@ -153,7 +164,7 @@ const IndexingForm = () => {
                     formState == 'referee' ? modifiedRefereeFields : formState == 'result' ?
                     Fields.indexingResultFields : duplicateGrades(Fields.indexingResultFields)
                 } 
-                onSubmit={submitHandler} span6={true} stepperForm={true} 
+                onSubmit={submitHandler} span6={true} stepperForm={true} employmentStatus={employmentStatus} 
             />
            {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
         </>

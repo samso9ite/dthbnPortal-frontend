@@ -71,10 +71,10 @@ export const Fields:any = {
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
-                {values:'Dental Therapist', label:'Dental Therapist'},
-                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
-                {values:'Dental Nurse', label:'Dental Nurse'}
+                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
+                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
+                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ], required:true
         },
         {name:'password', type:'password', label:'Password', required:true},
@@ -91,10 +91,10 @@ export const Fields:any = {
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         {name:'programme', type:'multiselect', label:'Programme', 
             options: [
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician', name:'Dental Surgery Technician'},
-                {values:'Dental Therapist', label:'Dental Therapist', name:'Dental Therapist'},
-                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant', name:'Dental Surgery Assistant'},
-                {values:'Dental Nurse', label:'Dental Nurse', name:'Dental Nurse'}
+                {values:'B. Dental Therapy', label:'B. Dental Therapy', name:'B. Dental Therapy'},
+                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting ', name:'HND Dental Surgery Assisting '},
+                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting', name:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician', name:'Dental Surgery Technician'}
             ], required:true
         },
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true}, 
@@ -114,10 +114,10 @@ export const Fields:any = {
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
-                {values:'Dental Therapist', label:'Dental Therapist'},
-                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
-                {values:'Dental Nurse', label:'Dental Nurse'}
+                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
+                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
+                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ],
         },
         {name: 'sex', type:'select', label:'Gender', required:true,
@@ -144,7 +144,7 @@ export const Fields:any = {
         },
         {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
         {name: 'contact_address', type:'text', label:'Contact Address', required:false},
-        {name:'profile_image', type:'file', label:'Profile Image', required:true},
+        {name:'profile_image', type:'file', label:'Passport Photo', required:true},
         {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
        
     ],
@@ -199,10 +199,10 @@ export const Fields:any = {
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'},
-                {values:'Dental Therapist', label:'Dental Therapist'},
-                {values:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
-                {values:'Dental Nurse', label:'Dental Nurse'}
+                {values:'HND Dental Surgery Assisting ', label:'HND Dental Surgery Assisting '},
+                {values:'B. Dental Therapy', label:'B. Dental Therapy'},
+                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
             ],
         },
         {name: 'gender', type:'select', label:'Gender', required:true,
