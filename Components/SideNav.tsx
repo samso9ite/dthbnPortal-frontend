@@ -19,13 +19,11 @@ const SideNav = () => {
         localStorage.clear()
         router.push('/auth')
     }
-
+    let username = localStorage.getItem('sch_name')
     useEffect(() => {
-      setSchName(localStorage.getItem('sch_name'))
-      console.log(sch_name);
-      
+      setSchName(username)
       setSchLogo(localStorage.getItem('sch_logo'))
-    }, [])
+    }, [sch_logo])
     
     return ( 
         <>
@@ -36,7 +34,7 @@ const SideNav = () => {
                         process.env.NEXT_PUBLIC_URL+"/src/images/logo_dental.png" : sch_logo} />
                    
     
-                    <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {sch_name} /> </span> 
+                    <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {username} /> </span> 
                 </a>
                 <div className="side-nav__devider my-6"></div>
                 <ul>

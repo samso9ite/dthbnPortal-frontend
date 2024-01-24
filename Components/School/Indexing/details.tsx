@@ -7,9 +7,11 @@ import { indexingActions } from '@/store/indexing-slice';
 
 const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
   
+  
     const router = useRouter();
     const dispatch = useDispatch()
     const onEditRecord = () => {
+        console.log(props.data);
         dispatch(indexingActions.setIndexingStatus(true))
         dispatch(indexingActions.switchState(''))
         dispatch(indexingActions.storeIndexingData(props.data))

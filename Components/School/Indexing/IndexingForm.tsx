@@ -14,7 +14,7 @@ type ModifiedRefereeField = Field & { name: string };
 type Field = {
     name:string;
     type:string;
-    options?: {label:string, value:string, }[];
+    options?: {label:string, value:string,}[];
     label: string;
     required?:boolean;
     stepperForm?:true
@@ -65,7 +65,7 @@ const IndexingForm = () => {
      const submitHandler = (formData:any) => {
         // if (numOfSitting == '1' || numOfSitting == '2'){
             if(formState == 'result' && numOfSitting == '1' || formState == 'secondResult' && numOfSitting == '2'){
-                const resultFormData = new FormData();
+                let resultFormData = new FormData();
                 let currentYear = new Date().getFullYear()
                 let prevYear = currentYear - 1
                 let year = prevYear+'-'+currentYear
@@ -100,29 +100,48 @@ const IndexingForm = () => {
                 // formDataCopy.referees = JSON.stringify(referees)
                 // formDataCopy.school_attended = JSON.stringify(school_data)
                 // formDataCopy.exam_sitting = numOfSitting
-            
-                formData.year = year
+                if(!isUpdate){
+                    formData.year = year
+                }
+               
+                if((formData.profile_image == '' || formData.marriage_cert == '' 
+                    || formData.o_level_cert == '' || formData.o_level_cert_0 == '') && !isUpdate){
+                    toast.error("Please set the required image", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        theme: "light",
+                    })
+                }
                 
                 for (const [key, value] of Object.entries(formData)) {
+                    if( 
+                        (key === 'profile_image' || key === 'o_level_cert' || key === 'o_level_cert_0' || key === 'marriage_cert')  &&
+                        !(value instanceof File)
+                    ){
+                    //    console.log("Not File");
+                    }else{
                         resultFormData.append(key, value as string | Blob);
                     }
+                }
+                resultFormData.append('exam_sitting', numOfSitting)
                 handleSubmit(resultFormData)
-            }else{
+            }else if(formState == 'result' && numOfSitting == ''){
+                toast.error("Please set number of exam sitting", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    theme: "light",
+                })
+            }
+            else{
                 dispatch(indexingActions.storeIndexingData(formData))
                 if(formState == 'profile'){
                     dispatch(indexingActions.setIndexingStatus(true))
                 }
             }
-        // }else{
-        //     toast.error("Please select number of sitting", {
-        //         position: "top-right",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         theme: "light",
-        //     }
-        //     )
-        // }
     }
 
     const duplicateGrades = (fields:any) => {

@@ -56,13 +56,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
     const indexingUpdateStatus = useSelector(indexingUpdate)
-    console.log(stepper);
-    console.log(employmentStatus);
     
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
-            console.log();
-            
             setFormStatus(true)
             setStepper(indexStepper)
             setStoreFormData(indexingFormData)
@@ -74,21 +70,22 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }, [stepper, storeFormData, formStatus])
     
     useEffect(() => {
-       
-        
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
         let updatingForm = formStatus == true  && stepper == 'profile' && 
         (isExamUpdate == true || indexingUpdateStatus == true)
         
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
-            toast.success("Please Reset all Images", {
+            if(uncompletedForm){
+                toast.success("Please Reset all Images", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 theme: "light",
-            })
+                })
+            }
+            
         }
 
         // if (formStatus == false || indexingStatus == false) {

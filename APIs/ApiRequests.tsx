@@ -26,7 +26,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     }catch(error:any){
         if(error.response && error.response.data){
            if (error.response.status == "401"){
-            window.location.href = "http://localhost:3000/auth"
+            window.location.href = "https://portal.dthbn.gov.ng/auth/"
            }
             
             let data = error.response.data

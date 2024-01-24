@@ -145,7 +145,7 @@ export const Fields:any = {
         },
         {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
         {name: 'contact_address', type:'text', label:'Contact Address', required:false},
-        {name:'profile_image', type:'file', label:'Passport Photo', required:true},
+        {name:'profile_image', type:'file', label:'Passport Photo', required:false},
         {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
        
     ],
@@ -174,7 +174,7 @@ export const Fields:any = {
         {name: 'exam_year', type:'text', label:'Examination Year', required:true},
         generatedSubjectFields,
         generatedGradeFields,
-        {name:'o_level_cert', type:'file', label:'O Level Certificate', required:true}
+        {name:'o_level_cert', type:'file', label:'O Level Certificate', required:false}
     ],
     indexingSchCertDetails: [
         {name: 'school_attended_1', type:'text', label:'Primary School Attended', required:true},

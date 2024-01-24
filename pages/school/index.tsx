@@ -11,6 +11,7 @@ const Dashboard = () => {
         return data?.data.data
     } 
     const response:any = fetchData()
+    console.log(response);
     
     localStorage.setItem('sch_name',response?.school_data?.sch_name)
     localStorage.setItem('sch_logo', response?.school_data?.sch_logo)

@@ -5,6 +5,7 @@ import MainLayout from "@/Layout/MainLayout"
 import GenericForm, { FormValues } from "@/UI/genericForm"
 import ApiStateHandler from "@/util/ApiStateHandler"
 import { useState } from "react"
+import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
     const [formState, setFormState] = useState('profile')
