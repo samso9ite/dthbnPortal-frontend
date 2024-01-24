@@ -17,7 +17,8 @@ interface Indexing {
     marital_status: string;
     marriage_cert: URL;
     nationality: string;
-    o_level_cert: URL;
+    o_level_cert: string;
+    o_level_cert_0: string;
     permanent_address: string;
     place_of_work: string;
     profile_image: string;
@@ -77,7 +78,7 @@ interface Indexing {
     grade_5_4: string;
     grade_6_5: string;
     grade_7_6: string;
-    exam_sitting: string
+    exam_sitting: number
 }
 
 interface Examination {
