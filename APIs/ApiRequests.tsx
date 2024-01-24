@@ -6,9 +6,19 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     
     try{
         let config
-        if(method == 'get'){
-            const response = await api.axios_instance[method](api.baseUrl+url)
-            return response
+        if (method === 'get') {
+            const response: any = await api.axios_instance[method](api.baseUrl + url);
+            console.log(response);
+            console.log("This is great");
+            
+            // Check if 'code' property exists in the response data
+            if (response?.data?.code === "token_not_valid") {
+                console.log("Authentication not valid");
+                // Redirect to another page or take some action
+                // window.location.href = '/login';  // Uncomment this line and replace '/login' with the desired URL
+            }
+    
+            return response;
         }else{
             if (fileUpload) {
                 // If there are files, set the Content-Type to multipart/form-data
@@ -20,6 +30,11 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
             }
             const response = await api.axios_instance[method](api.baseUrl+url, formData, config)
             console.log(response);
+            if(response?.data.code == "token_not_valid"){
+                console.log("Authentication not valid");
+                
+                // window.location.href()
+            }
             
             return response
         }

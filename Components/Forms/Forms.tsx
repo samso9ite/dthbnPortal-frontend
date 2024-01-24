@@ -151,9 +151,9 @@ export const Fields:any = {
     ],
 
     indexingWorkFields: [
-        {name: 'place_of_work', type:'text', label:'Place of Work', required:true},
-        {name: 'address', type:'text', label:'Address', required:true},
-        {name: 'position', type:'text', label:'Position', required:true},
+        {name: 'place_of_work', type:'text', label:'Place of Work', required:false},
+        {name: 'address', type:'text', label:'Address', required:false},
+        {name: 'position', type:'text', label:'Position', required:false},
     ],
     indexingRefereeFields: [
         {name: 'referee_name', type:'text', label:'Referee Name', required:true},
@@ -177,9 +177,18 @@ export const Fields:any = {
         {name:'o_level_cert', type:'file', label:'O Level Certificate', required:true}
     ],
     indexingSchCertDetails: [
-        generatedSchField,
-        generatedCertField,
-        generatedEntry_GradYear
+        {name: 'school_attended_1', type:'text', label:'Primary School Attended', required:true},
+        {name: 'qualification_1', type:'text', label:'Primary School Certificate', required:true},
+        {name: 'admission_grad_year_1', type:'text', label:'Primary School Admission & Graduation Year(2000-2005)', required:true},
+        {name: 'school_attended_2', type:'text', label:'Secondary School Attended', required:true},
+        {name: 'qualification_2', type:'text', label:'Secondary School Certificate', required:true},
+        {name: 'admission_grad_year_2', type:'text', label:'Secondary School Admission & Graduation Year(2000-2005)', required:true},
+        {name: 'school_attended_3', type:'text', label:'Tertiary School Attended', required:true},
+        {name: 'qualification_3', type:'text', label:' Tertiary School Certificate', required:true},
+        {name: 'admission_grad_year_3', type:'text', label:'Tertiary School Admission & Graduation Year(2000-2005)', required:true},
+        // generatedSchField,
+        // generatedCertField,
+        // generatedEntry_GradYear
     ],
 
     // New Examination Form

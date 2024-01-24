@@ -32,10 +32,10 @@ const IndexingForm = () => {
     let showSuccessMsg = true
 
     const onSuccess:any = (data:any) => {
-        setNotifIsActive(true)
-       
-        dispatch(indexingActions.setIndexingStatus(false))
         dispatch(indexingActions.resetIndexingData({}))
+        window.location.reload()
+        setNotifIsActive(true)
+        dispatch(indexingActions.setIndexingStatus(false))
         dispatch(indexingActions.switchState('profile'))
         setNumOfSitting('');
         if(isUpdate == true){
@@ -146,7 +146,7 @@ const IndexingForm = () => {
                     <option value='2'>Two Sitting</option>
                 </select>
             }
-            {
+            {/* {
                 formState == 'work' && <>
                     <select className="form-control" onChange={(e) => {
                         setEmploymentStatus(e.target.value)
@@ -156,7 +156,7 @@ const IndexingForm = () => {
                         <option value='true'>Unemployed</option>
                     </select>
                 </>
-            }
+            } */}
             
             <GenericForm fields= { formState == 'profile' ? Fields.indexingProfileFields : 
                     formState == 'work' ? Fields.indexingWorkFields : 

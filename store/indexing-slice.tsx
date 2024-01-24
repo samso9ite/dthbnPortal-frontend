@@ -46,6 +46,10 @@ const indexingSlice = createSlice({
             }
         },
         resetIndexingData(state, action:PayloadAction<any>){
+            console.log(action.payload);
+            console.log("Git here on success");
+            console.log(indexingData);
+            
             state.indexingData = {}  
         },
         switchState(state, action:PayloadAction<string>){

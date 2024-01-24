@@ -4,6 +4,7 @@ interface Indexing {
     middlename: string;
     age:number;
     approved: boolean;
+    lga:string;
     unapproved: boolean;
     cadre: string;
     closed: boolean;
