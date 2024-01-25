@@ -18,6 +18,7 @@ const Authentication: React.FC = () => {
     const [message, setMessage] = useState<string>()
     const [username, setUsername] = useState<any>('')
     const [accountDetails, setAccountDetails] = useState<any>()
+    const [email, setEmail] = useState<any>()
 
     const router = useRouter()
 
@@ -25,7 +26,7 @@ const Authentication: React.FC = () => {
         if (formState == 'login') {
             sessionStorage.setItem('token', data.data.access),
             sessionStorage.setItem('refresh', data.data.refresh)
-            const resp = apiRequest.getUserAccount(username).then(response => {
+            const resp = apiRequest.getUserAccount(email).then(response => {
                 if(response?.data.data.is_admin == true){
                     router.push('/admin')
                 }else if(response?.data.data.is_school == true){
@@ -100,6 +101,7 @@ const Authentication: React.FC = () => {
             apiStatusHandler(true)
             if(formState == 'login'){
                 setUsername(formData.username)
+                setEmail(formData.email)
             }
         }
     }

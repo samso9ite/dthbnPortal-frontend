@@ -59,7 +59,7 @@ const generatedEntry_GradYear = generateFields(3,'admission_grad_year', 'Admissi
 
 export const Fields:any = {
     loginFormFields: [
-        {name:'username', type:'text', label:'Username', required:true},
+        {name:'email', type:'email', label:'Email', required:true},
         {name:'password', type:'password', label:'Password', required:true}
     ],
     forgetPwdFormFields: [
