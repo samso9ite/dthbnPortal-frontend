@@ -29,6 +29,8 @@ const ResetPassword:React.FC = () => {
             uidb:uid,
             token:token
         } 
+        console.log(formData);
+        
         handleSubmit(formData)
     }, [uid, token])
     

@@ -1,9 +1,12 @@
 import { formData } from "@/store/examination-slice";
 import api from "./api";
 import { FormValues } from "@/UI/genericForm"
+import { useRouter } from "next/router";
 
 const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get' | 'delete', formData?:FormValues, fileUpload?:boolean) => {
     
+    const router = useRouter()
+    const exactPath = router.asPath
     try{
         let config
         if(method == 'get'){
@@ -25,7 +28,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
           
     }catch(error:any){
         if(error.response && error.response.data){
-           if (error.response.status == "401"){
+           if (error.response.status == "401" && !exactPath.includes('/auth')){
             window.location.href = "https://portal.dthbn.gov.ng/auth/"
            }
             
