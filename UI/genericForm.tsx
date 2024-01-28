@@ -83,6 +83,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 hideProgressBar: false,
                 closeOnClick: true,
                 theme: "light",
+
                 })
             }
             
@@ -168,12 +169,30 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                 ): type === 'multiselect' ? (
                                     <div>
                                         <Multiselect className='mt-4'
+                                            onKeyPressFn={function noRefCheck(){}}
+                                            onRemove={function noRefCheck(){}}
+                                            onSearch={function noRefCheck(){}}
+                                            onSelect={function noRefCheck(){}}
                                             options={options} 
                                             selectedValues={values[name] || ''} 
-                                            displayValue={name}
+                                            displayValue="name"
+                                            placeholder="School Programme"
+                                            style={{
+                                                chips: {
+                                                  background: '#3d1b59'
+                                                },
+                                                highlightOptions: {
+                                                    'background': '#0096fb'
+                                                },
+                                                searchBox: {
+                                                  'border': 'none',
+                                                  'border-bottom': '1px solid blue',
+                                                  'border-radius': '0px'
+                                                }
+                                              }}
                                         />
                                         {field.required && errors[name] && (
-                                        <p className="text-red-500">{errors[name]}</p>
+                                            <p className="text-red-500">{errors[name]}</p>
                                         )}
                                     </div>
                                 ):

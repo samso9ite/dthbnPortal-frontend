@@ -84,20 +84,21 @@ export const Fields:any = {
     schoolFormFields: [
         {name:'schCode', type:'text', label:'School Code', required:true},
         {name:'schName', type:'text', label:'School Name', required:true},
+        {name:'programme', type:'multiselect', label:'Programme', 
+            options: [
+                {name:'Barchelor Dental Therapy(B.DTh)', id:1},
+                {name:'HND Dental Therapy', id:2},
+                {name:'HND Dental Surgery Assisting', id:3},
+                {name:'Dental Surgery Technician', id:4}
+         
+            ], required:true
+        },
         {name:'email', type:'email', label:'Email', required:true},
         {name:'phone', type:'text', label:'Phone Number', required:true},
        
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
-        {name:'programme', type:'multiselect', label:'Programme', 
-            options: [
-                {value:'', label:'Select Cadre'},
-                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
-                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
-                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
-            ], required:true
-        },
+        
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true}, 
     ],
     resetPwdFields: [
@@ -115,7 +116,7 @@ export const Fields:any = {
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
+                {name:'Barchelor Dental Therapy(B.DTh)', values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
                 {values:'HND Dental Therapy', label:'HND Dental Therapy'},
                 {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
                 {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}

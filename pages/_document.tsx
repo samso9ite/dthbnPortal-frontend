@@ -15,6 +15,7 @@ export default function Document() {
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src={process.env.NEXT_PUBLIC_URL+'/dist/js/app.js'}></script>
       </body>
+      
     </Html>
   )
 }
