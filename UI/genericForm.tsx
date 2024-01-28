@@ -45,6 +45,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const [storeFormData, setStoreFormData] = useState<any>({});
     const [stepper, setStepper] = useState<string>('');
     const [isUpdate, setIsUpdate] = useState<boolean>(false)
+    const [selected, setSelected] = useState([]);
 
     let indexingFormData = useSelector(indexingData)
     let examFormData = useSelector(formData) 
@@ -88,16 +89,12 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
             }
             
         }
-
-        // if (formStatus == false || indexingStatus == false) {
-        //     setValues(initialValues || {})
-        // }
     }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files} = e.target;
         let file = files && e.target.files[0]
-        
+       
         // Handle stepper form fields
        if (fields.find(field => field.name === name && field.stepperForm)) {
         setValues((prevValues) => ({
@@ -124,17 +121,32 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
-
+        
+        const programmeExist = fields.some(item => item.name == 'schCode');
         const newErrors: Record<string, string> = {}
         fields.forEach((field) => {
             if(field.required && !values[field.name]){
                 newErrors[field.name] = "This field is required";
+            }else if(field.name){
+
             }
         });
         if(Object.keys(newErrors).length > 0){
             setErrors(newErrors)
-        }else{
+        }else if(programmeExist && selected.length == 0){
+            toast.error('Programme field is required', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+            })
+        }
+        else{
             setErrors({})
+            if(selected.length > 0){
+                values.programme = selected
+            }
             onSubmit(values)
         }
         
@@ -172,11 +184,11 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                             onKeyPressFn={function noRefCheck(){}}
                                             onRemove={function noRefCheck(){}}
                                             onSearch={function noRefCheck(){}}
-                                            onSelect={function noRefCheck(){}}
+                                            onSelect={setSelected}
                                             options={options} 
-                                            selectedValues={values[name] || ''} 
-                                            displayValue="name"
-                                            placeholder="School Programme"
+                                            displayValue="values"
+                                            placeholder="Programme"
+                                          
                                             style={{
                                                 chips: {
                                                   background: '#3d1b59'
@@ -186,7 +198,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                                 },
                                                 searchBox: {
                                                   'border': 'none',
-                                                  'border-bottom': '1px solid blue',
+                                                  'border-bottom': '1px solid #3d1b59',
                                                   'border-radius': '0px'
                                                 }
                                               }}

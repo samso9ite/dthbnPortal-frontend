@@ -86,12 +86,12 @@ export const Fields:any = {
         {name:'schName', type:'text', label:'School Name', required:true},
         {name:'programme', type:'multiselect', label:'Programme', 
             options: [
-                {name:'Barchelor Dental Therapy(B.DTh)', id:1},
-                {name:'HND Dental Therapy', id:2},
-                {name:'HND Dental Surgery Assisting', id:3},
-                {name:'Dental Surgery Technician', id:4}
+                {values:'Barchelor Dental Therapy(B.DTh)'},
+                {values:'HND Dental Therapy'},
+                {values:'HND Dental Surgery Assisting'},
+                {values:'Dental Surgery Technician'}
          
-            ], required:true
+            ], required:false
         },
         {name:'email', type:'email', label:'Email', required:true},
         {name:'phone', type:'text', label:'Phone Number', required:true},
