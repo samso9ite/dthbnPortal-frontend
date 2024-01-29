@@ -146,6 +146,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
             setErrors({})
             if(selected.length > 0){
                 values.programme = selected
+                values.is_school = '1'
             }
             onSubmit(values)
         }

@@ -10,11 +10,17 @@ import { useEffect, useState } from "react";
 
 const ResetPassword:React.FC = () => {
     const [showStatus, setShowStatus] = useState<boolean>(false)
-
     const router = useRouter()
     
     const onSuccess = () => {
         router.push('/auth') 
+        toast.success('Account activated sucessfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            theme: "light",
+        })
     }
     const {uid, token} = router.query 
     
@@ -29,7 +35,6 @@ const ResetPassword:React.FC = () => {
             uidb:uid,
             token:token
         } 
-        console.log(formData);
         
         handleSubmit(formData)
     }, [uid, token])
