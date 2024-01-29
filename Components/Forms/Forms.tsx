@@ -82,8 +82,8 @@ export const Fields:any = {
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true},
     ],
     schoolFormFields: [
-        {name:'schCode', type:'text', label:'School Code', required:true},
-        {name:'schName', type:'text', label:'School Name', required:true},
+        {name:'code', type:'text', label:'School Code', required:true},
+        {name:'username', type:'text', label:'School Name', required:true},
         {name:'programme', type:'multiselect', label:'Programme', 
             options: [
                 {values:'Barchelor Dental Therapy(B.DTh)'},
@@ -95,7 +95,7 @@ export const Fields:any = {
         },
         {name:'email', type:'email', label:'Email', required:true},
         {name:'phone', type:'text', label:'Phone Number', required:true},
-       
+        // {name:'phone', type:'text', label:'Phone Number', required:true,},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         

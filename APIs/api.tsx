@@ -23,17 +23,6 @@ let access = await sessionStorage.getItem('token')
   return config;
 });
 
-// Route user to login when token expires
-// axios_instance.interceptors.response.use(undefined, function (error) {
-//   if (error) {
-//     const originalRequest = error.config;
-//     if (error.response.status === 401 && !originalRequest._retry) {
-//         localStorage.clear();
-//         sessionStorage.clear();
-//         return window.location.href="http://127.0.0.1:8000/api/";
-//     }
-//   }
-// })
 
 const baseUrl = 'https://api.dthbn.gov.ng/api/'
 // const baseUrl = 'http://127.0.0.1:8000/api/'
