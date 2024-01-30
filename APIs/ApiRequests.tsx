@@ -6,9 +6,7 @@ import { FormValues } from "@/UI/genericForm"
 const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'get' | 'delete', formData?:FormValues, fileUpload?:boolean) => {
     
     var currentPath = window.location.pathname;
-    console.log(currentPath);
-    
-
+   
     try{
         let config
         if(method == 'get'){
@@ -73,6 +71,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     generalRequest(`school/update_exam_record/${pk}/`, 'patch', formData, fileUpload=true),
 
     // School Profile
+    createProfile: (formData:FormValues, fileUpload:boolean) => generalRequest(`school/schoolprofile/`, 'post', formData, fileUpload=true),
     updateProfile: (formData:FormValues, fileUpload:boolean,  pk:number) => 
         generalRequest(`school/profile_update/${pk}/`, 'patch', formData, fileUpload=true),
 

@@ -282,7 +282,10 @@ export const Fields:any = {
 
     // Profile Update Form
     schProfileUpdateFields: [
-        {name: 'address', type:'text', label:'School Address', required:false},
+        {name: 'address', type:'text', label:'School Address', required:true},
+        {name: 'state', type:'text', label:'School State', required:true},
+        {name: 'region', type:'text', label:'School Region', required:true},
+        {name: 'postal_number', type:'text', label:'Postal Number', required:false},
         {name: 'sch_phone', type:'text', label:'School Phone Number', required:false},
         {name: 'hod_name', type:'text', label:'HOD Name', required:false},
         {name: 'hod_phone', type:'text', label:'HOD Phone', required:false},
