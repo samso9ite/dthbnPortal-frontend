@@ -30,7 +30,7 @@ const SideNav = () => {
             <nav className="side-nav">
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
                    
-                    <img alt="Dental Board of Nigeria" className="w-6" src={ sch_logo == 'undefined' ? 
+                    <img alt="Dental Board of Nigeria" className="w-10 rounded-full" src={ sch_logo == 'undefined' ? 
                         process.env.NEXT_PUBLIC_URL+"/src/images/logo_dental.png" : sch_logo} />
                    
     
