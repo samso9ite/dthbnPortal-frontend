@@ -111,7 +111,7 @@ export const Fields:any = {
     indexingProfileFields: [
         // {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
-        {name: 'middle_name', type:'text', label:'Middle Name', required:true},
+        {name: 'middle_name', type:'text', label:'Middle Name', required:false},
         {name: 'surname', type:'text', label:'Last Name', required:true},
         {name: 'cadre', type:'select', label:'Cadre', required:true,
             options: [

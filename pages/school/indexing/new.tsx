@@ -10,7 +10,6 @@ const { default: MainLayout } = require("@/Layout/MainLayout")
 
 const NewIndexing = () => {
     let stepper = useSelector(stepperState)
-    console.log(stepper);
     
     const indexingUpdateStatus = useSelector(indexingUpdate) 
     const dispatch = useDispatch()

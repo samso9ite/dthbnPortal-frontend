@@ -4,12 +4,13 @@ import { useCustomMutation, useCustomQuery } from "@/Hooks/apiCall"
 import MainLayout from "@/Layout/MainLayout"
 import GenericForm, { FormValues } from "@/UI/genericForm"
 import ApiStateHandler from "@/util/ApiStateHandler"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
     const [formState, setFormState] = useState('profile')
     const[notifIsActive, setNotifIsActive] = useState<boolean>(false)
+    // const[profileInitialValues, setProfileInitialValues] = useState<any>()
     let showSuccessMsg = true
 
     // Getting profile details from the backend 
@@ -17,19 +18,26 @@ const Profile = () => {
         const { isPending, isError, error, data } = useCustomQuery(apiRequest.dashboard, 'dashboard')
         return data?.data.data
     }
-    const response: any = fetchData()
 
+    const response: any = fetchData()
     const onSuccess = () => {
-        setNotifIsActive(true)
+        toast.success("Profile Updated", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false, 
+            closeOnClick: true,
+            theme: "light",
+        })      
         fetchData()
     }
 
     let fileUpload: boolean = true
+    
     // Submitting the updated form
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
         useCustomMutation((formData: FormValues) => { formState == 'profile' && 
         response.school_data.profile_update == false ? apiRequest.createProfile(formData, fileUpload)  : 
-        formState == 'profile' && response.school_data.profile_update ? 
+        formState == 'profile' && response.school_data.profile_update == true ? 
         apiRequest.updateProfile(formData, fileUpload, response?.school_data.sch_id) : 
         apiRequest.changePassword(formData)}, onSuccess)
 
@@ -37,8 +45,6 @@ const Profile = () => {
         if(formState == 'password'){
             if(formData.new_password === formData.confirm_password){
                 handleSubmit(formData)
-            }else{
-
             }
         }else{
             handleSubmit(formData)
@@ -46,13 +52,32 @@ const Profile = () => {
        
     }
 
-    let profileInitialValues = {
+    let profileInitialValues= {
         address: response?.school_data?.sch_address,
         hod_phone: response?.school_data?.hod_phone,
         hod_name: response?.school_data?.hod_name,
-        hod_email: response?.school_data?.hod_email
+        hod_email: response?.school_data?.hod_email,
+        state: response?.school_data?.state,
+        region: response?.school_data?.region,
+        postal_number: response?.school_data?.postal_number,
+        sch_phone: response?.school_data?.sch_phone,
     }
-
+   
+    // useEffect(() => {
+    //      setProfileInitialValues({
+    //         address: response?.school_data?.sch_address,
+    //         hod_phone: response?.school_data?.hod_phone,
+    //         hod_name: response?.school_data?.hod_name,
+    //         hod_email: response?.school_data?.hod_email,
+    //         state: response?.school_data?.state,
+    //         region: response?.school_data?.region,
+    //         postal_number: response?.school_data?.postal_number,
+    //         sch_phone: response?.school_data?.sch_phone,
+    //     })
+    // }, [response])
+    // console.log(profileInitialValues);
+    
+    
     return (
         <>
             <MainLayout>
@@ -60,7 +85,7 @@ const Profile = () => {
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="School Logo" className="rounded-full" src={response?.school_data?.profile_img ? response?.school_data?.profile_img : "dist/images/profile-9.jpg"} />
+                                <img alt="School Logo" className="rounded-full" src={response?.school_data?.sch_logo ? response?.school_data?.sch_logo : "dist/images/profile-9.jpg"} />
                             </div>
                             <div className="ml-5">
                                 <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.school_data?.sch_name}</div>
@@ -96,22 +121,27 @@ const Profile = () => {
                     </div>
                     <ul className="nav nav-link-tabs flex-col sm:flex-row justify-center lg:justify-start text-center" role="tablist" >
                         <li id="profile-tab" className="nav-item" role="presentation" onClick={() => { setFormState('profile') }}>
-                            <a href="javascript:;" className="nav-link py-4 flex items-center active" data-tw-target="#profile" aria-controls="profile" aria-selected="true" role="tab" > <i className="w-4 h-4 mr-2" data-lucide="user"
+                            <a href="javascript:;" className="nav-link py-4 flex items-center active" data-tw-target="#profile"
+                            aria-controls="profile" aria-selected="true" role="tab" > <i className="w-4 h-4 mr-2" data-lucide="user"
                             ></i>Update Profile </a>
                         </li>
                     </ul>
                 </div>
+              
                 <div className="tab-content mt-5">
                     <div id="profile" className="tab-pane active" role="tabpanel" aria-labelledby="profile-tab">
                         <div className="grid grid-cols-12 gap-6">
                             <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
-                                <GenericForm fields={formState == 'profile' ? Fields.schProfileUpdateFields : Fields.resetPwdFields} onSubmit={submitHandler} span6={true} initialValues={formState == 'profile' ? profileInitialValues : {}} />
+                                <GenericForm fields={formState == 'profile' ? Fields.schProfileUpdateFields : 
+                                Fields.resetPwdFields} onSubmit={submitHandler} span6={true} 
+                                initialValues={formState == 'profile' ? profileInitialValues : {}} />
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {notifIsActive && ApiStateHandler(isPending, isError, error, showSuccessMsg, isSuccess, data?.data.message)}
+                
+                {/* {notifIsActive && ApiStateHandler(isPending, isError, error, showSuccessMsg, isSuccess, data?.data.message)} */}
+                <ToastContainer />
             </MainLayout>
         </>
     )
