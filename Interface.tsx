@@ -78,7 +78,7 @@ interface Indexing {
     grade_5_4: string;
     grade_6_5: string;
     grade_7_6: string;
-    exam_sitting: number
+    exam_sitting: string
 }
 
 interface Examination {

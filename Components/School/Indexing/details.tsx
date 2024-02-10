@@ -88,18 +88,18 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                     
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>O-Level Result {props.data.exam_sitting}</b></div>
+                            <div className="font-medium text-center lg:text-left lg:mt-3"> <b>O-Level Result </b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number: </b> {props.data.exam_number}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type: </b> {props.data.exam_type}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year: </b> {props.data.exam_year}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_1}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_2} {props.data.grade_2}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_3} {props.data.grade_3}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_4} {props.data.grade_4}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_5} {props.data.grade_5}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_6}</div>
-                                <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1} {props.data.grade_7}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number : {props.data.exam_number}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type : {props.data.exam_type}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year : {props.data.exam_year}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_1} : {props.data.grade_1}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_2} : {props.data.grade_2}  </b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_3} : {props.data.grade_3}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_4} : {props.data.grade_4}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_5} : {props.data.grade_5}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b> {props.data.sub_6} : {props.data.grade_6}</b></div>
+                                <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_7} : {props.data.grade_7}</b></div>
                                 {/* <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}}>
                                     <i className="fa fa-eye" aria-hidden="true"></i> 
                                 </button> */}
@@ -115,21 +115,22 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                     </div>
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                     {
-                    // (props.data.exam_sitting == 2) &&
+                        
+                    (props.data.exam_sitting === "2") &&
                      <>
                         <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
                                 <div className="font-medium text-center lg:text-left lg:mt-3"> <b>O-Level Result</b></div>
                                 <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number: </b> {props.data.exam_number}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type: </b> {props.data.exam_type}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year: </b> {props.data.exam_year}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_1_0} {props.data.grade_1_0}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_2_1} {props.data.grade_2_1}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_3_2} {props.data.grade_3_2}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_4_3} {props.data.grade_4_3}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_5_4} {props.data.grade_5_4}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_6_5} {props.data.grade_6_5}</div>
-                                    <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_7_6} {props.data.grade_7_6}</div>
+                                <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number :  {props.data.exam_number_0}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Type :  {props.data.exam_type_0}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Year :  {props.data.exam_year_0}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center"> <b> {props.data.sub_1_0} : {props.data.grade_1_0}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_2_1} : {props.data.grade_2_1}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_3_2} : {props.data.grade_3_2}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_4_3} : {props.data.grade_4_3}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center"> <b> {props.data.sub_5_4} : {props.data.grade_5_4}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_6_5} : {props.data.grade_6_5}</b></div>
+                                    <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_7_6} : {props.data.grade_7_6}</b></div>
                                 </div>
                                 
                             </div>
