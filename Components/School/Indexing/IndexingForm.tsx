@@ -31,7 +31,7 @@ const IndexingForm = () => {
     const updateKey = useSelector(updateRecordKey)
     let showSuccessMsg = true
 
-    const onSuccess:any = (data:any) => {
+    const onSuccess:any = () => {
         dispatch(indexingActions.resetIndexingData({}))
         window.location.reload()
         setNotifIsActive(true)
@@ -69,37 +69,7 @@ const IndexingForm = () => {
                 let currentYear = new Date().getFullYear()
                 let prevYear = currentYear - 1
                 let year = prevYear+'-'+currentYear
-                // const formDataCopy = { ...formData };
-                
-                // Append each key-value pair to the FormData
-                // for (const [key, value] of Object.entries(formData)) {
-                //     if (gradeKeysToRemove.includes(key)) {
-                //         grades[key] = value
-                //      } else if (refereeKeysToRemove.includes(key)) {
-                //         referees[key] = value
-                //     } else if (qualificationKeysToRemove.includes(key)) {
-                //         examinations[key] = value
-                //     } else if (schKeysToRemove.includes(key)) {
-                //         school_data[key] = value
-                //     } else if(secondGradeKeysToRemove.includes(key)){
-                //         secondGrades[key] = value
-                //     }
-                // }   
-
-                // gradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-                // refereeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-                // qualificationKeysToRemove.forEach((key) => delete formDataCopy[key]);
-                // schKeysToRemove.forEach((key) => delete formDataCopy[key]);
-                // secondGradeKeysToRemove.forEach((key) => delete formDataCopy[key]);
-                
-                // formDataCopy.examinations = JSON.stringify(examinations)
-                // formDataCopy.grades = JSON.stringify(grades)
-                // if(numOfSitting == '2') {
-                //     formDataCopy.secondGrades = JSON.stringify(secondGrades)
-                // }
-                // formDataCopy.referees = JSON.stringify(referees)
-                // formDataCopy.school_attended = JSON.stringify(school_data)
-                // formDataCopy.exam_sitting = numOfSitting
+               
                 if(!isUpdate){
                     formData.year = year
                 }
@@ -165,17 +135,6 @@ const IndexingForm = () => {
                     <option value='2'>Two Sitting</option>
                 </select>
             }
-            {/* {
-                formState == 'work' && <>
-                    <select className="form-control" onChange={(e) => {
-                        setEmploymentStatus(e.target.value)
-                    }}>
-                        <option value=''>Select Employment Status</option>
-                        <option value='false'>Employed</option>
-                        <option value='true'>Unemployed</option>
-                    </select>
-                </>
-            } */}
             
             <GenericForm fields= { formState == 'profile' ? Fields.indexingProfileFields : 
                     formState == 'work' ? Fields.indexingWorkFields : 
@@ -185,7 +144,7 @@ const IndexingForm = () => {
                 } 
                 onSubmit={submitHandler} span6={true} stepperForm={true} employmentStatus={employmentStatus} 
             />
-           {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
+           {(notifIsActive || isError) && ApiStateHandler (isPending, isError, error, apiStatusHandler, showSuccessMsg, isSuccess, data?.data.message)}
         </>
     )
 }
