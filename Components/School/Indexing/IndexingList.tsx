@@ -10,6 +10,7 @@ import PaginatedItems from "@/UI/paginated";
 import SearchFilter from "@/Hooks/searchFilter";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { ToastContainer } from "react-toastify";
 
 const IndexingList:React.FC = () => {
     const router = useRouter()
@@ -29,7 +30,6 @@ const IndexingList:React.FC = () => {
         let currentYear:any = new Date().getFullYear();
         let previousYear:any = currentYear - 1
         let year = `${previousYear}-${currentYear}`
-        // setIndexYear(year)
         dispatch(fetchData(year))
     }, [])
     
@@ -94,7 +94,6 @@ const IndexingList:React.FC = () => {
                         {heading}    
                     </h2>
                     <div className="dropdown">
-                        {/* <button className="btn dropdown-toggle btn-primary shadow-md" aria-expanded="false" data-tw-toggle="dropdown" style={{backgroundColor: '#280742'}}>Export Record<i className="w-4 h-4" data-lucide="plus"></i> </button> */}
                         {indexingState == 'current' && <button  onClick={onSubmitCurrentIndexing} className="btn  btn-primary shadow-md" 
                         style={{backgroundColor: '#280742'}}> Submit Current Indexing <i className="w-4 h-4"></i> </button> }
                         {/* <div className="dropdown-menu w-40">
@@ -132,7 +131,7 @@ const IndexingList:React.FC = () => {
                                                 <th className="text-center whitespace-nowrap">SEX</th>
                                                 <th className="text-center whitespace-nowrap">AGE</th>
                                                 <th className="text-center whitespace-nowrap">RELIGION</th>
-                                                <th className="text-center whitespace-nowrap">VIEW</th>
+                                                <th className="text-center whitespace-nowrap">ACTION</th>
                                             </tr>
                                         </thead>
                                     }>
@@ -164,6 +163,7 @@ const IndexingList:React.FC = () => {
             </div>  
             {notifIsActive && ApiStateHandler (isPending, isError, error, apiStatusHandler,
                  showSuccessMsg, isSuccess, data?.data.message)} 
+            <ToastContainer />
         </>
     )
 }

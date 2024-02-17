@@ -3,21 +3,45 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { indexingActions } from '@/store/indexing-slice';
+import { fetchData, indexingActions } from '@/store/indexing-slice';
+import { ToastContainer, toast } from 'react-toastify';
+import apiRequest from '@/APIs/ApiRequests';
 
 const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
   
   
     const router = useRouter();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const onEditRecord = () => {
-        console.log(props.data);
         dispatch(indexingActions.setIndexingStatus(true))
         dispatch(indexingActions.switchState(''))
         dispatch(indexingActions.storeIndexingData(props.data))
         dispatch(indexingActions.setIndexingUpdate({isUpdate:true, updateRecordKey:props.data.id}))
         router.push('/school/indexing/new')
     }
+
+    const onDeleteRecord = () => {
+        props.data.id
+        apiRequest.deleteIndexRecord(props.data.id)
+        .then(res => {
+            props.onCloseModal()
+            toast.success("Indexing Record Deleted", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false, 
+                closeOnClick: true,
+                theme: "light",
+            }) 
+            let currentYear:any = new Date().getFullYear();
+            let previousYear:any = currentYear - 1
+            let year = `${previousYear}-${currentYear}`
+            dispatch(fetchData(year))    
+        }).catch(e => {
+            console.log(e);
+            
+        })
+    }
+
     return (
         <>
             <Modal
@@ -100,9 +124,7 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                                 <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_5} : {props.data.grade_5}</b></div>
                                 <div className="truncate sm:whitespace-normal flex items-center"> <b> {props.data.sub_6} : {props.data.grade_6}</b></div>
                                 <div className="truncate sm:whitespace-normal flex items-center">  <b>{props.data.sub_7} : {props.data.grade_7}</b></div>
-                                {/* <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}}>
-                                    <i className="fa fa-eye" aria-hidden="true"></i> 
-                                </button> */}
+                             
                             </div>
                         </div>
 
@@ -141,23 +163,9 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
                         }
                     </div>
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
-                    
-                        {/* <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <div id="faq-accordion-2" className="accordion accordion-boxed">
-                                <div className="accordion-item">
-                                    <div id="faq-accordion-content-5" className="accordion-header"> <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-5" aria-expanded="true" aria-controls="faq-accordion-collapse-5" style={{color:'red'}}> Dissapprove Submission</button> </div>
-                                    <div id="faq-accordion-collapse-5" className="accordion-collapse collapse " aria-labelledby="faq-accordion-content-5" data-tw-parent="#faq-accordion-2">
-                                        <div className="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </div>
-                                        <button className="btn btn-danger  mr-1 mb-2" > Submit </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn btn-success  mr-1 mb-2" style={{width:'100%'}}>Approve Submission</button>
-                        </div> */}
-                          {router.asPath.includes('/school/indexing/current') && <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-                            <button className="btn  mr-1 mb-2" style={{width:'100%'}} onClick={onEditRecord}>Edit Indexing Record</button>
+                        {router.asPath.includes('/school/indexing/current') && 
+                          <div className="mt-8 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+                            <button className="btn  mr-1 mb-2" onClick={onEditRecord} style={{width:'40%'}}>Edit Indexing Record</button>  <button className="btn btn-danger  mr-1 mb-2" onClick={onDeleteRecord} style={{width:'40%', float:'right'}}>Delete  Record</button>
                             </div>
                         }
                 </div>

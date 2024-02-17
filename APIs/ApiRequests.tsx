@@ -14,7 +14,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
             return response
         }else{
             if (fileUpload) {
-                // If there are files, set the Content-Type to multipart/form-data
+
                 config = {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -98,6 +98,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     reverseExamSubmission: (id:number) => generalRequest(`admin/reverse_exam_submission/${id}`, 'patch'),
     resetIndexLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_index_limit/${id}/${year}/${limit}`, 'patch'),
     resetExamLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_exam_limit/${id}/${year}/${limit}`, 'patch'),
+    deleteIndexRecord: (id:number) => generalRequest(`school/delete_index_record/${id}`, 'delete')
 }
 
 export default apiRequest 
