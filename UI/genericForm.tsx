@@ -95,6 +95,16 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         let {name, value, files} = e.target;
         let file = files && e.target.files[0]
        
+        if(file?.size > 1 * 1024 * 1024){
+            toast.error("File size shouldn't be more than 1mb, reduce your file size and re-upload", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                theme: "light",
+
+            })  
+          }
         // Handle stepper form fields
        if (fields.find(field => field.name === name && field.stepperForm)) {
         setValues((prevValues) => ({
