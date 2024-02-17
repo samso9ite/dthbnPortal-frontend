@@ -24,5 +24,6 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk]
 })
+export type AppDispatch = typeof store.dispatch
 
 export default store

@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import { fetchData, indexingActions } from '@/store/indexing-slice';
 import { ToastContainer, toast } from 'react-toastify';
 import apiRequest from '@/APIs/ApiRequests';
+// import { AppDispatch } from '@/store';
 
 const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:() => void}> = (props) => {
   
-  
     const router = useRouter();
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<any>()
     const onEditRecord = () => {
         dispatch(indexingActions.setIndexingStatus(true))
         dispatch(indexingActions.switchState(''))
@@ -21,7 +21,6 @@ const IndexingDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal
     }
 
     const onDeleteRecord = () => {
-        props.data.id
         apiRequest.deleteIndexRecord(props.data.id)
         .then(res => {
             props.onCloseModal()
