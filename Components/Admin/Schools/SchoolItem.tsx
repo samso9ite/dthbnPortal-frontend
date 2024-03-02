@@ -30,7 +30,7 @@ const SchoolItem = (props:any) => {
                     {props.data.User?.code}
                 </td>
                 <td className="text-center">
-                    <div className="flex items-center justify-center">{props.data.User?.phone_number}</div>
+                    <div className="flex items-center justify-center">{props.data?.hod_phone}</div>
                 </td>
                 <td className="text-center">
                     <div className="flex justify-center items-center">
