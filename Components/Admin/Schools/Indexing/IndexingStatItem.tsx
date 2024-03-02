@@ -59,6 +59,12 @@ const IndexingStatItem = (props:any) => {
     const onSetLimit = (e:any) => {
         setLimit(e?.target.value)
     }
+
+    const saveSchDetail = (schData:any) => {
+        console.log(schData);
+        localStorage.setItem("indexedSchName", schData.school)
+        
+    }
  
     return(
         <>
@@ -77,7 +83,7 @@ const IndexingStatItem = (props:any) => {
                 </td>
                 <td className="text-center">
                     <Link href="indexed/[id]/[year]/[type]" as={`indexed/${props.data.school_id}/${props.year}/submitted`}> 
-                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} >
+                        <button className="btn btn-primary mr-1 mb-2" onClick={() => saveSchDetail(props.data)} style={{backgroundColor: '#280742'}} >
                             {props.data?.index}
                         </button> 
                     </Link>

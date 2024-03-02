@@ -14,7 +14,7 @@ const IndexedList = (props:any) => {
     const [updatedResponse, setUpdatedResponse] = useState<any>()
     const[response, setResponse] = useState<any>([])
     const router = useRouter()
-
+    
     const {id, year, type} = router.query
     const fetchData = () => {
         apiRequest.schIndexedRec(id, year, type).then((res) => {
@@ -46,6 +46,7 @@ const IndexedList = (props:any) => {
                 <h2 className="text-lg font-medium truncate mr-5"> <TitleCase  text= {type} /> Indexed Record </h2>
               
                 <div className="hidden md:block mx-auto ">
+                <h2 className="text-lg font-medium truncate mr-5">{localStorage.getItem("indexedSchName")}</h2>
                 </div>
                 <div className="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                     <SearchFilter records={response?.all_sch_records}  getfilteredData={updateFilter} />
