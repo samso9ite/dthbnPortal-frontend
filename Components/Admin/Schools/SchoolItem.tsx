@@ -4,6 +4,7 @@ import SchoolDetails from "./SchoolDetails"
 
 
 const SchoolItem = (props:any) => {
+    
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     const refetchData = () => {
         props.triggerDataRefetch()
@@ -15,7 +16,7 @@ const SchoolItem = (props:any) => {
                     <div className="flex">
                         <div className="w-10 h-10 image-fit zoom-in">
                             <img alt="Student Image" className="tooltip rounded-full" 
-                            src={props.data.User?.school_logo !== null ? props.data?.school_logo : 
+                            src={props.data?.school_logo !== null ? props.data?.school_logo : 
                             "dist/images/preview-12.jpg"} />
                         </div>
                     </div>
