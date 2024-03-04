@@ -66,17 +66,16 @@ export const Fields:any = {
         {name:'email', type:'text', label:'Email', required:true},
     ],
     professionalFormFields: [
-        {name:'code', type:'text', label:'Registeration Code', required:true},
-        {name:'email', type:'email', label:'Email', required:true},
+        {name:'code', type:'text', label:'License Number', required:true},
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Barchelor Dental Therapy(B.DTh)', label:'Barchelor Dental Therapy(B.DTh)'},
-                {values:'HND Dental Therapy', label:'HND Dental Therapy'},
-                {values:'HND Dental Surgery Assisting', label:'HND Dental Surgery Assisting'},
-                {values:'Dental Surgery Technician', label:'Dental Surgery Technician'}
+                {values:'Dental Therapist/Officer', label:"Dental Therapist/Officer"},
+                {values:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
             ], required:true
         },
+        {name:'username', type:'text', label:'Name', required:true, disabled:true},
+        {name:'email', type:'email', label:'Email', required:true},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true},
@@ -95,7 +94,6 @@ export const Fields:any = {
         },
         {name:'email', type:'email', label:'Email', required:true},
         {name:'phone', type:'text', label:'Phone Number', required:true},
-        // {name:'phone', type:'text', label:'Phone Number', required:true,},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         
