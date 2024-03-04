@@ -74,7 +74,7 @@ export const Fields:any = {
                 {values:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
             ], required:true
         },
-        {name:'username', type:'text', label:'Name', required:true, disabled:true},
+        {name:'username', type:'text', label:'Name', required:true},
         {name:'email', type:'email', label:'Email', required:true},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},

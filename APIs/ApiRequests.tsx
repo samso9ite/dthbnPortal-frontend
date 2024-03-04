@@ -54,6 +54,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     accountActivation: (formData:FormValues) => generalRequest('auth/activate', 'post', formData),
     changePassword: (formData:FormValues) => generalRequest('auth/change_pwd/', 'post'),
     getUserAccount: (param:string) => generalRequest(`auth/get_account/${param}`, 'get'),
+    verifyProfCode: (param:string) => generalRequest(`auth/verify_prof_code/${param}`, 'get'),
 
     // School Portal API's 
     dashboard:() => generalRequest('school/dashboard/', 'get'),

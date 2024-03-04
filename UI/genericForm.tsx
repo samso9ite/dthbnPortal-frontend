@@ -9,8 +9,9 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { examinationState } from "@/store/examination-slice";
+import api from "@/APIs/api";
 
- type Field = {
+type Field = {
     name:string;
     type:string;
     options?: {label:string, value:string, }[];
@@ -58,6 +59,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const isExamUpdate = useSelector(examUpdate)
     const indexingUpdateStatus = useSelector(indexingUpdate)
     
+
+    console.log(fields);
+    
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
@@ -92,7 +96,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
+        
         let {name, value, files} = e.target;
+       
         let file = files && e.target.files[0]
        
         if(file?.size > 1 * 1024 * 1024){
@@ -126,6 +132,26 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
             setErrors((prevErrors) => ({
                 ...prevErrors, [name]:''
             }))
+        }
+
+        if((name=="programme" || name == "code") && value !== ''){
+            fields.map(field => {
+                if((values["code"] && values["programme"]) ){
+                    api.axios_instance.get(api.baseUrl+"auth/verify_prof_code/"+values["code"])
+                    .then(res => {
+                        console.log(res);
+                        setValues((prevValues) => ({
+                            ...prevValues,
+                            "name" : res.data.name,
+                        }));
+
+                    }).catch(err => {
+                        console.log("error");
+                    })
+                }
+            })
+           
+            
         }
     }
 
