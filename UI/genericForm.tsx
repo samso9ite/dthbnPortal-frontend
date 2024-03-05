@@ -39,7 +39,8 @@ type Props = {
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, employmentStatus })  => {
     const router = useRouter()
-  
+    console.log(stepperForm);
+    
     const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formStatus, setFormStatus] = useState<boolean>(false)
@@ -58,10 +59,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
     const indexingUpdateStatus = useSelector(indexingUpdate)
-    
-
-    console.log(fields);
-    
+        
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
@@ -91,13 +89,13 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
 
                 })
             }
-            
         }
     }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
+        console.log(e.target);
         
-        let {name, value, files} = e.target;
+        let {name, value, files, placeholder} = e.target;
        
         let file = files && e.target.files[0]
        
@@ -134,21 +132,22 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
             }))
         }
 
-        if((name=="programme" || name == "code") && value !== ''){
+        if(placeholder == "License Number"){
             fields.map(field => {
-                if((values["code"] && values["programme"]) ){
-                    api.axios_instance.get(api.baseUrl+"auth/verify_prof_code/"+values["code"])
+                setTimeout(() => {
+                    if((values["code"]) ){
+                    api.axios_instance.get(api.baseUrl+"auth/verify_prof_code/"+value)
                     .then(res => {
-                        console.log(res);
                         setValues((prevValues) => ({
                             ...prevValues,
-                            "name" : res.data.name,
+                            username : res.data.data.name,
+                            is_professional: 'true'
                         }));
 
                     }).catch(err => {
                         console.log("error");
                     })
-                }
+                }}, 4000)
             })
            
             
@@ -192,7 +191,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         <form onSubmit={handleSubmit} encType="multipart/form-data">
              {(employmentStatus == 'true' && stepper == 'work') ? '' :
                 <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
-                
+                    
                     {fields.map((field) => {
                         const fieldArray = Array.isArray(field) ? field : [field];
                         return fieldArray.map((field, index) => {
@@ -248,6 +247,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                 (
                                     <>
                                 {type == "file" && <label className="form-control"><b>{label}</b></label>}
+                                    {type !== "disabled" ?
                                         <input
                                             className="intro-x login__input form-control py-3 px-4 block mt-4"
                                             type={type}
@@ -255,7 +255,16 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                             placeholder={label}
                                             value={type == 'file' ? undefined : values[name] || ''}
                                             onChange={handleChange}
-                                        />
+                                        /> :   <input
+                                            className="intro-x login__input form-control py-3 px-4 block mt-4"
+                                            type={type}
+                                            name={name}
+                                            placeholder={label}
+                                            value={type == 'file' ? undefined : values[name] || ''}
+                                            onChange={handleChange}
+                                            disabled
+                                        /> 
+                                    }
                                         {field.required && errors[name] && (
                                             <p className="text-red-500">{errors[name]}</p>
                                         )}
