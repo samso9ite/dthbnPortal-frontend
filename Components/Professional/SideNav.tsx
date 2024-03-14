@@ -37,10 +37,42 @@ const SideNav = () => {
                 <div className="side-nav__devider my-6"></div>
                 <ul>
                     <li>
-                        <Link href='/school' className={router.pathname == '/school' ? "side-menu side-menu--active" : 'side-menu'}>
+                        <Link href='/professional' className={router.pathname == '/professional' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
                                 Dashboard 
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                            <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="side-menu__title">
+                               Renew License 
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                            <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="side-menu__title">
+                               Upcoming Events 
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                            <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="side-menu__title">
+                               Latest  News  
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/professional/profile' className={router.pathname == '/professional/profile' ? "side-menu side-menu--active" : 'side-menu'}>
+                            <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="side-menu__title">
+                                Profile
                             </div>
                         </Link>
                     </li>

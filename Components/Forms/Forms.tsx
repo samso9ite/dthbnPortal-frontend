@@ -80,6 +80,31 @@ export const Fields:any = {
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true},
     ],
+    profProfileUpdateFields: [
+        {name:'first_name', type:'text', label:"First Name", required:false},
+        {name:'middle_name', type:'text', label:"Middle Name", required:false},
+        {name:'last_name', type:'text', label:"Last Name", required:false},
+        {name:'dob', type:'text', label:"Date of Birth", required:false},
+        {name:'religion', type:'text', label:"Religion", required:false,
+            options: [
+                {value:'', label: "Select Religion"},
+                {value:'Christian', label:"Christian"},
+                {value: "Muslim", label: "Muslim"},
+                {value: "Others", label: "Others"}
+            ]
+        },
+        {name:'marital_status', type:'text', label:"Marital Status", required:false,
+            options: [
+                {value:'', label: "Select Marital Status"},
+                {value:'Single', label:"Single"},
+                {value: "Married", label:"Married"},
+                {value: "Divorced", label:"Divorced"}
+            ]
+        },
+        {name:'address', type:'text', label:'Address', required:false},
+        {name:'profile_image', type:'file', label:'Passport Photo', required:false},
+        
+    ],
     schoolFormFields: [
         {name:'code', type:'text', label:'School Code', required:true},
         {name:'username', type:'text', label:'School Name', required:true},
@@ -89,14 +114,12 @@ export const Fields:any = {
                 {values:'HND Dental Therapy'},
                 {values:'HND Dental Surgery Assisting'},
                 {values:'Dental Surgery Technician'}
-         
             ], required:false
         },
         {name:'email', type:'email', label:'Email', required:true},
         {name:'phone', type:'text', label:'Phone Number', required:true},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
-        
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true}, 
     ],
     resetPwdFields: [
