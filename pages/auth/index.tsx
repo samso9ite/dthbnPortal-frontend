@@ -115,7 +115,7 @@ const Authentication: React.FC = () => {
                         <div className="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             Dental Therapist
                             <br />
-                            Registeration Board <br /> of Nigeria
+                            Registration Board <br /> of Nigeria
                         </div>
                         <div className="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Login to your account with just few clicks.</div>
                     </div>
@@ -167,9 +167,7 @@ const Authentication: React.FC = () => {
                     {showStatus && ApiStateHandler(isPending, isError, error, apiStatusHandler)}
                 </div>
             </div>
-            <ToastContainer
-
-            />
+            <ToastContainer />
 
         </div>
 

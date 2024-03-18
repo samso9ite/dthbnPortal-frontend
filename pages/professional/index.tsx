@@ -1,7 +1,24 @@
 
+import apiRequest from "@/APIs/ApiRequests"
+import { useCustomQuery } from "@/Hooks/apiCall"
 import MainLayout from "@/Layout/ProfLayout"
+import { useEffect } from "react"
 
 const Professional = () => {
+
+    const fetchLicenses = () => {
+        console.log("Checking if this works");
+        
+        const { isPending, isError, error, data } = useCustomQuery(apiRequest.getAllLicense, 'license')
+        return data?.data.data
+    }
+    fetchLicenses()
+    // useEffect(() => {
+    //     const fetchData = () => {
+    //         const { isPending, isError, error, data } = useCustomQuery(apiRequest.dashboard, 'dashboard')
+    //         return data?.data.data
+    //     }
+    // }, [])
     return(
         <MainLayout>
              <div className="grid grid-cols-12 gap-6">
@@ -54,11 +71,11 @@ const Professional = () => {
                         </div>
                       
                         <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                        <div className="intro-y flex items-center h-10">
+                        {/* <div className="intro-y flex items-center h-10">
                                 <h2 className="text-lg font-medium truncate mr-5 mt-10">
                                     License Renewal History
                                 </h2>
-                            </div>
+                            </div> */}
                         <table className="table table-report mt-5">
                             <thead>
                                 <tr>

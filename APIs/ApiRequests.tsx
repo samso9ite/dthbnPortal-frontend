@@ -99,7 +99,13 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     reverseExamSubmission: (id:number) => generalRequest(`admin/reverse_exam_submission/${id}`, 'patch'),
     resetIndexLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_index_limit/${id}/${year}/${limit}`, 'patch'),
     resetExamLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_exam_limit/${id}/${year}/${limit}`, 'patch'),
-    deleteIndexRecord: (id:number) => generalRequest(`school/delete_index_record/${id}`, 'delete')
+    deleteIndexRecord: (id:number) => generalRequest(`school/delete_index_record/${id}`, 'delete'),
+
+    // Professional Endpoints
+    getAllLicense: (id:number) => generalRequest(`professional/list-license/${id}`, 'get'),
+    getProfile: (id:number) => generalRequest(`professional/get-profile/${id}`, 'get'),
+    updateProfProfile: (id:number) => generalRequest(`professional/update-profile/${id}`, 'patch'),
+    addProfile: () => generalRequest('professional/add-profile', 'post')
 }
 
 export default apiRequest 
