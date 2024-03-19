@@ -102,6 +102,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     deleteIndexRecord: (id:number) => generalRequest(`school/delete_index_record/${id}`, 'delete'),
 
     // Professional Endpoints
+    profDashboard: () => generalRequest(`professional/dashboard`, 'get'),
     getAllLicense: (id:number) => generalRequest(`professional/list-license/${id}`, 'get'),
     getProfile: (id:number) => generalRequest(`professional/get-profile/${id}`, 'get'),
     updateProfProfile: (id:number) => generalRequest(`professional/update-profile/${id}`, 'patch'),

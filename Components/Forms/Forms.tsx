@@ -80,12 +80,22 @@ export const Fields:any = {
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
         {name:'is_professional', type:'hidden', label:'Is Professional', isHidden:true},
     ],
-    profProfileUpdateFields: [
-        {name:'first_name', type:'text', label:"First Name", required:false},
-        {name:'middle_name', type:'text', label:"Middle Name", required:false},
-        {name:'last_name', type:'text', label:"Last Name", required:false},
-        {name:'dob', type:'text', label:"Date of Birth", required:false},
-        {name:'religion', type:'text', label:"Religion", required:false,
+    profProfileFields: [
+        {name:'title', type:'select', label:"Title", required:true,
+            options: [
+                {value:'', label: "Select Title"},
+                {value:'Mrs.', label:"Mrs."},
+                {value: "Miss", label: "Miss"},
+                {value: "Mr.", label: "Mr."}
+            ]
+        },
+        {name:'first_name', type:'text', label:"First Name", required:true},
+        {name:'middle_name', type:'text', label:"Middle Name", required:true},
+        {name:'surname', type:'text', label:"Last Name", required:true},
+        {name:'telephone', type:'text', label:'Phone Number', required:true},
+        {name:'email', type:'email', label:'Active Email', required:true},
+        {name:'date_of_birth', type:'text', label:"Date of Birth", required:true},
+        {name:'religion', type:'select', label:"Religion", required:true,
             options: [
                 {value:'', label: "Select Religion"},
                 {value:'Christian', label:"Christian"},
@@ -93,7 +103,7 @@ export const Fields:any = {
                 {value: "Others", label: "Others"}
             ]
         },
-        {name:'marital_status', type:'text', label:"Marital Status", required:false,
+        {name:'marital_status', type:'select', label:"Marital Status", required:true,
             options: [
                 {value:'', label: "Select Marital Status"},
                 {value:'Single', label:"Single"},
@@ -101,9 +111,48 @@ export const Fields:any = {
                 {value: "Divorced", label:"Divorced"}
             ]
         },
-        {name:'address', type:'text', label:'Address', required:false},
-        {name:'profile_image', type:'file', label:'Passport Photo', required:false},
+       
+        {name:'residential_address', type:'text', label:'Residential Address', required:true},
+        {name:'postal_address', type:'text', label:'Postal Address', required:false},
+        {name:'profile_image', type:'file', label:'Passport Photo', required:true},
         
+    ],
+    profWorkFields: [
+        {name:'employment_status', type:'select', label:'Employment Status', required:true, 
+            options: [
+                {value:'', label:'Select Employment Status'},
+                {values:'Employed', label:"Employed"},
+                {values:'Unemployed', label:'unemployed'},
+            ],
+        },  
+        {name:'office_name', type:'text', label:'Name of Place of Work', required:false},
+        {name:'office_address', type:'text', label:'Address of Place of Work', required:false},
+        {name:'office_country', type:'text', label:'Country of Place of Work ', required:false},
+        {name:'office_state', type:'text', label:'State of Place of Work ', required:false},
+        {name:'office_lga', type:'text', label:'LGA of Place of Work ', required:false},
+        {name:'office_phone', type:'text', label:'Phone number of Place of Work ', required:false},
+        {name:'office_email', type:'text', label:'Official Email', required:false},
+        {name:'department', type:'text', label:'Department', required:false},
+        {name:'present_position', type:'text', label:'Present Position', required:false},
+    ],
+    profAcademicFields: [
+        {name:'institution_1', type:'text', label:'Primary School', required:true},
+        {name:'qualification1', type:'text', label:'Primary School Leaving Certificate', required:true},
+        {name:'institution_2', type:'text', label:'Junior Secondary School', required:true},
+        {name:'qualification2', type:'text', label:'Junior School Leaving Certificate', required:true},
+        {name:'institution_3', type:'text', label:'Secondary School', required:true},
+        {name:'qualification3', type:'text', label:'Secondary School Leaving Certificate', required:true},
+        {name:'institution_4', type:'text', label:'Tertiary School', required:false},
+        {name:'qualification4', type:'text', label:'Tertiary School Certificate', required:false},
+        
+    ],
+    profContactFields: [
+        {name:'senatorial_district', type:'text', label:'Senatorial District', required:false},
+        {name:'residential_country', type:'text', label:'Residential Country', required:true},
+        {name:'residential_state', type:'text', label:'Residential State', required:true},
+        {name:'residential_lga', type:'text', label:'Residential LGA', required:true},
+        {name:'state_of_birth', type:'text', label:'State of Birth', required:true},
+        {name:'lga_of_birth', type:'text', label:'LGA of Birth', required:true},
     ],
     schoolFormFields: [
         {name:'code', type:'text', label:'School Code', required:true},

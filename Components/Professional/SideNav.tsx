@@ -7,9 +7,7 @@ const SideNav = () => {
     const router = useRouter()
     const exactPath = router.asPath
     const [isSubMenuActive , setIsSubMenuActive] = useState<string>()
-    const [sch_name, setSchName] = useState<any>()
-    const [sch_logo, setSchLogo] = useState<any>()
-
+    const [userProfile, setUserProfile] = useState<string>()
     const activateSubmenuHandler = (menu:string) => {
         setIsSubMenuActive(menu)
     }
@@ -19,20 +17,23 @@ const SideNav = () => {
         localStorage.clear()
         router.push('/auth')
     }
-    let username = localStorage.getItem('sch_name')
-    useEffect(() => {
-      setSchName(username)
-      setSchLogo(localStorage.getItem('sch_logo'))
-    }, [sch_logo])
+    // const fetchData = () => {
+    //     const { isPending, isError, error, data } = useCustomQuery(apiRequest.dashboard, 'dashboard')
+    //     return data?.data.data
+    // }
+
+    // useEffect(() => {
+    //     fetchData()
+    // },)
     
     return ( 
         <>
             <nav className="side-nav">
                 <a href="" className="intro-x flex items-center pl-5 pt-4">
-                    <img alt="Dental Board of Nigeria" className="w-10 rounded-full" src={ sch_logo == 'undefined' ? 
-                        process.env.NEXT_PUBLIC_URL+"/src/images/logo_dental.png" : sch_logo} />
+                    {/* <img alt="Dental Board of Nigeria" className="w-10 rounded-full" src={  == 'undefined' ? 
+                        process.env.NEXT_PUBLIC_URL+"/src/images/logo_dental.png" : sch_logo} /> */}
                    
-                    <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {username} /> </span> 
+                    <span className="hidden xl:block text-white text-lg ml-3"><TitleCase text = {localStorage.getItem('name')} /> </span> 
                 </a>
                 <div className="side-nav__devider my-6"></div>
                 <ul>

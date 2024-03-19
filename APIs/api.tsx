@@ -11,14 +11,14 @@ axios_instance.defaults.headers.post['Accept'] = 'application/json;';
 axios_instance.interceptors.request.use(async function (config) {
 let access = await sessionStorage.getItem('token') 
 
-    if(!navigator.onLine){
-        alert("Hello! Seems you're offline");
-        return {
-          headers: {} as AxiosRequestHeaders,
-          method: config.method,
-          url: ""
-        };
-      };
+    // if(!navigator.onLine){
+    //     alert("Hello! Seems you're offline");
+    //     return {
+    //       headers: {} as AxiosRequestHeaders,
+    //       method: config.method,
+    //       url: ""
+    //     };
+    //   };
   access ? config.headers.Authorization = `Bearer ${access}` : null;
   return config;
 });

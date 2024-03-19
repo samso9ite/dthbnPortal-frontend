@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ApiStateHandler from "@/util/ApiStateHandler"
 import GenericForm, { FormValues } from "@/UI/genericForm"
 import { Fields } from "@/Components/Forms/Forms"
-import api from "@/APIs/api";
+// import api from "@/APIs/api";
 
 type ServiceType = 'login' | 'signUp' | 'forgotPwd';
 
@@ -32,6 +32,9 @@ const Authentication: React.FC = () => {
                 }else if(response?.data.data.is_school == true){
                     router.push('/school')
                 }else if(response?.data.data.is_professional == true){
+                    localStorage.setItem('name', response?.data.data.username)
+                    localStorage.setItem('id', response?.data.data.id)
+                    localStorage.setItem('email', response?.data.data.email)
                     router.push('/professional')
                 }
               })
@@ -113,7 +116,7 @@ const Authentication: React.FC = () => {
                     <div className="my-auto">
                         <img alt="Dental Board of Nigeria" className="-intro-x w-2/2 -mt-16" src={process.env.NEXT_PUBLIC_URL + '/dist/images/dental_logo.png'} />
                         <div className="-intro-x text-white font-medium text-4xl leading-tight mt-10">
-                            Dental Therapist
+                            Dental Therapists'
                             <br />
                             Registration Board <br /> of Nigeria
                         </div>
