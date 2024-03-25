@@ -6,20 +6,33 @@ import GenericForm, { FormValues } from "@/UI/genericForm"
 import ApiStateHandler from "@/util/ApiStateHandler"
 import { useEffect, useState } from "react"
 import { ToastContainer, toast } from 'react-toastify';
+// import profileImg from '../../'
 
 const Profile = () => {
     const [formState, setFormState] = useState('profile')
     const [notifIsActive, setNotifIsActive] = useState<boolean>(false)
-    // const[profileInitialValues, setProfileInitialValues] = useState<any>()
+    const[profProfileInitialValues, setprofProfileInitialValues] = useState({})
+    const [profAcademicInitialValues, setProfAcademicInitialValues] = useState({})
+    const [profContactInitialValues, setProfContactInitialValues] = useState({})
+    const [profWorkInitialValues, setProfWorkInitialValues] = useState({})
+    const [response, setResponse] = useState<any>()
     let showSuccessMsg = true
-
+    let userId = localStorage.getItem('id') 
     // Getting profile details from the backend 
-    const fetchData = () => {
-        const { isPending, isError, error, data } = useCustomQuery(apiRequest.dashboard, 'dashboard')
-        return data?.data.data
+    const fetchData = async (userId:any) => {
+       return await apiRequest.getProfile(userId)
     }
-
-    const response: any = fetchData()
+    useEffect(() => {
+        fetchData(userId)
+        .then((response: any) => {
+            setResponse(response.data)   
+        })
+        .catch((error: any) => {
+            console.error(error);
+    });
+    }, [])
+   
+ 
     const onSuccess = () => {
         toast.success("Profile Updated", {
             position: "bottom-right",
@@ -28,7 +41,7 @@ const Profile = () => {
             closeOnClick: true,
             theme: "light",
         })
-        fetchData()
+        // fetchData(userId)
     }
 
     let fileUpload: boolean = true
@@ -36,47 +49,67 @@ const Profile = () => {
     // Submitting the updated form
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
         useCustomMutation((formData: FormValues) => {
-            formState == 'profile' &&
             response.school_data.profile_update == false ? apiRequest.createProfile(formData, fileUpload) :
-            formState == 'profile' && response.school_data.profile_update == true ?
+             response.school_data.profile_update == true ?
                 apiRequest.updateProfile(formData, fileUpload, response?.school_data.sch_id) :
                 apiRequest.changePassword(formData)
         }, onSuccess)
 
-    const submitHandler = (formData: FormValues) => {
-        if (formState == 'password') {
-            if (formData.new_password === formData.confirm_password) {
-                handleSubmit(formData)
-            }
-        } else {
-            handleSubmit(formData)
+        const submitHandler = () => {
+
         }
 
-    }
 
-    let profileInitialValues = {
-        address: response?.school_data?.sch_address,
-        hod_phone: response?.school_data?.hod_phone,
-        hod_name: response?.school_data?.hod_name,
-        hod_email: response?.school_data?.hod_email,
-        state: response?.school_data?.state,
-        region: response?.school_data?.region,
-        postal_number: response?.school_data?.postal_number,
-        sch_phone: response?.school_data?.sch_phone,
-    }
 
-    // useEffect(() => {
-    //      setProfileInitialValues({
-    //         address: response?.school_data?.sch_address,
-    //         hod_phone: response?.school_data?.hod_phone,
-    //         hod_name: response?.school_data?.hod_name,
-    //         hod_email: response?.school_data?.hod_email,
-    //         state: response?.school_data?.state,
-    //         region: response?.school_data?.region,
-    //         postal_number: response?.school_data?.postal_number,
-    //         sch_phone: response?.school_data?.sch_phone,
-    //     })
-    // }, [response])
+    useEffect(() => {
+        setprofProfileInitialValues({
+        title: response?.title,
+        first_name: response?.first_name,
+        middle_name: response?.middle_name,
+        surname: response?.surname,
+        telephone: response?.telephone,
+        email: response?.email,
+        date_of_birth: response?.date_of_birth,
+        religion: response?.religion,
+        marital_status: response?.marital_status,
+        residential_address: response?.residential_address,
+        postal_address: response?.postal_address,
+        profile_image: response?.profile_image,
+    })
+
+    setProfAcademicInitialValues({
+        institution_1: response?.institution_1,
+        qualification1: response?.qualification1,
+        institution_2: response?.institution_2,
+        qualification2: response?.qualification2,
+        institution_3: response?.institution_3,
+        qualification3: response?.qualification3,
+        institution_4: response?.institution_4,
+        qualification4: response?.qualification4
+    })
+
+    setProfContactInitialValues({
+        senatorial_district: response?.senatorial_district,
+        residential_country: response?.residential_country,
+        residential_state: response?.residential_state,
+        residential_lga: response?.residential_lga,
+        state_of_birth: response?.state_of_birth,
+        lga_of_birth: response?.lga_of_birth
+    })
+
+    setProfWorkInitialValues({
+        employment_status: response?.employment_status,
+        office_name: response?.office_name,
+        office_address: response?.office_address,
+        office_country: response?.office_country,
+        office_state: response?.office_state,
+        office_lga: response?.office_lga,
+        office_phone: response?.office_phone,
+        office_email: response?.office_email,
+        department: response?.department,
+        present_position: response?.present_position
+    })
+}, [response])
     // console.log(profileInitialValues);
 
 
@@ -87,12 +120,12 @@ const Profile = () => {
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-2 -mx-5">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="School Logo" className="rounded-full" src={response?.school_data?.sch_logo ? response?.school_data?.sch_logo : "dist/images/profile-9.jpg"} />
+                                <img alt="School Logo" className="rounded-full" src={response?.profile_image !== null ? response?.profile_image : process.env.NEXT_PUBLIC_URL+"dist/images/profile-11.jpg"} />
                             </div>
                             <div className="ml-5">
-                                <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.school_data?.sch_name}</div>
-                                <div className="text-slate-500">{response?.school_data?.email}</div>
-                                <div className="text-slate-500 mt-2">{response?.school_data?.sch_phone}</div>
+                                <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.title} {response?.surname} {response?.first_name}</div>
+                                <div className="text-slate-500">{response?.email}</div>
+                                <div className="text-slate-500 mt-2">{response?.telephone}</div>
                             </div>
                         </div>
 
@@ -124,7 +157,7 @@ const Profile = () => {
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
                                             <GenericForm fields={Fields.profProfileFields} onSubmit={submitHandler} span6={true}
-                                                initialValues={formState == 'profile' ? profileInitialValues : {}} />
+                                                initialValues={profProfileInitialValues} />
                                         </div>
                                     </div>
                                 </div>
@@ -139,12 +172,12 @@ const Profile = () => {
                                 Contact Detail +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
-                                <div id="profile" className="tab-pane active" role="tabpanel" aria-labelledby="profile-tab">
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                                <div id="profile" className="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
                                             <GenericForm fields={Fields.profContactFields} onSubmit={submitHandler} span6={true}
-                                                initialValues={formState == 'profile' ? profileInitialValues : {}} />
+                                                initialValues={profContactInitialValues} />
                                         </div>
                                     </div>
                                 </div>
@@ -159,12 +192,12 @@ const Profile = () => {
                                 Academic Details +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
-                                <div id="profile" className="tab-pane active" role="tabpanel" aria-labelledby="profile-tab">
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                                <div id="profile" className="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
                                             <GenericForm fields={Fields.profAcademicFields} onSubmit={submitHandler} span6={true}
-                                                initialValues={formState == 'profile' ? profileInitialValues : {}} />
+                                                initialValues={profAcademicInitialValues} />
                                         </div>
                                     </div>
                                 </div>
@@ -179,12 +212,12 @@ const Profile = () => {
                                 Work Details +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
-                                <div id="profile" className="tab-pane active" role="tabpanel" aria-labelledby="profile-tab">
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                                <div id="profile" className="tab-pane " role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
                                             <GenericForm fields={Fields.profWorkFields} onSubmit={submitHandler} span6={true}
-                                                initialValues={formState == 'profile' ? profileInitialValues : {}} />
+                                                initialValues={profWorkInitialValues} />
                                         </div>
                                     </div>
                                 </div>

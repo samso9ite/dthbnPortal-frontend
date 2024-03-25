@@ -49,7 +49,6 @@ const Profile = () => {
         }else{
             handleSubmit(formData)
         }
-       
     }
 
     let profileInitialValues= {
@@ -62,21 +61,6 @@ const Profile = () => {
         postal_number: response?.school_data?.postal_number,
         sch_phone: response?.school_data?.sch_phone,
     }
-   
-    // useEffect(() => {
-    //      setProfileInitialValues({
-    //         address: response?.school_data?.sch_address,
-    //         hod_phone: response?.school_data?.hod_phone,
-    //         hod_name: response?.school_data?.hod_name,
-    //         hod_email: response?.school_data?.hod_email,
-    //         state: response?.school_data?.state,
-    //         region: response?.school_data?.region,
-    //         postal_number: response?.school_data?.postal_number,
-    //         sch_phone: response?.school_data?.sch_phone,
-    //     })
-    // }, [response])
-    // console.log(profileInitialValues);
-    
     
     return (
         <>

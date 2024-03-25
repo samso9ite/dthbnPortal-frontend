@@ -131,7 +131,7 @@ const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:
                             </div>
                         </div>
 
-                       {/* {props.data.exam_sitting == "2" && <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
+                       {props.data.exam_sitting == "2" && <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
                             <div className="font-medium text-center lg:text-left lg:mt-3"> <b>OLevel Result</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
                             <div className="truncate sm:whitespace-normal flex items-center"> <b>Examination Number: </b> {props.data.exam_number}</div>
@@ -146,7 +146,7 @@ const IndexedDetails:React.FC<{data:Indexing, modalIsOpen:boolean, onCloseModal:
                                 <div className="truncate sm:whitespace-normal flex items-center">  {props.data.sub_7_6} {props.data.grade_7_6}</div>
                             </div>
                         </div>
-                        } */}
+                        }
                         {props.data.unapproved == true && <p><b>Comment: </b> {props.data.comment}</p>}
                     </div>
                    
