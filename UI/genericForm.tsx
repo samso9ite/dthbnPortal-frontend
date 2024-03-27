@@ -39,9 +39,9 @@ type Props = {
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, employmentStatus })  => {
     const router = useRouter()
-    console.log(stepperForm);
+    console.log(initialValues);
     
-    const [values, setValues] = useState<FormValues>(initialValues || {});
+    const [values, setValues] = useState<any>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formStatus, setFormStatus] = useState<boolean>(false)
     const [storeFormData, setStoreFormData] = useState<any>({});
@@ -59,7 +59,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
     const indexingUpdateStatus = useSelector(indexingUpdate)
-        
+    
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
@@ -79,6 +79,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
+            
             if(uncompletedForm){
                 toast.success("Please Reset all Images", {
                 position: "bottom-right",
@@ -89,12 +90,13 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
 
                 })
             }
+        }else{
+            setValues(initialValues)
         }
+  
     }, [formStatus, indexingStatus, examinationStatus])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
-        console.log(e.target);
-        
         let {name, value, files, placeholder} = e.target;
        
         let file = files && e.target.files[0]
@@ -120,13 +122,12 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 },
             ],
         }))
-    } else {
+        } else {
         setValues((prevValues) => ({
             ...prevValues,
             [name]: files ? file : value || '',
         }));
-    }
-        if(fields.find((field) =>  field.name === name && field.required)){
+        } if(fields.find((field) =>  field.name === name && field.required)){
             setErrors((prevErrors) => ({
                 ...prevErrors, [name]:''
             }))
@@ -187,6 +188,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         }
         
     }
+    
     return(
         <form onSubmit={handleSubmit} encType="multipart/form-data">
              {(employmentStatus == 'true' && stepper == 'work') ? '' :
@@ -253,7 +255,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                             type={type}
                                             name={name}
                                             placeholder={label}
-                                            value={type == 'file' ? undefined : values[name] || ''}
+                                            value={ values[name] || ''}
                                             onChange={handleChange}
                                         /> :   <input
                                             className="intro-x login__input form-control py-3 px-4 block mt-4"

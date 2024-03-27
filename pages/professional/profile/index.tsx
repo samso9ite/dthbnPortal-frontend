@@ -59,9 +59,23 @@ const Profile = () => {
 
         }
 
-
-
     useEffect(() => {
+        console.log(response);
+        
+        let profDetails = {
+            title: response?.title,
+            first_name: response?.first_name,
+            middle_name: response?.middle_name,
+            surname: response?.surname,
+            telephone: response?.telephone,
+            email: response?.email,
+            date_of_birth: response?.date_of_birth,
+            religion: response?.religion,
+            marital_status: response?.marital_status,
+            residential_address: response?.residential_address,
+            postal_address: response?.postal_address,
+            profile_image: response?.profile_image,
+        }
         setprofProfileInitialValues({
         title: response?.title,
         first_name: response?.first_name,
@@ -76,7 +90,8 @@ const Profile = () => {
         postal_address: response?.postal_address,
         profile_image: response?.profile_image,
     })
-
+    console.log(profDetails);
+    
     setProfAcademicInitialValues({
         institution_1: response?.institution_1,
         qualification1: response?.qualification1,
@@ -109,9 +124,9 @@ const Profile = () => {
         department: response?.department,
         present_position: response?.present_position
     })
+    console.log(profProfileInitialValues);
+    
 }, [response])
-    // console.log(profileInitialValues);
-
 
     return (
         <>
