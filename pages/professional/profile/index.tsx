@@ -17,7 +17,7 @@ const Profile = () => {
     const [profWorkInitialValues, setProfWorkInitialValues] = useState({})
     const [response, setResponse] = useState<any>()
     let showSuccessMsg = true
-    let userId = localStorage.getItem('id') 
+    let userId:any = localStorage.getItem('id') 
     // Getting profile details from the backend 
     const fetchData = async (userId:any) => {
        return await apiRequest.getProfile(userId)
@@ -41,42 +41,33 @@ const Profile = () => {
             closeOnClick: true,
             theme: "light",
         })
-        // fetchData(userId)
+        fetchData(userId)
+        .then((response: any) => {
+            setResponse(response.data)   
+        })
+        .catch((error: any) => {
+            console.error(error);
+    });
     }
 
     let fileUpload: boolean = true
 
     // Submitting the updated form
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
-        useCustomMutation((formData: FormValues) => {
-            response.school_data.profile_update == false ? apiRequest.createProfile(formData, fileUpload) :
-             response.school_data.profile_update == true ?
-                apiRequest.updateProfile(formData, fileUpload, response?.school_data.sch_id) :
-                apiRequest.changePassword(formData)
-        }, onSuccess)
+    useCustomMutation((formData: FormValues) => {
+        localStorage.getItem("profile_update") == "false" ? 
+            apiRequest.addProfile(formData, fileUpload) :
+            apiRequest.updateProfProfile(formData, userId, fileUpload)
+    }, onSuccess)
 
-        const submitHandler = () => {
-
-        }
+    const submitHandler = (formData:any) => {
+        handleSubmit(formData)
+    }
 
     useEffect(() => {
-        console.log(response);
-        
-        let profDetails = {
-            title: response?.title,
-            first_name: response?.first_name,
-            middle_name: response?.middle_name,
-            surname: response?.surname,
-            telephone: response?.telephone,
-            email: response?.email,
-            date_of_birth: response?.date_of_birth,
-            religion: response?.religion,
-            marital_status: response?.marital_status,
-            residential_address: response?.residential_address,
-            postal_address: response?.postal_address,
-            profile_image: response?.profile_image,
-        }
-        setprofProfileInitialValues({
+      console.log("ran again ");
+      
+    setprofProfileInitialValues({
         title: response?.title,
         first_name: response?.first_name,
         middle_name: response?.middle_name,
@@ -90,8 +81,6 @@ const Profile = () => {
         postal_address: response?.postal_address,
         profile_image: response?.profile_image,
     })
-    console.log(profDetails);
-    
     setProfAcademicInitialValues({
         institution_1: response?.institution_1,
         qualification1: response?.qualification1,
@@ -124,8 +113,6 @@ const Profile = () => {
         department: response?.department,
         present_position: response?.present_position
     })
-    console.log(profProfileInitialValues);
-    
 }, [response])
 
     return (
@@ -145,11 +132,7 @@ const Profile = () => {
                         </div>
 
                         <div className="mt-6 lg:mt-0 flex-1 flex items-center justify-center px-5 border-t lg:border-0 border-slate-200/60 dark:border-darkmode-400 pt-5 lg:pt-0">
-                            <div className="text-center rounded-md w-20 py-3">
-                                <div className="font-medium text-primary text-xl">{response?.total_indexed}</div>
-                                <div className="text-slate-500">Total License Renewal</div>
-                            </div>
-
+                        <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.residential_address}</div>
                         </div>
                     </div>
                     <ul className="nav nav-link-tabs flex-col sm:flex-row justify-center lg:justify-start text-center" role="tablist" >

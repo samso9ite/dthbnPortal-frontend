@@ -1,6 +1,5 @@
 import GenericForm, { FormValues} from "@/UI/genericForm"
 
-
 type Field = {
     name:string;
     type:string;
@@ -67,7 +66,9 @@ export const Fields:any = {
     ],
     professionalFormFields: [
         {name:'code', type:'text', label:'License Number', required:true},
-        {name:'username', type:'disabled', label:'Name', required:true},
+        {name:'first_name', type:'disabled', label:'First Name', required:false},
+        {name:'last_name', type:'disabled', label:'Last Name', required:false},
+        {name:'middle_name', type:'disabled', label:'Other Name', required:false},
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
@@ -179,7 +180,6 @@ export const Fields:any = {
 
     // New Indexng Form
     indexingProfileFields: [
-        // {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:false},
         {name: 'surname', type:'text', label:'Last Name', required:true},
@@ -217,8 +217,7 @@ export const Fields:any = {
         {name: 'permanent_address', type:'text', label:'Permanent Address', required:false},
         {name: 'contact_address', type:'text', label:'Contact Address', required:false},
         {name:'profile_image', type:'file', label:'Passport Photo', required:false},
-        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false},
-       
+        {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false}, 
     ],
 
     indexingWorkFields: [
@@ -257,23 +256,19 @@ export const Fields:any = {
         {name: 'school_attended_3', type:'text', label:'Tertiary School Attended', required:true},
         {name: 'qualification_3', type:'text', label:' Tertiary School Certificate', required:true},
         {name: 'admission_grad_year_3', type:'text', label:'Tertiary School Admission & Graduation Year(2000-2005)', required:true},
-        // generatedSchField,
-        // generatedCertField,
-        // generatedEntry_GradYear
     ],
 
     // New Examination Form
     examinationProfileFields: [
-        // {name: 'institution_name', type:'text', label:'Institution', required:true},
         {name: 'title', type:'select', label:'Title', required:true,
-        options: [
-            {value:'', label:'Select Title'},
-            {values:'Mr.', label:'Mr.'},
-            {values:'Mrs.', label:'Mrs.'},
-            {values:'Miss', label:'Miss'},
-            {values:'Messrs', label: 'Messrs'}
-        ],
-    },
+            options: [
+                {value:'', label:'Select Title'},
+                {values:'Mr.', label:'Mr.'},
+                {values:'Mrs.', label:'Mrs.'},
+                {values:'Miss', label:'Miss'},
+                {values:'Messrs', label: 'Messrs'}
+            ],
+        },
         {name: 'first_name', type:'text', label:'First Name', required:true}, 
         {name: 'middle_name', type:'text', label:'Middle Name', required:true},
         {name: 'surname', type:'text', label:'Last Name', required:true},

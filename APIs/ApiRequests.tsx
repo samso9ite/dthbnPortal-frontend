@@ -105,8 +105,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     profDashboard: () => generalRequest(`professional/dashboard`, 'get'),
     getAllLicense: (id:number) => generalRequest(`professional/list-license/${id}`, 'get'),
     getProfile: (id:number) => generalRequest(`professional/get-profile/${id}`, 'get'),
-    updateProfProfile: (id:number) => generalRequest(`professional/update-profile/${id}`, 'patch'),
-    addProfile: () => generalRequest('professional/add-profile', 'post')
+    updateProfProfile: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`professional/update-profile/${id}`, 'patch', formData, fileUpload=true),
+    addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData)
 }
 
 export default apiRequest 

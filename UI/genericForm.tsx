@@ -39,9 +39,8 @@ type Props = {
 
 const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending, span6, stepperForm, employmentStatus })  => {
     const router = useRouter()
-    console.log(initialValues);
     
-    const [values, setValues] = useState<any>(initialValues || {});
+    const [values, setValues] = useState<FormValues>(initialValues || {});
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [formStatus, setFormStatus] = useState<boolean>(false)
     const [storeFormData, setStoreFormData] = useState<any>({});
@@ -59,7 +58,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
     const examStepper = useSelector(examStepperState)
     const isExamUpdate = useSelector(examUpdate)
     const indexingUpdateStatus = useSelector(indexingUpdate)
-    
+        
     useEffect(() => {
         if(indexingStatus == true  && indexingRoute == true ){
             setFormStatus(true)
@@ -76,10 +75,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         let uncompletedForm = formStatus == true  && stepper !== 'profile'
         let updatingForm = formStatus == true  && stepper == 'profile' && 
         (isExamUpdate == true || indexingUpdateStatus == true)
-        
+     
         if(uncompletedForm || updatingForm){
             setValues(storeFormData)
-            
             if(uncompletedForm){
                 toast.success("Please Reset all Images", {
                 position: "bottom-right",
@@ -87,14 +85,12 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 hideProgressBar: false,
                 closeOnClick: true,
                 theme: "light",
-
                 })
             }
-        }else{
+        }else if(initialValues){
             setValues(initialValues)
         }
-  
-    }, [formStatus, indexingStatus, examinationStatus])
+    }, [formStatus, indexingStatus, examinationStatus, initialValues])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files, placeholder} = e.target;
@@ -122,12 +118,13 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 },
             ],
         }))
-        } else {
+    } else {
         setValues((prevValues) => ({
             ...prevValues,
             [name]: files ? file : value || '',
         }));
-        } if(fields.find((field) =>  field.name === name && field.required)){
+    }
+        if(fields.find((field) =>  field.name === name && field.required)){
             setErrors((prevErrors) => ({
                 ...prevErrors, [name]:''
             }))
@@ -141,7 +138,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                     .then(res => {
                         setValues((prevValues) => ({
                             ...prevValues,
-                            username : res.data.data.name,
+                            first_name : res.data.data.first_name,
+                            middle_name : res.data.data.middle_name,
+                            last_name : res.data.data.last_name,
                             is_professional: 'true'
                         }));
 
@@ -149,9 +148,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                         console.log("error");
                     })
                 }}, 4000)
-            })
-           
-            
+            })  
         }
     }
 
@@ -188,7 +185,6 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         }
         
     }
-    
     return(
         <form onSubmit={handleSubmit} encType="multipart/form-data">
              {(employmentStatus == 'true' && stepper == 'work') ? '' :
@@ -255,7 +251,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                                             type={type}
                                             name={name}
                                             placeholder={label}
-                                            value={ values[name] || ''}
+                                            value={type == 'file' ? undefined : values[name] || ''}
                                             onChange={handleChange}
                                         /> :   <input
                                             className="intro-x login__input form-control py-3 px-4 block mt-4"
