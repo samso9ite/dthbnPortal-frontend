@@ -19,6 +19,7 @@ let access = await sessionStorage.getItem('token')
     //       url: ""
     //     };
     //   };
+
   access ? config.headers.Authorization = `Bearer ${access}` : null;
   return config;
 });

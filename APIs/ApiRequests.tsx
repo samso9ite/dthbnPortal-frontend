@@ -103,8 +103,8 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
 
     // Professional Endpoints
     profDashboard: () => generalRequest(`professional/dashboard`, 'get'),
-    getAllLicense: (id:number) => generalRequest(`professional/list-license/${id}`, 'get'),
-    getProfile: (id:number) => generalRequest(`professional/get-profile/${id}`, 'get'),
+    getAllLicense: (id:any) => generalRequest(`professional/list-license/${id}`, 'get'),
+    getProfile: (id:any) => generalRequest(`professional/get-profile/${id}`, 'get'),
     updateProfProfile: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`professional/update-profile/${id}`, 'patch', formData, fileUpload=true),
     addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData)
 }

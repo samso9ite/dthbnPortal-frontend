@@ -13,7 +13,7 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                         <div className="flex  px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="Dental Board of Nigeria" className="rounded-full" src={props.data.profile_image !== null ? props.data.profile_image : "dist/images/preview-12.jpg"} />
+                                <img alt="Dental Board of Nigeria" className="rounded-full" src={props.data.profile_image !== null ? process.env.NEXT_PUBLIC_API_IMG_BASE_URL+props.data.profile_image : "dist/images/preview-12.jpg"} />
                                 <div className="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2"> <i className="w-4 h-4 text-white" data-lucide="camera"></i> </div>
                             </div>
                             <div className="ml-5">
@@ -72,7 +72,7 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                             <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Work Details</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
                             <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Employment State:</b> {props.data.employment_status} </div>
-                               {props.data.employment_status !== "unemployed" && <span> <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Present Position:</b> {props.data.present_position} </div>
+                               {props.data.employment_status == "employed" && <span> <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Present Position:</b> {props.data.present_position} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Department:</b> {props.data.department} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office: </b>{props.data.office_name} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Office Address :</b> {props.data.office_address} </div>
@@ -84,15 +84,17 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                             </div>
                         </div>
 
-                       {props.data.exam_sitting && <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
+                       { <div className="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" >
                             <div className="font-medium text-center lg:text-left lg:mt-3"> <b>Qualifications / Certifications</b></div>
                             <div className="flex flex-col justify-center items-center lg:items-start mt-4">
-                            <div className="truncate sm:whitespace-normal flex items-center"> <b>Qualification 1: </b> {props.data.qualification1}</div>
-                            <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualification 2 :</b> {props.data.qualification2} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Qualification 3:</b> {props.data.qualification3} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b> Professional Qualification 1: </b>{props.data.prof_qualification1} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Professional Qualification 2 :</b> {props.data.prof_qualification2} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Professional Qualification 3:</b> {props.data.prof_qualification3} </div>
+                            <div className="truncate sm:whitespace-normal flex items-center"> <b>Primary School: </b> {props.data.institution_1}</div>
+                            <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Primary Certificate:</b> {props.data.qualification1} </div>
+                            <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Junior School:</b> {props.data.institution_2} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Junior Certificate:</b> {props.data.qualification2} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b> Secondary School: </b>{props.data.institution_3} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Secondary  Certificate:</b> {props.data.qualification3} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Institution:</b> {props.data.institution_4} </div>
+                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Institution Certificate:</b> {props.data.qualification4} </div>
                             </div>
                         </div>
                         }
