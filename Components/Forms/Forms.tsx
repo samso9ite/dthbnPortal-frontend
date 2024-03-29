@@ -219,7 +219,18 @@ export const Fields:any = {
         {name:'profile_image', type:'file', label:'Passport Photo', required:false},
         {name: 'marriage_cert', type:'file', label:'Marriage Certificate', required:false}, 
     ],
-
+    licenseFormFields: [
+        {name: 'expiry_date', type:'date', label:'Expiry Date', required: true},
+        {name: "renewal_date", type:'date', label:'Renewal Date', required: true},
+        {name: "status", type:"select", required: true, 
+            options: [
+                {value:'', label:'Select Status'},
+                {value:'Valid', label:'Valid'},
+                {value:'Expired', label:'Expired'}
+            ]
+        },
+        {name: "certificate", type:"file", label:"License Certificate", required:false}
+    ],
     indexingWorkFields: [
         {name: 'place_of_work', type:'text', label:'Place of Work', required:false},
         {name: 'address', type:'text', label:'Address', required:false},
