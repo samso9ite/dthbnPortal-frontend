@@ -1,41 +1,65 @@
 import apiRequest from "@/APIs/ApiRequests"
 import { Fields } from "@/Components/Forms/Forms"
+import { useCustomMutation } from "@/Hooks/apiCall"
 import SearchFilter from "@/Hooks/searchFilter"
 import AdminLayout from "@/Layout/AdminLayout"
-import GenericForm from "@/UI/genericForm"
+import GenericForm, { FormValues } from "@/UI/genericForm"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { Modal } from 'react-responsive-modal';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Licenses:React.FC<{ }> = () => {
     const router = useRouter()
     const { id } = router.query;
     const [response, setResponse] = useState<any>([])
     const [isModaOpen, setIsModalOpen] = useState<boolean>(false)
-    let licenseInitialValues = {};
+    const [licenseInitialValues, setLicenseInitialValues] = useState<any>({})
+    
     const getLicenses = () => {
         apiRequest.getAllLicense(id).then(
             response => {
                 setResponse(response?.data) 
-
         })
     }
 
-    const openModal = () => {
+    const openModal = (id:any) => {
         setIsModalOpen(true)
+        let activeLicense = response.filter((item:any) => item.id == id)
+        setLicenseInitialValues ( {
+            "id": activeLicense[0]?.id,
+            "renewal_date": activeLicense[0]?.renewal_date,
+            "expiry_date": activeLicense[0]?.expiry_date,
+            "status": activeLicense[0]?.status,
+            "certificate": activeLicense[0]?.certificate
+        })
     }
 
+    let fileUpload: boolean = true
     useEffect(() => {
         getLicenses()
-        licenseInitialValues = {
-            "renewal_date": response?.renewal_date,
-            "expiry_date": response?.expiry_date,
-            "status": response?.status
-        }
     }, [])
 
-    const submitHandler = () => {
+    const onSuccess = () => {
+        toast.success("Profile Updated", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            theme: "light",
+        })
+       getLicenses()
+    }
+    const { handleSubmit, isSuccess, isError, error, isPending, data } =
+    useCustomMutation((formData: FormValues) => {
+        apiRequest.updateLicense(formData, licenseInitialValues?.id, fileUpload) 
+        // :
+        // apiRequest.updateProfProfile(formData, userId, fileUpload)
+    }, onSuccess)
 
+    const submitHandler = (formData:any) => {
+        // console.log(licenseInitialValues?.id);
+        handleSubmit(formData)
     }
     
     return(
@@ -71,7 +95,7 @@ const Licenses:React.FC<{ }> = () => {
                             </td>
                             <td className="table-report__action ">
                                 <div className="flex justify-center items-center">
-                                    <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={openModal}>
+                                    <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => openModal(item.id)}>
                                         <i className="fa fa-eye" aria-hidden="true"></i> 
                                     </button>
                                 </div>
@@ -83,6 +107,9 @@ const Licenses:React.FC<{ }> = () => {
                 </div>
                 <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
+                        <div>
+                            <center><img src={licenseInitialValues?.certificate} width="500"/></center> 
+                        </div>
                         <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                             <GenericForm fields={Fields.licenseFormFields} onSubmit={submitHandler} span6={true}
                                 initialValues={licenseInitialValues} 

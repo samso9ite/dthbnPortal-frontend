@@ -88,6 +88,8 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 })
             }
         }else if(initialValues){
+            console.log(initialValues);
+            
             setValues(initialValues)
         }
     }, [formStatus, indexingStatus, examinationStatus, initialValues])

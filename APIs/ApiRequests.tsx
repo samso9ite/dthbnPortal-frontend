@@ -100,10 +100,13 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     resetIndexLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_index_limit/${id}/${year}/${limit}`, 'patch'),
     resetExamLimit: (id:number, year:string, limit:number) => generalRequest(`admin/set_exam_limit/${id}/${year}/${limit}`, 'patch'),
     deleteIndexRecord: (id:number) => generalRequest(`school/delete_index_record/${id}`, 'delete'),
+    // Admin License Endpoints
+    updateLicense: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`admin/update-license/${id}`,  'patch', formData, fileUpload=true),
+    getAllLicense: (id:any) => generalRequest(`admin/list-license/${id}`, 'get'),
 
     // Professional Endpoints
     profDashboard: () => generalRequest(`professional/dashboard`, 'get'),
-    getAllLicense: (id:any) => generalRequest(`professional/list-license/${id}`, 'get'),
+
     getProfile: (id:any) => generalRequest(`professional/get-profile/${id}`, 'get'),
     updateProfProfile: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`professional/update-profile/${id}`, 'patch', formData, fileUpload=true),
     addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData)

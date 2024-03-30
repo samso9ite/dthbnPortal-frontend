@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 const SearchFilter = (props:any) => {
-    console.log(props.records);
     let responseData = props.records
     const [records, setRecords] = useState<any>(props.records)
     const [fetched, setFetched] = useState<boolean>(false)

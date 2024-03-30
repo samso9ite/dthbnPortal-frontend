@@ -22,6 +22,7 @@ const Profile = () => {
     const fetchData = async (userId:any) => {
        return await apiRequest.getProfile(userId)
     }
+
     useEffect(() => {
         fetchData(userId)
         .then((response: any) => {
@@ -43,7 +44,8 @@ const Profile = () => {
         })
         fetchData(userId)
         .then((response: any) => {
-            setResponse(response.data)   
+            setResponse(response.data)  
+             
         })
         .catch((error: any) => {
             console.error(error);
@@ -56,8 +58,8 @@ const Profile = () => {
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
     useCustomMutation((formData: FormValues) => {
         localStorage.getItem("profile_update") == "false" ? 
-            apiRequest.addProfile(formData, fileUpload) :
-            apiRequest.updateProfProfile(formData, userId, fileUpload)
+        apiRequest.addProfile(formData, fileUpload) :
+        apiRequest.updateProfProfile(formData, userId, fileUpload)
     }, onSuccess)
 
     const submitHandler = (formData:any) => {
