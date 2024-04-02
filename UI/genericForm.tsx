@@ -183,6 +183,8 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 values.programme = selected
                 values.is_school = '1'
             }
+            console.log(values);
+            
             onSubmit(values)
         }
         
@@ -191,13 +193,11 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
         <form onSubmit={handleSubmit} encType="multipart/form-data">
              {(employmentStatus == 'true' && stepper == 'work') ? '' :
                 <div className={span6 == true ? 'grid grid-cols-12 gap-4 gap-y-5 mt-5' : ''}>
-                    
                     {fields.map((field) => {
                         const fieldArray = Array.isArray(field) ? field : [field];
                         return fieldArray.map((field, index) => {
                         const { name, type, options, label } = field;
                         return(
-                        
                             <div key={name} className={span6 == true ? 'intro-y col-span-12 sm:col-span-6' : ''}>
                                 {type === 'select' && options ? (
                                     <>

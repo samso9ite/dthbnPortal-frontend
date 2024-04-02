@@ -15,8 +15,12 @@ const Licenses:React.FC<{ }> = () => {
     const [response, setResponse] = useState<any>([])
     const [isModaOpen, setIsModalOpen] = useState<boolean>(false)
     const [licenseInitialValues, setLicenseInitialValues] = useState<any>({})
-    
+    const [certImage, setCertImage] = useState<any>()
+    const [createLicense, setCreateLicense] = useState<boolean>(false)
+    const [msg, setMsg] = useState(" ")
     const getLicenses = () => {
+        console.log("This ran");
+        
         apiRequest.getAllLicense(id).then(
             response => {
                 setResponse(response?.data) 
@@ -25,14 +29,15 @@ const Licenses:React.FC<{ }> = () => {
 
     const openModal = (id:any) => {
         setIsModalOpen(true)
+        setCreateLicense(false)
         let activeLicense = response.filter((item:any) => item.id == id)
-        setLicenseInitialValues ( {
+        setLicenseInitialValues ({
             "id": activeLicense[0]?.id,
             "renewal_date": activeLicense[0]?.renewal_date,
             "expiry_date": activeLicense[0]?.expiry_date,
             "status": activeLicense[0]?.status,
-            "certificate": activeLicense[0]?.certificate
         })
+        setCertImage({"certificate": activeLicense[0]?.certificate})
     }
 
     let fileUpload: boolean = true
@@ -41,39 +46,51 @@ const Licenses:React.FC<{ }> = () => {
     }, [])
 
     const onSuccess = () => {
-        toast.success("Profile Updated", {
+        getLicenses()
+        toast.success(msg, {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             theme: "light",
         })
-       getLicenses()
+       
+       setIsModalOpen(false)
     }
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
-    useCustomMutation((formData: FormValues) => {
-        apiRequest.updateLicense(formData, licenseInitialValues?.id, fileUpload) 
-        // :
-        // apiRequest.updateProfProfile(formData, userId, fileUpload)
-    }, onSuccess)
+        useCustomMutation((formData: FormValues) => {
+        !createLicense ? apiRequest.updateLicense(formData, licenseInitialValues?.id, fileUpload) 
+            : apiRequest.createLicense(formData, fileUpload) 
+        }, onSuccess)
 
     const submitHandler = (formData:any) => {
-        // console.log(licenseInitialValues?.id);
-        handleSubmit(formData)
+        if(createLicense){
+            formData["prof"] = id
+            setMsg("License Created Successfully")
+        }else if(!createLicense){
+            setMsg("License has been updated")
+        }
+      
+        handleSubmit(formData)  
     }
-    
+
+    let createLicenseHandler = () => {
+        setLicenseInitialValues(null)
+        setIsModalOpen(true)
+        setCreateLicense(true)
+        setCertImage(undefined)
+    }
+
     return(
         <AdminLayout>
             <div className="col-span-12 mt-6">
                 <div className="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                     <h2 className="text-lg font-medium truncate mr-5">{response.length > 0 && response[0].prof.username} License Record</h2><button className=" btn btn-primary" aria-expanded="false" 
-                        style={{marginLeft:'10px'}} onClick={() => {setIsModalOpen(true)}}>Create License Record</button>
+                        style={{marginLeft:'10px'}} onClick={createLicenseHandler}>Create License Record</button>
                 </div>  
-                <div> 
-                    </div>
-             
+                
                 <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                <table className="table table-report sm:mt-2">
+                    <table className="table table-report sm:mt-2">
                     <thead>
                         <tr>
                             <th className="whitespace-nowrap"> Renewal Date</th>
@@ -108,16 +125,17 @@ const Licenses:React.FC<{ }> = () => {
                 <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
                         <div>
-                            <center><img src={licenseInitialValues?.certificate} width="500"/></center> 
+                            <center><img src={certImage?.certificate} width="500"/></center> 
                         </div>
                         <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                             <GenericForm fields={Fields.licenseFormFields} onSubmit={submitHandler} span6={true}
-                                initialValues={licenseInitialValues} 
+                                initialValues={createLicense == false ? licenseInitialValues: null}  
                             />
                         </div>
                     </div>
                 </Modal>
             </div>  
+            <ToastContainer />
         </AdminLayout>
     )
 }
