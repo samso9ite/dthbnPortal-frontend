@@ -80,37 +80,42 @@ const Professional = () => {
                                     <th className="text-center whitespace-nowrap">View License</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                               { dashboardDetails?.license?.map((item:any) => (
-                                    <tr className="intro-x"> 
-                                        <td className="w-40">
-                                            <div className="flex">
-                                                <a  className="font-medium whitespace-nowrap">{item.renewal_date}</a> 
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a  className=" items-center  font-medium whitespace-nowrap">{item.expiry_date}</a> 
-                                        </td>
-                                        <td className="text-center">{item.status}</td>
-                                        <td className="w-40">
-                                            <div className="flex items-center justify-center" onClick={ () => setIsModalOpen(true)}> <i data-lucide="check-square" className="w-4 h-4 mr-2"></i> Click to view </div>
-                                        </td>
-                                    </tr>
-                               ))
-                                }
-                                <Modal
-                    open={modalIsOpen}
-                    onClose={onCloseModal}
-                    >
-                        <div className="intro-y box px-5 pt-5 mt-5" >
-                    <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
-                         kkdskj   
-                    </div>
-                    </div>
-                          
-                    </Modal>
-                            </tbody>
-                        </table>
+                            {dashboardDetails?.license.length > 0  ? 
+                                <tbody>
+                                {dashboardDetails?.license?.map((item:any) => (
+                                        <tr className="intro-x"> 
+                                            <td className="w-40">
+                                                <div className="flex">
+                                                    <a  className="font-medium whitespace-nowrap">{item.renewal_date}</a> 
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a  className=" items-center  font-medium whitespace-nowrap">{item.expiry_date}</a> 
+                                            </td>
+                                            <td className="text-center">{item.status}</td>
+                                            <td className="w-40">
+                                                <div className="flex items-center justify-center" onClick={ () => setIsModalOpen(true)}> <i data-lucide="check-square" className="w-4 h-4 mr-2"></i> Click to view </div>
+                                            </td>
+                                        </tr>
+                                ))
+                                    }
+                                    <Modal
+                        open={modalIsOpen}
+                        onClose={onCloseModal}
+                        >
+                            <div className="intro-y box px-5 pt-5 mt-5" >
+                        <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
+                                
+                        </div>
+                        </div>
+                            
+                        </Modal>
+                                </tbody>
+                            : 
+                               <span style={{marginLeft:"6%", fontWeight:"500", fontSize:"17px"}}> No record found! </span>
+                            }
+                        </table> 
+                            
                         
                         </div>
                       

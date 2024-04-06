@@ -67,54 +67,52 @@ const Profile = () => {
     }
 
     useEffect(() => {
-      console.log("ran again ");
-      
-    setprofProfileInitialValues({
-        title: response?.title,
-        first_name: response?.first_name,
-        middle_name: response?.middle_name,
-        surname: response?.surname,
-        telephone: response?.telephone,
-        email: response?.email,
-        date_of_birth: response?.date_of_birth,
-        religion: response?.religion,
-        marital_status: response?.marital_status,
-        residential_address: response?.residential_address,
-        postal_address: response?.postal_address,
-        profile_image: response?.profile_image,
-    })
-    setProfAcademicInitialValues({
-        institution_1: response?.institution_1,
-        qualification1: response?.qualification1,
-        institution_2: response?.institution_2,
-        qualification2: response?.qualification2,
-        institution_3: response?.institution_3,
-        qualification3: response?.qualification3,
-        institution_4: response?.institution_4,
-        qualification4: response?.qualification4
-    })
+        setprofProfileInitialValues({
+            title: response?.title,
+            first_name: response?.first_name,
+            middle_name: response?.middle_name,
+            surname: response?.surname,
+            telephone: response?.telephone,
+            email: response?.email,
+            date_of_birth: response?.date_of_birth,
+            religion: response?.religion,
+            marital_status: response?.marital_status,
+            residential_address: response?.residential_address,
+            postal_address: response?.postal_address,
+            profile_image: response?.profile_image,
+        })
+        setProfAcademicInitialValues({
+            institution_1: response?.institution_1,
+            qualification1: response?.qualification1,
+            institution_2: response?.institution_2,
+            qualification2: response?.qualification2,
+            institution_3: response?.institution_3,
+            qualification3: response?.qualification3,
+            institution_4: response?.institution_4,
+            qualification4: response?.qualification4
+        })
 
-    setProfContactInitialValues({
-        senatorial_district: response?.senatorial_district,
-        residential_country: response?.residential_country,
-        residential_state: response?.residential_state,
-        residential_lga: response?.residential_lga,
-        state_of_birth: response?.state_of_birth,
-        lga_of_birth: response?.lga_of_birth
-    })
+        setProfContactInitialValues({
+            senatorial_district: response?.senatorial_district,
+            residential_country: response?.residential_country,
+            residential_state: response?.residential_state,
+            residential_lga: response?.residential_lga,
+            state_of_birth: response?.state_of_birth,
+            lga_of_birth: response?.lga_of_birth
+        })
 
-    setProfWorkInitialValues({
-        employment_status: response?.employment_status,
-        office_name: response?.office_name,
-        office_address: response?.office_address,
-        office_country: response?.office_country,
-        office_state: response?.office_state,
-        office_lga: response?.office_lga,
-        office_phone: response?.office_phone,
-        office_email: response?.office_email,
-        department: response?.department,
-        present_position: response?.present_position
-    })
+        setProfWorkInitialValues({
+            employment_status: response?.employment_status,
+            office_name: response?.office_name,
+            office_address: response?.office_address,
+            office_country: response?.office_country,
+            office_state: response?.office_state,
+            office_lga: response?.office_lga,
+            office_phone: response?.office_phone,
+            office_email: response?.office_email,
+            department: response?.department,
+            present_position: response?.present_position
+        })
 }, [response])
 
     return (

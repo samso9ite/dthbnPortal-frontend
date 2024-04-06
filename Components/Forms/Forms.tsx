@@ -64,6 +64,8 @@ export const Fields:any = {
     forgetPwdFormFields: [
         {name:'email', type:'text', label:'Email', required:true},
     ],
+
+    // Professional Fields
     professionalFormFields: [
         {name:'code', type:'text', label:'License Number', required:true},
         {name:'first_name', type:'disabled', label:'First Name', required:false},
@@ -155,6 +157,11 @@ export const Fields:any = {
         {name:'state_of_birth', type:'text', label:'State of Birth', required:true},
         {name:'lga_of_birth', type:'text', label:'LGA of Birth', required:true},
     ],
+
+    licenseVerificationField:[
+        {name:"license_number", type:'text', label:'License Number', required:true}
+    ],
+    // End of Professional form fields
     schoolFormFields: [
         {name:'code', type:'text', label:'School Code', required:true},
         {name:'username', type:'text', label:'School Name', required:true},
