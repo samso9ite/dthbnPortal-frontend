@@ -17,7 +17,7 @@ const VerifyLicense = () => {
             const response = await axios.get(api.baseUrl+`professional/verify-license/${licenseId.license_number}/`);
             console.log(response);
             
-            setLicense(response.data);
+            setLicense(response.data.data);
             setChecked(true)
             setLoading(false);
         } catch (error) {
@@ -67,19 +67,19 @@ const VerifyLicense = () => {
                         :
                     <>
                         <div >
-                            <center><img className="text-center" src={license.data.status == "valid" ? process.env.NEXT_PUBLIC_URL+"dist/images/valid.jpeg" : process.env.NEXT_PUBLIC_URL+"dist/images/expired.png"} /></center>
+                            <center><img className="text-center mt-10" src={license.license.status == "Valid" ? process.env.NEXT_PUBLIC_URL+"dist/images/valid_icon.png" : process.env.NEXT_PUBLIC_URL+"dist/images/expired.png"} width="30%"  /></center>
                         </div>
                         
                     <div className="intro-y box  pt-5 mt-5 block xl:grid grid-cols-1 w-full">
                     <div className="flex flex-col lg:flex-row border-b">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="Midone - HTML Admin Template" className="rounded-full" src={process.env.NEXT_PUBLIC_URL+"dist/images/profile-1.jpg"} />
+                                <img alt="Dental Board of Nigeria" className="rounded-full" src={license.profDetails.profile_image !== null ? license.profDetails.profile_image : process.env.NEXT_PUBLIC_URL+"dist/images/profile-1.jpg"} />
                             </div>
                             <div className="ml-5">
-                                <div className="  truncate sm:whitespace-normal font-medium text-lg">{license?.data.prof?.last_name} {license?.data.prof?.first_name} {license?.data.prof?.middle_name}</div>
-                                <div className="text-slate-500">{license?.data.prof?.programme}</div>
-                                <div className="text-slate-500">{license?.data.prof?.email}</div>
+                                <div className="  truncate sm:whitespace-normal font-medium text-lg">{license?.license.prof?.last_name} {license?.license.prof?.first_name} {license?.license.prof?.middle_name}</div>
+                                <div className="text-slate-500">{license?.license.prof?.programme}</div>
+                                <div className="text-slate-500">{license?.license.prof?.email}</div>
                             </div>
                         </div>
                         
@@ -87,18 +87,18 @@ const VerifyLicense = () => {
                     <div className="mt-6 lg:mt-0 px-5 border-l border-r dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0" style={{width:"100%"}}> 
                             <div className="font-medium lg:text-left lg:mt-3">License Details</div>
                             <div className="flex flex-col lg:items-start mt-4">
-                                <div className="truncate sm:whitespace-normal flex font-medium text-lg "> Last Renewal: {license?.data.renewal_date}</div>
-                                <div className="truncate sm:whitespace-normal flex font-medium text-lg mt-3">  Expiry Date: {license?.data.expiry_date} </div>
-                                <div className="truncate sm:whitespace-normal flex  font-medium text-lg  mt-3">License Validity: <span style={{color:"red", paddingLeft:"5px"}}>{license?.data.status == "valid" ? "License Up-To-Date" : "License Expired"}</span></div>
+                                <div className="truncate sm:whitespace-normal flex font-medium text-lg "> Last Renewal: {license?.license.renewal_date}</div>
+                                <div className="truncate sm:whitespace-normal flex font-medium text-lg mt-3">  Expiry Date: {license?.license.expiry_date} </div>
+                                <div className="truncate sm:whitespace-normal flex  font-medium text-lg  mt-3">License Validity: <span style={{ color: license && license.license.status === "Valid" ? "green" : "red", paddingLeft: "5px" }}>{license?.license.status == "Valid" ? "License Up-To-Date" : "License Expired"}</span></div>
                             </div>
                     </div>
                     
                 </div>
-                <button className="btn btn-primary py-3 px-4 xl:mr-3 align-top mt-10" type="submit" 
+               <a href="https://dthbn.gov.ng/"> <button className="btn btn-primary py-3 px-4 xl:mr-3 align-top mt-10" type="submit" 
                    > Go Back to Website
-                </button>  <button className="btn btn-primary py-3 px-4 xl:mr-3 align-top mt-10" type="submit" 
+                </button></a>  <a href={process.env.NEXT_PUBLIC_URL+"professional/verify"}><button className="btn btn-primary py-3 px-4 xl:mr-3 align-top mt-10" type="submit" 
                    > Check New License
-                </button>
+                </button></a>
                     </>
                     }
                 </div>
