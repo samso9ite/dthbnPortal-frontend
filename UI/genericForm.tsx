@@ -88,17 +88,17 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 })
             }
         }else if(initialValues){
-            console.log(initialValues);
-            
             setValues(initialValues)
         }
     }, [formStatus, indexingStatus, examinationStatus, initialValues])
     
     const handleChange = (e:React.ChangeEvent<any>) => {
         let {name, value, files, placeholder} = e.target;
-       
+        let profProgramme:string = ""
+        if(name=="programme"){
+            profProgramme = value
+        }
         let file = files && e.target.files[0]
-       
         if(file?.size > 1 * 1024 * 1024){
             toast.error("File size shouldn't be more than 1mb, reduce your file size and re-upload", {
                 position: "bottom-right",
@@ -131,27 +131,37 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 ...prevErrors, [name]:''
             }))
         }
+       
+        // Handle Professional license verification on authpage
+        setTimeout(() => {
+            if((values["code"] && profProgramme) ){
+            api.axios_instance.get(api.baseUrl+"auth/verify_prof_code/"+values["code"]+"/"+profProgramme)
+            .then(res => {
+                setErrors({})
+                setValues((prevValues) => ({
+                    ...prevValues,
+                    first_name : res.data.data.first_name,
+                    middle_name : res.data.data.middle_name,
+                    last_name : res.data.data.last_name,
+                    is_professional: 'true'
+                }));
 
-        if(placeholder == "License Number"){
-            fields.map(field => {
-                setTimeout(() => {
-                    if((values["code"]) ){
-                    api.axios_instance.get(api.baseUrl+"auth/verify_prof_code/"+value)
-                    .then(res => {
-                        setValues((prevValues) => ({
-                            ...prevValues,
-                            first_name : res.data.data.first_name,
-                            middle_name : res.data.data.middle_name,
-                            last_name : res.data.data.last_name,
-                            is_professional: 'true'
-                        }));
-
-                    }).catch(err => {
-                        console.log("error");
-                    })
-                }}, 4000)
-            })  
-        }
+            }).catch(err => {
+                const newErrors: Record<any, any> = {}
+                fields.forEach((field) => {
+                    if(field.name == "programme"){
+                        newErrors[field.name] = (
+                            <span style={{marginTop:"2%"}}>
+                                Professional not found, please click <a href="#" style={{color:"blue"}}>here</a>.
+                            </span>
+                        );
+                        setErrors(newErrors)
+                    }
+                })
+            })
+        }}, 2000)
+            
+        
     }
 
     const handleSubmit = (e:any) => {
@@ -183,7 +193,6 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                 values.programme = selected
                 values.is_school = '1'
             }
-            console.log(values);
             
             onSubmit(values)
         }
@@ -283,7 +292,9 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                     disabled={isPending}>{isPending ? 'Submitting' : 'Submit'}
                 </button>
             }
+            <ToastContainer />
         </form>   
+        
         )
 
     }

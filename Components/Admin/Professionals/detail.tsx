@@ -103,9 +103,7 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                    
 
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5 mt-3">
-                    
-                         
-                </div>
+                    </div>
         
                 </div>
         </Modal>

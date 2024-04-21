@@ -12,11 +12,9 @@ const VerifyLicense = () => {
     const[loading, setLoading] = useState<boolean>(false)
     const[checked, setChecked] = useState<boolean>(false)
 
-    const fetchLicense = async (licenseId:any) => {
+    const fetchLicense = async (data:any) => {
         try {
-            const response = await axios.get(api.baseUrl+`professional/verify-license/${licenseId.license_number}/`);
-            console.log(response);
-            
+            const response = await axios.get(api.baseUrl+`professional/verify-license/${data.license_number}/${data.programme}`);
             setLicense(response.data.data);
             setChecked(true)
             setLoading(false);
@@ -45,7 +43,8 @@ const VerifyLicense = () => {
                     <div className="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Verify a Professional License </div>
                 </div>
             </div>
-            <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
+            <center className="md:hidden"><img alt="Dental Board of Nigeria"  src={process.env.NEXT_PUBLIC_URL + '/dist/images/dental_logo.png'} /></center>
+                <div className={window.innerWidth < 768 ? "xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0" : "h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0"}>
                 <div className={`${!checked == true ? 
                     "my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto" 
                     : " "} text-right`}>

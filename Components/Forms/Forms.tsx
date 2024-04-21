@@ -68,16 +68,16 @@ export const Fields:any = {
     // Professional Fields
     professionalFormFields: [
         {name:'code', type:'text', label:'License Number', required:true},
-        {name:'first_name', type:'disabled', label:'First Name', required:false},
-        {name:'last_name', type:'disabled', label:'Last Name', required:false},
-        {name:'middle_name', type:'disabled', label:'Other Name', required:false},
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
-                {values:'Dental Therapist/Officer', label:"Dental Therapist/Officer"},
-                {values:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
+                {value:'Dental Therapist-Officer', label:"Dental Therapist/Officer"},
+                {value:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
             ], required:true
         },
+        {name:'first_name', type:'disabled', label:'First Name', required:false},
+        {name:'last_name', type:'disabled', label:'Last Name', required:false},
+        {name:'middle_name', type:'disabled', label:'Other Name', required:false},
         {name:'email', type:'email', label:'Email', required:true},
         {name:'password', type:'password', label:'Password', required:true},
         {name:'confirmPwd', type:'password', label:'Confirm Password', required:true},
@@ -159,7 +159,14 @@ export const Fields:any = {
     ],
 
     licenseVerificationField:[
-        {name:"license_number", type:'text', label:'License Number', required:true}
+        {name:"license_number", type:'text', label:'License Number', required:true},
+        {name:'programme', type:'select', label:'Programme', 
+            options: [
+                {value:'', label:'Select Cadre'},
+                {value:'Dental Therapist-Officer', label:"Dental Therapist/Officer"},
+                {value:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
+            ], required:true
+        },
     ],
     // End of Professional form fields
     schoolFormFields: [

@@ -72,7 +72,7 @@ const ProfessionalList = () => {
                                         )}
                                     </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
-                                ) :
+                                ) : 
                             ''
                             }
                         {/* </tbody>

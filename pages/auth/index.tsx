@@ -27,6 +27,7 @@ const Authentication: React.FC = () => {
             sessionStorage.setItem('token', data.data.access),
             sessionStorage.setItem('refresh', data.data.refresh)
             const resp = apiRequest.getUserAccount(email).then(response => {
+                localStorage.setItem("profile_update", response?.data.data.profile_update)
                 if(response?.data.data.is_admin == true){
                     router.push('/admin')
                 }else if(response?.data.data.is_school == true){
@@ -123,9 +124,13 @@ const Authentication: React.FC = () => {
                         <div className="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Login to your account with just few clicks.</div>
                     </div>
                 </div>
-                <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
+                <center className="md:hidden"><img alt="Dental Board of Nigeria"  src={process.env.NEXT_PUBLIC_URL + '/dist/images/dental_logo.png'} /></center>
+                <div className={window.innerWidth < 768 ? "xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0" : "h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0"}>
+                       
                     <div className="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent
                      px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                         
+               
                         <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             {formState == 'login' ? 'Sign in' : formState == 'school' ? 'School Sign up' :
                                 formState == 'professional' ? 'Professional Sign Up' : 'Forgot Password'}
@@ -147,7 +152,7 @@ const Authentication: React.FC = () => {
                                     :
                                     formState == 'professional' ?
                                         <GenericForm fields={Fields.professionalFormFields}
-                                            initialValues={{ programme: 'Dental Therapist', is_professional: 'true' }}
+                                            initialValues={{ programme: '', is_professional: 'true' }}
                                             onSubmit={submitHandler}
                                         /> :
                                         <GenericForm fields={Fields.forgetPwdFormFields}

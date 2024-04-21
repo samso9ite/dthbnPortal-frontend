@@ -122,7 +122,7 @@ const Profile = () => {
                     <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-2 -mx-5">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="School Logo" className="rounded-full" src={response?.profile_image !== null ? response?.profile_image : process.env.NEXT_PUBLIC_URL+"dist/images/profile-11.jpg"} />
+                                <img alt="School Logo" className="rounded-full" src={response?.profile_image !== null ? response?.profile_image : process.env.NEXT_PUBLIC_URL+"dist/images/profile-1.jpg"} />
                             </div>
                             <div className="ml-5">
                                 <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{response?.title} {response?.surname} {response?.first_name}</div>

@@ -60,8 +60,6 @@ const Professional = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
-                            
                             </div>
                         </div>
                       
