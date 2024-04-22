@@ -152,7 +152,7 @@ const GenericForm:React.FC<Props> = ({fields, onSubmit, initialValues, isPending
                     if(field.name == "programme"){
                         newErrors[field.name] = (
                             <span style={{marginTop:"2%"}}>
-                                Professional not found, please click <a href="#" style={{color:"blue"}}>here</a>.
+                                Professional not found, please click <a href="https://forms.gle/SBYjxaywAjgJVUiA7" style={{color:"blue"}}>here</a>.
                             </span>
                         );
                         setErrors(newErrors)
