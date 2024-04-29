@@ -97,7 +97,6 @@ export const Fields:any = {
         {name:'surname', type:'text', label:"Last Name", required:true},
         {name:'telephone', type:'text', label:'Phone Number', required:true},
         {name:'email', type:'email', label:'Active Email', required:true},
-        {name:'date_of_birth', type:'text', label:"Date of Birth", required:true},
         {name:'religion', type:'select', label:"Religion", required:true,
             options: [
                 {value:'', label: "Select Religion"},
@@ -117,6 +116,7 @@ export const Fields:any = {
        
         {name:'residential_address', type:'text', label:'Residential Address', required:true},
         {name:'postal_address', type:'text', label:'Postal Address', required:false},
+        {name:'date_of_birth', type:'date', label:"Date of Birth", required:true},
         {name:'profile_image', type:'file', label:'Passport Photo', required:true},
         
     ],

@@ -27,6 +27,8 @@ const Profile = () => {
         fetchData(userId)
         .then((response: any) => {
             setResponse(response.data)   
+            console.log(response.data +"uigufi");
+            
         })
         .catch((error: any) => {
             console.error(error);
@@ -42,14 +44,16 @@ const Profile = () => {
             closeOnClick: true,
             theme: "light",
         })
-        fetchData(userId)
-        .then((response: any) => {
-            setResponse(response.data)  
-             
-        })
-        .catch((error: any) => {
-            console.error(error);
-    });
+        setTimeout(() => {
+            fetchData(userId)
+            .then((responseData: any) => {
+                setResponse(responseData.data)  
+            })
+            .catch((error: any) => {
+                console.error(error);
+        });
+        }, 3000)
+       
     }
 
     let fileUpload: boolean = true
@@ -57,8 +61,8 @@ const Profile = () => {
     // Submitting the updated form
     const { handleSubmit, isSuccess, isError, error, isPending, data } =
     useCustomMutation((formData: FormValues) => {
-        localStorage.getItem("profile_update") == "false" ? 
-        apiRequest.addProfile(formData, fileUpload) :
+        localStorage.getItem("profile_update") == "false" 
+        // apiRequest.addProfile(formData, fileUpload) :
         apiRequest.updateProfProfile(formData, userId, fileUpload)
     }, onSuccess)
 
