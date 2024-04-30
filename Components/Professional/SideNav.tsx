@@ -73,7 +73,7 @@ const SideNav = () => {
                         <Link href='/professional/profile' className={router.pathname == '/professional/profile' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
-                                Profile
+                               Update Profile
                             </div>
                         </Link>
                     </li>

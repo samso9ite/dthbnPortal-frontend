@@ -93,7 +93,7 @@ export const Fields:any = {
             ]
         },
         {name:'first_name', type:'text', label:"First Name", required:true},
-        {name:'middle_name', type:'text', label:"Middle Name", required:true},
+        {name:'middle_name', type:'text', label:"Middle Name", required:false},
         {name:'surname', type:'text', label:"Last Name", required:true},
         {name:'telephone', type:'text', label:'Phone Number', required:true},
         {name:'email', type:'email', label:'Active Email', required:true},
