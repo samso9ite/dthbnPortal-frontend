@@ -72,7 +72,7 @@ export const Fields:any = {
             options: [
                 {value:'', label:'Select Cadre'},
                 {value:'Dental Therapist-Officer', label:"Dental Therapist/Officer"},
-                {value:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
+                {value:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
             ], required:true
         },
         {name:'first_name', type:'disabled', label:'First Name', required:false},
