@@ -22,9 +22,8 @@ const ProfessiionalItem = (props:any) => {
                 <td>
                     <div className="flex items-center justify-center"><b>
                        <TitleCase text={`${props.data?.title !== null ? props.data?.title  : "" } 
-                       ${props.data?.first_name !== null ? props.data?.first_name : ""} 
-                       ${props.data?.middle_name !== null ? props.data?.middle_name : ""} 
-                       ${props.data?.surname !== null ? props.data?.surname : ""}`}/>
+                       ${props.data?.profuser.username} 
+                     `}/>
                     </b></div>
                 </td>
                 <td className="text-center">

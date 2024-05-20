@@ -18,7 +18,7 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                             </div>
                             <div className="ml-5">
                                 <div className="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg"> 
-                                    <TitleCase text={`${props.data?.title} ${props.data?.first_name} ${props.data?.middle_name} ${props.data?.last_name}`}/> 
+                                    <TitleCase text={`${props.data?.title !== null ? props.data?.title : ""} ${props.data?.profuser.username}`}/> 
                                 </div>
                                 {/* <div className="text-slate-500">{props.data.cadre}</div> */}
                             </div>
@@ -44,7 +44,7 @@ const ProfessionalDetails:React.FC<{data:any, modalIsOpen:boolean, onCloseModal:
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>D.O.B: </b> {props.data.date_of_birth} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Religion: </b> {props.data.religion}</div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Nationality: </b> {props.data.nationality} </div>
-                                <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>State: </b> {props.data.state} </div>
+                                {/* <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>State: </b> {props.data.state} </div> */}
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Senatorial District: </b> {props.data.senatorial_district} </div>
                                 <div className="truncate sm:whitespace-normal flex items-center mt-3"> <b>Residential Country: </b> {props.data.residential_country}</div>
                             </div>
