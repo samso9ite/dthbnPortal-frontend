@@ -14,7 +14,7 @@ const ProfessiionalItem = (props:any) => {
                     <div className="flex">
                         <div className="w-10 h-10 image-fit zoom-in">
                             <img alt="Student Image" className="tooltip rounded-full" 
-                            src={props.data.profile_image !== null ? process.env.NEXT_PUBLIC_API_BASE_URL+props.data.profile_image : 
+                            src={props.data.profile_image !== null ? process.env.NEXT_PUBLIC_API_IMG_BASE_URL+props.data.profile_image : 
                             "dist/images/preview-12.jpg"} />
                         </div>
                     </div>
