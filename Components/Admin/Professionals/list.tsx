@@ -58,11 +58,13 @@ const ProfessionalList = () => {
                                             <tr>
                                                 <th className="whitespace-nowrap">IMAGE</th>
                                                 <th className="whitespace-nowrap"> NAME</th>
+                                                <th className="whitespace-nowrap"> LICENSE</th>
                                                 <th className="text-center whitespace-nowrap">EMAIL</th>
                                                 <th className="text-center whitespace-nowrap"> PHONE</th>
                                                 <th className="text-center whitespace-nowrap">ADDRESS</th>
                                                 <th className="text-center whitespace-nowrap">STATE</th>
-                                                <th className="text-center whitespace-nowrap">RELIGION</th>
+                                                <th className="whitespace-nowrap"> RELIGION</th>
+                                               
                                                 <th className="text-center whitespace-nowrap">DOB</th>
                                             </tr>
                                         </thead>

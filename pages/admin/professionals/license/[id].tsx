@@ -19,8 +19,6 @@ const Licenses:React.FC<{ }> = () => {
     const [createLicense, setCreateLicense] = useState<boolean>(false)
     const [msg, setMsg] = useState(" ")
     const getLicenses = () => {
-        console.log("This ran");
-        
         apiRequest.getAllLicense(id).then(
             response => {
                 setResponse(response?.data) 
@@ -90,7 +88,8 @@ const Licenses:React.FC<{ }> = () => {
                 </div>  
                 
                 <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                    <table className="table table-report sm:mt-2">
+               { response.length > 0 ?  
+                <table className="table table-report sm:mt-2">
                     <thead>
                         <tr>
                             <th className="whitespace-nowrap"> Renewal Date</th>
@@ -99,28 +98,33 @@ const Licenses:React.FC<{ }> = () => {
                             <th className="text-center whitespace-nowrap">View/Edit Certificate</th>
                         </tr>
                     </thead>
-                    {response?.map((item:any) => (
-                        <tr className="intro-x">
-                            <td className="text-center">
-                                <div className="flex items-center justify-center"> {item.renewal_date} </div>
-                            </td>
-                            <td className="text-center">
-                                <div className="flex items-center justify-center"> {item.expiry_date} </div>
-                            </td>
-                            <td className="text-center">
-                                <div className="flex items-center justify-center"> {item.status} </div>
-                            </td>
-                            <td className="table-report__action ">
-                                <div className="flex justify-center items-center">
-                                    <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => openModal(item.id)}>
-                                        <i className="fa fa-eye" aria-hidden="true"></i> 
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    ))
+                    {
+                        response?.map((item:any) => (
+                            <tr className="intro-x">
+                                <td className="text-center">
+                                    <div className="flex items-center justify-center"> {item.renewal_date} </div>
+                                </td>
+                                <td className="text-center">
+                                    <div className="flex items-center justify-center"> {item.expiry_date} </div>
+                                </td>
+                                <td className="text-center">
+                                    <div className="flex items-center justify-center"> {item.status} </div>
+                                </td>
+                                <td className="table-report__action ">
+                                    <div className="flex justify-center items-center">
+                                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => openModal(item.id)}>
+                                            <i className="fa fa-eye" aria-hidden="true"></i> 
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))
+                       
                     }
                     </table>
+                :
+                <center><h1 style={{fontSize:"18px", fontWeight:"700"}}>No record found for this user</h1></center>
+                }
                 </div>
                 <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
