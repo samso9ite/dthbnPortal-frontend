@@ -58,10 +58,11 @@ const ProfessiionalItem = (props:any) => {
                 </td>
                 <td className="table-report__action ">
                     <div className="flex justify-center items-center">
-                        <button className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}} onClick={() => {setIsModalOpen(true)}}>
+                        <button className="btn btn-primary mr-1 mb-2" 
+                            style={{backgroundColor: '#280742'}} onClick={() => {setIsModalOpen(true)}}>
                             <i className="fa fa-eye" aria-hidden="true"></i> 
                         </button>
-                        <Link href={`professionals/license/${props.data?.profuser}`} className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}}>
+                        <Link href={`professionals/license/${props.data?.profuser.id}`} className="btn btn-primary mr-1 mb-2" style={{backgroundColor: '#280742'}}>
                             <i className="fa fa-id-card-o" aria-hidden="true"></i>
                         </Link>
                     </div>
