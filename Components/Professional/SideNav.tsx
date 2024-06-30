@@ -54,6 +54,14 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link href='https://login.remita.net/remita/onepage/OAGFCRF/biller.spa' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                            <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="side-menu__title">
+                              Upload License Receipt
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
                         <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
@@ -76,6 +84,20 @@ const SideNav = () => {
                                Update Profile
                             </div>
                         </Link>
+                    </li>
+
+                    <li>
+                    <a href="https://web.whatsapp.com/send?phone=2349042903236&text=Hello%2C%20I%27m%20from%DTHRBN%20portal%20and%20I%20have%20an%20enquiry" className="side-menu" target="_blank">
+                            <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                            <div className="side-menu__title"> Whatsapp Support 1 </div>
+                        </a>
+                    </li>
+                   
+                    <li>
+                    <a href="https://web.whatsapp.com/send?phone=2348086771485&text=Hello%2C%20I%27m%20from%DTHRBN%20portal%20and%20I%20have%20an%20enquiry" className="side-menu" target="_blank">
+                            <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                            <div className="side-menu__title"> Whatsapp Support 2 </div>
+                        </a>
                     </li>
                     <li>
                         <a href="javascript:;" className="side-menu" onClick={logOut}>

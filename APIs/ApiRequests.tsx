@@ -104,12 +104,14 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     updateLicense: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`admin/update-license/${id}`,  'patch', formData, fileUpload=true),
     getAllLicense: (id:any) => generalRequest(`admin/list-license/${id}`, 'get'),
     createLicense:(formData:FormValues, fileUpload:boolean) => generalRequest('admin/add-license', 'post', formData, fileUpload=true),
+    
     // Professional Endpoints
     profDashboard: () => generalRequest(`professional/dashboard`, 'get'),
-
     getProfile: (id:any) => generalRequest(`professional/get-profile/${id}`, 'get'),
     updateProfProfile: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`professional/update-profile/${id}`, 'patch', formData, fileUpload=true),
-    addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData)
+    addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData),
+    getReceipts: () => generalRequest('professional/list-license-receipt', 'get'),
+    addReceipt: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-license-receipt', 'post', formData, fileUpload=true)
 }
 
 export default apiRequest 

@@ -143,7 +143,7 @@ const SideNav = () => {
                     </li>
                    
                     <li>
-                        <a href="side-menu-light-chat.html" className="side-menu">
+                        <a href="https://web.whatsapp.com/send?phone=254796111020&text=Hello%2C%20I%27m%20from%DTHRBN%20portal%20and%20I%20have%20an%20enquiry" className="side-menu" target="_blank">
                             <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
                             <div className="side-menu__title"> Whatsapp Support 2 </div>
                         </a>
