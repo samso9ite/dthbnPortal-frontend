@@ -54,7 +54,7 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href='https://login.remita.net/remita/onepage/OAGFCRF/biller.spa' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                        <Link href='/professional/license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
                               Upload License Receipt
@@ -62,7 +62,7 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                        <Link href='' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
                                Upcoming Events 
@@ -70,7 +70,7 @@ const SideNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/renew-license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
+                        <Link href='' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
                                Latest  News  
