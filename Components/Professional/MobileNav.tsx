@@ -49,11 +49,18 @@ const MobileNav = () => {
                         </a>
                     </li>
                     <li>
+                        <Link href='/professional/license' className="menu menu--active">
+                            <div className="menu__icon"> <i data-lucide="home"></i> </div>
+                            <div className="menu__title">  Upload License Receipt </div>
+                        </Link>
+                    </li>
+                    <li>
                         <a href="javascript:;.html" className="menu menu--active">
                             <div className="menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="menu__title"> Latest News  </div>
                         </a>
                     </li>
+                 
                     <li>
                         <Link href='/professional/profile' className="menu menu--active">
                             <div className="menu__icon"> <i data-lucide="home"></i> </div>
@@ -61,14 +68,19 @@ const MobileNav = () => {
                         </Link>
                     </li>
                     <li>
-                        <a href="menu-light-chat.html" className="menu">
-                            <div className="menu__icon"> <i data-lucide="message-square"></i> </div>
-                            <div className="menu__title"> Whatsapp Chat </div>
+                        <a href="https://web.whatsapp.com/send?phone=2349042903236&text=Hello%2C%20I%27m%20from%DTHRBN%20portal%20and%20I%20have%20an%20enquiry" className="menu menu--active" target="_blank">
+                            <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                            <div className="side-menu__title"> Whatsapp Support 1 </div>
                         </a>
                     </li>
                    
-                  
-
+                    <li>
+                        <a href="https://web.whatsapp.com/send?phone=2348086771485&text=Hello%2C%20I%27m%20from%DTHRBN%20portal%20and%20I%20have%20an%20enquiry" className="menu menu--active" target="_blank">
+                            <div className="side-menu__icon"> <i data-lucide="message-square"></i> </div>
+                            <div className="side-menu__title"> Whatsapp Support 2 </div>
+                        </a>
+                    </li>
+                   
                     <li>
                         <a href="javascript:;" className="menu"  onClick={logOut}>
                             <div className="menu__icon"> <i data-lucide="power"></i> </div>
