@@ -27,8 +27,6 @@ const Profile = () => {
         fetchData(userId)
         .then((response: any) => {
             setResponse(response.data)   
-            console.log(response.data +"uigufi");
-            
         })
         .catch((error: any) => {
             console.error(error);

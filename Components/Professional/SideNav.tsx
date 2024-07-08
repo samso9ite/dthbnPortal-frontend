@@ -57,7 +57,7 @@ const SideNav = () => {
                         <Link href='/professional/license' className={router.pathname == '' ? "side-menu side-menu--active" : 'side-menu'}>
                             <div className="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div className="side-menu__title">
-                              Upload License Receipt
+                              Upload  Receipt
                             </div>
                         </Link>
                     </li>

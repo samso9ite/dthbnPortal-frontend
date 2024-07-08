@@ -51,7 +51,7 @@ const MobileNav = () => {
                     <li>
                         <Link href='/professional/license' className="menu menu--active">
                             <div className="menu__icon"> <i data-lucide="home"></i> </div>
-                            <div className="menu__title">  Upload License Receipt </div>
+                            <div className="menu__title">  Upload Receipt </div>
                         </Link>
                     </li>
                     <li>
