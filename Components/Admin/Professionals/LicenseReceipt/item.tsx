@@ -18,7 +18,7 @@ const ReceiptItem = (props:any) => {
                 <td className="">
                     {props.data?.remita_number}
                 </td>
-                <td style={{color:"blue"}}><a href={props?.data.license_proof}>Click to View</a></td>
+                <td style={{color:"blue"}}><a href={props?.data.license_proof} target="_blank">Click to View</a></td>
                 <td className="">
                     {props.data?.status}
                 </td>
