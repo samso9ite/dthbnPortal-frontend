@@ -98,7 +98,7 @@ const ListLicenseReceipt = () => {
                 <p style={{fontSize:"17px"}}>Upload Payment Receipt</p> 
                 </center>
                 <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
-                    <GenericForm initialValues={{profuser_id:localStorage.getItem('id') || ''}} fields={Fields.profLicenceReceiptField} onSubmit={submitHandler} span6={false}
+                    <GenericForm initialValues={{profuser:localStorage.getItem('id') || ''}} fields={Fields.profLicenceReceiptField} onSubmit={submitHandler} span6={false}
                     />
                 </div>
             </div>

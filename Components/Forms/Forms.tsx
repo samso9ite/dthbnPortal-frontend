@@ -172,7 +172,7 @@ export const Fields:any = {
     profLicenceReceiptField: [
         {name: 'remita_number', type:'text', label: 'Remita Number', required:true},
         {name:'license_proof', type:'file', label:'Upload Payment Receipt', required:true},
-        {name:'profuser_id', type:'hidden', isHidden:true}
+        {name:'profuser', type:'hidden', isHidden:true}
     ],
     // End of Professional form fields
     schoolFormFields: [
