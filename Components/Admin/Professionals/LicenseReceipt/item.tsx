@@ -6,8 +6,6 @@ import Link from 'next/link';
 
 const ReceiptItem = (props:any) => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
-    console.log(props);
-    
     
     return(
         <>
