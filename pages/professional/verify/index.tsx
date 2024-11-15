@@ -66,14 +66,14 @@ const VerifyLicense = () => {
                         :
                     <>
                         <div >
-                            <center><img className="text-center mt-10" src={license.license.status == "Valid" ? process.env.NEXT_PUBLIC_URL+"dist/images/valid_icon.png" : process.env.NEXT_PUBLIC_URL+"dist/images/expired.png"} width="30%"  /></center>
+                            <center><img className="text-center mt-10" src={license.license.status == "Valid" ? process.env.NEXT_PUBLIC_URL+"dist/images/valid_icon.png" : process.env.NEXT_PUBLIC_URL+"/dist/images/expired.png"} width="30%"  /></center>
                         </div>
                         
                     <div className="intro-y box  pt-5 mt-5 block xl:grid grid-cols-1 w-full">
                     <div className="flex flex-col lg:flex-row border-b">
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                                <img alt="Dental Board of Nigeria" className="rounded-full" src={license.profDetails.profile_image !== null ? license.profDetails.profile_image : process.env.NEXT_PUBLIC_URL+"dist/images/profile-1.jpg"} />
+                                <img alt="Dental Board of Nigeria" className="rounded-full" src={license.profDetails.profile_image !== null ? license.profDetails.profile_image : process.env.NEXT_PUBLIC_URL+"/dist/images/profile-1.jpg"} />
                             </div>
                             <div className="ml-5">
                                 <div className="  truncate sm:whitespace-normal font-medium text-lg">{license?.license.prof?.last_name} {license?.license.prof?.first_name} {license?.license.prof?.middle_name}</div>
