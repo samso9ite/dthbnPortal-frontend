@@ -72,7 +72,7 @@ const ProfessionalList = () => {
                                         {(item:any) => (
                                             <ProfessiionalItem data={item} />
                                         )}
-                                    </PaginatedItems>
+                                       </PaginatedItems>
                                     ||  <h1 style={{ paddingTop:'30px'}}><b><center>No Record Available</center></b></h1> 
                                 ) : 
                             ''

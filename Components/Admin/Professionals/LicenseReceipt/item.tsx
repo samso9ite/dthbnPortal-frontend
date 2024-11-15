@@ -25,7 +25,6 @@ const ReceiptItem = (props:any) => {
                 <td className="">
                     {props.data?.created_date}
                 </td>
-               
             </tr>
             {/* <ProfessionalDetails data={props.data} modalIsOpen={modalIsOpen} onCloseModal={() => {setIsModalOpen(false)}}/> */}
         </>

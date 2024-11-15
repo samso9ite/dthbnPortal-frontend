@@ -99,7 +99,8 @@ const Licenses:React.FC<{ }> = () => {
                         </tr>
                     </thead>
                     {
-                        response?.map((item:any) => (
+                        <tbody>
+                        {response?.map((item:any) => (
                             <tr className="intro-x">
                                 <td className="text-center">
                                     <div className="flex items-center justify-center"> {item.renewal_date} </div>
@@ -118,14 +119,18 @@ const Licenses:React.FC<{ }> = () => {
                                     </div>
                                 </td>
                             </tr>
-                        ))
-                       
+                        ))}
+                       </tbody>
                     }
                     </table>
                 :
                 <center><h1 style={{fontSize:"18px", fontWeight:"700"}}>No record found for this user</h1></center>
                 }
-                <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
+               
+                </div>
+                
+            </div>  
+            <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
                         <div>
                             <center><img src={certImage?.certificate} width="500"/></center> 
@@ -137,9 +142,7 @@ const Licenses:React.FC<{ }> = () => {
                         </div>
                     </div>
                 </Modal>
-                </div>
-                
-            </div>  
+
             <ToastContainer />
         </AdminLayout>
     )
