@@ -66,7 +66,7 @@ const VerifyLicense = () => {
                         :
                     <>
                         <div >
-                            <center><img className="text-center mt-10" src={license.license.status == "Valid" ? process.env.NEXT_PUBLIC_URL+"dist/images/valid_icon.png" : process.env.NEXT_PUBLIC_URL+"/dist/images/expired.png"} width="30%"  /></center>
+                            <center><img className="text-center mt-10" src={license.license.status == "Valid" ? process.env.NEXT_PUBLIC_URL+"/dist/images/valid_icon.png" : process.env.NEXT_PUBLIC_URL+"/dist/images/expired.png"} width="30%"  /></center>
                         </div>
                         
                     <div className="intro-y box  pt-5 mt-5 block xl:grid grid-cols-1 w-full">
