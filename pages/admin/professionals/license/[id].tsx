@@ -7,6 +7,8 @@ import GenericForm, { FormValues } from "@/UI/genericForm"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { Modal } from 'react-responsive-modal';
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
 import { ToastContainer, toast } from 'react-toastify';
 
 const Licenses:React.FC<{ }> = () => {
@@ -130,7 +132,7 @@ const Licenses:React.FC<{ }> = () => {
                 </div>
                 
             </div>  
-            <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
+            <Drawer open={isModaOpen}  direction='top' onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
                         <div>
                             <center><img src={certImage?.certificate} width="500"/></center> 
@@ -141,7 +143,7 @@ const Licenses:React.FC<{ }> = () => {
                             />
                         </div>
                     </div>
-                </Modal>
+                </Drawer>
 
             <ToastContainer />
         </AdminLayout>
