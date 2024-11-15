@@ -125,7 +125,6 @@ const Licenses:React.FC<{ }> = () => {
                 :
                 <center><h1 style={{fontSize:"18px", fontWeight:"700"}}>No record found for this user</h1></center>
                 }
-                </div>
                 <Modal open={isModaOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="intro-y box px-5 pt-5 mt-5" >
                         <div>
@@ -138,6 +137,8 @@ const Licenses:React.FC<{ }> = () => {
                         </div>
                     </div>
                 </Modal>
+                </div>
+                
             </div>  
             <ToastContainer />
         </AdminLayout>

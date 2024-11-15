@@ -163,8 +163,8 @@ export const Fields:any = {
         {name:'programme', type:'select', label:'Programme', 
             options: [
                 {value:'', label:'Select Cadre'},
-                {value:'Dental Therapist-Officer', label:"Dental Therapist/Officer"},
-                {value:'Dental Surgery Assistance', label:'Dental Surgery Assistance'},
+                {value:'DTH', label:"Dental Therapist/Officer"},
+                {value:'DSA', label:'Dental Surgery Assistance'},
             ], required:true
         },
     ],
