@@ -5,7 +5,7 @@ import { useCustomMutation } from "@/Hooks/apiCall"
 import GenericForm, { FormValues } from "@/UI/genericForm"
 import axios from "axios"
 import { useState } from "react"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 
 const VerifyLicense = () => {
     const[license, setLicense] = useState<any>({})
@@ -30,7 +30,6 @@ const VerifyLicense = () => {
         }
     };
 
-     
     const submitHandler = (formData:any) => {
        fetchLicense(formData)
     }
@@ -80,7 +79,7 @@ const VerifyLicense = () => {
                         <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                             <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
                                 <img alt="Dental Board of Nigeria" className="rounded-full" 
-                                src={license.profDetails.profile_image !== null ? process.env.NEXT_PUBLIC_API_IMG_BASE_URL+license.profDetails.profile_image : 
+                                src={license.profDetails.profile_image !== null ? process.env.NEXT_PUBLIC_API_IMG_BASE_URL+license?.profDetails[0]?.profile_image : 
                                 process.env.NEXT_PUBLIC_API_IMG_BASE_URL+"/dist/images/profile-1.jpg"} />
                             </div>
                             <div className="ml-5">
