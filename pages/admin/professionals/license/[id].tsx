@@ -70,7 +70,7 @@ const Licenses:React.FC<{ }> = () => {
         }else if(!createLicense){
             setMsg("License has been updated")
         }
-      
+        getLicenses()
         handleSubmit(formData)  
     }
 
@@ -133,11 +133,11 @@ const Licenses:React.FC<{ }> = () => {
                 
             </div>  
             <Drawer open={isModaOpen}  direction='top' onClose={() => setIsModalOpen(false)}>
-                    <div className="intro-y box px-5 pt-5 mt-5" >
+                    <div className="intro-y box px-5 pt-5 mt-5">
                         <div>
-                            <center><img src={certImage?.certificate} width="500"/></center> 
+                            <center><img src={certImage?.certificate} className="w-[300px]" /></center> 
                         </div>
-                        <div className="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
+                        <div className="flex flex-col lg:flex-row border-b justify-center border-slate-200/60 pb-5  text-center">
                             <GenericForm fields={Fields.licenseFormFields} onSubmit={submitHandler} span6={true}
                                 initialValues={createLicense == false ? licenseInitialValues: null}  
                             />

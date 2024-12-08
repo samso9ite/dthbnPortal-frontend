@@ -74,8 +74,9 @@ const Professional = () => {
                                 <tr>
                                     <th className="whitespace-nowrap">Renewal Date</th>
                                     <th className=" whitespace-nowrap">Expiry Date</th>
+                                    <th className="">View License Certificate</th>
                                     <th className="text-center whitespace-nowrap">Status</th>
-                                    <th className="text-center whitespace-nowrap">View License</th>
+                                    {/* <th className="text-center whitespace-nowrap">View License</th> */}
                                 </tr>
                             </thead>
                             {dashboardDetails?.license.length > 0  ? 
@@ -90,10 +91,11 @@ const Professional = () => {
                                             <td>
                                                 <a  className=" items-center  font-medium whitespace-nowrap">{item.expiry_date}</a> 
                                             </td>
+                                            <td style={{color:"blue"}}><a href={process.env.NEXT_PUBLIC_API_IMG_BASE_URL+item.certificate} target="_blank">Click to View</a></td>
                                             <td className="text-center">{item.status}</td>
-                                            <td className="w-40">
+                                            {/* <td className="w-40">
                                                 <div className="flex items-center justify-center" onClick={ () => setIsModalOpen(true)}> <i data-lucide="check-square" className="w-4 h-4 mr-2"></i> Click to view </div>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                 ))
                                     }

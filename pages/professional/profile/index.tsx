@@ -168,12 +168,12 @@ const Profile = () => {
                     <div id="profile-accordion" className="accordion accordion-boxed mt-5 pb-2"> 
                         <div className="accordion-item"> 
                             <div id="contact-accordion-contentt" className="accordion-header"> 
-                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="false" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
+                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="true" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
                                 Contact Detail +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
-                                <div id="profile" className="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                                <div id="profile" className="tab-pane active" role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
                                             <GenericForm fields={Fields.profContactFields} onSubmit={submitHandler} span6={true}
@@ -188,11 +188,11 @@ const Profile = () => {
                     <div id="profile-accordion" className="accordion accordion-boxed mt-5 pb-2"> 
                         <div className="accordion-item"> 
                             <div id="contact-accordion-contentt" className="accordion-header"> 
-                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="false" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
+                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="true" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
                                 Academic Details +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
                                 <div id="profile" className="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
@@ -208,11 +208,11 @@ const Profile = () => {
                     <div id="profile-accordion" className="accordion accordion-boxed mt-5 pb-2"> 
                         <div className="accordion-item"> 
                             <div id="contact-accordion-contentt" className="accordion-header"> 
-                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="false" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
+                                <button className="accordion-button" type="button" data-tw-toggle="collapse" data-tw-target="#contact-accordion-collapse" aria-expanded="true" aria-controls="contact-accordion-collapse" style={{backgroundColor:"white"}}>  
                                 Work Details +
                                 </button> 
                             </div> 
-                            <div id="contact-accordion-collapse" className="accordion-collapse collapse " aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
+                            <div id="contact-accordion-collapse" className="accordion-collapse collapse show" aria-labelledby="contact-accordion-contentt" data-tw-parent="#profile-accordion"> 
                                 <div id="profile" className="tab-pane " role="tabpanel" aria-labelledby="profile-tab">
                                     <div className="grid grid-cols-12 gap-6">
                                         <div className="intro-y box col-span-12 lg:col-span-12" style={{ padding: '2rem' }}>
@@ -225,11 +225,7 @@ const Profile = () => {
                         </div> 
                     </div> 
                 </div>
-
-               
-           
-               
-
+                
                 {/* {notifIsActive && ApiStateHandler(isPending, isError, error, showSuccessMsg, isSuccess, data?.data.message)} */}
                 <ToastContainer />
             </MainLayout>
