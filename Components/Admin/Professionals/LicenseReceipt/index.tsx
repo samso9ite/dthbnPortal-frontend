@@ -13,9 +13,8 @@ import { toast } from "react-toastify"
 const ListLicenseReceipt = () => {
     const [modalIsOpen, setIsModalOpen] = useState<boolean>(false)
     const [filteredData, setfilteredData] = useState([])
-    // const [remita, setRemita] = useState<any>('')
-    // const []
-
+ 
+    let userId:any = localStorage.getItem('id') 
     const fetchData = () => {
         const {isPending, isError, error, data } = useCustomQuery(
             apiRequest.getReceipts, 'professionals'
@@ -24,6 +23,8 @@ const ListLicenseReceipt = () => {
     }
     const response:any = fetchData()
 
+    console.log(response);
+    
     const updateFilter = (filteredData:any) => {
         setfilteredData(filteredData)
     }

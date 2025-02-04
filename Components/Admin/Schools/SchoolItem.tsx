@@ -22,11 +22,11 @@ const SchoolItem = (props:any) => {
                 </td>
                 <td>
                     <div className="flex items-center justify-center"><b>
-                       <TitleCase text={props.data.User?.username} />
+                       <TitleCase text={props.data?.User?.username} />
                     </b></div>
                 </td>
                 <td className="text-center">
-                    {props.data.User?.code}
+                    {props.data?.User?.code}
                 </td>
                 <td className="text-center">
                     <div className="flex items-center justify-center">{props.data?.hod_phone}</div>

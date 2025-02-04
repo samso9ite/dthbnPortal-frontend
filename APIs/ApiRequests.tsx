@@ -110,7 +110,7 @@ const generalRequest = async (url:string, method: 'post' | 'put' | 'patch' | 'ge
     getProfile: (id:any) => generalRequest(`professional/get-profile/${id}`, 'get'),
     updateProfProfile: (formData:FormValues, id:number, fileUpload:boolean) => generalRequest(`professional/update-profile/${id}`, 'patch', formData, fileUpload=true),
     addProfile: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-profile', 'post', formData),
-    getReceipts: () => generalRequest('professional/list-license-receipt', 'get'),
+    getReceipts: (id:any) => generalRequest(`professional/list-license-receipt`, 'get'),
     addReceipt: (formData:FormValues, fileUpload:boolean) => generalRequest('professional/add-license-receipt', 'post', formData, fileUpload=true)
 }
 
