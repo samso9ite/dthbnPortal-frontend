@@ -72,7 +72,8 @@ export const Fields:any = {
             options: [
                 {value:'', label:'Select Cadre'},
                 {value:'Dental Therapist-Officer', label:"Dental Therapist"},
-                {value:'Dental Surgery Assistant', label:'Dental Surgery Assistant'},
+                {value:'Dental Surgery Technician', label:"Dental Surgery Technician"},
+                {value:'Dental Surgery Technologist', label:'Dental Surgery Technologist'},
             ], required:true
         },
         {name:'first_name', type:'disabled', label:'First Name', required:false},
@@ -164,7 +165,8 @@ export const Fields:any = {
             options: [
                 {value:'', label:'Select Cadre'},
                 {value:'DTH', label:"Dental Therapist"},
-                {value:'DSA', label:'Dental Surgery Assistance'},
+                {value:'DST', label:'Dental Surgery Technician'},
+                {value:'DSTECH', label:'Dental Surgery Technologist'},
             ], required:true
         },
     ],
