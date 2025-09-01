@@ -166,7 +166,7 @@ export const Fields:any = {
                 {value:'', label:'Select Cadre'},
                 {value:'DTH', label:"Dental Therapist"},
                 {value:'DST', label:'Dental Surgery Technician'},
-                {value:'DSTECH', label:'Dental Surgery Technologist'},
+                {value:'DSTEC', label:'Dental Surgery Technologist'},
             ], required:true
         },
     ],
